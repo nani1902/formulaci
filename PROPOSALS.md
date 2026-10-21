@@ -109,3 +109,11 @@
 - **For translate:** verify relies on the `sides: L || R` note line for decimal literals and LaTeX label
   checks, and on `superscript_label:<name>` lines. Please keep both formats stable. The optional
   `Parsed.hints` list proposed under translate would serve the same purpose.
+
+## mcp
+- **Add `mcp>=1.2` to the `dev` extra** (or install the `mcp` extra in CI). `tests/mcp/` uses
+  `pytest.importorskip("mcp")`, so without the SDK those 13 tests are skipped silently. The installed SDK is
+  2.3.0, where `FastMCP` became `mcp.server.mcpserver.MCPServer`. `formulaci/mcp_server.py` imports either one,
+  so the `mcp>=1.2` floor stays valid.
+- `tests/mcp/` deliberately has **no `__init__.py`**. With one, pytest's default `prepend` import mode puts
+  `tests/` on `sys.path`, and the test package would shadow the `mcp` SDK. Please keep it that way.

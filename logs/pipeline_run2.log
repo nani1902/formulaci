@@ -1,0 +1,73 @@
+[17:04:51] translate
+translate ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 952136/952136 0:00:00
+translated 952136 new formulas in 243.3s -> data/parsed/parsed.jsonl
+formulas: 952136  records: 1070126  status: {'not_checkable': 811878, 'ok': 210782, 'unparsed': 47466}
+kinds: {'other': 663041, 'equation': 206338, 'chain': 98293, 'inequality': 54402, 'definition_like': 48052}
+equation-kind formulas: 272013  with >=1 ok equation record: 140226 (51.6%)  all equation records ok: 129093 (47.5%)
+equation-kind records: 352683  ok: 173336 (49.1%)   lark fallback records: 0
+top failure categories (equation-kind records):
+   13035  unsupported:set_notation
+    9784  unsupported:tuple
+    9335  unsupported:matrix
+    9220  unsupported:superscript_label
+    8534  unsupported:ellipsis
+    5913  unsupported:sum_index_set
+    5798  unsupported:inner_product
+    4682  unsupported:uppercase_juxtaposition
+    4580  unsupported:conjugate_star
+    4465  unsupported:differential_form
+    4404  unsupported:vector_calculus
+    4333  unsupported:subscript_on_expression
+    3977  unsupported:probability
+    3977  unsupported:partial_operator
+    3688  unsupported:integral_domain
+    3627  error:unexpected <x>
+    3336  unsupported:vector_product
+    3244  unsupported:word_symbol
+    2761  unsupported:transpose
+    2711  unsupported:styled_expression
+    2508  unsupported:accent_expression
+    2500  unsupported:empty_side
+    2461  unsupported:norm
+    2210  unsupported:list
+    1918  unsupported:conditional_probability
+[17:09:14] semantics
+{
+  "seen": 952136,
+  "skipped_existing": 0,
+  "written": 952136,
+  "checkable": 6437,
+  "missing_formula": 0,
+  "skip_reasons": {
+    "translator_not_checkable": 403787,
+    "definition": 50850,
+    "has_undefined_function": 27052,
+    "statement_not_identity": 54356,
+    "named_constant": 2884,
+    "operator_notation": 203436,
+    "condition": 10401,
+    "defining_equation": 7213,
+    "set_notation": 56539,
+    "approximation": 34,
+    "functional_identity": 8207,
+    "special_algebra": 8686,
+    "matrix_or_vector": 76071,
+    "units": 2240,
+    "plus_minus": 3546,
+    "indefinite_integral": 700,
+    "congruence": 5306,
+    "unparsed": 18934,
+    "stated_false": 1030,
+    "differential_equation": 4305,
+    "notation_or_convention": 80,
+    "semantics_error": 34,
+    "semantics_timeout": 8
+  },
+  "errors": 34,
+  "timeouts": 8
+}
+[17:40:42] verify
+{"processed": 952136, "skipped_existing": 0, "SKIP": 945996, "PASS": 5076, "INCONCLUSIVE": 756, "FAIL": 308}
+[18:13:07] report
+{'findings': 308, 'inconclusive': 756, 'formulas': 952136, 'report': 'data/findings/report.html'}
+[18:27:35] done
