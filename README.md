@@ -14,29 +14,31 @@ Prior art: Greiner-Petter et al., ["Do the Math: Making Mathematics in Wikipedia
 (IEEE TPAMI, 2022) proved the approach on 103 pages with Maple/Mathematica and LaCASt; it was never
 deployed. formulaci uses free tools and runs at the scale of the whole encyclopedia.
 
-## Results so far (first pass, 2026-10-21)
+## Results (two full passes, 2026-10-21)
 
-- **Corpus:** 64,617 articles, 952,136 formulas extracted. The first full verification pass covered the
-  180,016 formulas from the most-read ~4,800 pages.
-- **Checkable identities in that pass:** 2,867. Verdicts: 2,067 PASS, 398 INCONCLUSIVE, 266 FAIL.
-- **Review of all 266 FAILs:** 13 confirmed errors on live Wikipedia pages (plus one found next to a
-  confirmed one), 253 pipeline mistakes, 0 ambiguous. The 14 errors, each recomputed independently and
-  re-checked on the live page, are in [`CONFIRMED_ERRORS.md`](CONFIRMED_ERRORS.md); ready-to-paste fixes
-  are in [`WIKIPEDIA_EDITS.md`](WIKIPEDIA_EDITS.md). Among them: two derivative series on *Taylor
-  series* missing factors of 2 and 6, two wrong series in the *Dirichlet integral* proof, a sign error in
-  a limit on *Euler's constant*, two mislabeled sums on *List of trigonometric identities*, two reduction
-  formulas with wrong bounds on *List of definite integrals*, and Γ(3/2) given as π/2 on *Volume of an n-ball*.
-- **Measured quality on labeled data** (`data/bench/REPORT.md`): precision 100 % (0 false positives on
-  272 known-true identities), recall 82 % on 1,320 injected errors (sign flips, wrong constants, dropped
-  factors, off-by-one bounds, swapped symbols).
-- **Measured quality on real pages:** first-pass precision before review was 5 % (13 of 266). The 253 false
-  positives were tagged by cause (misread operators and conjugates, label superscripts, arithmetic in finite
-  fields and ordinals, equations the page itself calls false, defining equations, rounding) and fed back as
-  rules and fixtures; the second pass clears 109 of 110 translator cases and 130 of 135 semantics cases
-  while keeping 11 of the 13 confirmed errors flagged. A full second run over all 952k formulas is in progress.
+- **Corpus:** 64,617 articles tagged by WikiProjects Mathematics, Physics, Statistics and Engineering; 952,136 `<math>` formulas.
+- **Checkable identities (second pass):** 6,140. Verdicts: 5,076 PASS, 756 INCONCLUSIVE, 308 FAIL.
+- **Review:** every FAIL from both passes was reviewed by an independent reviewer (553 flags). **36 confirmed errors on live
+  Wikipedia pages**, 518 pipeline mistakes, 0 ambiguous. Each confirmed error was re-fetched from the live page and, where
+  computable, recomputed independently at 30 digits. The list with evidence and fixes is in
+  [`CONFIRMED_ERRORS.md`](CONFIRMED_ERRORS.md); exact wikitext edits for the first 14 are in [`WIKIPEDIA_EDITS.md`](WIKIPEDIA_EDITS.md).
+  Among them: two derivative series on *Taylor series* missing factors of 2 and 6; two wrong series in the *Dirichlet
+  integral* proof; a limit on *Euler's constant* with the wrong sign; two "sine" identities on *List of trigonometric
+  identities* that sum cosines; reduction formulas on *List of definite integrals* with ∞ where m−1 belongs; Γ(3/2) = π/2 on
+  *Volume of an n-ball*; arccos written as the arcsin integral on *Extreme learning machine*; swapped bounds on *Gautschi's
+  inequality*; a reversed inequality on *Holm–Bonferroni method*; a missing i in the flux-quantization exponent on
+  *Ginzburg–Landau theory*; a wrong arctangent argument in the *Tridecagon* construction; a sign error on *Universal joint*;
+  sin 54° given as 2√5/4 on *54 (number)*; a negative upper bound on *Area of a circle*.
+- **Measured quality on labeled data** (`data/bench/REPORT.md`): precision 100 % (0 false positives on 272 known-true
+  identities), recall 82 % on 1,320 injected errors.
+- **Measured quality on real pages:** pre-review precision was 4.9 % in the first pass (13 of 266 flags) and 10.4 % in the
+  second (32 of 308) after the 253 first-pass false positives were tagged by cause and turned into rules and fixtures;
+  242 of those 253 no longer fail. The cost: 3 of the 13 first-pass errors became INCONCLUSIVE or skipped. The remaining
+  false positives are dominated by notation the translator still misreads (double zeta, elliptic nome, coefficient
+  extraction), named constants read as variables, and equations to be solved rather than identities.
 
-Coverage is the honest limitation: most `<math>` tags are expressions without a relation, definitions,
-operators, matrices or notation the translator refuses rather than guesses at. Only identities are checked.
+Coverage is the honest limitation: only identities with an explicit relation are checked, which is a small fraction of
+all `<math>` tags (most are bare expressions, definitions, operators, matrices or sets).
 
 ## Layout
 
