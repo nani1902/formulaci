@@ -51,6 +51,9 @@ class Domain(BaseModel):
 
 class Semantics(BaseModel):
     formula_id: str
+    index_in_chain: Optional[int] = None
+    skip_pieces: list[int] = Field(default_factory=list)
+    function_aliases: dict[str, str] = Field(default_factory=dict)
     checkable: bool = True
     skip_reason: Optional[str] = None
     domains: dict[str, Domain] = Field(default_factory=dict)
@@ -83,6 +86,8 @@ class Tolerance(BaseModel):
 
 class Verdict(BaseModel):
     formula_id: str
+    index_in_chain: Optional[int] = None
+    details: dict = Field(default_factory=dict)
     verdict: Literal["PASS", "FAIL", "INCONCLUSIVE", "SKIP"]
     symbolic: Literal["equal", "not_equal", "unknown"] = "unknown"
     regimes: list[RegimeResult] = Field(default_factory=list)
@@ -99,6 +104,7 @@ class Review(BaseModel):
 
 class Finding(BaseModel):
     formula_id: str
+    index_in_chain: Optional[int] = None
     verdict: str
     confidence: float = 0.0
     review: Review = Field(default_factory=Review)

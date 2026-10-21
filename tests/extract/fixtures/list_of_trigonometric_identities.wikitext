@@ -1,0 +1,1252 @@
+{{Short description|none}}
+{{Trigonometry}}
+In [[trigonometry]], '''trigonometric identities''' are [[Equality (mathematics)|equalities]] that involve [[trigonometric functions]] and are true for every value of the occurring [[Variable (mathematics)|variables]] for which both sides of the equality are defined. Geometrically, these are [[identity (mathematics)|identities]] involving certain functions of one or more [[angle]]s. They are distinct from [[Trigonometry#Triangle identities|triangle identities]], which are identities potentially involving angles but also involving side lengths or other lengths of a [[triangle]].
+
+These identities are useful whenever expressions involving trigonometric functions need to be simplified. An important application is the [[integral|integration]] of non-trigonometric functions: a common technique involves first using the [[Trigonometric substitution|substitution rule with a trigonometric function]], and then simplifying the resulting integral with a trigonometric identity.
+
+== Pythagorean identities ==
+{{Main|Pythagorean trigonometric identity}}
+[[File:Trigonometric functions and their reciprocals on the unit circle.svg|class=skin-invert-image|thumb|Trigonometric functions and their reciprocals on the unit circle. All of the right-angled triangles are similar, i.e. the ratios between their corresponding sides are the same. For sin, cos and tan the unit-length radius forms the hypotenuse of the triangle that defines them. The reciprocal identities arise as ratios of sides in the triangles where this unit line is no longer the hypotenuse. The triangle shaded blue illustrates the identity <math>1 + \cot^2\theta = \csc^2\theta</math>, and the red triangle shows that <math>\tan^2\theta + 1 = \sec^2\theta</math>.]]
+
+The basic relationship between the [[sine and cosine]] is given by the Pythagorean identity:
+
+<math display="block">\sin^2\theta + \cos^2\theta = 1,</math>
+
+where <math>\sin^2 \theta</math> means <math>{(\sin \theta)}^2</math> and <math>\cos^2 \theta</math> means <math>{(\cos \theta)}^2.</math>
+
+This can be viewed as a version of the [[Pythagorean theorem]], and follows from the equation <math>x^2 + y^2 = 1</math> for the [[unit circle]]. This equation can be solved for either the sine or the cosine:
+
+<math display=block>\begin{align}
+\sin\theta &= \pm \sqrt{1 - \cos^2\theta}, \\
+\cos\theta &= \pm \sqrt{1 - \sin^2\theta}.
+\end{align}</math>
+
+where the sign depends on the [[Quadrant (plane geometry)|quadrant]] of <math>\theta.</math>
+
+Dividing this identity by <math>\sin^2 \theta</math>, <math>\cos^2 \theta</math>, or both yields the following identities:
+<math display=block>\begin{align}
+1 + \cot^2\theta &= \csc^2\theta \\
+1 + \tan^2\theta &= \sec^2\theta \\
+\sec^2\theta + \csc^2\theta &= \sec^2\theta\csc^2\theta
+\end{align}</math>
+
+Using these identities, it is possible to express any trigonometric function in terms of any other ([[up to]] a plus or minus sign):
+
+{| class="wikitable" style="text-align:center"
+|+ Each trigonometric function in terms of each of the other five.<ref name="AS4345">{{AS ref|4, eqn 4.3.45|73}}</ref>
+! scope=row | in terms of →
+↓
+! scope="col"|<math>\sin \theta</math>
+! scope="col" |<math>\csc \theta</math>
+! scope="col"|<math>\cos \theta</math>
+! scope="col" |<math>\sec \theta</math>
+! scope="col"|<math>\tan \theta</math>
+! scope="col"|<math>\cot \theta</math>
+|-
+! scope=row | <math>\sin \theta =</math>
+| <math>\sin \theta</math>
+| <math>\frac{1}{\csc \theta}</math>
+| <math>\pm\sqrt{1 - \cos^2 \theta}</math>
+| <math>\pm\frac{\sqrt{\sec^2 \theta - 1}}{\sec \theta}</math>
+| <math>\pm\frac{\tan \theta}{\sqrt{1 + \tan^2 \theta}}</math>
+| <math>\pm\frac{1}{\sqrt{1 + \cot^2 \theta}}</math>
+|-
+! scope=row | <math>\csc \theta =</math>
+| <math>\frac{1}{\sin \theta}</math>
+| <math>\csc \theta</math>
+| <math>\pm\frac{1}{\sqrt{1 - \cos^2 \theta}}</math>
+| <math>\pm\frac{\sec \theta}{\sqrt{\sec^2 \theta - 1}}</math>
+| <math>\pm\frac{\sqrt{1 + \tan^2 \theta}}{\tan \theta}</math>
+| <math>\pm\sqrt{1 + \cot^2 \theta}</math>
+|-
+! scope=row | <math>\cos \theta =</math>
+| <math>\pm\sqrt{1 - \sin^2\theta}</math>
+| <math>\pm\frac{\sqrt{\csc^2 \theta - 1}}{\csc \theta}</math>
+| <math>\cos \theta</math>
+| <math>\frac{1}{\sec \theta}</math>
+| <math>\pm\frac{1}{\sqrt{1 + \tan^2 \theta}}</math>
+| <math>\pm\frac{\cot \theta}{\sqrt{1 + \cot^2 \theta}}</math>
+|-
+! scope=row | <math>\sec \theta =</math>
+| <math>\pm\frac{1}{\sqrt{1 - \sin^2 \theta}}</math>
+| <math>\pm\frac{\csc \theta}{\sqrt{\csc^2 \theta - 1}}</math>
+| <math>\frac{1}{\cos \theta}</math>
+| <math>\sec \theta</math>
+| <math>\pm\sqrt{1 + \tan^2 \theta}</math>
+| <math>\pm\frac{\sqrt{1 + \cot^2 \theta}}{\cot \theta}</math>
+|-
+! scope=row | <math>\tan \theta =</math>
+| <math>\pm\frac{\sin \theta}{\sqrt{1 - \sin^2 \theta}}</math>
+| <math>\pm\frac{1}{\sqrt{\csc^2 \theta - 1}}</math>
+| <math>\pm\frac{\sqrt{1 - \cos^2 \theta}}{\cos \theta}</math>
+| <math>\pm\sqrt{\sec^2 \theta - 1}</math>
+| <math>\tan \theta</math>
+| <math>\frac{1}{\cot \theta}</math>
+|-
+! scope=row | <math>\cot \theta =</math>
+| <math>\pm\frac{\sqrt{1 - \sin^2 \theta}}{\sin \theta}</math>
+| <math>\pm\sqrt{\csc^2 \theta - 1}</math>
+| <math>\pm\frac{\cos \theta}{\sqrt{1 - \cos^2 \theta}}</math>
+| <math>\pm\frac{1}{\sqrt{\sec^2 \theta - 1}}</math>
+| <math>\frac{1}{\tan \theta}</math>
+| <math>\cot \theta</math>
+|}
+
+== Reflections, shifts, and periodicity ==
+By examining the unit circle, one can establish the following properties of the trigonometric functions.
+
+=== Reflections ===
+[[File:Unit Circle - symmetry.svg|class=skin-invert-image|alt=Unit circle with a swept angle theta plotted at coordinates (a,b). As the angle is reflected in increments of one-quarter pi, or 45 degrees, the coordinates are transformed. For a transformation of one-quarter pi (45 degrees, or 90 – theta), the coordinates are transformed to (b,a). Another increment of the angle of reflection by one-quarter pi (90 degrees total, or 180 – theta) transforms the coordinates to (-a,b). A third increment of the angle of reflection by another one-quarter pi (135 degrees total, or 270 – theta) transforms the coordinates to (-b,-a). A final increment of one-quarter pi (180 degrees total, or 360 – theta) transforms the coordinates to (a,-b).|Transformation of coordinates (''a'',''b'') when shifting the reflection angle <math>\alpha</math> in increments of <math>\frac{\pi}{4}</math>|frame]]
+When the direction of a [[Euclidean vector]] is represented by an angle <math>\theta,</math> this is the angle determined by the free vector (starting at the origin) and the positive <math>x</math>-[[unit vector]]. The same concept may also be applied to lines in an [[Euclidean space]], where the angle is that determined by a parallel to the given line through the origin and the positive <math>x</math>-axis. If a line (vector) with direction <math>\theta</math> is reflected about a line with direction <math>\alpha,</math> then the direction angle <math>\theta^{\prime}</math> of this reflected line (vector) has the value
+<math display="block">\theta^{\prime} = 2 \alpha - \theta.</math>
+
+The values of the trigonometric functions of these angles <math>\theta,\;\theta^{\prime}</math> for specific angles <math>\alpha</math> satisfy simple identities: either they are equal, or have opposite signs, or employ the complementary trigonometric function. These are also known as {{em|reduction formulae}}.<ref>{{harvnb|Selby|1970|loc=p. 188}}</ref>
+{{clear}}
+<div style="overflow-x: auto;">
+{|class="wikitable"
+! <math>\theta</math> reflected in <math>\alpha = 0</math><ref>Abramowitz and Stegun, p.&nbsp;72, 4.3.13–15</ref><br /><span style="font-weight:normal">[[even and odd functions|odd/even]] identities</span>
+! <math>\theta</math> reflected in <math>\alpha = \frac{\pi}{4}</math><br /><span style="font-weight:normal>complementary angles</span>
+! <math>\theta</math> reflected in <math>\alpha = \frac{\pi}{2}</math><br /><span style="font-weight:normal>supplementary angles</span>
+! <math>\theta</math> reflected in <math>\alpha = \frac{3\pi}{4}</math>
+! <math>\theta</math> reflected in <math>\alpha = \pi</math><br /><span style="font-weight:normal">conjugate angles; compare to <math>\alpha = 0</math></span>
+|-
+|<math>\sin(-\theta) = -\sin \theta</math>
+|<math>\sin\left(\tfrac{\pi}{2} - \theta\right) =\cos \theta</math>
+|<math>\sin(\pi - \theta) = +\sin \theta</math>
+|<math>\sin\left(\tfrac{3\pi}{2} - \theta\right) =-\cos \theta</math>
+|<math>\sin(2\pi - \theta) = -\sin(\theta) = \sin(-\theta)</math>
+|-
+|<math>\cos(-\theta) =+ \cos \theta</math>
+|<math>\cos\left(\tfrac{\pi}{2} - \theta\right) = \sin \theta</math>
+|<math>\cos(\pi - \theta) = -\cos \theta</math>
+|<math>\cos\left(\tfrac{3\pi}{2} - \theta\right) = -\sin \theta</math>
+|<math>\cos(2\pi - \theta) = +\cos(\theta) = \cos(-\theta)</math>
+|-
+|<math>\tan(-\theta) = -\tan \theta</math>
+|<math>\tan\left(\tfrac{\pi}{2} - \theta\right) = \cot \theta</math>
+|<math>\tan(\pi - \theta) = -\tan \theta</math>
+|<math>\tan\left(\tfrac{3\pi}{2} - \theta\right) = +\cot \theta</math>
+|<math>\tan(2\pi - \theta) = -\tan(\theta) = \tan(-\theta)</math>
+|-
+|<math>\csc(-\theta) = -\csc \theta</math>
+|<math>\csc\left(\tfrac{\pi}{2} - \theta\right) = \sec \theta</math>
+|<math>\csc(\pi - \theta) =+ \csc \theta</math>
+|<math>\csc\left(\tfrac{3\pi}{2} - \theta\right) = -\sec \theta</math>
+|<math>\csc(2\pi - \theta) = -\csc(\theta) = \csc(-\theta)</math>
+|-
+|<math>\sec(-\theta) = +\sec \theta</math>
+|<math>\sec\left(\tfrac{\pi}{2} - \theta\right) = \csc \theta</math>
+|<math>\sec(\pi - \theta) = -\sec \theta</math>
+|<math>\sec\left(\tfrac{3\pi}{2} - \theta\right) = -\csc \theta</math>
+|<math>\sec(2\pi - \theta) = +\sec(\theta) = \sec(-\theta)</math>
+|-
+|<math>\cot(-\theta) = -\cot \theta</math>
+|<math>\cot\left(\tfrac{\pi}{2} - \theta\right) = \tan \theta</math>
+|<math>\cot(\pi - \theta) = -\cot \theta</math>
+|<math>\cot\left(\tfrac{3\pi}{2} - \theta\right) = +\tan \theta</math>
+|<math>\cot(2\pi - \theta) = -\cot(\theta) = \cot(-\theta)</math>
+|}
+</div>
+
+=== Shifts and periodicity ===
+[[File:Unit Circle - shifts.svg|class=skin-invert-image|thumb|upright=1.5|alt=Unit circle with a swept angle theta plotted at coordinates (a,b). As the swept angle is incremented by one-half pi (90 degrees), the coordinates are transformed to (-b,a). Another increment of one-half pi (180 degrees total) transforms the coordinates to (-a,-b). A final increment of one-half pi (270 degrees total) transforms the coordinates to (b,a).|Transformation of coordinates (''a'',''b'') when shifting the angle <math>\theta</math> in increments of <math>\frac{\pi}{2}</math>]]
+
+{|class="wikitable"
+!Shift by one quarter period<br/><span style="font-weight:normal>orthogonal angles</span>
+!Shift by one half period<br/><span style="font-weight:normal>opposite angles</span>
+!Shift by full periods<br /><span style="font-weight:normal>coincident angles</span><ref>Abramowitz and Stegun, p.&nbsp;72, 4.3.7–9</ref>
+!Period
+|-
+|<math>\sin(\theta \pm \tfrac{\pi}{2}) = \pm\cos \theta</math>
+|<math>\sin(\theta + \pi) = -\sin \theta</math>
+|<math>\sin(\theta + k\cdot 2\pi) = +\sin \theta</math>
+|style="text-align: center;"|<math>2\pi</math>
+|-
+|<math>\cos(\theta \pm \tfrac{\pi}{2}) = \mp\sin \theta</math>
+|<math>\cos(\theta + \pi) = -\cos \theta</math>
+|<math>\cos(\theta + k\cdot 2\pi) = +\cos \theta</math>
+|style="text-align: center;"|<math>2\pi</math>
+|-
+|<math>\csc(\theta \pm \tfrac{\pi}{2}) = \pm\sec \theta</math>
+|<math>\csc(\theta + \pi) = -\csc \theta</math>
+|<math>\csc(\theta + k\cdot 2\pi) = +\csc \theta</math>
+|style="text-align: center;"|<math>2\pi</math>
+|-
+|<math>\sec(\theta \pm \tfrac{\pi}{2}) = \mp\csc \theta</math>
+|<math>\sec(\theta + \pi) = -\sec \theta</math>
+|<math>\sec(\theta + k\cdot 2\pi) = +\sec \theta</math>
+|style="text-align: center;"|<math>2\pi</math>
+|-
+|<math>\tan(\theta \pm \tfrac{\pi}{4}) =  \tfrac{\tan \theta \pm 1}{1\mp \tan \theta}</math>
+|<math>\tan(\theta + \tfrac{\pi}{2}) = -\cot \theta</math>
+|<math>\tan(\theta + k\cdot \pi) = +\tan \theta</math>
+|style="text-align: center;"|<math>\pi</math>
+|-
+|<math>\cot(\theta \pm \tfrac{\pi}{4}) =  \tfrac{\cot \theta \mp 1}{1\pm \cot \theta}</math>
+|<math>\cot(\theta + \tfrac{\pi}{2}) = -\tan\theta</math>
+|<math>\cot(\theta + k\cdot \pi) = +\cot \theta</math>
+|style="text-align: center;"|<math>\pi</math>
+|}
+
+=== Signs ===
+
+The sign of trigonometric functions depends on quadrant of the angle. If <math>{-\pi} < \theta \leq \pi</math> and {{math|sgn}} is the [[sign function]],
+
+<math display=block>\begin{align}
+\sgn(\sin \theta) = \sgn(\csc \theta) &= \begin{cases}
+  +1 & \text{if}\ \  0 < \theta < \pi \\
+  -1 & \text{if}\ \  {-\pi} < \theta < 0 \\
+   0 & \text{if}\ \  \theta \in \{0, \pi \}
+\end{cases}
+\\[5mu]
+\sgn(\cos \theta) = \sgn(\sec \theta) &= \begin{cases}
+  +1 & \text{if}\ \  {-\tfrac{\pi}{2}} < \theta < \tfrac{\pi}{2} \\
+  -1 & \text{if}\ \  {-\pi} < \theta < -\tfrac{\pi}{2} \ \ \text{or}\ \ \tfrac{\pi}{2} < \theta < \pi\\
+   0 & \text{if}\ \  \theta \in \bigl\{{-\tfrac{\pi}{2}}, \tfrac{\pi}{2} \bigr\}
+\end{cases}
+\\[5mu]
+\sgn(\tan \theta) = \sgn(\cot \theta) &= \begin{cases}
+  +1 & \text{if}\ \  {-\pi} < \theta < -\tfrac{\pi}{2} \ \ \text{or}\ \ 0 < \theta < \tfrac{\pi}{2} \\
+  -1 & \text{if}\ \  {-\tfrac{\pi}{2}} < \theta < 0 \ \ \text{or}\ \ \tfrac{\pi}{2} < \theta < \pi \\
+   0 & \text{if}\ \  \theta \in \bigl\{{-\tfrac{\pi}{2}}, 0, \tfrac{\pi}{2}, \pi \bigr\}
+\end{cases}
+\end{align}</math>
+
+The trigonometric functions are periodic with common period <math>2\pi,</math> so for values of {{mvar|θ}} outside the interval <math>({-\pi}, \pi],</math> they take repeating values (see {{slink|#Shifts and periodicity}} above).
+The sign of a sinusoid or cosinusoid can be used to define a normalized [[Square wave (waveform)|square wave]].
+For example, the functions <math>\sgn(\sin x)</math> and <math>\sgn(\cos x)</math> take values {{math|±1}} and correspond to square waves with a phase shift of {{math|{{sfrac|{{pi}}|2}}}}.
+
+== Angle sum and difference identities ==
+{{See also|Proofs of trigonometric identities#Angle sum identities|Small-angle approximation#Angle sum and difference}}
+[[File:Angle sum.svg|class=skin-invert-image|Geometric construction to derive angle sum trigonometric identities|frame]]
+
+[[File:Diagram showing the angle difference trigonometry identities for sin(a-b) and cos(a-b).svg|class=skin-invert-image|thumb|Diagram showing the angle difference identities for <math>\sin(\alpha - \beta)</math> and <math>\cos(\alpha - \beta)</math>]]
+
+These are also known as the {{em|angle addition and subtraction theorems}} (or {{em|formulae}}).
+<math display=block>\begin{align}
+\sin(\alpha + \beta) &= \sin \alpha \cos \beta + \cos \alpha \sin \beta \\
+\sin(\alpha - \beta) &= \sin \alpha \cos \beta - \cos \alpha \sin \beta \\
+\cos(\alpha + \beta) &= \cos \alpha \cos \beta - \sin \alpha \sin \beta \\ 
+\cos(\alpha - \beta) &= \cos \alpha \cos \beta + \sin \alpha \sin \beta
+\end{align}</math>
+
+The angle difference identities for <math>\sin(\alpha - \beta)</math> and <math>\cos(\alpha - \beta)</math> can be derived from the angle sum versions (and vice versa) by substituting <math>-\beta</math> for <math>\beta</math> and using the facts that <math>\sin(-\beta) = -\sin(\beta)</math> and <math>\cos(-\beta) = \cos(\beta)</math> They can also be derived by using a slightly modified version of the figure for the angle sum identities, both of which are shown here. They can also be seen as expressing the [[dot product]] and [[cross product]] of two vectors in terms of the cosine and the sine of the angle between them.
+
+These identities are summarized in the first two rows of the following table, which also includes sum and difference identities for the other trigonometric functions.
+
+{|class="wikitable" style=""
+! Sine
+| colspan="3" style='border-style: solid none solid solid; text-align: right;' |<math>\sin(\alpha \pm \beta)</math>
+| style='border-style: solid none solid none; text-align: center;' |<math>=</math>
+| style='border-style: solid solid solid none; text-align: left;' |<math>\sin \alpha \cos \beta \pm \cos \alpha \sin \beta</math><ref>Abramowitz and Stegun, p.&nbsp;72, 4.3.16</ref><ref name="mathworld_addition">{{MathWorld|title=Trigonometric Addition Formulas|urlname=TrigonometricAdditionFormulas}}</ref>
+|-
+! Cosine
+| colspan="3" style='border-style: solid none solid solid; text-align: right;' |<math>\cos(\alpha \pm \beta)</math>
+| style='border-style: solid none solid none; text-align: center;' |<math>=</math>
+| style='border-style: solid solid solid none; text-align: left;' |<math>\cos \alpha \cos \beta \mp \sin \alpha \sin \beta</math><ref name="mathworld_addition" /><ref>Abramowitz and Stegun, p.&nbsp;72, 4.3.17</ref>
+|-
+! Tangent
+| colspan="3" style='border-style: solid none solid solid; text-align: right;' |<math>\tan(\alpha \pm \beta)</math>
+| style='border-style: solid none solid none; text-align: center;' |<math>=</math>
+| style='border-style: solid solid solid none; text-align: left;' |<math>\frac{\tan \alpha \pm \tan \beta}{1 \mp \tan \alpha \tan \beta}</math><ref name="mathworld_addition" /><ref>Abramowitz and Stegun, p.&nbsp;72, 4.3.18</ref>
+|-
+!Cosecant
+| colspan="3" style='border-style: solid none solid solid; text-align: right;' |<math>\csc(\alpha \pm \beta)</math>
+| style='border-style: solid none solid none; text-align: center;' |<math>=</math>
+| style='border-style: solid solid solid none; text-align: left;' |<math>\frac{\sec \alpha \sec \beta \csc \alpha \csc \beta}{\sec \alpha \csc \beta \pm \csc \alpha \sec \beta}</math><ref name=":0">{{Cite web|url=http://www.milefoot.com/math/trig/22anglesumidentities.htm|title=Angle Sum and Difference Identities|website=www.milefoot.com|access-date=2019-10-12}}</ref>
+|-
+! Secant
+| colspan="3" style='border-style: solid none solid solid; text-align: right;' |<math>\sec(\alpha \pm \beta)</math>
+| style='border-style: solid none solid none; text-align: center;' |<math>=</math>
+| style='border-style: solid solid solid none; text-align: left;' |<math>\frac{\sec \alpha \sec \beta \csc \alpha \csc \beta}{\csc \alpha \csc \beta \mp \sec \alpha \sec \beta}</math><ref name=":0" />
+|-
+! Cotangent
+| colspan="3" style='border-style: solid none solid solid; text-align: right;' |<math>\cot(\alpha \pm \beta)</math>
+| style='border-style: solid none solid none; text-align: center;' |<math>=</math>
+| style='border-style: solid solid solid none; text-align: left;' |<math>\frac{\cot \alpha \cot \beta \mp 1}{\cot \beta \pm \cot \alpha}</math><ref name="mathworld_addition" /><ref>Abramowitz and Stegun, p.&nbsp;72, 4.3.19</ref>
+|-
+! Arcsine
+| colspan="3" style='border-style: solid none solid solid; text-align: right;' |<math>\arcsin x \pm \arcsin y</math>
+| style='border-style: solid none solid none; text-align: center;' |<math>=</math>
+| style='border-style: solid solid solid none; text-align: left;' |<math>\arcsin\left(x\sqrt{1-y^2} \pm y\sqrt{1-x^2\vphantom{y}}\right)</math><ref>Abramowitz and Stegun, p.&nbsp;80, 4.4.32</ref>
+|-
+! Arccosine
+| colspan="3" style='border-style: solid none solid solid; text-align: right;' |<math>\arccos x \pm \arccos y</math>
+| style='border-style: solid none solid none; text-align: center;' |<math>=</math>
+| style='border-style: solid solid solid none; text-align: left;' |<math>\arccos\left(xy \mp \sqrt{\left(1-x^2\right)\left(1-y^2\right)}\right)</math><ref>Abramowitz and Stegun, p.&nbsp;80, 4.4.33</ref>
+|-
+! Arctangent
+| colspan="3" style='border-style: solid none solid solid; text-align: right;' |<math>\arctan x \pm \arctan y</math>
+| style='border-style: solid none solid none; text-align: center;' |<math>=</math>
+| style='border-style: solid solid solid none; text-align: left;' |<math>\arctan\left(\frac{x \pm y}{1 \mp xy}\right)</math><ref>Abramowitz and Stegun, p.&nbsp;80, 4.4.34</ref>
+|-
+! Arccotangent
+| colspan="3" style='border-style: solid none solid solid; text-align: right;' |<math>\arccot x \pm \arccot y</math>
+| style='border-style: solid none solid none; text-align: center;' |<math>=</math>
+| style='border-style: solid solid solid none; text-align: left;' |<math>\arccot\left(\frac{xy \mp 1}{y \pm x}\right)</math>
+|}
+
+=== Sines and cosines of sums of infinitely many angles ===
+When the series <math display="inline">\sum_{i=1}^\infty \theta_i</math> [[absolute convergence|converges absolutely]] then
+
+<math display=block>\begin{align}
+{\sin}\biggl(\sum_{i=1}^\infty \theta_i\biggl)
+&= \sum_{\text{odd}\ k \ge 1} (-1)^\frac{k-1}{2} \!\!
+   \sum_{\begin{smallmatrix} A \subseteq \{\,1,2,3,\dots\,\} \\
+\left|A\right| = k\end{smallmatrix}}
+   \biggl(\prod_{i \in A} \sin\theta_i \prod_{i \not \in A} \cos\theta_i\biggr) \\
+{\cos}\biggl(\sum_{i=1}^\infty \theta_i\biggr)
+&= \sum_{\text{even}\ k \ge 0} (-1)^\frac{k}{2} \,
+\sum_{\begin{smallmatrix} A \subseteq \{\,1,2,3,\dots\,\} \\ \left|A\right| = k\end{smallmatrix}}
+\biggl(\prod_{i \in A} \sin\theta_i \prod_{i \not \in A} \cos\theta_i\biggr) .
+\end{align}</math>
+
+Because the series <math display="inline">\sum_{i=1}^\infty \theta_i</math> converges absolutely, it is necessarily the case that <math display="inline">\lim_{i \to \infty} \theta_i = 0,</math> <math display="inline">\lim_{i \to \infty} \sin \theta_i = 0,</math> and <math display="inline">\lim_{i \to \infty} \cos \theta_i = 1.</math>  Particularly, in these two identities, an asymmetry appears that is not seen in the case of sums of finitely many angles: in each product, there are only finitely many sine factors but there are [[Cofiniteness|cofinitely]] many cosine factors.  Terms with infinitely many sine factors would necessarily be equal to zero.
+
+When only finitely many of the angles <math>\theta_i</math> are nonzero then only finitely many of the terms on the right side are nonzero because all but finitely many sine factors vanish.  Furthermore, in each term all but finitely many of the cosine factors are unity.
+
+=== Tangents and cotangents of sums ===
+Let <math>e_k</math> (for <math>k = 0, 1, 2, 3, \ldots</math>) be the {{mvar|k}}th-degree [[elementary symmetric polynomial]] in the variables
+<math display="block">x_i = \tan \theta_i</math>
+for <math>i = 0, 1, 2, 3, \ldots,</math> that is,
+
+<math display=block>\begin{align}
+e_0 &= 1  \\[6pt]
+e_1 &= \sum_i       x_i         &&= \sum_i       \tan\theta_i                 \\[6pt]
+e_2 &= \sum_{i<j}   x_i x_j     &&= \sum_{i<j}   \tan\theta_i \tan\theta_j    \\[6pt]
+e_3 &= \sum_{i<j<k} x_i x_j x_k &&= \sum_{i<j<k} \tan\theta_i \tan\theta_j \tan\theta_k \\
+    &\ \ \vdots                 &&\ \ \vdots
+\end{align}</math>
+
+Then
+
+<math display=block>
+\tan \Bigl(\sum_i \theta_i\Bigr) 
+= \frac{e_1 - e_3 + e_5 -\cdots}{e_0 - e_2 + e_4 - \cdots}.
+</math>
+This can be shown by using the sine and cosine sum formulae above:
+<math display=block>\begin{align}
+\tan \Bigl(\sum_i \theta_i\Bigr)
+&= \frac{{\sin}\bigl(\sum_i \theta_i\bigr) / \prod_i \cos \theta_i}
+        {{\cos}\bigl(\sum_i \theta_i\bigr) / \prod_i \cos \theta_i} \\[10pt]
+& = \frac
+  {\displaystyle
+    \sum_{\text{odd}\ k \ge 1} (-1)^\frac{k-1}{2}
+    \sum_{
+      \begin{smallmatrix} A \subseteq \{1,2,3,\dots\} \\
+      \left|A\right| = k\end{smallmatrix}}
+    \prod_{i \in A} \tan\theta_i}
+  {\displaystyle
+    \sum_{\text{even}\ k \ge 0} ~ (-1)^\frac{k}{2} ~~
+    \sum_{
+      \begin{smallmatrix} A \subseteq \{1,2,3,\dots\} \\
+      \left|A\right| = k\end{smallmatrix}}
+    \prod_{i \in A} \tan\theta_i}
+= \frac{e_1 - e_3 + e_5 -\cdots}{e_0 - e_2 + e_4 - \cdots} \\[10pt]
+
+\cot\Bigl(\sum_i \theta_i\Bigr)
+&= \frac{e_0 - e_2 + e_4 - \cdots}{e_1 - e_3 + e_5 -\cdots}
+\end{align}</math>
+
+The number of terms on the right side depends on the number of terms on the left side.
+
+For example:
+<math display="block">\begin{align}
+\tan(\theta_1 + \theta_2) &
+= \frac{ e_1 }{ e_0 - e_2 }
+= \frac{ x_1 + x_2 }{ 1 \ - \ x_1 x_2 }
+= \frac{ \tan\theta_1 + \tan\theta_2 }{ 1 \ - \ \tan\theta_1 \tan\theta_2 },
+\\[8pt]
+\tan(\theta_1 + \theta_2 + \theta_3) &
+= \frac{ e_1 - e_3 }{ e_0 - e_2 }
+= \frac{ (x_1 + x_2 + x_3) \ - \ (x_1 x_2 x_3) }{ 1 \ - \ (x_1x_2 + x_1 x_3 + x_2 x_3) },
+\\[8pt]
+\tan(\theta_1 + \theta_2 + \theta_3 + \theta_4) &
+= \frac{ e_1 - e_3 }{ e_0 - e_2 + e_4 } \\[8pt] &
+= \frac{ (x_1 + x_2 + x_3 + x_4) \ - \ (x_1 x_2 x_3 + x_1 x_2 x_4 + x_1 x_3 x_4 + x_2 x_3 x_4) }{ 1 \ - \ (x_1 x_2 + x_1 x_3 + x_1 x_4 + x_2 x_3 + x_2 x_4 + x_3 x_4) \ + \ (x_1 x_2 x_3 x_4) },
+\end{align}</math>
+
+and so on. The case of only finitely many terms can be proved by [[mathematical induction]].<ref>{{cite conference |last=Bronstein |first=Manuel |title=Simplification of real elementary functions |pages=207–211 |doi=10.1145/74540.74566 |book-title=Proceedings of the ACM-[[SIGSAM]] 1989 International Symposium on Symbolic and Algebraic Computation |editor-first= G. H. |editor-last=Gonnet |conference=ISSAC '89 (Portland US-OR, 1989-07) |location=New York |publisher=[[Association for Computing Machinery|ACM]] |year=1989 |isbn=0-89791-325-6}}</ref> The case of infinitely many terms can be proved by using some elementary inequalities.<ref>Michael Hardy. (2016). "On Tangents and Secants of Infinite Sums." ''The American Mathematical Monthly'', volume 123, number 7, 701–703. https://doi.org/10.4169/amer.math.monthly.123.7.701</ref>
+
+=== Linear fractional transformations of tangents, related to tangents of sums ===
+
+Suppose <math display=inline> a,b,c,d,p,q\in\mathbb R</math> and <math display=inline> i = \sqrt{-1}</math> and
+: <math> \frac{ai+b}{ci+d} = pi +q </math>
+and let <math display=inline> \varphi </math> be any number for which <math display=inline> \tan\varphi = \tfrac{c}{d}. </math>
+Suppose that <math display=inline> \tfrac{a}{c} \ne \tfrac{b}{d} </math> so that the forgoing fraction cannot be {{sfrac|0|0}}. Then for all <math display=inline> \theta\in\mathbb R </math><ref>{{cite journal|first=Michael |last=Hardy |date=2025 |title=Invariance of the Cauchy Family Under Linear Fractional Transformations |journal=The American Mathematical Monthly |volume=132 |issue=5 |pages=453–455 |doi=10.1080/00029890.2025.2459048}}</ref>
+: <math> \frac{a\tan\theta + b}{c\tan\theta+d} = p\tan(\theta-\varphi) + q. </math>
+(In case the denominator of this fraction is 0, we take the value of the fraction to be <math display=inline> \infty </math>, where the symbol <math display=inline> \infty </math> does not mean either <math display=inline> +\infty </math> or <math display=inline> -\infty </math>, but is the <math display=inline> \infty </math> that is approached by going in either the positive or the negative direction, making the completion of the line <math display=inline> \mathbb R \cup \{\,\infty\,\} </math> topologically a circle.)
+
+From this identity it can be shown to follow quickly that the family of all [[Cauchy distribution|Cauchy-distributed]] random variables is closed under linear fractional transformations, a result known since 1976.<ref>{{cite journal|last=Knight |first=F. B. |date=1976 |title=A characterization of the Cauchy type |journal=Proceedings of the American Mathematical Society |volume=1976 |pages=130–135 |doi=10.1090/S0002-9939-1976-0394803-6 }}</ref>
+
+=== Secants and cosecants of sums ===
+<math display=block>\begin{align}
+{\sec}\Bigl(\sum_i \theta_i \Bigr) &= \frac{\prod_i \sec\theta_i}{e_0 - e_2 + e_4 - \cdots} \\[8pt]
+{\csc}\Bigl(\sum_i \theta_i \Bigr) &= \frac{\prod_i \sec\theta_i }{e_1 - e_3 + e_5 - \cdots}
+\end{align}</math>
+
+where <math>e_k</math> is the {{mvar|k}}th-degree [[elementary symmetric polynomial]] in the {{mvar|n}} variables <math>x_i = \tan \theta_i,</math> <math>i = 1, \ldots, n,</math> and the number of terms in the denominator and the number of factors in the product in the numerator depend on the number of terms in the sum on the left.<ref>{{cite journal |last=Hardy |first=Michael |year=2016 |title=On Tangents and Secants of Infinite Sums |journal=American Mathematical Monthly |volume=123 |issue=7 |pages=701–703 |doi=10.4169/amer.math.monthly.123.7.701 |url=https://zenodo.org/record/1000408 }}</ref> The case of only finitely many terms can be proved by mathematical induction on the number of such terms.
+
+For example,
+
+<math display=block>\begin{align}
+\sec(\alpha+\beta+\gamma)
+&= \frac{\sec\alpha \sec\beta \sec\gamma}
+        {1 - \tan\alpha\tan\beta - \tan\alpha\tan\gamma - \tan\beta\tan\gamma} \\[8pt]
+\csc(\alpha+\beta+\gamma)
+&= \frac{\sec\alpha \sec\beta \sec\gamma}
+        {\tan\alpha + \tan\beta + \tan\gamma - \tan\alpha\tan\beta\tan\gamma}.
+\end{align}</math>
+
+=== Ptolemy's theorem ===
+{{Main|Ptolemy's theorem}}
+
+{{See also|History of trigonometry#Classical antiquity}}
+
+[[File:Diagram illustrating the relation between Ptolemy's theorem and the angle sum trig identity for sin.svg|class=skin-invert-image|thumb|upright=1.5|Diagram illustrating the relation between Ptolemy's theorem and the angle sum trig identity for sine. Ptolemy's theorem states that the sum of the products of the lengths of opposite sides is equal to the product of the lengths of the diagonals. When those side-lengths are expressed in terms of the sin and cos values shown in the figure above, this yields the angle sum trigonometric identity for sine: {{math|1=sin(''α'' + ''β'') = sin ''α'' cos ''β'' + cos ''α'' sin ''β''}}.]]
+
+Ptolemy's theorem is important in the history of trigonometric identities, as it is how results equivalent to the sum and difference formulas for sine and cosine were first proved (but expressed in terms of [[Chord (geometry)|chords]]).<ref>{{cite thesis |last=Van Brummelen |first=Glen |author-link=Glen Van Brummelen  |date=1993 |title=Mathematical Tables in Ptolemy's 'Almagest' |url=https://summit.sfu.ca/_flysystem/fedora/sfu_migrate/4490/b14308782.pdf |degree=PhD |publisher=Simon Fraser University |pages=56–58 }}</ref> It states that in a [[cyclic quadrilateral]] <math>ABCD</math>, as shown in the accompanying figure, the sum of the products of the lengths of opposite sides is equal to the product of the lengths of the diagonals. In the special cases of one of the diagonals or sides being a diameter of the circle, this theorem gives rise directly to the angle sum and difference trigonometric identities.<ref name="cut-the-knot.org">{{cite web | url=https://www.cut-the-knot.org/proofs/sine_cosine.shtml | title=Sine, Cosine, and Ptolemy's Theorem }}</ref> The relationship follows most easily when the circle is constructed to have a diameter of length one, as shown here.
+
+By [[Thales's theorem]], <math> \angle DAB</math> and <math> \angle DCB</math> are both right angles. The right-angled triangles <math>DAB</math> and <math>DCB</math> both share the hypotenuse <math>\overline{BD}</math> of length 1. Thus, the side <math>\overline{AB} = \sin \alpha</math>, <math>\overline{AD} = \cos \alpha</math>, <math>\overline{BC} = \sin \beta</math> and <math>\overline{CD} = \cos \beta</math>.
+
+By the [[inscribed angle]] theorem, the [[central angle]] subtended by the chord <math>\overline{AC}</math> at the circle's center is twice the angle <math> \angle ADC</math>, i.e. <math>2(\alpha + \beta)</math>. Therefore, the symmetrical pair of red triangles each has the angle <math>\alpha + \beta</math> at the center. Each of these triangles has a [[hypotenuse]] of length <math display="inline">\frac{1}{2}</math>, so the length of <math>\overline{AC}</math> is  <math display="inline">2 \times \frac{1}{2} \sin(\alpha + \beta)</math>, i.e. simply <math>\sin(\alpha + \beta)</math>. The quadrilateral's other diagonal is the diameter of length 1, so the product of the diagonals' lengths is also <math>\sin(\alpha + \beta)</math>.
+
+When these values are substituted into the statement of Ptolemy's theorem that <math>|\overline{AC}|\cdot |\overline{BD}|=|\overline{AB}|\cdot |\overline{CD}|+|\overline{AD}|\cdot |\overline{BC}|</math>, this yields the angle sum trigonometric identity for sine: <math> \sin(\alpha + \beta) = \sin \alpha \cos \beta + \cos \alpha \sin \beta </math>. The angle difference formula for <math> \sin(\alpha  - \beta)</math> can be similarly derived by letting the side <math>\overline{CD}</math> serve as a diameter instead of <math>\overline{BD}</math>.<ref name="cut-the-knot.org"/>
+
+== Multiple-angle and half-angle formulas ==
+
+=== Multiple-angle formulae ===
+
+==== Double-angle formulae ====
+[[File:Visual demonstration of the double-angle trigonometric identity for sine.svg|class=skin-invert-image|thumb|upright=1.5|Visual demonstration of the double-angle formula for sine. For the above  isosceles triangle with unit sides and angle {{math|2''θ''}}, the area {{math|{{small|{{sfrac|2}}}}(base × height)}} is calculated in two orientations. When upright, the area is {{math|sin&thinsp;''θ'' cos&thinsp;''θ''}}. When on its side, the same area is {{math|{{small|{{sfrac|2}}}}sin&thinsp;2''θ''}}. Therefore, {{math|1= sin&thinsp;2''θ'' = 2sin&thinsp;''θ'' cos&thinsp;''θ''}}.]]
+{| class="wikitable plainrowheaders" style="text-align: left;"
+|+ Double-angle formulae,<br/>in terms of {{math|{{itco|''f''}}(''θ'')}} (or cofunction) and {{math|tan(''θ'')}}<ref name=STM1>{{harvnb|Selby|1970|loc=pg. 190}}</ref><ref name="A&S" />
+|-
+! scope="col" | {{math|{{itco|''f''}}(2''θ'')}}
+! scope="col" | Identity,<br/>{{math|{{itco|''f''}}(''θ'')}} or cofunction
+! scope="col" | Identity,<br/>{{math|tan(''θ'')}}
+|-
+! scope="row" | <math>\sin(2\theta)</math>
+| <math>\begin{align} &= 2 \sin\theta \cos\theta \\ &= (\sin\theta+\cos\theta)^2 - 1\end{align}</math>
+| <math>= \frac{2\tan\theta}{1+\tan^2\theta}</math>
+|-
+! scope="row" | <math>\cos(2\theta)</math>
+| <math>\begin{align} &= \cos^2\theta - \sin^2\theta \\ &= 2\cos^2\theta - 1 \\ &= 1 - 2\sin^2\theta \end{align}</math>
+| <math>= \frac{1 - \tan^2\theta}{1 + \tan^2\theta}</math>
+|-
+! scope="row" | <math>\tan(2\theta)</math>
+|
+| <math>= \frac{2\tan\theta}{1-\tan^2\theta}</math>
+|-
+! scope="row" | <math>\cot(2\theta)</math>
+| <math>= \frac{\cot^2\theta - 1}{2\cot\theta}</math>
+| <math>= \frac{1 - \tan^2\theta}{2\tan\theta}</math>
+|-
+! scope="row" | <math>\sec(2\theta)</math>
+| <math>= \frac{\sec^2\theta}{2 - \sec^2\theta}</math>
+| <math>= \frac{1 + \tan^2\theta}{1 - \tan^2\theta}</math>
+|-
+! scope="row" | <math>\csc(2\theta)</math>
+| <math>= \frac{\sec\theta \csc\theta}{2}</math>
+| <math>= \frac{1 + \tan^2\theta}{2\tan\theta}</math>
+|}
+
+==== Triple-angle formulae ====
+Formulae for triple angles.<ref name=STM1 />
+
+<math display=block>\begin{align}
+\sin (3\theta) &=3\sin\theta - 4\sin^3\theta &&= 4\sin\theta\sin\left(\tfrac{\pi}{3} -\theta\right)\sin\left(\tfrac{\pi}{3} + \theta\right)\\
+\cos (3\theta) &= 4 \cos^3\theta - 3 \cos\theta &&=4\cos\theta\cos\left(\tfrac{\pi}{3} -\theta\right)\cos\left(\tfrac{\pi}{3} + \theta\right)\\
+\tan (3\theta) &= \frac{3 \tan\theta - \tan^3\theta}{1 - 3 \tan^2\theta} &&= \tan \theta\tan\left(\tfrac{\pi}{3} - \theta\right)\tan\left(\tfrac{\pi}{3} + \theta\right)\\
+\cot (3\theta) &= \frac{3 \cot\theta - \cot^3\theta}{1 - 3 \cot^2\theta}\\
+\sec (3\theta) &= \frac{\sec^3\theta}{4-3\sec^2\theta}\\
+\csc (3\theta) &= \frac{\csc^3\theta}{3\csc^2\theta-4}\\
+\end{align}</math>
+
+==== Multiple-angle formulae ====
+Formulae for multiple angles.<ref>{{Cite web |last=Weisstein |first=Eric W. |title=Multiple-Angle Formulas |url=https://mathworld.wolfram.com/Multiple-AngleFormulas.html |access-date=2022-02-06 |website=mathworld.wolfram.com |language=en}}</ref>
+
+<math display=block>\begin{align}
+  \sin(n\theta) &= \sum_{k \in \mathbb{O}^{+}}^n (-1)^\frac{k-1}{2} {n \choose k}\cos^{n-k} \theta \sin^k \theta =
+  \sin\theta\sum_{i=0}^\frac{n+1}{2}\sum_{j=0}^{i} (-1)^{i-j} {n \choose 2i + 1}{i \choose j}
+  \cos^{n-2(i-j)-1} \theta \\
+  &=\sin(\theta)\sum_{k=0}^{\left\lfloor\frac{n-1}{2}\right\rfloor}(-1)^k \bigl(2 \cos(\theta)\bigr)^{n-2k-1} {n-k-1 \choose k} \\
+  &=2^{(n-1)} \prod_{k=0}^{n-1} \sin\left(\frac{k\pi}{n}+\theta\right)\\
+\cos(n\theta) &= \sum_{k \in \mathbb{E}_0^{+}}^n (-1)^\frac{k}{2} {n \choose k}\cos^{n-k} \theta \sin^k \theta =
+  \sum_{i=0}^\frac{n}{2}\sum_{j=0}^{i} (-1)^{i-j} {n \choose 2i}{i \choose j} \cos^{n-2(i-j)} \theta \\
+  &= \sum_{k=0}^{\left\lfloor\frac{n}{2}\right\rfloor} (-1)^k {(2 \cos(\theta))}^{n-2k} {n-k \choose k}\frac{n}{2n-2k}\\
+\cos\bigl((2n+1)\theta\bigr)&=(-1)^n 2^{2n}\prod_{k=0}^{2n}\cos\left(\frac{k\pi}{2n+1}-\theta\right)\\
+\cos(2 n \theta)&=(-1)^n 2^{2n-1} \prod_{k=0}^{2n-1} \cos\left(\frac{(1+2k)\pi}{4n}-\theta\right)\\
+\tan(n\theta) &= \frac{\displaystyle\sum_{k \in \mathbb{O}^{+}}^n (-1)^\frac{k-1}{2} {n \choose k}\tan^k \theta}{\displaystyle\sum_{k\in \mathbb{E}_0^{+}}^n (-1)^\frac{k}{2} {n \choose k}\tan^k \theta}\\
+\mathbb{O}^{+} &= \text{Positive odd integers}\\
+\mathbb{E}_0^{+} &= \text{Non-negative even integers}\\
+\end{align}</math>
+
+==== Chebyshev method ====
+The [[Pafnuty Chebyshev|Chebyshev]] method is a [[Recursion|recursive]] [[algorithm]] for finding the {{mvar|n}}th multiple angle formula knowing the <math>(n-1)</math>th and <math>(n-2)</math>th values.<ref>{{cite web|last=Ward|first=Ken|website=Ken Ward's Mathematics Pages|title=Multiple angles recursive formula|url=http://trans4mind.com/personal_development/mathematics/trigonometry/multipleAnglesRecursiveFormula.htm}}</ref>
+
+<math>\cos(nx)</math> can be computed from <math>\cos((n-1)x)</math>, <math>\cos((n-2)x)</math>, and <math>\cos(x)</math> with
+
+<math display="block">\cos(nx)=2 \cos x \cos\bigl((n-1)x\bigr) - \cos\bigl((n-2)x\bigr).</math>
+
+This can be proved by adding together the formulae
+
+<math display="block">\begin{align}
+  \cos \bigl((n-1)x + x\bigr) &= \cos \bigl((n-1)x\bigr) \cos x-\sin \bigl((n-1)x\bigr) \sin x \\
+  \cos \bigl((n-1)x - x\bigr) &= \cos \bigl((n-1)x\bigr) \cos x+\sin \bigl((n-1)x\bigr) \sin x
+\end{align}</math>
+
+It follows by induction that <math>\cos(nx)</math> is a polynomial of {{tmath|\cos x}}, the so-called Chebyshev polynomial of the first kind, {{math|T_n}} {{Crossreference|selfref=no|(see {{slink|Chebyshev polynomials#Trigonometric definition}})}}; thus,<ref name="mathworld_multiple_angle">{{MathWorld|title=Multiple-Angle Formulas|urlname=Multiple-AngleFormulas}}</ref>
+<math display="block">\cos (n\theta) = T_n (\cos \theta )</math>
+
+Similarly, <math>\sin(nx)</math> can be computed from {{tmath|\sin((n-1)x)}}, {{tmath|\sin((n-2)x)}}, and <math>\cos x</math> with
+<math display="block">\sin(nx)=2 \cos x \sin\bigl((n-1)x\bigr)-\sin\bigl((n-2)x\bigr)</math>
+
+This can be proved by adding formulae for <math>\sin((n-1)x+x)</math> and <math>\sin((n-1)x-x).</math>
+
+Serving a purpose similar to that of the Chebyshev method, for the tangent we can write:
+
+<math display="block">\tan (nx) = \frac{\tan \bigl((n-1)x\bigr) + \tan x}{1- \tan \bigl((n-1)x\bigr) \tan x}\,.</math>
+
+=== Half-angle formulas ===
+
+<math display=block>\begin{align}
+\sin \frac{\theta}{2} &= \sgn\left(\sin\frac\theta2\right) \sqrt{\frac{1 - \cos \theta}{2}} \\[3pt]
+
+\cos \frac{\theta}{2} &= \sgn\left(\cos\frac\theta2\right) \sqrt{\frac{1 + \cos\theta}{2}} \\[3pt]
+
+\tan \frac{\theta}{2}
+&= \frac{1 - \cos \theta}{\sin \theta}
+= \frac{\sin \theta}{1 + \cos \theta}
+= \csc \theta - \cot \theta
+= \frac{\tan\theta}{1 + \sec{\theta}} \\[6mu]
+
+&= \sgn(\sin \theta) \sqrt\frac{1 - \cos \theta}{1 + \cos \theta}
+= \frac{-1 + \sgn(\cos \theta) \sqrt{1+\tan^2\theta}}{\tan\theta} \\[3pt]
+
+\cot \frac{\theta}{2}
+&= \frac{1 + \cos \theta}{\sin \theta}
+= \frac{\sin \theta}{1 - \cos \theta}
+= \csc \theta + \cot \theta
+= \sgn(\sin \theta) \sqrt\frac{1 + \cos \theta}{1 - \cos \theta} \\
+
+\sec \frac{\theta}{2}
+&= \sgn\left(\cos\frac\theta2\right) \sqrt{\frac{2}{1 + \cos\theta}} \\
+
+\csc \frac{\theta}{2}
+&= \sgn\left(\sin\frac\theta2\right) \sqrt{\frac{2}{1 - \cos\theta}} \\
+
+\end{align}</math>
+<ref name="ReferenceA">{{AS ref|4, eqn 4.3.20-22|72}}</ref><ref name="mathworld_half_angle">{{MathWorld|title=Half-Angle Formulas|urlname=Half-AngleFormulas}}</ref>
+
+Also
+<math display=block>\begin{align}
+  \tan\frac{\eta\pm\theta}{2} &= \frac{\sin\eta \pm \sin\theta}{\cos\eta + \cos\theta} \\[3pt]
+  \tan\left(\frac{\theta}{2} + \frac{\pi}{4}\right) &= \sec\theta + \tan\theta \\[3pt]
+       \sqrt{\frac{1 - \sin\theta}{1 + \sin\theta}} &= \frac{\left|1 - \tan\frac{\theta}{2}\right|}{\left|1 + \tan\frac{\theta}{2}\right|}
+\end{align}</math>
+
+=== Table ===
+<!-- [[Double-angle formula]], [[Double-angle formula]], [[Triple-angle formula]], [[Triple-angle formula]], [[Half-angle formula]], and [[Half-angle formula]] redirect here -->
+{{See also|Tangent half-angle formula}}
+These can be shown by using either the sum and difference identities or the multiple-angle formulae.
+
+<div style="overflow-x:auto;">
+{|class="wikitable"
+! !! Sine !! Cosine !! Tangent !! Cotangent
+|-
+! Double-angle formula<ref>Abramowitz and Stegun, p.&nbsp;72, 4.3.24–26</ref><ref name="mathworld_double_angle">{{MathWorld|title=Double-Angle Formulas|urlname=Double-AngleFormulas}}</ref>
+| <math>\begin{align}
+  \sin (2\theta) &= 2 \sin \theta \cos \theta \ \\
+                 &= \frac{2 \tan \theta} {1 + \tan^2 \theta}
+\end{align}</math>
+| <math>\begin{align}
+  \cos (2\theta) &= \cos^2 \theta - \sin^2 \theta \\
+                 &= 2 \cos^2 \theta - 1 \\ 
+                 &= 1 - 2 \sin^2 \theta \\
+                 &= \frac{1 - \tan^2 \theta} {1 + \tan^2 \theta}
+\end{align}</math>
+| <math>\tan (2\theta) = \frac{2 \tan \theta} {1 - \tan^2 \theta}</math>
+| <math>\cot (2\theta) = \frac{\cot^2 \theta - 1}{2 \cot \theta}</math>
+|-
+! Triple-angle formula<ref name="mathworld_multiple_angle" /><ref name="Stegun p. 72, 4">Abramowitz and Stegun, p.&nbsp;72, 4.3.27–28</ref>
+| <math>\begin{align}
+  \sin (3\theta) &= - \sin^3\theta + 3 \cos^2\theta \sin\theta\\
+                 &= - 4\sin^3\theta + 3\sin\theta
+\end{align}</math>
+| <math>\begin{align}
+  \cos (3\theta) &= \cos^3\theta - 3 \sin^2 \theta\cos \theta \\
+                 &= 4 \cos^3\theta - 3 \cos\theta
+\end{align}</math>
+| <math>\tan (3\theta) = \frac{3 \tan\theta - \tan^3\theta}{1 - 3 \tan^2\theta}</math>
+| <math>\cot (3\theta) = \frac{3 \cot\theta - \cot^3\theta}{1 - 3 \cot^2\theta}</math>
+|-
+! Half-angle formula<ref name="ReferenceA" /><ref name="mathworld_half_angle" />
+| <math>\begin{align}
+  &\sin \frac{\theta}{2} = \sgn\left(\sin\frac\theta2\right) \sqrt{\frac{1 - \cos \theta}{2}} \\ \\
+  &\left(\text{or }\sin^2\frac{\theta}{2} = \frac{1 - \cos\theta}{2}\right)
+\end{align}</math>
+| <math>\begin{align}
+  &\cos \frac{\theta}{2} = \sgn\left(\cos\frac\theta2\right) \sqrt{\frac{1 + \cos\theta}{2}} \\ \\
+  &\left(\text{or } \cos^2\frac{\theta}{2} = \frac{1 + \cos\theta}{2}\right)
+\end{align}</math>
+| <math>\begin{align}
+  \tan \frac{\theta}{2}
+    &= \csc \theta - \cot \theta \\
+    &= \pm\, \sqrt\frac{1 - \cos \theta}{1 + \cos \theta} \\[3pt]
+    &= \frac{\sin \theta}{1 + \cos \theta} \\[3pt]
+    &= \frac{1 - \cos \theta}{\sin \theta} \\[5pt]
+  \tan\frac{\eta + \theta}{2} &= \frac{\sin\eta + \sin\theta}{\cos\eta + \cos\theta} \\[5pt]
+  \tan\left(\frac{\theta}{2} + \frac{\pi}{4}\right) &= \sec\theta + \tan\theta \\[5pt]
+  \sqrt{\frac{1 - \sin\theta}{1 + \sin\theta}}
+    &= \frac{\left|1 - \tan\frac{\theta}{2}\right|}{\left|1 + \tan\frac{\theta}{2}\right|} \\[5pt]
+  \tan\frac{\theta}{2} &= \frac{\tan\theta}{1 + \sqrt{1 + \tan^2\theta}} \\
+                       &\text{for } \theta \in \left(-\tfrac{\pi}{2},\tfrac{\pi}{2} \right)
+\end{align}</math>
+| <math>\begin{align}
+  \cot \frac{\theta}{2}
+    &= \csc \theta + \cot \theta \\
+    &= \pm\, \sqrt\frac{1 + \cos \theta}{1 - \cos \theta} \\[3pt]
+    &= \frac{\sin \theta}{1 - \cos \theta} \\[4pt]
+    &= \frac{1 + \cos \theta}{\sin \theta}
+\end{align}</math>
+|}
+</div>
+The fact that the triple-angle formula for sine and cosine only involves powers of a single function allows one to relate the geometric problem of a [[Compass and straightedge constructions|compass and straightedge construction]] of [[angle trisection]] to the algebraic problem of solving a [[Cubic function|cubic equation]], which allows one to prove that [[Angle_trisection#Proof_of_impossibility|trisection is in general impossible]] using the given tools.
+
+A formula for computing the trigonometric identities for the one-third angle exists, but it requires finding the zeroes of the [[Cubic function|cubic equation]] {{math|1=4''x''<sup>3</sup> − 3''x'' + ''d'' = 0}}, where {{mvar|x}} is the value of the cosine function at the one-third angle and {{mvar|d}} is the known value of the cosine function at the full angle. However, the [[discriminant]] of this equation is positive, so this equation has three real roots (of which only one is the solution for the cosine of the one-third angle). [[Casus irreducibilis|None of these solutions are reducible]] to a real [[algebraic expression]], as they use intermediate complex numbers under the [[cube root]]s.
+
+== Power-reduction formula ==
+
+Obtained by solving the second and third versions of the cosine double-angle formula.
+
+<div class="noresize">
+{|class="wikitable"
+!Sine
+!Cosine
+!Other
+|-
+|<math>\sin^2\theta = \frac{1 - \cos (2\theta)}{2}</math>
+|<math>\cos^2\theta = \frac{1 + \cos (2\theta)}{2}</math>
+|<math>\sin^2\theta \cos^2\theta = \frac{1 - \cos (4\theta)}{8}</math>
+|-
+|<math>\sin^3\theta = \frac{3 \sin\theta - \sin (3\theta)}{4}</math>
+|<math>\cos^3\theta = \frac{3 \cos\theta + \cos (3\theta)}{4}</math>
+|<math>\sin^3\theta \cos^3\theta = \frac{3\sin (2\theta) - \sin (6\theta)}{32}</math>
+|-
+|<math>\sin^4\theta = \frac{3 - 4 \cos (2\theta) + \cos (4\theta)}{8}</math>
+|<math>\cos^4\theta = \frac{3 + 4 \cos (2\theta) + \cos (4\theta)}{8}</math>
+|<math>\sin^4\theta \cos^4\theta = \frac{3-4\cos (4\theta) + \cos (8\theta)}{128}</math>
+|-
+|<math>\sin^5\theta = \frac{10 \sin\theta - 5 \sin (3\theta) + \sin (5\theta)}{16}</math>
+|<math>\cos^5\theta = \frac{10 \cos\theta + 5 \cos (3\theta) + \cos (5\theta)}{16}</math>
+|<math>\sin^5\theta \cos^5\theta = \frac{10\sin (2\theta) - 5\sin (6\theta) + \sin (10\theta)}{512}</math>
+|}
+</div>
+
+{{stack |float=left |[[File:Diagram showing how to derive the power reduction formula for cosine.svg|class=skin-invert-image|thumb|left|upright=1.3|Cosine power-reduction formula: an illustrative diagram. The red, orange and blue triangles are all similar, and the red and orange triangles are congruent. The hypotenuse <math>\overline{AD}</math> of the blue triangle has length <math>2 \cos \theta</math>. The angle <math>\angle DAE</math> is <math>\theta</math>, so the base <math>\overline{AE}</math> of that triangle has length <math>2 \cos^2 \theta</math>. That length is also equal to the summed lengths of <math>\overline{BD}</math> and <math>\overline{AF}</math>, i.e. <math>1 + \cos (2\theta)</math>. Therefore, <math>2 \cos^2\theta = 1 + \cos (2\theta)</math>. Dividing both sides by <math>2</math> yields the power-reduction formula for cosine: <math>\cos^2\theta =</math> <math display="inline">\frac{1}{2}(1 + \cos (2\theta)) </math>. The half-angle formula for cosine can be obtained by replacing <math>\theta</math> with <math>\theta/2</math> and taking the square-root of both sides: <math display="inline">\cos \left(\theta / 2\right) = \pm \sqrt{\left(1 + \cos \theta\right) /2}.</math>]] }}
+{{stack |float=left |[[File:Diagram showing how to derive the power reducing formula for sine.svg|class=skin-invert-image|thumb|left|upright=1.3|Sine power-reduction formula: an illustrative diagram. The shaded blue and green triangles, and the red-outlined triangle <math>EBD</math> are all right-angled and similar, and all contain the angle <math>\theta</math>. The hypotenuse <math>\overline{BD}</math> of the red-outlined triangle has length <math>2 \sin \theta</math>, so its side <math>\overline{DE}</math> has length <math>2 \sin^2 \theta</math>. The line segment <math>\overline{AE}</math> has length <math>\cos 2 \theta</math> and sum of the lengths of <math>\overline{AE}</math> and <math>\overline{DE}</math> equals the length of <math>\overline{AD}</math>, which is 1. Therefore, <math>\cos 2 \theta + 2 \sin^2 \theta = 1 </math>. Subtracting <math>\cos 2 \theta</math> from both sides and dividing by 2 by two yields the power-reduction formula for sine: <math> \sin^2 \theta = </math> <math display="inline">\frac{1}{2} (1 - \cos (2\theta))</math>. The half-angle formula for sine can be obtained by replacing <math>\theta</math> with <math>\theta/2</math> and taking the square-root of both sides: <math display="inline">\sin \left(\theta/2\right) = \pm \sqrt{\left(1 - \cos \theta\right)/2}.</math> Note that this figure also illustrates, in the vertical line segment <math>\overline{EB}</math>, that <math>\sin 2 \theta = 2 \sin \theta \cos \theta</math>.]] }}
+{{clear}}
+
+In general terms of powers of <math>\sin \theta</math> or <math>\cos \theta</math> the following is true, and can be deduced using [[De Moivre's formula]], [[Euler's formula]] and the [[binomial theorem]].
+
+{|class="wikitable"
+! scope="col" | if ''n'' is&nbsp;...
+! scope="col" | <math>\cos^n \theta</math>
+! scope="col" | <math>\sin^n \theta</math>
+|-
+! scope="row" | ''n'' is odd
+|<math>\cos^n\theta = \frac{2}{2^n} \sum_{k=0}^{\frac{n-1}{2}} \binom{n}{k} \cos{\big((n-2k)\theta\big)}</math>
+|<math>\sin^n\theta = \frac{2}{2^n} \sum_{k=0}^{\frac{n-1}{2}} (-1)^{\left(\frac{n-1}{2}-k\right)} \binom{n}{k} \sin{\big((n-2k)\theta\big)}</math>
+|-
+! scope="row" | ''n'' is even
+|<math>\cos^n\theta = \frac{1}{2^n} \binom{n}{\frac{n}{2}} + \frac{2}{2^n} \sum_{k=0}^{\frac{n}{2}-1} \binom{n}{k} \cos{\big((n-2k)\theta\big)}</math>
+|<math>\sin^n\theta = \frac{1}{2^n} \binom{n}{\frac{n}{2}} + \frac{2}{2^n} \sum_{k=0}^{\frac{n}{2}-1} (-1)^{\left(\frac{n}{2}-k\right)} \binom{n}{k} \cos{\big((n-2k)\theta\big)}</math>
+|}
+
+==Product-to-sum and sum-to-product identities==<!-- [[Standing wave]] links to this section -->
+[[File:visual_proof_prosthaphaeresis_cosine_formula.svg|class=skin-invert-image|Proof of the sum-and-difference-to-product cosine identity for prosthaphaeresis calculations using an [[isosceles triangle]] |frame]]
+The product-to-sum identities<ref>Abramowitz and Stegun, p.&nbsp;72, 4.3.31–33</ref> or [[prosthaphaeresis]] formulae can be proven by expanding their right-hand sides using the [[#Angle sum and difference identities|angle addition theorems]]. Historically, the first four of these were known as '''Werner's formulas''', after [[Johannes Werner]] who used them for astronomical calculations.<ref>{{Cite book |last=Eves |first=Howard |title=An introduction to the history of mathematics |date=1990 |publisher=Saunders College Pub |isbn=0-03-029558-0 |edition=6th |location=Philadelphia |page=309 |oclc=20842510}}</ref> See [[Amplitude modulation#Simplified analysis of standard AM|amplitude modulation]] for an application of the product-to-sum formulae, and [[beat (acoustics)]] and [[phase detector]] for applications of the sum-to-product formulae.
+
+===Product-to-sum identities===
+The product of two sines or cosines of different angles can be converted to a sum of trigonometric functions of a sum and difference of those angles:
+
+<math display=block>\begin{align}
+\cos \theta\, \cos \varphi &= \tfrac12\bigl(\!\!~\cos(\theta - \varphi) + \cos(\theta + \varphi)\bigr), \\[5mu]
+\sin \theta\, \sin \varphi &= \tfrac12\bigl(\!\!~\cos(\theta - \varphi) - \cos(\theta + \varphi)\bigr), \\[5mu]
+\sin \theta\, \cos \varphi &= \tfrac12\bigl(\!\!~\sin(\theta + \varphi) + \sin(\theta - \varphi)\bigr), \\[5mu]
+\cos \theta\, \sin \varphi &= \tfrac12\bigl(\!\!~\sin(\theta + \varphi) - \sin(\theta - \varphi)\bigr).
+\end{align}</math>
+As a corollary, the product or quotient of tangents can be converted to a quotient of sums of cosines or sines, respectively,
+<math display=block>\begin{align}
+\tan \theta\, \tan \varphi &= \frac{\cos(\theta-\varphi)-\cos(\theta+\varphi)}
+                                  {\cos(\theta-\varphi)+\cos(\theta+\varphi)}, \\[5mu]
+\frac{\tan \theta}{\tan \varphi} &= \frac{\sin(\theta + \varphi) + \sin(\theta - \varphi)}
+                                  {\sin(\theta + \varphi) - \sin(\theta - \varphi)}.
+\end{align}</math>
+
+More generally, for a product of any number of sines or cosines,{{cn|date=August 2025}}
+<math display=block>\begin{align}
+\prod_{k=1}^n \cos \theta_k
+&= \frac{1}{2^n}\sum_{e\in S} \cos(e_1\theta_1+\cdots+e_n\theta_n) \\[5mu]
+  & \text{where }e = (e_1,\ldots,e_n) \in S=\{1,-1\}^n, \\
+
+\prod_{k=1}^n \sin\theta_k
+&=\frac{(-1)^{\left\lfloor\frac
+        {n}{2}\right\rfloor}}{2^n}\begin{cases}
+  \displaystyle\sum_{e\in S}\cos(e_1\theta_1+\cdots+e_n\theta_n)\prod_{j=1}^n e_j \;\text{if}\; n\; \text{is even},\\
+  \displaystyle\sum_{e\in S}\sin(e_1\theta_1+\cdots+e_n\theta_n)\prod_{j=1}^n e_j \;\text{if}\; n\; \text{is odd}.
+  \end{cases}
+\end{align}</math>
+
+===Sum-to-product identities===
+[[File:Diagram illustrating sum to product identities for sine and cosine.svg|class=skin-invert-image|thumb|Diagram illustrating sum-to-product identities for sine and cosine. The blue right-angled triangle has angle <math>\theta</math> and the red right-angled triangle has angle <math>\varphi</math>. Both have a hypotenuse of length 1. Auxiliary angles, here called <math>p</math> and <math>q</math>, are constructed such that <math>p=\tfrac12(\theta+\varphi)</math> and <math>q=\tfrac12(\theta-\varphi)</math>. Therefore,  <math>\theta = p+q </math> and <math>\varphi = p-q </math>. This allows the two congruent purple-outline triangles <math>AFG</math> and <math>FCE</math> to be constructed, each with hypotenuse <math>\cos q</math> and angle <math>p</math> at their base. The sum of the heights of the red and blue triangles is <math>\sin \theta + \sin \varphi</math>, and this is equal to twice the height of one purple triangle, i.e. <math>2 \sin p \cos q</math>. Writing <math>p</math> and <math>q</math> in that equation in terms of    <math>\theta</math> and <math>\varphi</math> yields a sum-to-product identity for sine: <math>\sin \theta + \sin \varphi = 2 \sin \tfrac12 (\theta + \varphi)\, \cos\tfrac12(\theta - \varphi)</math>. Similarly, the sum of the widths of the red and blue triangles yields the corresponding identity for cosine.]]
+The sum of sines or cosines of two angles can be converted to a product of sines or cosines of the mean and half the difference of the angles:<ref name="A&S sum-to-product">Abramowitz and Stegun, p.&nbsp;72, 4.3.34–39</ref>
+
+<math display="block">\begin{align}
+\sin \theta + \sin \varphi
+  &= 2 \sin \tfrac{\theta + \varphi}2\, \cos \tfrac{\theta - \varphi}2, \\[5mu]
+\sin \theta - \sin \varphi
+  &= 2 \cos \tfrac{\theta + \varphi}2\, \sin \tfrac{\theta - \varphi}2, \\[5mu]
+\cos \theta + \cos \varphi
+  &= 2 \cos \tfrac{\theta + \varphi}2\, \cos\tfrac{\theta - \varphi}2, \\[5mu]
+\cos \theta - \cos \varphi
+  &= -2\sin \tfrac{\theta + \varphi}2\, \sin\tfrac{\theta - \varphi}2.
+\end{align}</math>
+
+The sum of the tangent of two angles can be converted to a quotient of the sine of angles divided by the product of the cosines:{{r|A&S sum-to-product}}
+<math display="block">\tan\theta\pm\tan\varphi
+  =\frac{\sin(\theta\pm \varphi)}{\cos\theta\,\cos\varphi}.</math>
+
+=== Hermite's cotangent identity ===
+{{Main|Hermite's cotangent identity}}
+
+[[Charles Hermite]] demonstrated the following identity.<ref>{{cite journal|first=Warren P. |last=Johnson |title=Trigonometric Identities à la Hermite |journal=[[American Mathematical Monthly]] |volume=117 |issue=4 |date=Apr 2010 |pages=311–327 |doi=10.4169/000298910x480784|s2cid=29690311 }}</ref> Suppose <math>a_1, \ldots, a_n</math> are [[complex number]]s, no two of which differ by an integer multiple of&nbsp;{{pi}}. Let
+
+<math display="block">A_{n,k} = \prod_{\begin{smallmatrix} 1 \le j \le n \\ j \neq k \end{smallmatrix}} \cot(a_k - a_j)</math>
+
+(in particular, <math>A_{1,1},</math> being an [[empty product]], is&nbsp;1). Then
+
+<math display="block">\cot(z - a_1)\cdots\cot(z - a_n) = \cos\frac{n\pi}{2} + \sum_{k=1}^n A_{n,k} \cot(z - a_k).</math>
+
+The simplest non-trivial example is the case&nbsp;{{math|1=''n''&nbsp;=&nbsp;2}}:
+
+<math display="block">\cot(z - a_1)\cot(z - a_2) = -1 + \cot(a_1 - a_2)\cot(z - a_1) + \cot(a_2 - a_1)\cot(z - a_2).</math>
+
+=== Finite products of trigonometric functions ===
+
+For [[coprime]] integers {{mvar|n}}, {{mvar|m}}
+
+<math display="block">\prod_{k=1}^n \left(2a + 2\cos\left(\frac{2 \pi k m}{n} + x\right)\right) = 2\left( T_n(a)+{(-1)}^{n+m}\cos(n x) \right)</math>
+
+where {{mvar|T<sub>n</sub>}} is the [[Chebyshev polynomial]].{{citation needed|date=October 2023}}
+
+The following relationship holds for the sine function
+
+<math display="block">\prod_{k=1}^{n-1} \sin\left(\frac{k\pi}{n}\right) = \frac{n}{2^{n-1}}.</math>
+
+More generally for an integer {{math|''n'' > 0}}<ref>{{cite web |title=Product Identity Multiple Angle |url=https://math.stackexchange.com/q/2095330 }}</ref>
+
+<math display="block">\sin(nx) = 2^{n-1}\prod_{k=0}^{n-1} \sin\left(\frac{k\pi}{n} + x\right) = 2^{n-1}\prod_{k=1}^{n} \sin\left(\frac{k\pi}{n} - x\right).</math>
+
+or written in terms of the [[chord (geometry)|chord]] function <math display=inline>\operatorname{crd}x \equiv 2\sin\tfrac12x</math>,
+
+<math display="block">\operatorname{crd}(nx) = \prod_{k=1}^{n} \operatorname{crd}\left(\frac{2k\pi}{n} - x\right).</math>
+
+This comes from the [[Factorization of polynomials|factorization of the polynomial]] <math display=inline>z^n - 1</math> into linear factors (cf. [[root of unity]]): For any complex {{mvar|z}} and an integer {{math|''n'' > 0}},
+
+<math display="block">z^n - 1 = \prod_{k=1}^{n}\left( z - \exp \frac{2ki\pi}{n}\right).</math>
+
+== Linear combinations ==
+For some purposes it is important to know that any [[linear combination]] of sine waves of the same period or frequency but different [[phase (waves)|phase shifts]] is also a sine wave with the same period or frequency, but a different phase shift. This is useful in [[sinusoid]] [[data fitting]], because the measured or observed data are linearly related to the {{mvar|a}} and {{mvar|b}} unknowns of the [[in-phase and quadrature components]] basis below, resulting in a simpler [[Jacobian matrix and determinant|Jacobian]], compared to that of <math>c</math> and <math>\varphi</math>.
+
+=== Sine and cosine ===
+The linear combination, or harmonic addition, of sine and cosine waves is equivalent to a single sine wave with a phase shift and scaled amplitude,<ref>Apostol, T.M. (1967) Calculus. 2nd edition. New York, NY, Wiley. Pp 334-335.</ref><ref name="ReferenceB">{{MathWorld|id=HarmonicAdditionTheorem|title=Harmonic Addition Theorem}}</ref>
+
+<math display="block">a\cos x+b\sin x=c\cos(x+\varphi)</math>
+
+where <math>c</math> and <math>\varphi</math> are defined as so:
+
+<math display="block">\begin{align}
+        c &= \sgn(a) \sqrt{a^2 + b^2}, \\
+  \varphi &= \arctan\left(-\frac{b}{a}\right),
+\end{align}</math>
+
+given that <math>a \neq 0.</math>
+
+=== Arbitrary phase shift ===
+More generally, for arbitrary phase shifts, we have
+
+<math display="block">a \sin(x + \theta_a) + b \sin(x + \theta_b)= c \sin(x+\varphi)</math>
+
+where <math>c</math> and <math>\varphi</math> satisfy:
+
+<math display="block">\begin{align}
+           c^2 &= a^2 + b^2 + 2ab\cos \left(\theta_a - \theta_b \right) , \\
+  \tan \varphi &= \frac{a \sin \theta_a + b \sin \theta_b}{a \cos \theta_a + b \cos \theta_b}.
+\end{align}</math>
+
+=== More than two sinusoids ===
+{{See also|phasor (sine waves)#Addition|label1=Phasor addition}}The general case reads<ref name="ReferenceB" />
+<math display="block">\sum_i a_i \sin(x + \theta_i) = a \sin(x + \theta),</math>
+where
+<math display="block">a^2 = \sum_{i,j}a_i a_j \cos(\theta_i - \theta_j)</math>
+and
+<math display="block">\tan\theta = \frac{\sum_i a_i \sin\theta_i}{\sum_i a_i \cos\theta_i}.</math>
+
+== Lagrange's trigonometric identities ==
+These identities, named after [[Joseph Louis Lagrange]], are:<ref name=Muniz>{{cite journal |first=Eddie |last=Ortiz Muñiz |date=Feb 1953 |volume=21 |number=2 |title=A Method for Deriving Various Formulas in Electrostatics and Electromagnetism Using Lagrange's Trigonometric Identities |journal=American Journal of Physics |page=140 | doi=10.1119/1.1933371 | bibcode=1953AmJPh..21..140M }}</ref><ref>{{cite book |title=Ordinary and Partial Differential Equations: With Special Functions, Fourier Series, and Boundary Value Problems | edition=illustrated |first1=Ravi P. |last1=Agarwal |first2=Donal |last2=O'Regan |publisher=Springer Science & Business Media |year=2008 |isbn=978-0-387-79146-3 |page=185 |url=https://books.google.com/books?id=jWvAfcNnphIC}} [https://books.google.com/books?id=jWvAfcNnphIC&pg=PA185 Extract of page 185]</ref><ref>{{cite book |title=Handbook of Mathematical Formulas and Integrals |edition=4th |first1=Alan |last1=Jeffrey |first2=Hui-hui |last2=Dai |chapter=Section 2.4.1.6 |isbn=978-0-12-374288-9 |year=2008 |publisher=Academic Press}}</ref>
+<math display="block">\begin{align}
+
+\sum_{k=0}^n \sin k\theta & = \frac{\cos \tfrac12\theta - \cos\left(\left(n + \tfrac12\right)\theta\right)}{2\sin\tfrac12\theta}\\[5pt]
+
+\sum_{k=1}^n \cos k\theta & = \frac{-\sin \tfrac12\theta + \sin\left(\left(n + \tfrac12\right)\theta\right)}{2\sin\tfrac12\theta}
+
+\end{align}</math>
+for <math>\theta \not\equiv 0 \pmod{2\pi}.</math>
+
+A related function is the [[Dirichlet kernel]]:
+
+<math display="block">D_n(\theta) = 1 + 2\sum_{k=1}^n \cos k\theta
+= \frac{\sin\left(\left(n + \tfrac12 \right)\theta\right)}{\sin \tfrac12 \theta}.</math>
+
+A similar identity is<ref>{{Cite journal |last1=Fay |first1=Temple H. |last2=Kloppers |first2=P. Hendrik |date=2001 |title=The Gibbs' phenomenon |url=http://dx.doi.org/10.1080/00207390117151 |journal=International Journal of Mathematical Education in Science and Technology |volume=32 |issue=1 |pages=73–89 |doi=10.1080/00207390117151|bibcode=2001IJMES..32...73F |url-access=subscription }}</ref>
+
+<math display="block">\sum_{k=1}^n \cos (2k -1)\alpha = \frac{\sin (2n \alpha)}{2 \sin \alpha}.</math>
+
+The proof is the following. By using the [[#Angle sum and difference identities|angle sum and difference identities]],
+<math display="block">\sin (A + B) - \sin (A - B) = 2 \cos A \sin B.</math>
+Then let's examine the following formula,
+
+<math display="block">2 \sin \alpha \sum_{k=1}^n \cos (2k - 1)\alpha = 2\sin \alpha \cos \alpha + 2 \sin \alpha \cos 3\alpha
++ 2 \sin \alpha \cos 5 \alpha + \cdots + 2 \sin \alpha \cos (2n - 1) \alpha </math>
+and this formula can be written by using the above identity,
+
+<math display="block">\begin{align}
+& 2 \sin \alpha \sum_{k=1}^n \cos (2k - 1)\alpha \\
+&\quad= \sum_{k=1}^n (\sin (2k \alpha) - \sin (2(k - 1)\alpha)) \\
+&\quad= (\sin 2\alpha - \sin 0) + (\sin 4 \alpha - \sin 2 \alpha) + (\sin 6 \alpha - \sin 4 \alpha) + \cdots
++ (\sin (2n \alpha) - \sin (2(n - 1) \alpha)) \\
+&\quad= \sin (2n \alpha).
+\end{align}</math>
+
+So, dividing this formula with <math>2 \sin \alpha</math> completes the proof.
+
+== Certain linear fractional transformations ==
+If <math>f(x)</math> is given by the [[Möbius transformation|linear fractional transformation]]
+<math display="block">f(x) = \frac{(\cos\alpha)x - \sin\alpha}{(\sin\alpha)x + \cos\alpha},</math>
+and similarly
+<math display="block">g(x) = \frac{(\cos\beta)x - \sin\beta}{(\sin\beta)x + \cos\beta},</math>
+then
+<math display="block">f\big(g(x)\big) = g\big(f(x)\big)
+= \frac{\big(\cos(\alpha+\beta)\big)x - \sin(\alpha+\beta)}{\big(\sin(\alpha+\beta)\big)x + \cos(\alpha+\beta)}.</math>
+
+More tersely stated, if for all <math>\alpha</math> we let <math>f_{\alpha}</math> be what we called <math>f</math> above, then
+<math display="block">f_\alpha \circ f_\beta = f_{\alpha+\beta}.</math>
+
+If <math>x</math> is the slope of a line, then <math>f(x)</math> is the slope of its rotation through an angle of <math>- \alpha.</math>
+
+== Relation to the complex exponential function ==
+{{Main|Euler's formula}}
+
+Euler's formula states that, for any [[real number]] ''x'':<ref>Abramowitz and Stegun, p.&nbsp;74, 4.3.47</ref>
+<math display="block">e^{ix} = \cos x + i\sin x,</math>
+where ''i'' is the [[imaginary unit]]. Substituting −''x'' for ''x'' gives us:
+<math display="block">e^{-ix} = \cos(-x) + i\sin(-x) = \cos x - i\sin x.</math>
+
+These two equations can be used to solve for cosine and sine in terms of the [[exponential function]].  Specifically,<ref>Abramowitz and Stegun, p.&nbsp;71, 4.3.2</ref><ref>Abramowitz and Stegun, p.&nbsp;71, 4.3.1</ref>
+<math display="block">\cos x = \frac{e^{ix} + e^{-ix}}{2}</math>
+<math display="block">\sin x = \frac{e^{ix} - e^{-ix}}{2i}</math>
+
+These formulae are useful for proving many other trigonometric identities.  For example, that
+{{math|1=''e''<sup>''i''(''θ''+''φ'')</sup> = ''e''<sup>''iθ''</sup> ''e''<sup>''iφ''</sup>}} means that
+{{block indent|em=1.5|text={{math|1=cos(''θ'' + ''φ'') + ''i'' sin(''θ'' + ''φ'') = (cos ''θ'' + ''i'' sin ''θ'') (cos ''φ'' + ''i'' sin ''φ'') = (cos ''θ'' cos ''φ'' − sin ''θ'' sin ''φ'') + ''i'' (cos ''θ'' sin ''φ'' + sin ''θ'' cos ''φ'')}}.}}
+That the real part of the left hand side equals the real part of the right hand side is an angle addition formula for cosine.  The equality of the imaginary parts gives an angle addition formula for sine.
+
+The following table expresses the trigonometric functions and their inverses in terms of the exponential function and the [[complex logarithm]].
+
+{| class="wikitable"
+!Function
+!Inverse function<ref>Abramowitz and Stegun, p.&nbsp;80, 4.4.26–31</ref>
+|-
+|<math>\sin \theta = \frac{e^{i\theta} - e^{-i\theta}}{2i}</math>
+|<math>\arcsin x = -i\, \ln \left(ix + \sqrt{1 - x^2}\right)</math>
+|-
+|<math>\cos \theta = \frac{e^{i\theta} + e^{-i\theta}}{2}</math>
+|<math>\arccos x = -i\ln\left(x+\sqrt{x^2-1}\right)</math>
+|-
+|<math>\tan \theta = -i\, \frac{e^{i\theta} - e^{-i\theta}}{e^{i\theta} + e^{-i\theta}}</math>
+|<math>\arctan x = \frac{i}{2} \ln \left(\frac{i + x}{i - x}\right)</math>
+|-
+|<math>\csc \theta = \frac{2i}{e^{i\theta} - e^{-i\theta}}</math>
+|<math>\arccsc x = -i\, \ln \left(\frac{i}{x} + \sqrt{1 - \frac{1}{x^2}}\right)</math>
+|-
+|<math>\sec \theta = \frac{2}{e^{i\theta} + e^{-i\theta}}</math>
+|<math>\arcsec x = -i\, \ln \left(\frac{1}{x} +i \sqrt{1 - \frac{1}{x^2}}\right)</math>
+|-
+|<math>\cot \theta = i\, \frac{e^{i\theta} + e^{-i\theta}}{e^{i\theta} - e^{-i\theta}}</math>
+|<math>\arccot x = \frac{i}{2} \ln \left(\frac{x - i}{x + i}\right)</math>
+|-
+|[[cis (mathematics)|<math>\operatorname{cis} \theta = e^{i\theta}</math>]]
+|<math>\operatorname{arccis} x = -i \ln x</math>
+|}
+
+== Relation to complex hyperbolic functions ==
+Trigonometric functions may be deduced from [[hyperbolic functions]] with [[Complex number|complex]] arguments.  The formulae for the relations are shown below<ref>{{Cite book |last1=Hawkins |first1=Faith Mary |url=https://archive.org/details/isbn_356025055/mode/2up |title=Complex Numbers and Elementary Complex Functions |last2=Hawkins |first2=J. Q. |date=March 1, 1969 |publisher=MacDonald Technical & Scientific London |isbn=978-0356025056 |location=London |publication-date=1968 |pages=122 |language=english}}</ref><ref>{{Cite book |last=Markushevich |first=A. I. |url=https://archive.org/details/markushevich-the-remarkable-sine-functions |title=The Remarkable Sine Function |publisher=American Elsevier Publishing Company, Inc. |year=1966 |isbn=978-1483256313 |location=New York |publication-date=1966 |pages=35–37, 81 |language=english}}</ref>.<math display="block">\begin{align}
+\sin x &= -i \sinh (ix)  \\
+\cos x &= \cosh (ix) \\
+\tan x &= -i \tanh (i x) \\
+\cot x &= i \coth (i x) \\
+\sec x &= \operatorname{sech} (i x) \\
+\csc x &= i \operatorname{csch} (i x) \\
+\end{align}</math>
+
+== Series expansion ==
+When using a [[power series]] expansion to define trigonometric functions, the following identities are obtained:<ref>Abramowitz and Stegun, p.&nbsp;74, 4.3.65–66</ref>
+:<math display="block">\begin{align}
+\sin x &= x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + \cdots &&= \sum_{n=0}^\infty (-1)^n \frac{x^{2n+1}}{(2n+1)!} \\
+\cos x & = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \frac{x^6}{6!} + \cdots &&= \sum_{n=0}^\infty (-1)^n \frac{x^{2n}}{(2n)!}
+\end{align}</math>
+
+== Infinite product formulae ==
+For applications to [[special functions]], the following [[infinite product]] formulae for trigonometric functions are useful:<ref>Abramowitz and Stegun, p.&nbsp;75, 4.3.89–90</ref><ref>Abramowitz and Stegun, p.&nbsp;85, 4.5.68–69</ref>
+
+<math display=block>\begin{align}
+   \sin x &= x \prod_{n = 1}^\infty\left(1 - \frac{x^2}{\pi^2 n^2}\right), &
+   \cos x &=   \prod_{n = 1}^\infty\left(1 - \frac{x^2}{\pi^2\left(n - \frac{1}{2}\right)\!\vphantom)^2}\right), \\[10mu]
+  \sinh x &= x \prod_{n = 1}^\infty\left(1 + \frac{x^2}{\pi^2 n^2}\right), &
+  \cosh x &=   \prod_{n = 1}^\infty\left(1 + \frac{x^2}{\pi^2\left(n - \frac{1}{2}\right)\!\vphantom)^2}\right).
+\end{align}</math>
+
+== Inverse trigonometric functions ==
+{{Main|Inverse trigonometric functions}}
+
+The following identities give the result of composing a trigonometric function with an inverse trigonometric function.<ref>{{harvnb|Abramowitz|Stegun|1972|loc=p. 73, 4.3.45}}</ref>
+
+<math display=block>
+\begin{align}
+  \sin(\arcsin x) &=x
+& \cos(\arcsin x) &=\sqrt{1-x^2}
+& \tan(\arcsin x) &=\frac{x}{\sqrt{1 - x^2}}
+\\
+  \sin(\arccos x) &=\sqrt{1-x^2}
+& \cos(\arccos x) &=x
+& \tan(\arccos x) &=\frac{\sqrt{1 - x^2}}{x}
+\\
+  \sin(\arctan x) &=\frac{x}{\sqrt{1+x^2}}
+& \cos(\arctan x) &=\frac{1}{\sqrt{1+x^2}}
+& \tan(\arctan x) &=x
+\\
+  \sin(\arccsc x) &=\frac{1}{x}
+& \cos(\arccsc x) &=\sqrt{1-\frac{1}{x^2}}
+& \tan(\arccsc x) &=\frac{1}{x\sqrt{1-\frac{1}{x^2}}}
+\\
+  \sin(\arcsec x) &=\sqrt{1-\frac{1}{x^2}}
+& \cos(\arcsec x) &=\frac{1}{x}
+& \tan(\arcsec x) &=x\sqrt{1-\frac{1}{x^2}}
+\\
+  \sin(\arccot x) &=\frac{1}{\sqrt{1+x^2}}
+& \cos(\arccot x) &=\frac{x}{\sqrt{1+x^2}}
+& \tan(\arccot x) &=\frac{1}{x}
+\\
+\end{align}
+</math>
+
+Taking the [[multiplicative inverse]] of both sides of the each equation above results in the equations for <math>\csc = \frac{1}{\sin}, \;\sec = \frac{1}{\cos}, \text{ and } \cot = \frac{1}{\tan}.</math>
+The right hand side of the formula above will always be flipped.
+For example, the equation for <math>\cot(\arcsin x)</math> is:
+<math display=block>\cot(\arcsin x) = \frac{1}{\tan(\arcsin x)} = \frac{1}{\frac{x}{\sqrt{1 - x^2}}} = \frac{\sqrt{1 - x^2}}{x}</math>
+while the equations for <math>\csc(\arccos x)</math> and <math>\sec(\arccos x)</math> are:
+<math display=block>\csc(\arccos x) = \frac{1}{\sin(\arccos x)} = \frac{1}{\sqrt{1-x^2}} \qquad \text{ and }\quad \sec(\arccos x) = \frac{1}{\cos(\arccos x)} = \frac{1}{x}.</math>
+
+The following identities are implied by the [[#Reflections|reflection identities]]. They hold whenever <math>x, r, s, -x, -r,</math> and <math>-s</math> are in the domains of the relevant functions.
+<math display=block>\begin{alignat}{9}
+\frac{\pi}{2} ~&=~ \arcsin(x) &&+ \arccos(x) ~&&=~ \arctan(r) &&+ \arccot(r) ~&&=~ \arcsec(s) &&+ \arccsc(s) \\[0.4ex]
+\pi ~&=~ \arccos(x) &&+ \arccos(-x) ~&&=~ \arccot(r) &&+ \arccot(-r) ~&&=~ \arcsec(s) &&+ \arcsec(-s) \\[0.4ex]
+0 ~&=~ \arcsin(x) &&+ \arcsin(-x) ~&&=~ \arctan(r) &&+ \arctan(-r) ~&&=~ \arccsc(s) &&+ \arccsc(-s) \\[1.0ex]
+\end{alignat}</math>
+
+Also,<ref name=Wu>Wu, Rex H. "Proof Without Words: Euler's Arctangent Identity", ''Mathematics Magazine'' 77(3), June 2004, p. 189.</ref>
+<math display=block>\begin{align}
+\arctan x + \arctan \dfrac{1}{x}
+&= \begin{cases}
+   \frac{\pi}{2},  & \text{if } x > 0 \\
+ - \frac{\pi}{2},  & \text{if } x < 0
+ \end{cases} \\
+\arccot x + \arccot \dfrac{1}{x}
+&= \begin{cases}
+   \frac{\pi}{2},  & \text{if } x > 0 \\
+   \frac{3\pi}{2}, & \text{if } x < 0
+ \end{cases} \\
+\end{align}</math>
+<math display=block>\arccos \frac{1}{x} = \arcsec x \qquad \text{ and } \qquad \arcsec \frac{1}{x} = \arccos x</math>
+<math display=block>\arcsin \frac{1}{x} = \arccsc x \qquad \text{ and } \qquad \arccsc \frac{1}{x} = \arcsin x</math>
+
+The [[arctangent]] function can be expanded as a series:<ref>{{citation | title = Algorithmic determination of a large integer in the two-term Machin-like formula for {{pi}} | journal = Mathematics |author1=S. M. Abrarov|author2=R. K. Jagpal|author3=R. Siddiqui|author4=B. M. Quine | doi = 10.3390/math9172162 | year = 2021 | volume = 9 | issue = 17 | at = 2162| doi-access = free | arxiv = 2107.01027 }}</ref>
+<math display=block>
+\arctan(nx) = \sum_{m = 1}^n \arctan\frac{x}{1 + (m - 1)mx^2}
+</math>
+
+== Identities without variables ==
+
+In terms of the [[arctangent]] function we have<ref name="Wu" />
+<math display="block">\arctan \frac{1}{2} = \arctan \frac{1}{3} + \arctan \frac{1}{7}</math>
+
+which is a special case of [[Leonhard Euler | Euler]]'s arctangent identity<ref>{{cite web | last = Euler | first = Leonhard |title = De Variis Modis Circvli Qvadratorvm: Numeris Proximae Expremendi | page = 231 | date = 1737 | url = https://archive.org/details/commentariiacade09impe/page/231/mode/1up |access-date = 2026-03-18}}</ref>:
+
+<math display="block">\arctan \frac{1}{p} = \arctan \frac{1}{p+q} + \arctan \frac{q}{p^2+pq+1}.</math>
+
+The curious identity known as [[Morrie's law]],
+<math display="block">\cos 20^\circ\cdot\cos 40^\circ\cdot\cos 80^\circ = \frac{1}{8},</math>
+
+is a special case of an identity that contains one variable:
+<math display="block">\prod_{j=0}^{k-1}\cos\left(2^j x\right) = \frac{\sin\left(2^k x\right)}{2^k\sin x}.</math>
+
+Similarly,
+<math display="block">\sin 20^\circ\cdot\sin 40^\circ\cdot\sin 80^\circ = \frac{\sqrt{3}}{8}</math>
+is a special case of an identity with <math>x = 20^\circ</math>:
+<math display="block">\sin x \cdot \sin \left(60^\circ - x\right) \cdot \sin \left(60^\circ + x\right) = \frac{\sin 3x}{4}.</math>
+
+For the case <math>x = 15^\circ</math>,
+<math display="block">\begin{align}
+  \sin 15^\circ\cdot\sin 45^\circ\cdot\sin 75^\circ &= \frac{\sqrt{2}}{8}, \\
+                    \sin 15^\circ\cdot\sin 75^\circ &= \frac{1}{4}.
+\end{align}</math>
+
+For the case <math>x = 10^\circ</math>,
+<math display="block">\sin 10^\circ\cdot\sin 50^\circ\cdot\sin 70^\circ = \frac{1}{8}.</math>
+
+The same cosine identity is
+<math display="block">\cos x \cdot \cos \left(60^\circ - x\right) \cdot \cos \left(60^\circ + x\right) = \frac{\cos 3x}{4}.</math>
+
+Similarly,
+<math display="block">\begin{align}
+  \cos 10^\circ\cdot\cos 50^\circ\cdot\cos 70^\circ &= \frac{\sqrt{3}}{8}, \\
+  \cos 15^\circ\cdot\cos 45^\circ\cdot\cos 75^\circ &= \frac{\sqrt{2}}{8}, \\
+                    \cos 15^\circ\cdot\cos 75^\circ &= \frac{1}{4}.
+\end{align}</math>
+
+Similarly,
+<math display="block">\begin{align}
+  \tan 50^\circ\cdot\tan 60^\circ\cdot\tan 70^\circ &= \tan 80^\circ, \\
+  \tan 40^\circ\cdot\tan 30^\circ\cdot\tan 20^\circ &= \tan 10^\circ.
+\end{align}</math>
+
+The following is perhaps not as readily generalized to an identity containing variables (but see explanation below):
+<math display="block">\cos 24^\circ + \cos 48^\circ + \cos 96^\circ + \cos 168^\circ = \frac{1}{2}.</math>
+
+Degree measure ceases to be more felicitous than radian measure when we consider this identity with 21 in the denominators:
+<math display="block">
+\cos \frac{2\pi}{21} +
+\cos\left(2\cdot\frac{2\pi}{21}\right) +
+\cos\left(4\cdot\frac{2\pi}{21}\right) +
+\cos\left( 5\cdot\frac{2\pi}{21}\right) +
+\cos\left( 8\cdot\frac{2\pi}{21}\right) +
+\cos\left(10\cdot\frac{2\pi}{21}\right)
+= \frac{1}{2}.</math>
+
+The factors 1, 2, 4, 5, 8, 10&nbsp;may start to make the pattern clear: they are those integers less than {{sfrac|21|2}} that are [[Coprime|relatively prime]] to (or have no [[prime factor]]s in common with) 21. The last several examples are corollaries of a basic fact about the irreducible [[cyclotomic polynomial]]s: the cosines are the real parts of the zeroes of those polynomials; the sum of the zeroes is the [[Möbius function]] evaluated at (in the very last case above) 21; only half of the zeroes are present above. The identity preceding this last one arises in the same fashion with 21 replaced by 15.
+
+Other cosine identities include:<ref>{{cite journal|last=Humble |first=Steve |title=Grandma's identity |journal=Mathematical Gazette |volume=88 |date=Nov 2004 |pages=524–525 |doi=10.1017/s0025557200176223|s2cid=125105552 }}</ref>
+<math display="block">\begin{align}
+                                                         2\cos \frac{\pi}{3} &= 1, \\
+                             2\cos \frac{\pi}{5} \times 2\cos \frac{2\pi}{5} &= 1, \\
+  2\cos \frac{\pi}{7} \times 2\cos \frac{2\pi}{7}\times 2\cos \frac{3\pi}{7} &= 1,
+\end{align}</math>
+and so forth for all odd numbers, and hence
+<math display="block">\cos \frac{\pi}{3}+\cos \frac{\pi}{5} \times \cos \frac{2\pi}{5} + \cos \frac{\pi}{7} \times \cos \frac{2\pi}{7} \times \cos \frac{3\pi}{7} + \dots = 1.</math>
+
+Many of those curious identities stem from more general facts like the following:<ref>{{MathWorld|id=Sine|title=Sine}}</ref>
+<math display="block">\prod_{k=1}^{n-1} \sin\frac{k\pi}{n} = \frac{n}{2^{n-1}}</math>
+and
+<math display="block">\prod_{k=1}^{n-1} \cos\frac{k\pi}{n} = \frac{\sin\frac{\pi n}{2}}{2^{n-1}}.</math>
+
+Combining these gives us
+<math display="block">\prod_{k=1}^{n-1} \tan\frac{k\pi}{n} = \frac{n}{\sin\frac{\pi n}{2}}</math>
+
+If {{mvar|n}} is an odd number (<math>n = 2 m + 1</math>) we can make use of the symmetries to get
+<math display="block">\prod_{k=1}^{m} \tan\frac{k\pi}{2m+1} = \sqrt{2m+1}</math>
+
+The transfer function of the [[Butterworth filter|Butterworth low pass filter]] can be expressed in terms of polynomial and poles. By setting the frequency as the [[cutoff frequency]], the following identity can be proved:
+<math display="block">\prod_{k=1}^n \sin\frac{\left(2k - 1\right)\pi}{4n} = \prod_{k=1}^{n} \cos\frac{\left(2k-1\right)\pi}{4n} = \frac{\sqrt{2}}{2^n}</math>
+
+=== Computing {{pi}} ===
+An efficient way to [[pi|compute {{pi}}]] to a [[approximations of pi|large number of digits]] is based on the following identity without variables, due to [[John Machin|Machin]]. This is known as a [[Machin-like formula]]:
+<math display="block">\frac{\pi}{4} = 4 \arctan\frac{1}{5} - \arctan\frac{1}{239}</math>
+or, alternatively, by using an identity of [[Leonhard Euler]]:
+<math display="block">\frac{\pi}{4} = 5 \arctan\frac{1}{7} + 2 \arctan\frac{3}{79}</math>
+or by using [[Pythagorean triple]]s:
+<math display="block">\pi = \arccos\frac{4}{5} + \arccos\frac{5}{13} + \arccos\frac{16}{65} = \arcsin\frac{3}{5} + \arcsin\frac{12}{13} + \arcsin\frac{63}{65}.</math>
+
+Others include:<ref name=Harris>Harris, Edward M. "Sums of Arctangents", in Roger B. Nelson, ''Proofs Without Words'' (1993, Mathematical Association of America), p. 39.</ref><ref name="Wu" />
+<math display="block">\frac{\pi}{4} = \arctan\frac{1}{2} + \arctan\frac{1}{3},</math>
+<math display="block">\pi = \arctan 1 + \arctan 2 + \arctan 3,</math>
+<math display="block">\frac{\pi}{4} = 2\arctan \frac{1}{3} + \arctan \frac{1}{7}.</math>
+
+Generally, for numbers {{math|''t''<sub>1</sub>, ..., ''t''<sub>''n''−1</sub> ∈ (−1, 1)}} for which {{math|1=''θ''<sub>''n''</sub> = Σ{{su|b=''k''=1|p=''n''−1}} arctan ''t''<sub>''k''</sub> ∈ ({{pi}}/4, 3{{pi}}/4)}}, let {{math|1=''t''<sub>''n''</sub> = tan({{pi}}/2 − ''θ''<sub>''n''</sub>) = cot ''θ''<sub>''n''</sub>}}.  This last expression can be computed directly using the formula for the cotangent of a sum of angles whose tangents are {{math|''t''<sub>1</sub>, ..., ''t''<sub>''n''−1</sub>}} and its value will be in {{math|(−1, 1)}}.  In particular, the computed {{math|''t''<sub>''n''</sub>}} will be rational whenever all the {{math|''t''<sub>1</sub>, ..., ''t''<sub>''n''−1</sub>}} values are rational.  With these values,
+<math display="block">\begin{align}
+  \frac{\pi}{2} & = \sum_{k=1}^n \arctan(t_k) \\
+            \pi & = \sum_{k=1}^n \sgn(t_k) \arccos\left(\frac{1 - t_k^2}{1 + t_k^2}\right) \\
+            \pi & = \sum_{k=1}^n \arcsin\left(\frac{2t_k}{1 + t_k^2}\right) \\
+            \pi & = \sum_{k=1}^n \arctan\left(\frac{2t_k}{1 - t_k^2}\right)\,,
+\end{align}</math>
+
+where in all but the first expression, we have used tangent half-angle formulae.  The first two formulae work even if one or more of the {{math|''t''<sub>''k''</sub>}} values is not within {{math|(−1, 1)}}.  Note that if {{math|1=''t'' = ''p''/''q''}} is rational, then the {{math|(2''t'', 1 − ''t''<sup>2</sup>, 1 + ''t''<sup>2</sup>)}} values in the above formulae are proportional to the Pythagorean triple {{math|(2''pq'', ''q''<sup>2</sup> − ''p''<sup>2</sup>, ''q''<sup>2</sup> + ''p''<sup>2</sup>)}}.
+
+For example, for {{math|1=''n'' = 3}} terms,
+<math display="block">\frac{\pi}{2} = \arctan\left(\frac{a}{b}\right) + \arctan\left(\frac{c}{d}\right) + \arctan\left(\frac{bd - ac}{ad + bc}\right)</math>
+for any {{math|''a'', ''b'', ''c'', ''d'' > 0}}.
+
+=== An identity of Euclid ===
+[[Euclid]] showed in Book XIII, Proposition 10 of his ''[[Euclid's Elements|Elements]]'' that the area of the square on the side of a regular pentagon inscribed in a circle is equal to the sum of the areas of the squares on the sides of the regular hexagon and the regular [[decagon]] inscribed in the same circle. In the language of modern trigonometry, this says:
+<math display="block">\sin^2 18^\circ + \sin^2 30^\circ = \sin^2 36^\circ.</math>
+
+[[Ptolemy]] used this proposition to compute some angles in [[Ptolemy's table of chords|his table of chords]] in Book I, chapter 11 of ''[[Almagest]]''.
+
+== Composition of trigonometric functions ==
+These identities involve a trigonometric function of a trigonometric function:<ref>[[Abramowitz and Stegun|Milton Abramowitz and Irene Stegun, ''Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical Tables'']], [[Dover Publications]], New York, 1972, formulae 9.1.42–9.1.45</ref>
+
+: <math>\cos(t \sin x) = J_0(t) + 2 \sum_{k=1}^\infty J_{2k}(t) \cos(2kx)</math>
+: <math>\sin(t \sin x) = 2 \sum_{k=0}^\infty J_{2k+1}(t) \sin\big((2k+1)x\big)</math>
+: <math>\cos(t \cos x) = J_0(t) + 2 \sum_{k=1}^\infty (-1)^kJ_{2k}(t) \cos(2kx)</math>
+: <math>\sin(t \cos x) = 2 \sum_{k=0}^\infty(-1)^k J_{2k+1}(t) \cos\big((2k+1)x\big)</math>
+
+where {{mvar|J<sub>i</sub>}} are [[Bessel function]]s.
+
+== Further "conditional" identities for the case ''α'' + ''β'' + ''γ'' = 180° ==
+A '''conditional trigonometric identity''' is a trigonometric identity that holds if specified conditions on the arguments to the trigonometric functions are satisfied.<ref>Er. K. C. Joshi, ''Krishna's IIT MATHEMATIKA''. Krishna Prakashan Media. Meerut, India.  page 636.</ref> The following formulae apply to arbitrary plane triangles and follow from <math>\alpha + \beta + \gamma = 180^{\circ},</math> as long as the functions occurring in the formulae are well-defined (the latter applies only to the formulae in which tangents and cotangents occur).<ref>Cagnoli, Antonio (1808), ''Trigonométrie rectiligne et sphérique'', p. 27.</ref>
+<math display="block">\begin{align}
+   \tan \alpha + \tan \beta + \tan \gamma &= \tan \alpha \tan \beta \tan \gamma \\
+   1 &= \cot \beta \cot \gamma + \cot \gamma \cot \alpha + \cot \alpha \cot \beta \\
+   \cot\left(\frac{\alpha}{2}\right) + \cot\left(\frac{\beta}{2}\right) + \cot\left(\frac{\gamma}{2}\right) &= \cot\left(\frac{\alpha}{2}\right) \cot \left(\frac{\beta}{2}\right) \cot\left(\frac{\gamma}{2}\right) \\
+   1 &= \tan\left(\frac{\beta}{2}\right)\tan\left(\frac{\gamma}{2}\right) + \tan\left(\frac{\gamma}{2}\right)\tan\left(\frac{\alpha}{2}\right) + \tan\left(\frac{\alpha}{2}\right)\tan\left(\frac{\beta}{2}\right) \\
+   \sin \alpha + \sin \beta + \sin \gamma &= 4\cos\left(\frac{\alpha}{2}\right)\cos\left(\frac{\beta}{2}\right)\cos\left(\frac{\gamma}{2}\right) \\
+  -\sin \alpha + \sin \beta + \sin \gamma &= 4\cos\left(\frac{\alpha}{2}\right)\sin\left(\frac{\beta}{2}\right)\sin\left(\frac{\gamma}{2}\right) \\
+   \cos \alpha + \cos \beta + \cos \gamma &= 4\sin\left(\frac{\alpha}{2}\right)\sin\left(\frac{\beta}{2}\right)\sin \left(\frac{\gamma}{2}\right) + 1 \\
+  -\cos \alpha + \cos \beta + \cos \gamma &= 4\sin\left(\frac{\alpha}{2}\right)\cos\left(\frac{\beta}{2}\right)\cos \left(\frac{\gamma}{2}\right) - 1 \\
+   \sin (2\alpha) + \sin (2\beta) + \sin (2\gamma) &=  4\sin \alpha \sin \beta \sin \gamma \\
+  -\sin (2\alpha) + \sin (2\beta) + \sin (2\gamma) &=  4\sin \alpha \cos \beta \cos \gamma \\
+   \cos (2\alpha) + \cos (2\beta) + \cos (2\gamma) &= -4\cos \alpha \cos \beta \cos \gamma - 1 \\
+  -\cos (2\alpha) + \cos (2\beta) + \cos (2\gamma) &= -4\cos \alpha \sin \beta \sin \gamma + 1 \\
+   \sin^2\alpha + \sin^2\beta + \sin^2\gamma &=  2 \cos \alpha \cos \beta \cos \gamma + 2 \\
+  -\sin^2\alpha + \sin^2\beta + \sin^2\gamma &=  2 \cos \alpha \sin \beta \sin \gamma \\
+   \cos^2\alpha + \cos^2\beta + \cos^2\gamma &= -2 \cos \alpha \cos \beta \cos \gamma + 1 \\
+  -\cos^2\alpha + \cos^2\beta + \cos^2\gamma &= -2 \cos \alpha \sin \beta \sin \gamma + 1 \\
+  \sin^2 (2\alpha) + \sin^2 (2\beta) + \sin^2 (2\gamma) &= -2\cos (2\alpha) \cos (2\beta) \cos (2\gamma)+2 \\
+  \cos^2 (2\alpha) + \cos^2 (2\beta) + \cos^2 (2\gamma) &=  2\cos (2\alpha) \,\cos (2\beta) \,\cos (2\gamma) + 1 \\
+   1 &= \sin^2 \left(\frac{\alpha}{2}\right) + \sin^2 \left(\frac{\beta}{2}\right) + \sin^2 \left(\frac{\gamma}{2}\right) + 2\sin \left(\frac{\alpha}{2}\right) \,\sin \left(\frac{\beta}{2}\right) \,\sin \left(\frac{\gamma}{2}\right)
+\end{align}</math>
+
+== Historical shorthands ==
+{{Main|Versine|Exsecant}}
+
+The [[versine]], [[coversine]], [[haversine]], and [[exsecant]] were used in navigation. For example, the [[haversine formula]] was used to calculate the distance between two points on a sphere. They are rarely used today.
+
+==Miscellaneous==<!--This section will hopefully be sorted back into the article, If I can work out a place for the stuff to go-->
+
+=== Dirichlet kernel ===
+{{Main|Dirichlet kernel}}
+
+The [[Dirichlet kernel]] {{math|''D<sub>n</sub>''(''x'')}} is the function occurring on both sides of the next identity:
+<math display="block">1 + 2\cos x + 2\cos(2x) + 2\cos(3x) + \cdots + 2\cos(nx) = \frac{\sin\left(\left(n + \frac{1}{2}\right)x\right) }{\sin\left(\frac{1}{2}x\right)}.</math>
+
+The [[convolution]] of any [[integrable function]] of period <math>2 \pi</math> with the Dirichlet kernel coincides with the function's <math>n</math>th-degree Fourier approximation. The same holds for any [[Measure (mathematics)|measure]] or [[Distribution (mathematics)|generalized function]].
+
+=== Tangent half-angle substitution ===
+{{Main|Tangent half-angle substitution}}
+
+If we set <math display="block">t = \tan\frac x 2,</math> then<ref>Abramowitz and Stegun, p.&nbsp;72, 4.3.23</ref>
+<math display="block">\sin x = \frac{2t}{1 + t^2};\qquad \cos x = \frac{1 - t^2}{1 + t^2};\qquad e^{i x} = \frac{1 + i t}{1 - i t}; \qquad dx = \frac{2\,dt}{1+t^2}, </math>
+where <math>e^{i x} = \cos x + i \sin x,</math> sometimes abbreviated to&nbsp;{{math|[[cis (mathematics)|cis]] ''x''}}.
+
+When this substitution of <math>t</math> for {{math|tan {{sfrac|''x''|2}}}} is used in [[calculus]], it follows that <math>\sin x</math> is replaced by {{math|{{sfrac|2''t''|1 + ''t''<sup>2</sup>}}}}, <math>\cos x</math> is replaced by {{math|{{sfrac|1 − ''t''<sup>2</sup>|1 + ''t''<sup>2</sup>}}}} and the differential {{math|d''x''}} is replaced by {{math|{{sfrac|2 d''t''|1 + ''t''<sup>2</sup>}}}}. Thereby one converts rational functions of <math>\sin x</math> and <math>\cos x</math> to rational functions of <math>t</math> in order to find their [[antiderivative]]s.
+
+=== Viète's infinite product ===
+{{See also|Viète's formula|Sinc function}}
+<math display="block">\cos\frac{\theta}{2} \cdot \cos \frac{\theta}{4}
+\cdot \cos \frac{\theta}{8} \cdots = \prod_{n=1}^\infty \cos \frac{\theta}{2^n}
+= \frac{\sin \theta}{\theta} = \operatorname{sinc} \theta.</math>
+<!-- \operatorname{sinc} is intended to say "sinc", not "sin" and not "sine". --->
+
+=== A sine identity used in medical imaging ===
+
+Here is an identity discovered as a by-product of research in [[medical imaging]].<ref>{{cite journal|first1=Peter |last1=Kuchment |first2=Sergey |last2=Lvin |title=Identities for sin&nbsp;''x'' that Came from Medical Imaging |journal=[[American Mathematical Monthly]] |volume=120 |date=Aug 2013 |issue=7 |pages=609–621 |doi=10.4169/amer.math.monthly.120.07.609|arxiv=1110.6109 |s2cid=17478608 }}</ref>
+
+Let <math>i = \sqrt{-1}</math> be the imaginary unit and let&nbsp;∘&nbsp;denote composition of differential operators. Then for every '''odd''' positive integer&nbsp;{{mvar|n}},
+
+:<math>\begin{align}
+  \sum_{k=0}^n \binom n k \left(\frac d {dx} - \sin x\right)
+           &\circ \left(\frac d {dx} - \sin x + i\right) \circ \cdots \\
+    \cdots &\circ \left(\frac d {dx} - \sin x + (k - 1)i\right) (\sin x)^{n-k} = 0.
+\end{align}</math>
+
+(When {{mvar|k}}&nbsp;=&nbsp;0, then the number of differential operators being composed is&nbsp;0, so the corresponding term in the sum above is just&nbsp;{{math|(sin ''x'')<sup>''n''</sup>}}.)
+
+=== Sum of Sines and Cosines of Arithmetic Sequences ===
+Let <math>d \in \mathbb{R}</math> be a real number such that <math>d \neq 2\pi k</math> for <math>k \in \mathbb{Z}</math>. Then:<ref>{{Cite web |title=Sum of Sines of Arithmetic Sequence of Angles - ProofWiki |url=https://proofwiki.org/wiki/Sum_of_Sines_of_Arithmetic_Sequence_of_Angles |access-date=2026-10-08 |website=proofwiki.org}}</ref><ref>{{Cite web |title=Sum of Cosines of Arithmetic Sequence of Angles - ProofWiki |url=https://proofwiki.org/wiki/Sum_of_Cosines_of_Arithmetic_Sequence_of_Angles |access-date=2026-10-08 |website=proofwiki.org}}</ref>
+
+==== Sine formulation 1: ====
+<math>\begin{align}
+    \sum_{k=0}^n \cos (a + kd) = \frac{\sin (d(n+1)/2)}{\sin(d/2)}\sin\Big(a + \frac{nd}{2} \Big).
+\end{align}</math>
+
+==== Sine formulation 2: ====
+<math>\begin{align}
+    \sum_{k=1}^n \cos (a + kd) = \frac{\sin (nd/2)}{\sin(d/2)}\sin\Big(a + \frac{n+1}{2}d \Big).
+\end{align}</math>
+
+==== Cosine formulation 1: ====
+<math>\begin{align}
+    \sum_{k=0}^n \cos (a + kd) = \frac{\sin (d(n+1)/2)}{\sin(d/2)}\cos\Big(a + \frac{nd}{2} \Big).
+\end{align}</math>
+
+==== Cosine formulation 2: ====
+<math>\begin{align}
+    \sum_{k=1}^n \cos (a + kd) = \frac{\sin (nd/2)}{\sin(d/2)}\cos\Big(a + \frac{n+1}{2}d \Big).
+\end{align}</math>
+
+== See also ==
+{{div col|colwidth=30em}}
+* [[Aristarchus's inequality]]
+* [[Table of derivatives#Derivatives of trigonometric functions|Derivatives of trigonometric functions]]
+* [[Exact trigonometric values]] (values of sine and cosine expressed in surds)
+* [[Exsecant]]
+* [[Half-side formula]]
+* [[Hyperbolic function]]
+* Laws for solution of triangles:
+** [[Law of cosines]]
+*** [[Spherical law of cosines]]
+** [[Law of sines]]
+** [[Law of tangents]]
+** [[Law of cotangents]]
+** [[Mollweide's formula]]
+* [[List of integrals of trigonometric functions]]
+* [[Mnemonics in trigonometry]]
+* [[Pentagramma mirificum]]
+* [[Proofs of trigonometric identities]]
+* [[Prosthaphaeresis]]
+* [[Pythagorean theorem]]
+* [[Tangent half-angle formula]]
+* [[Trigonometric number]]
+* [[Trigonometry]]
+* [[Uses of trigonometry]]
+* [[Versine]] and [[haversine]]
+{{div col end}}
+
+== References ==
+{{reflist|30em}}
+
+== Bibliography ==
+{{Refbegin}}
+* {{Cite book|editor1-last=Abramowitz|editor1-first=Milton|editor1-link=Milton Abramowitz|editor2-last=Stegun|editor2-first=Irene A.|editor2-link=Irene Stegun|title=Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical Tables|publisher=[[Dover Publications]]|location=New York|isbn=978-0-486-61272-0|year=1972|url=https://archive.org/details/handbookofmathe000abra }}
+* {{ citation|last1 = Nielsen|first1 = Kaj L.|title = Logarithmic and Trigonometric Tables to Five Places|edition = 2nd|location = New York|publisher = [[Barnes & Noble]]|year = 1966|lccn = 61-9103 }}
+* {{citation|editor-first=Samuel M.|editor-last=Selby|title=Standard Mathematical Tables|publisher=The Chemical Rubber Co.|year=1970|edition=18th}}
+{{Refend}}
+
+== External links ==
+* [http://www.jdawiseman.com/papers/easymath/surds_sin_cos.html Values of sin and cos, expressed in surds, for integer multiples of 3° and of {{sfrac|5|5|8}}°], and for the same angles [http://www.jdawiseman.com/papers/easymath/surds_csc_sec.html csc and sec] and [http://www.jdawiseman.com/papers/easymath/surds_tan.html tan]
+
+{{DEFAULTSORT:Trigonometric identities}}
+[[Category:Mathematical identities]]
+[[Category:Trigonometry|Identities]]
+[[Category:Mathematics-related lists]]

@@ -1,0 +1,171 @@
+# Mock targets: same schema as ../targets.yaml, URLs relative to --base-url.
+# `planted` is ground truth for the tests (what the page really does); the audit never reads it.
+targets:
+  - id: mock-egfr-ckd-epi-2021
+    site: mock
+    url: egfr-ckd-epi-2021.html
+    formula: egfr_ckd_epi_cr@2021
+    claimed_version: "2021 CKD-EPI creatinine equation, refit without race"
+    recipe:
+      - {select: "#scr-unit", value: "mg/dL"}
+      - {fill: "#scr", value: "{scr}"}
+      - {fill: "#age", value: "{age}"}
+      - {click: "input[name=sex][value={sex}]"}
+      - {click: "#calculate"}
+    result: {selector: "#egfr-result", regex: "eGFR = ([0-9.]+)"}
+    planted: null
+
+  - id: mock-egfr-ckd-epi-2021-si
+    site: mock
+    url: egfr-ckd-epi-2021.html
+    formula: egfr_ckd_epi_cr@2021
+    claimed_version: "2021, µmol/L path"
+    recipe:
+      - {select: "#scr-unit", value: "umol/L"}
+      - {fill: "#scr", value: "{scr_umol}"}
+      - {fill: "#age", value: "{age}"}
+      - {click: "input[name=sex][value={sex}]"}
+      - {click: "#calculate"}
+    result: {selector: "#egfr-result", regex: "eGFR = ([0-9.]+)"}
+    planted: null
+
+  - id: mock-egfr-ckd-epi-legacy
+    site: mock
+    url: egfr-ckd-epi.html
+    formula: egfr_ckd_epi_cr@2021
+    claimed_version: "CKD-EPI (updated 2021)"
+    recipe:
+      - {fill: "#creat", value: "{scr}"}
+      - {fill: "#pt-age", value: "{age}"}
+      - {select: "#gender", value: "{sex_initial}"}
+      - {check: "#race-black", when: {black: true}}
+      - {click: "#calc-btn"}
+    result: {selector: "#gfr-value", regex: "([0-9]+\\.[0-9]+)"}
+    planted: "computes CKD-EPI 2009 with the race coefficient"
+
+  - id: mock-crcl-cockcroft-gault
+    site: mock
+    url: crcl-cockcroft-gault.html
+    formula: crcl_cockcroft_gault@1976
+    claimed_version: "Cockcroft-Gault 1976"
+    recipe:
+      - {fill: "#cg-age", value: "{age}"}
+      - {fill: "#cg-weight", value: "{weight_lb}"}
+      - {fill: "#cg-scr", value: "{scr}"}
+      - {click: "input[name=cg-sex][value={sex}]"}
+      - {click: "#cg-calc"}
+    result: {selector: "#cg-out", regex: "([0-9.]+)\\s*mL/min"}
+    planted: "weight field labelled lb is used as kg"
+
+  - id: mock-qtc-bazett
+    site: mock
+    url: qtc-bazett.html
+    formula: qtc_bazett@1920
+    claimed_version: "Bazett"
+    recipe:
+      - {fill: "#qt", value: "{qt}"}
+      - {fill: "#hr", value: "{hr}"}
+      - {click: "#qtc-go"}
+    result: {selector: "#qtc", regex: "([0-9.]+)"}
+    planted: "RR in milliseconds instead of seconds"
+
+  - id: mock-qtc-fridericia
+    site: mock
+    url: qtc-fridericia.html
+    formula: qtc_fridericia@1920
+    recipe:
+      - {fill: "#f-qt", value: "{qt}"}
+      - {fill: "#f-hr", value: "{hr}"}
+      - {click: "#f-go"}
+    result: {selector: "#f-qtc", regex: "([0-9.]+)"}
+    planted: null
+
+  - id: mock-sodium-corrected
+    site: mock
+    url: sodium-corrected.html
+    formula: sodium_corrected@hillier
+    claimed_version: "Hillier 1999, 2.4 per 100 mg/dL"
+    recipe:
+      - {fill: "#na", value: "{na}"}
+      - {fill: "#glu", value: "{glucose}"}
+    result: {selector: "#na-corr", regex: "([0-9.]+) mEq/L"}
+    planted: "uses the Katz 1.6 factor while claiming Hillier"
+
+  - id: mock-bmi
+    site: mock
+    url: bmi.html
+    formula: bmi@quetelet
+    recipe:
+      - {fill: "#bmi-height", value: "{height}"}
+      - {fill: "#bmi-weight", value: "{weight}"}
+    result: {selector: ".bmi-value", regex: "([0-9.]+)"}
+    planted: null
+
+  - id: mock-bsa-mosteller
+    site: mock
+    url: bsa.html
+    formula: bsa_mosteller@1987
+    recipe:
+      - {fill: "#ht", value: "{height_in}"}
+      - {fill: "#wt", value: "{weight_lb}"}
+      - {click: "#bsa-submit"}
+    result: {selector: "#bsa-out", regex: "([0-9.]+)"}
+    planted: null
+
+  - id: mock-anion-gap
+    site: mock
+    url: anion-gap.html
+    formula: anion_gap@no-k
+    recipe:
+      - {fill: "#ag-na", value: "{na}"}
+      - {fill: "#ag-cl", value: "{cl}"}
+      - {fill: "#ag-hco3", value: "{hco3}"}
+      - {click: "#ag-calc"}
+    result: {selector: "#ag-result", regex: "(-?[0-9.]+) mEq/L"}
+    planted: null
+
+  - id: mock-anion-gap-k
+    site: mock
+    url: anion-gap.html
+    formula: anion_gap@with-k
+    recipe:
+      - {fill: "#ag-na", value: "{na}"}
+      - {fill: "#ag-cl", value: "{cl}"}
+      - {fill: "#ag-hco3", value: "{hco3}"}
+      - {check: "#ag-usek"}
+      - {fill: "#ag-k", value: "{k}"}
+      - {click: "#ag-calc"}
+    result: {selector: "#ag-result", regex: "(-?[0-9.]+) mEq/L"}
+    planted: null
+
+  - id: mock-calcium-corrected
+    site: mock
+    url: calcium-corrected.html
+    formula: calcium_corrected@0.8
+    recipe:
+      - {fill: "#cal", value: "{ca}"}
+      - {fill: "#alb", value: "{albumin}"}
+      - {click: "#ca-go"}
+    result: {selector: "#ca-res", regex: "([0-9.]+)"}
+    planted: null
+
+  - id: mock-map
+    site: mock
+    url: map.html
+    formula: map@standard
+    recipe:
+      - {fill: "#sbp", value: "{sbp}"}
+      - {fill: "#dbp", value: "{dbp}"}
+    result: {selector: "[data-testid=map-result]", regex: "MAP ([0-9.]+)"}
+    planted: null
+
+  - id: mock-winters
+    site: mock
+    url: winters.html
+    formula: winters@1967
+    recipe:
+      - {fill: "#w-hco3", value: "{hco3}"}
+      - {click: "#w-go"}
+    result: {selector: "#w-out", regex: "([0-9.]+)"}
+    planted: "script error: result never renders (expect unreadable)"
+    expect: unreadable

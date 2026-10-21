@@ -1,0 +1,173 @@
+{
+ "formulas": 95,
+ "records": 116,
+ "equation_formulas": 92,
+ "equation_formulas_any_ok": 41,
+ "equation_formulas_all_ok": 37,
+ "equation_records": 113,
+ "equation_records_ok": 50,
+ "status": {
+  "ok": 51,
+  "unparsed": 11,
+  "not_checkable": 54
+ },
+ "kinds": {
+  "chain": 24,
+  "equation": 88,
+  "other": 2,
+  "inequality": 1,
+  "definition_like": 1
+ },
+ "lark_fallback_records": 0,
+ "top_equation_failures": [
+  [
+   "unsupported:semicolon_args",
+   13
+  ],
+  [
+   "unsupported:matrix",
+   11
+  ],
+  [
+   "unsupported:hypergeometric",
+   10
+  ],
+  [
+   "unsupported:nth_derivative",
+   7
+  ],
+  [
+   "unsupported:subscript_on_expression",
+   4
+  ],
+  [
+   "unsupported:prime_on_expression",
+   4
+  ],
+  [
+   "unsupported:empty_side",
+   3
+  ],
+  [
+   "unsupported:pm",
+   2
+  ],
+  [
+   "error:expected operand, got <x>",
+   1
+  ],
+  [
+   "unsupported:vector_division",
+   1
+  ],
+  [
+   "unsupported:negation",
+   1
+  ],
+  [
+   "unsupported:elliptic",
+   1
+  ],
+  [
+   "unsupported:integral_domain",
+   1
+  ],
+  [
+   "unsupported:sum_index_set",
+   1
+  ],
+  [
+   "unsupported:conjugate_star",
+   1
+  ],
+  [
+   "unsupported:determinant",
+   1
+  ],
+  [
+   "unsupported:conditional_probability",
+   1
+  ]
+ ],
+ "top_failures_all": [
+  [
+   "unsupported:semicolon_args",
+   13
+  ],
+  [
+   "unsupported:matrix",
+   11
+  ],
+  [
+   "unsupported:hypergeometric",
+   10
+  ],
+  [
+   "unsupported:nth_derivative",
+   7
+  ],
+  [
+   "unsupported:subscript_on_expression",
+   4
+  ],
+  [
+   "unsupported:prime_on_expression",
+   4
+  ],
+  [
+   "unsupported:empty_side",
+   3
+  ],
+  [
+   "unsupported:pm",
+   2
+  ],
+  [
+   "error:expected operand, got <x>",
+   1
+  ],
+  [
+   "unsupported:vector_division",
+   1
+  ],
+  [
+   "not_checkable:sim",
+   1
+  ],
+  [
+   "unsupported:negation",
+   1
+  ],
+  [
+   "unsupported:elliptic",
+   1
+  ],
+  [
+   "unsupported:integral_domain",
+   1
+  ],
+  [
+   "not_checkable:approx",
+   1
+  ],
+  [
+   "unsupported:sum_index_set",
+   1
+  ],
+  [
+   "unsupported:conjugate_star",
+   1
+  ],
+  [
+   "unsupported:determinant",
+   1
+  ],
+  [
+   "unsupported:conditional_probability",
+   1
+  ]
+ ],
+ "new_formulas": 95,
+ "seconds": 6.3,
+ "translator": "formulaci-rd-0.1/sympy-1.14.0"
+}

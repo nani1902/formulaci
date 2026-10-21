@@ -1,0 +1,16 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Calcium Correction for Hypoalbuminemia</title>
+<link rel="stylesheet" href="_style.css"></head><body>
+<h1>Corrected Calcium</h1>
+<form class="calc" onsubmit="return false">
+ <div class="row"><label for="cal">Calcium (mg/dL)</label><input id="cal" type="number" step="any"></div>
+ <div class="row"><label for="alb">Albumin (g/dL)</label><input id="alb" type="number" step="any"></div>
+ <div class="row"><label for="nalb">Normal albumin (g/dL)</label><input id="nalb" type="number" step="any" value="4"></div>
+ <button id="ca-go" type="button">Calculate</button>
+ <p class="result">Corrected calcium: <strong id="ca-res"></strong> mg/dL</p>
+</form>
+<script>
+document.getElementById('ca-go').onclick = function () {
+  var ca = +document.getElementById('cal').value, al = +document.getElementById('alb').value, n = +document.getElementById('nalb').value;
+  document.getElementById('ca-res').textContent = (ca + 0.8 * (n - al)).toFixed(2);
+};
+</script></body></html>

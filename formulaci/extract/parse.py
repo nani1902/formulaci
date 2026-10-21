@@ -10,6 +10,7 @@ One recursive walk over the mwparserfromhell tree does everything, in document o
 """
 from __future__ import annotations
 
+import bisect
 import re
 from dataclasses import dataclass, field
 
@@ -34,10 +35,12 @@ DISPLAY_TEMPLATES = {"numblk", "equation box 1", "bi", "block indent", "blockind
                      "math display", "equation"}
 # Templates whose (positional) content is prose to keep: name -> how to render.
 INLINE_TEMPLATES = {
-    "math": "join", "mvar": "join", "var": "join", "nowrap": "join", "nobr": "join", "nowr": "join",
+    "math": "first", "mvar": "first", "var": "first", "nowrap": "first", "nobr": "first", "nowr": "first",
     "em": "first", "strong": "first", "small": "first", "big": "first", "smallcaps": "first",
     "sub": "first", "sup": "first", "su": "first", "overline": "first", "underline": "first",
     "serif": "first", "sans-serif": "first", "mono": "first", "italics correction": "first",
+    "visible anchor": "first", "vanchor": "first", "dfn": "first", "ill": "first", "bold": "first",
+    "italic": "first", "nowiki": "first", "sc": "first", "gaps": "join", "val": "join", "angle bracket": "first",
     "linktext": "join", "lang": "second", "transl": "second", "nobold": "first", "noitalic": "first",
     "centre": "first", "center": "first", "bi": "text", "block indent": "text", "blockindent": "text",
     "quote": "text", "blockquote": "text", "quotation": "text", "numblk": "second",
@@ -48,11 +51,6 @@ INLINE_TEMPLATES = {
 LITERAL_TEMPLATES = {"!": "|", "=": "=", "pi": "π", "nbsp": " ", "spaces": " ", "thinsp": " ", "ndash": "–",
                      "mdash": "—", "snd": " – ", "'": "'", "''": "''", "sqrt": "√", "minus": "−",
                      "times": "×", "middot": "·", "dot": "·", "e": "e", "hair space": " ", "nbhyph": "-"}
-CITATION_LIKE = re.compile(r"^(cite|citation|sfn|harv|refn|efn|r$|rp$|main|see also|further|for$|about|"
-                           r"distinguish|redirect|short description|use |good article|featured article|"
-                           r"citation needed|cn$|clarify|who|when|by whom|dubious|reflist|notelist|"
-                           r"authority control|portal|commons|wiktionary|anchor|ill$|webarchive|isbn|doi)")
-
 SENT_OPEN, SENT_CLOSE = "", ""
 
 
@@ -180,7 +178,10 @@ class _Walker:
                 self.sections.pop()
             self.sections.append((level, _heading_text(node)))
             self.emit("\n\n", ctx)
-            self.walk(node.title, ctx)
+            if any(isinstance(x, (Tag, Template)) for x in node.title.nodes):
+                self.walk(node.title, ctx)
+            else:
+                self.emit(self.sections[-1][1], ctx)
             self.emit(".\n\n", ctx)
         elif isinstance(node, Tag):
             self.tag(node, ctx, line)
@@ -244,7 +245,7 @@ class _Walker:
         ns = title.lstrip(":").split(":", 1)[0].strip().lower() if ":" in title else ""
         if ns in ("file", "image", "media"):
             if node.text is not None:
-                self.walk(node.text, _Ctx(visible=False, label=ctx.label if not ctx.visible else "caption"))
+                self.walk(node.text, _Ctx(visible=False, label="caption"))
             return
         if ns == "category" and not title.startswith(":"):
             return
@@ -269,7 +270,8 @@ class _Walker:
             self.stats.n_html_math += 1
         mode = INLINE_TEMPLATES.get(name)
         display_wrapper = ctx.display_wrapper or name in DISPLAY_TEMPLATES
-        pos = [p for p in t.params if not p.showkey]
+        # Positional = unnamed or explicitly numbered (`{{math|1=a=b}}`), in numeric order.
+        pos = sorted((p for p in t.params if str(p.name).strip().isdigit()), key=lambda p: int(str(p.name)))
         if mode and ctx.visible:
             keep = self._kept_params(t, mode, pos)
             pre, mid, post = {"abs": ("|", "", "|"), "norm": ("‖", "", "‖"), "mset": ("{", "", "}"),
@@ -334,13 +336,32 @@ def _assemble(walker: _Walker, n_ctx: int) -> None:
         i = k + 1
     full = "".join(clean)
     assert len(spans) == len(walker.formulas)
+    starts = [a for a, _ in spans]
+
+    def inside(x: int) -> tuple[int, int] | None:
+        """The formula span strictly containing position x, if any."""
+        k = bisect.bisect_right(starts, x) - 1
+        if k >= 0 and spans[k][0] < x < spans[k][1]:
+            return spans[k]
+        return None
+
     for f, (a, b) in zip(walker.formulas, spans):
-        before = full[max(0, a - n_ctx):a]
-        if a > n_ctx and " " in before:
-            before = before[before.index(" ") + 1:]
-        after = full[b:b + n_ctx]
-        if b + n_ctx < len(full) and " " in after:
-            after = after[:after.rindex(" ")]
+        lo = max(0, a - n_ctx)
+        if lo > 0:  # start at a word boundary, never in the middle of another formula
+            if not inside(lo):
+                nxt = full.find(" ", lo, a)
+                lo = nxt + 1 if nxt >= 0 else lo
+            sp = inside(lo)
+            lo = sp[1] if sp else lo
+        before = full[lo:a]
+        hi = min(len(full), b + n_ctx)
+        if hi < len(full):
+            if not inside(hi):
+                prv = full.rfind(" ", b, hi)
+                hi = prv if prv >= 0 else hi
+            sp = inside(hi)
+            hi = sp[0] if sp else hi
+        after = full[b:hi]
         before = re.sub(r"\s+", " ", before).strip()
         if f.label:
             before = (before + f" [{f.label}]").strip()

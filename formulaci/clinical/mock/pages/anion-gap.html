@@ -1,0 +1,19 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Anion Gap Calculator</title>
+<link rel="stylesheet" href="_style.css"></head><body>
+<h1>Anion Gap</h1>
+<form class="calc" onsubmit="return false">
+ <div class="row"><label for="ag-na">Na⁺ (mEq/L)</label><input id="ag-na" type="number" step="any"></div>
+ <div class="row"><label for="ag-cl">Cl⁻ (mEq/L)</label><input id="ag-cl" type="number" step="any"></div>
+ <div class="row"><label for="ag-hco3">HCO₃⁻ (mEq/L)</label><input id="ag-hco3" type="number" step="any"></div>
+ <div class="row"><label><input type="checkbox" id="ag-usek"> Include K⁺</label><input id="ag-k" type="number" step="any" placeholder="K⁺"></div>
+ <button id="ag-calc" type="button">Calculate</button>
+ <div class="result" id="ag-result"></div>
+</form>
+<script>
+document.getElementById('ag-calc').onclick = function () {
+  var v = function (id) { return parseFloat(document.getElementById(id).value); };
+  var g = v('ag-na') - (v('ag-cl') + v('ag-hco3'));
+  if (document.getElementById('ag-usek').checked) g += v('ag-k');
+  document.getElementById('ag-result').textContent = 'Anion gap: ' + g.toFixed(1) + ' mEq/L';
+};
+</script></body></html>

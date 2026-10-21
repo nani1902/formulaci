@@ -1,0 +1,20 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Sodium Correction for Hyperglycemia (Hillier)</title>
+<link rel="stylesheet" href="_style.css"></head><body>
+<h1>Sodium Correction for Hyperglycemia</h1>
+<p>Hillier 1999 correction factor of 2.4 mEq/L per 100 mg/dL glucose.</p>
+<form class="calc" onsubmit="return false">
+ <div class="row"><label for="na">Sodium (mEq/L)</label><input id="na" type="number" step="any"></div>
+ <div class="row"><label for="glu">Glucose</label><input id="glu" type="number" step="any">
+  <select id="glu-unit"><option>mg/dL</option><option>mmol/L</option></select></div>
+ <div class="result" id="na-corr"></div>
+</form>
+<script>
+function upd() {
+  var na = parseFloat(document.getElementById('na').value), g = parseFloat(document.getElementById('glu').value);
+  if (document.getElementById('glu-unit').value === 'mmol/L') g = g * 18.016;
+  if (isNaN(na) || isNaN(g)) { document.getElementById('na-corr').textContent = ''; return; }
+  var c = na + 1.6 * (g - 100) / 100;   // bug: Katz factor on a page that claims Hillier
+  document.getElementById('na-corr').textContent = 'Corrected sodium: ' + c.toFixed(1) + ' mEq/L';
+}
+['na', 'glu', 'glu-unit'].forEach(function (id) { document.getElementById(id).addEventListener('input', upd); });
+</script></body></html>

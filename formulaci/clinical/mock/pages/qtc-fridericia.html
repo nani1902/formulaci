@@ -1,0 +1,15 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>QTc Calculator (Fridericia)</title>
+<link rel="stylesheet" href="_style.css"></head><body>
+<h1>Corrected QT — Fridericia</h1>
+<form class="calc" onsubmit="return false">
+ <div class="row"><label for="f-qt">QT (ms)</label><input id="f-qt" type="number"></div>
+ <div class="row"><label for="f-hr">HR (bpm)</label><input id="f-hr" type="number"></div>
+ <button id="f-go" type="button">Calculate</button>
+ <div class="result">QTc <span id="f-qtc"></span> msec</div>
+</form>
+<script>
+document.getElementById('f-go').onclick = function () {
+  var qt = +document.getElementById('f-qt').value, rr = 60 / +document.getElementById('f-hr').value;
+  document.getElementById('f-qtc').textContent = Math.round(qt / Math.cbrt(rr));
+};
+</script></body></html>

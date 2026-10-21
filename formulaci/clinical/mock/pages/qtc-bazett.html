@@ -1,0 +1,17 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>QTc Calculator (Bazett)</title>
+<link rel="stylesheet" href="_style.css"></head><body>
+<h1>Corrected QT Interval (Bazett)</h1>
+<p>QTc = QT / &radic;RR</p>
+<form class="calc" onsubmit="return false">
+ <div class="row"><label for="qt">QT interval (ms)</label><input id="qt" type="number"></div>
+ <div class="row"><label for="hr">Heart rate (bpm)</label><input id="hr" type="number"></div>
+ <button id="qtc-go" type="button">Calculate</button>
+ <div class="result">QTc: <output id="qtc">—</output> ms</div>
+</form>
+<script>
+document.getElementById('qtc-go').onclick = function () {
+  var qt = +document.getElementById('qt').value, hr = +document.getElementById('hr').value;
+  var rr = 60000 / hr;              // bug: RR in milliseconds; Bazett needs seconds
+  document.getElementById('qtc').value = Math.round(qt / Math.sqrt(rr));
+};
+</script></body></html>

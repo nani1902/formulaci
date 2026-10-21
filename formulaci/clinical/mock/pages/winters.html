@@ -1,0 +1,14 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Winters' Formula for Metabolic Acidosis Compensation</title>
+<link rel="stylesheet" href="_style.css"></head><body>
+<h1>Winters' Formula</h1>
+<form class="calc" onsubmit="return false">
+ <div class="row"><label for="w-hco3">HCO₃⁻ (mEq/L)</label><input id="w-hco3" type="number" step="any"></div>
+ <button id="w-go" type="button">Calculate</button>
+ <div class="result">Expected PaCO₂: <span id="w-out">—</span></div>
+</form>
+<script>
+document.getElementById('w-go').onclick = function () {
+  var h = +document.getElementById('w-hc03').value;   // typo'd id -> TypeError, result never shown
+  document.getElementById('w-out').textContent = (1.5 * h + 8).toFixed(1) + ' ± 2 mmHg';
+};
+</script></body></html>

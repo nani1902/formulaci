@@ -1,6 +1,7 @@
 """Minimal, polite MediaWiki API client: rate limit, retries, continuation merging."""
 from __future__ import annotations
 
+import os
 import sys
 import threading
 import time
@@ -11,18 +12,35 @@ import requests
 API_URL = "https://en.wikipedia.org/w/api.php"
 USER_AGENT = "formulaci/0.1 (knowledge verification research)"
 
+# Wikimedia's 2026 API rate limits (https://www.mediawiki.org/wiki/Wikimedia_APIs/Rate_limits):
+# a User-Agent without contact info is "Unidentified" and limited to 10 requests/minute; a
+# compliant one (contact email or URL) gets 200/minute. Set FORMULACI_CONTACT to opt in.
+UNIDENTIFIED_RPS = 10 / 62
+IDENTIFIED_RPS = 3.0
+
+
+def user_agent() -> str:
+    contact = os.environ.get("FORMULACI_CONTACT", "").strip()
+    return f"formulaci/0.1 (knowledge verification research; {contact})" if contact else USER_AGENT
+
+
+def default_rps() -> float:
+    if os.environ.get("FORMULACI_RPS"):
+        return float(os.environ["FORMULACI_RPS"])
+    return IDENTIFIED_RPS if os.environ.get("FORMULACI_CONTACT", "").strip() else UNIDENTIFIED_RPS
+
 
 class APIError(RuntimeError):
     pass
 
 
 class WikiClient:
-    def __init__(self, api_url: str = API_URL, rps: float = 5.0, max_retries: int = 8):
+    def __init__(self, api_url: str = API_URL, rps: float | None = None, max_retries: int = 10):
         self.api_url = api_url
-        self.min_interval = 1.0 / rps
+        self.min_interval = 1.0 / min(rps or default_rps(), 5.0)
         self.max_retries = max_retries
         self.session = requests.Session()
-        self.session.headers["User-Agent"] = USER_AGENT
+        self.session.headers["User-Agent"] = user_agent()
         self.session.headers["Accept-Encoding"] = "gzip"
         self._last = 0.0
         self._lock = threading.Lock()
@@ -43,7 +61,7 @@ class WikiClient:
         for attempt in range(self.max_retries):
             self._wait()
             try:
-                r = self.session.post(self.api_url, data=p, timeout=120)
+                r = self.session.get(self.api_url, params=p, timeout=120)
                 self.n_requests += 1
             except requests.RequestException as e:
                 print(f"[api] network error {e!r}; retry in {backoff:.0f}s", file=sys.stderr)
@@ -51,8 +69,8 @@ class WikiClient:
                 backoff = min(backoff * 2, 120)
                 continue
             if r.status_code == 429 or r.status_code >= 500:
-                wait = float(r.headers.get("Retry-After", backoff))
-                print(f"[api] HTTP {r.status_code}; retry in {wait:.0f}s", file=sys.stderr)
+                wait = max(float(r.headers.get("Retry-After", backoff)), 5.0)
+                print(f"[api] HTTP {r.status_code}; retry in {wait:.0f}s: {r.text[:60]!r}", file=sys.stderr)
                 time.sleep(wait)
                 backoff = min(backoff * 2, 120)
                 continue

@@ -1,0 +1,121 @@
+{
+ "known_good": {
+  "n": 272,
+  "rejected_by_oracle": [
+   {
+    "formula_id": "bench:good:0119",
+    "name": "Vandermonde's identity",
+    "latex": "\\sum_{j=0}^{k} \\binom{m}{j} \\binom{n}{k - j} = \\binom{m + n}{k}",
+    "n_eval": 2,
+    "n_fail": 0,
+    "errors": [
+     "ValueError: gamma function pole",
+     "ValueError: gamma function pole",
+     "ValueError: gamma function pole"
+    ]
+   }
+  ],
+  "per_category": {
+   "trig": 39,
+   "hyperbolic": 23,
+   "exp_log": 19,
+   "gamma_beta": 20,
+   "zeta": 9,
+   "binomial": 18,
+   "finite_series": 18,
+   "infinite_series": 21,
+   "integrals": 22,
+   "derivatives": 20,
+   "inequalities": 24,
+   "probability": 20,
+   "algebra": 12,
+   "complex": 7
+  },
+  "seconds": 40.9
+ },
+ "mutated": {
+  "n_source": 272,
+  "n_kept": 1320,
+  "per_type": {
+   "sign_flip": {
+    "kept": 272,
+    "unevaluable": 18,
+    "weak": 8,
+    "preserved": 13
+   },
+   "exponent_pm1": {
+    "kept": 165,
+    "no_site": 99,
+    "preserved": 8,
+    "exhausted": 8,
+    "unevaluable": 3,
+    "weak": 5
+   },
+   "dropped_factor": {
+    "no_site": 102,
+    "kept": 151,
+    "unparseable": 29,
+    "exhausted": 19,
+    "weak": 8,
+    "preserved": 10
+   },
+   "wrong_constant": {
+    "kept": 210,
+    "no_site": 53,
+    "unevaluable": 2,
+    "preserved": 12,
+    "weak": 11,
+    "exhausted": 9
+   },
+   "swapped_symbols": {
+    "kept": 116,
+    "preserved": 82,
+    "no_site": 115,
+    "exhausted": 41,
+    "unevaluable": 3,
+    "weak": 6,
+    "unparseable": 1
+   },
+   "off_by_one": {
+    "no_site": 177,
+    "kept": 83,
+    "unevaluable": 10,
+    "exhausted": 12,
+    "preserved": 7,
+    "weak": 1
+   },
+   "num_den_swap": {
+    "no_site": 122,
+    "kept": 141,
+    "unevaluable": 6,
+    "exhausted": 9,
+    "weak": 5
+   },
+   "missing_term": {
+    "kept": 182,
+    "no_site": 86,
+    "weak": 7,
+    "unevaluable": 3,
+    "preserved": 10,
+    "exhausted": 4
+   }
+  },
+  "dropped_candidates": {
+   "sign_flip": 39,
+   "exponent_pm1": 16,
+   "dropped_factor": 47,
+   "wrong_constant": 25,
+   "swapped_symbols": 92,
+   "off_by_one": 18,
+   "num_den_swap": 11,
+   "missing_term": 20
+  },
+  "dropped_preserving_identity": 142,
+  "seconds": 257.6
+ },
+ "lacast": {
+  "n": 95,
+  "source": "https://github.com/gipplab/LaCASt misc/Results/Wikipedia (MIT)"
+ },
+ "seed": 0
+}

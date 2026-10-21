@@ -1,0 +1,1512 @@
+# formulaci/clinical/targets.yaml — LIVE third-party calculator pages. Do NOT audit without the
+# user's explicit go-ahead (the harness refuses non-local hosts unless --allow-live is passed).
+# Schema: see formulaci/clinical/audit.py:Target. `formula` is what the page *claims*; a page whose
+# code was seen to use another equation keeps its claimed key and says so in `notes`.
+# Imported by the clinical session from a read-only research pass (below). Key remap applied on
+# import: calcium_corrected@payne -> calcium_corrected@0.8 (every such page uses the 0.8 slope; Payne
+# 1973 itself published slope 1.0, see formulas.py).
+#
+# targets_live.yaml -- public online medical calculator targets for formulaci audit
+# Date: 2026-10-21
+# Method: read-only research. Pages were fetched with GET requests only (Python urllib / curl with UA
+#   "formulaci-clinical-research/0.1 (read-only audit research)", >=1.1 s between requests) plus
+#   WebSearch/WebFetch. No form was submitted, no calculate button clicked, nothing POSTed, no headless browser.
+#   Formula notes come from page text, server HTML, embedded __NEXT_DATA__ JSON (QxMD/Medscape) or the
+#   page's own static JS bundle (NIDDK). Nothing was tested numerically.
+# Entries: 84 ; selectors_verified: true = 51 (the input ids/names were seen in fetched server HTML;
+#   result selectors were not always visible pre-submit -- see each entry's notes).
+# Conventions: `sex` is assumed to be "female"/"male"; `when:` keys refer to canonical inputs.
+#   `result.read: value` means read the element's value property (output is an <input>), otherwise textContent.
+#   `iframe_src` (MSD) means steps run inside that iframe document (or load iframe_src directly).
+# Caution for the harness: several "Calculate" buttons perform a real form POST/GET to the site
+#   (ClinCalc ASP.NET postback, NHLBI Drupal, Inch Calculator, bmi-calculator.net, calculator.net GET);
+#   flagged in notes as "server round-trip".
+targets:
+
+# ======================= MDCalc (Next.js/React; SSR markup with stable name / data-name attrs) =======================
+- id: mdcalc-ckd-epi
+  site: MDCalc
+  title: "CKD-EPI Equations for Glomerular Filtration Rate (GFR)"
+  url: https://www.mdcalc.com/calc/3939/ckd-epi-equations-glomerular-filtration-rate-gfr
+  formula: egfr_ckd_epi_cr@2021
+  claimed_version: "2021 race-free (page: \"This version does not include race.\")"
+  also_offers: [egfr_ckd_epi_crcys@2021, egfr_ckd_epi_cr@2009]
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {click: "[data-name=calc] button[data-value='0']"}
+    - {wait: 300}
+    - {click: "[data-name=gender] button[data-value='0']", when: {sex: female}}
+    - {click: "[data-name=gender] button[data-value='1']", when: {sex: male}}
+    - {fill: "input[name=age]", value: "{age}"}
+    - {fill: "input[name=creatinine]", value: "{scr_umol}"}
+  result: {selector: "#result-container", regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mL/min/1.73m²"}
+  notes: "Equation toggle data-name=calc: 0=2021 Cr, 1=2021 Cr-CysC, 2=2009 CKD-EPI Cr, 3=2012 CysC, 4=2012 Cr-CysC. Only age input + gender group present in SSR; creatinine/cystatin inputs render after equation choice (name 'creatinine' assumed from MDRD page, cystatin name unknown). The 2009 option (data-value 2) still exists on the page -- worth auditing whether it asks race. SSR default creatinine unit is µmol/L (unit toggle button in [data-input-end-adornment]); client may switch to mg/dL by locale. No explicit calculate button: result updates live."
+
+- id: mdcalc-mdrd
+  site: MDCalc
+  title: "MDRD GFR Equation"
+  url: https://www.mdcalc.com/calc/76/mdrd-gfr-equation
+  formula: egfr_mdrd@175
+  claimed_version: "unstated constant; race input optional (\"we have decided to make race optional\")"
+  rendering: js
+  selectors_verified: true
+  recipe:
+    - {click: "[data-name=sex] button[data-value='0']", when: {sex: female}}
+    - {click: "[data-name=sex] button[data-value='1']", when: {sex: male}}
+    - {fill: "input[name=age]", value: "{age}"}
+    - {fill: "input[name=creatinine]", value: "{scr_umol}"}
+    - {click: "[data-name=black_race] button[data-value='1']", when: {black: true}}
+    - {click: "[data-name=black_race] button[data-value='0']", when: {black: false}}
+  result: {selector: "#result-container", regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mL/min/1.73m²"}
+  notes: "Still asks 'Black race' (optional, No/Yes). Creatinine placeholder 'Norm: 62 - 115' => SSR default unit µmol/L; toggle via button in input[name=creatinine] + [data-input-end-adornment]. Page says it estimates a higher GFR for Black patients."
+
+- id: mdcalc-cockcroft-gault
+  site: MDCalc
+  title: "Creatinine Clearance (Cockcroft-Gault Equation)"
+  url: https://www.mdcalc.com/calc/43/creatinine-clearance-cockcroft-gault-equation
+  formula: crcl_cockcroft_gault@1976
+  claimed_version: "unstated (original 1976)"
+  rendering: js
+  selectors_verified: true
+  recipe:
+    - {click: "[data-name=sex] button[data-value='0']", when: {sex: female}}
+    - {click: "[data-name=sex] button[data-value='1']", when: {sex: male}}
+    - {fill: "input[name=age]", value: "{age}"}
+    - {fill: "input[name=weight]", value: "{weight}"}
+    - {fill: "input[name=creatinine]", value: "{scr_umol}"}
+    - {fill: "input[name=height]", value: "{height}"}
+  result: {selector: "#result-container", regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mL/min"}
+  notes: "Inputs: age, weight (kg), creatinine (SSR default µmol/L), height (cm, optional; used for IBW/AdjBW variants). Result panel likely shows several weight-based CrCl variants (actual/ideal/adjusted) -- regex picks first number; refine after first live run."
+
+- id: mdcalc-qtc
+  site: MDCalc
+  title: "Corrected QT Interval (QTc)"
+  url: https://www.mdcalc.com/calc/48/corrected-qt-interval-qtc
+  formula: qtc_bazett@1920
+  claimed_version: "unstated; formula toggle Bazett/Fridericia/Framingham/Hodges/Rautaharju"
+  also_offers: [qtc_fridericia@1920, qtc_framingham@1992, qtc_hodges@1983]
+  rendering: js
+  selectors_verified: true
+  recipe:
+    - {click: "[data-name=formula] button[data-value='0']"}
+    - {fill: "input[name=heart_rate]", value: "{hr}"}
+    - {fill: "input[name=qt_interval]", value: "{qt}"}
+  result: {selector: "#result-container", regex: '([0-9]+(?:\.[0-9]+)?)', unit: "ms"}
+  notes: "data-name=formula values: 0 Bazett, 1 Fridericia, 2 Framingham, 3 Hodges, 4 Rautaharju; swap data-value to test others. Extra group data-name=speed (25/50 mm/s) suggests QT may be enterable in small boxes; HR entered in bpm (not RR)."
+
+- id: mdcalc-calcium-correction
+  site: MDCalc
+  title: "Calcium Correction for Hypoalbuminemia and Hyperalbuminemia"
+  url: https://www.mdcalc.com/calc/31/calcium-correction-hypoalbuminemia
+  formula: calcium_corrected@0.8
+  claimed_version: "unstated"
+  rendering: js
+  selectors_verified: true
+  recipe:
+    - {fill: "input[name=calcium]", value: "{ca_mmol}"}
+    - {fill: "input[name=albumin]", value: "{albumin_g_l}"}
+    - {fill: "input[name=normal_albumin]", value: "40"}
+  result: {selector: "#result-container", regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mmol/L"}
+  notes: "SSR default units SI (calcium Norm 2.25-2.625, albumin Norm 35-55 => g/L). Has an editable normal_albumin input (default probably 4 g/dL / 40 g/L). If client switches to US units use {ca} and {albumin} and normal 4."
+
+- id: mdcalc-sodium-correction
+  site: MDCalc
+  title: "Sodium Correction for Hyperglycemia"
+  url: https://www.mdcalc.com/calc/50/sodium-correction-hyperglycemia
+  formula: sodium_corrected@katz
+  claimed_version: "Katz (1973) and Hillier (1999) both reported (per MDCalc write-up)"
+  also_offers: [sodium_corrected@hillier]
+  rendering: js
+  selectors_verified: true
+  recipe:
+    - {fill: "input[name=sodium]", value: "{na}"}
+    - {fill: "input[name=glucose]", value: "{glucose_mmol}"}
+  result: {selector: "#result-container", regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mEq/L"}
+  notes: "Glucose placeholder 'Norm: 3.9 - 5.8' => SSR default mmol/L. Result shows two values (Katz 0.016, Hillier 0.024); regex must be split per label after first live run. Old URL /calc/49/... returns 404."
+
+- id: mdcalc-anion-gap
+  site: MDCalc
+  title: "Serum Anion Gap"
+  url: https://www.mdcalc.com/calc/1669/anion-gap
+  formula: anion_gap@no-k
+  claimed_version: "unstated; Na - (Cl + HCO3), optional albumin correction"
+  rendering: js
+  selectors_verified: true
+  recipe:
+    - {fill: "input[name=sodium]", value: "{na}"}
+    - {fill: "input[name=chloride]", value: "{cl}"}
+    - {fill: "input[name=bicarbonate]", value: "{hco3}"}
+  result: {selector: "#result-container", regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mEq/L"}
+  notes: "No potassium input. Optional albumin input (g/L default) produces albumin-corrected AG as a second number."
+
+- id: mdcalc-fena
+  site: MDCalc
+  title: "Fractional Excretion of Sodium (FENa)"
+  url: https://www.mdcalc.com/calc/60/fractional-excretion-sodium-fena
+  formula: fena@espinel
+  claimed_version: "unstated"
+  rendering: js
+  selectors_verified: true
+  recipe:
+    - {fill: "input[name=sodium]", value: "{pna}"}
+    - {click: "input[name=creatinine] + [data-input-end-adornment] button"}
+    - {fill: "input[name=creatinine]", value: "{pcr}"}
+    - {fill: "input[name=urine_sodium]", value: "{una}"}
+    - {click: "input[name=urine_creatinine] + [data-input-end-adornment] button"}
+    - {fill: "input[name=urine_creatinine]", value: "{ucr}"}
+  result: {selector: "#result-container", regex: '([0-9]+(?:\.[0-9]+)?)', unit: "%"}
+  notes: "Creatinine inputs default to µmol/L in SSR (urine Cr Norm 1768-32708). The two clicks toggle the unit to mg/dL ONLY if the adornment currently reads µmol/L -- harness should check adornment text first. Since FENa is a ratio, entering both creatinines in the same unit is mathematically equivalent."
+
+- id: mdcalc-winters
+  site: MDCalc
+  title: "Winters' Formula for Metabolic Acidosis Compensation"
+  url: https://www.mdcalc.com/calc/117/winters-formula-metabolic-acidosis-compensation
+  formula: winters@1967
+  claimed_version: "unstated"
+  rendering: js
+  selectors_verified: true
+  recipe:
+    - {fill: "input[name=bicarbonate]", value: "{hco3}"}
+  result: {selector: "#result-container", regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mm Hg"}
+  notes: "Single input. Result likely shown as expected pCO2 with ±2 range -- regex takes first number. /calc/115 is Wells PE (not Winters)."
+
+- id: mdcalc-map
+  site: MDCalc
+  title: "Mean Arterial Pressure (MAP)"
+  url: https://www.mdcalc.com/calc/74/mean-arterial-pressure-map
+  formula: map@standard
+  claimed_version: "unstated"
+  rendering: js
+  selectors_verified: true
+  recipe:
+    - {fill: "input[name=systolic_blood_pressure]", value: "{sbp}"}
+    - {fill: "input[name=diastolic_blood_pressure]", value: "{dbp}"}
+  result: {selector: "#result-container", regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mm Hg"}
+  notes: "Units mm Hg fixed."
+
+- id: mdcalc-parkland
+  site: MDCalc
+  title: "Parkland Formula for Burns"
+  url: https://www.mdcalc.com/calc/83/parkland-formula-burns
+  formula: parkland@1968
+  claimed_version: "unstated"
+  rendering: js
+  selectors_verified: true
+  recipe:
+    - {fill: "input[name=weight]", value: "{weight}"}
+    - {fill: "input[name=percentage_body_burned]", value: "{tbsa}"}
+  result: {selector: "#result-container", regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mL"}
+  notes: "Result probably lists 24 h total plus first-8h / next-16h volumes; confirm which number the regex grabs."
+
+- id: mdcalc-maintenance-fluids
+  site: MDCalc
+  title: "Maintenance Fluids Calculations"
+  url: https://www.mdcalc.com/calc/72/maintenance-fluids-calculations
+  formula: holliday_segar_hourly@4-2-1
+  claimed_version: "unstated (Holliday-Segar credited)"
+  also_offers: [holliday_segar@1957]
+  rendering: js
+  selectors_verified: true
+  recipe:
+    - {fill: "input[name=weight]", value: "{weight}"}
+  result: {selector: "#result-container", regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mL/hr"}
+  notes: "Weight placeholder 'Norm: 0 - 68'. Result likely both mL/hr and mL/day."
+
+- id: mdcalc-ibw
+  site: MDCalc
+  title: "Ideal Body Weight and Adjusted Body Weight"
+  url: https://www.mdcalc.com/calc/68/ideal-body-weight-adjusted-body-weight
+  formula: ibw_devine@1974
+  claimed_version: "Devine (page: \"Calculates ideal body weight (Devine formula)\")"
+  rendering: js
+  selectors_verified: true
+  recipe:
+    - {click: "[data-name=sex] button[data-value='0']", when: {sex: female}}
+    - {click: "[data-name=sex] button[data-value='1']", when: {sex: male}}
+    - {fill: "input[name=height]", value: "{height}"}
+    - {fill: "input[name=weight]", value: "70"}
+  result: {selector: "#result-container", regex: '([0-9]+(?:\.[0-9]+)?)', unit: "kg"}
+  notes: "Weight input is for adjusted BW; fixed filler 70 kg. First number in result should be IBW."
+
+- id: mdcalc-bmi-bsa
+  site: MDCalc
+  title: "BMI Calculator (Body Mass Index and BSA)"
+  url: https://www.mdcalc.com/calc/29/body-mass-index-bmi-body-surface-area-bsa
+  formula: bmi@quetelet
+  claimed_version: "unstated"
+  also_offers: [bsa_mosteller@1987]
+  rendering: js
+  selectors_verified: true
+  recipe:
+    - {fill: "input[name=weight]", value: "{weight}"}
+    - {fill: "input[name=height]", value: "{height}"}
+  result: {selector: "#result-container", regex: '([0-9]+(?:\.[0-9]+)?)', unit: "kg/m²"}
+  notes: "Third input 'target' (target BMI, default 20-25). BSA formula used on page not confirmed (Mosteller assumed)."
+
+- id: mdcalc-ldl-friedewald
+  site: MDCalc
+  title: "Friedewald Equation for Low-Density Lipoprotein Cholesterol (LDL-C)"
+  url: https://www.mdcalc.com/calc/70/friedewald-equation-low-density-lipoprotein-cholesterol-ldl-c
+  formula: ldl_friedewald@1972
+  claimed_version: "Friedewald (title)"
+  rendering: js
+  selectors_verified: true
+  recipe:
+    - {fill: "input[name=total_cholesterol]", value: "{tc_mmol}"}
+    - {fill: "input[name=hdl_cholesterol]", value: "{hdl_mmol}"}
+    - {fill: "input[name=triglycerides]", value: "{tg_mmol}"}
+  result: {selector: "#result-container", regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mmol/L"}
+  notes: "/calc/70/ldl-calculated redirects here. SSR default units mmol/L (TC Norm 3.9-5.2). No Martin/Hopkins option seen."
+
+- id: mdcalc-schwartz
+  site: MDCalc
+  title: "Revised Schwartz Equation for Glomerular Filtration Rate (GFR) (2009)"
+  url: https://www.mdcalc.com/calc/10008/revised-schwartz-equation-glomerular-filtration-rate-gfr-2009
+  formula: egfr_schwartz_bedside@2009
+  claimed_version: "2009 revised (title)"
+  rendering: js
+  selectors_verified: true
+  recipe:
+    - {fill: "input[name=ht]", value: "{height}"}
+    - {fill: "input[name=cr]", value: "{scr_umol}"}
+  result: {selector: "#result-container", regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mL/min/1.73m²"}
+  notes: "Creatinine SSR default µmol/L (Norm 62-115)."
+
+# ======================= National Kidney Foundation (kidney.org) =======================
+- id: nkf-egfr-adult
+  site: National Kidney Foundation
+  title: "eGFR Calculator | National Kidney Foundation"
+  url: https://www.kidney.org/professionals/gfr_calculator
+  formula: egfr_ckd_epi_cr@2021
+  claimed_version: "CKD-EPI creatinine equation (2021); recommends race-free CKD-EPI"
+  also_offers: [egfr_ckd_epi_crcys@2021]
+  rendering: static
+  selectors_verified: true
+  recipe:
+    - {click: "input[name=scrType][value=mg]"}
+    - {fill: "#scr", value: "{scr}"}
+    - {fill: "#scys", value: "{scys}", when: {has_scys: true}}
+    - {fill: "#age", value: "{age}"}
+    - {click: "input[name=gender][value={sex}]"}
+    - {click: "input[name=adjustment][value=no]"}
+    - {click: "#form-gfr-equation-2021 button"}
+  result: {selector: "#result_1", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mL/min/1.73m²"}
+  notes: "Outputs: #result_1 CKD-EPI Cr 2021, #result_2 Cr-CysC 2021, #result_3 CysC 2012 (disabled inputs; read value). No race input. Also radios 'Standardized Assays' (arrays) and BSA adjustment (adjustment=yes reveals #height/#weight, Du Bois). Calculate button has no id. Client-side JS; form has no action. `has_scys` is a pseudo-condition: skip #scys when scys absent."
+
+- id: nkf-egfr-pediatric
+  site: National Kidney Foundation
+  title: "Pediatric GFR Calculator | National Kidney Foundation"
+  url: https://www.kidney.org/professionals/kdoqi/gfr_calculatorPed
+  formula: egfr_schwartz_bedside@2009
+  claimed_version: "Creatinine-based \"Bedside Schwartz\" equation (2009)"
+  rendering: static
+  selectors_verified: true
+  recipe:
+    - {fill: "#scr", value: "{scr}"}
+    - {fill: "#height", value: "{height}"}
+    - {click: "input[name=heightType][value=cm]"}
+    - {click: "#form-pediatric-equation button[type=submit]"}
+  result: {selector: "#result_1", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mL/min/1.73m²"}
+  notes: "/professionals/gfr_calculatorped redirects here. #result_2 CysC (2012), #result_3 Cr-CysC CKiD; optional #scys, #bun, gender radios (used only for full CKiD)."
+
+# ======================= NIDDK (NIH) =======================
+- id: niddk-egfr-adult
+  site: NIH NIDDK
+  title: "eGFR Calculators for Adults & Pediatrics - NIDDK (Adult eGFR Calculator)"
+  url: https://www.niddk.nih.gov/health-information/professionals/clinical-tools-patient-management/kidney-disease/laboratory-evaluation/estimated-gfr-calculators/adults-pediatrics
+  formula: egfr_ckd_epi_cr@2021
+  claimed_version: "race-free CKD-EPI (page: \"uses the race-free ... (CKD-EPI) equations\")"
+  also_offers: [egfr_ckd_epi_crcys@2021]
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {click: ".gfr-root[data-gfr-type=adult] input[name=measurement][value=conventional]"}
+    - {fill: ".gfr-root[data-gfr-type=adult] input[name=scr]", value: "{scr}"}
+    - {fill: ".gfr-root[data-gfr-type=adult] input[name=scy]", value: "{scys}", when: {has_scys: true}}
+    - {fill: ".gfr-root[data-gfr-type=adult] input[name=age]", value: "{age}"}
+    - {click: ".gfr-root[data-gfr-type=adult] input[name=sex][id^=sex_{sex}]"}
+    - {click: ".gfr-root[data-gfr-type=adult] button[type=submit]"}
+  result: {selector: ".gfr-root[data-gfr-type=adult] .gfr-result-value", regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mL/min/1.73m²"}
+  notes: "React widget mounted into div.gfr-root; names/ids (scr, scy, age, sex_female-<rand>, measurement_conv-<rand>) confirmed in /_ux/niddk/9.40.0/scripts/niddk-gfr-calculator.js, not SSR HTML. JS rounds to integer (Math.round); 2021 Cr eq. coded 142/-1.2/0.9938/1.012. When both scr+scys given, the Cr-CysC block is first (highlighted), then Cr, then CysC -- select by heading text."
+
+- id: niddk-ckid-bedside
+  site: NIH NIDDK
+  title: "2009 CKiD \"bedside\" calculator (NIDDK)"
+  url: https://www.niddk.nih.gov/health-information/professionals/clinical-tools-patient-management/kidney-disease/laboratory-evaluation/estimated-gfr-calculators/adults-pediatrics
+  formula: egfr_schwartz_bedside@2009
+  claimed_version: "2009 CKiD \"bedside\" equation"
+  rendering: static
+  selectors_verified: true
+  recipe:
+    - {fill: "#cc_scr", value: "{scr}"}
+    - {fill: "#cc_height", value: "{height}"}
+    - {click: "form.gfr-calculator.child.conventional button[type=submit]"}
+  result: {selector: "form.gfr-calculator.child.conventional .gfr-result .result", regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mL/min/1.73m²"}
+  notes: "SI variant: #cs_scr (µmol/L) / #cs_height in form.child.si. Label for height says for='cc_age' (mismatched label id) -- harmless markup bug. Same page also hosts CKiD U25 React widget (.gfr-root[data-gfr-type=child])."
+
+- id: niddk-ckd-epi-2009-previous
+  site: NIH NIDDK
+  title: "Previous eGFR Calculator for Reference - NIDDK (2009 CKD-EPI Creatinine)"
+  url: https://www.niddk.nih.gov/health-information/professionals/clinical-tools-patient-management/kidney-disease/laboratory-evaluation/estimated-gfr-calculators/previous
+  formula: egfr_ckd_epi_cr@2009
+  claimed_version: "2009 race-based CKD-EPI creatinine (kept for comparison)"
+  rendering: static
+  selectors_verified: true
+  recipe:
+    - {fill: "#acc_scr", value: "{scr}"}
+    - {fill: "#acc_age", value: "{age}"}
+    - {click: "#acc_race_yes", when: {black: true}}
+    - {click: "#acc_race_no", when: {black: false}}
+    - {click: "#acc_gender_{sex}"}
+    - {click: "form.gfr-calculator.adult.ckd-epi.conventional button[type=submit]"}
+  result: {selector: "form.gfr-calculator.adult.ckd-epi.conventional .gfr-result .result", regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mL/min/1.73m²"}
+  notes: "Explicitly asks 'African American?' Yes/No. Intentionally retained by NIDDK for transition comparisons -- good positive control for the 2009 race coefficient. SI form uses acs_* ids. Age validation 18-200."
+
+# ======================= Kidney Health Australia =======================
+- id: kha-egfr
+  site: Kidney Health Australia
+  title: "eGFR calculator | Kidney Health Australia"
+  url: https://kidney.org.au/health-professionals/egfr-calculator/
+  formula: egfr_ckd_epi_cr@2009
+  claimed_version: "\"This calculator uses the CKD-EPI formula 2009\""
+  rendering: static
+  selectors_verified: true
+  recipe:
+    - {fill: "#calc_creatinine", value: "{scr_umol}"}
+    - {fill: "#calc_age", value: "{age}"}
+    - {select: "#calc_sex", value: "{sex}"}
+    - {click: "#egfr_calculate"}
+  result: {selector: "#calc_result", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mL/min/1.73m²"}
+  notes: "Claims CKD-EPI 2009 but has NO race input (so equals 2009 with black=false, or a non-race variant) -- compare against egfr_ckd_epi_cr@2009 with black=false. Creatinine in µmol/L only. '#results_egfr' is an 'Email My Results' button -- never click."
+
+# ======================= calculator.net (server-rendered; GET round-trip) =======================
+- id: calculatornet-gfr
+  site: calculator.net
+  title: "GFR Calculator"
+  url: https://www.calculator.net/gfr-calculator.html
+  formula: egfr_mdrd@175
+  claimed_version: "IDMS-traceable MDRD (175) plus CKD-EPI (2009 form) and Mayo quadratic"
+  also_offers: [egfr_ckd_epi_cr@2009, egfr_schwartz_bedside@2009]
+  rendering: static
+  selectors_verified: true
+  recipe:
+    - {fill: "input[name=creatinine]", value: "{scr}"}
+    - {select: "select[name=creatinineunit]", value: "mgdL"}
+    - {fill: "input[name=age]", value: "{age}"}
+    - {click: "input[name=gender][value={sex}]"}
+    - {click: "#race1", when: {black: true}}
+    - {click: "#race2", when: {black: false}}
+    - {click: "form[name=calform] input[type=submit]"}
+  result: {selector: ".rightresult", regex: 'MDRD[^0-9]*([0-9]+(?:\.[0-9]+)?)', unit: "mL/min/1.73m²"}
+  notes: "Still asks Race (Black / Not Black). Page text gives MDRD 175 with 1.212 Black factor and the 2009 CKD-EPI 141/144/163/166 race-specific constants -- no 2021 equation. Form is GET to same URL (server round-trip). Children form calform2: ccreatinine, ccreatinineunit, height, heightunit (cm), Schwartz 0.413. Result block not visible pre-submit; .rightresult/.h2result pattern taken from sibling calculator.net pages."
+
+- id: calculatornet-bmi
+  site: calculator.net
+  title: "BMI Calculator"
+  url: https://www.calculator.net/bmi-calculator.html
+  formula: bmi@quetelet
+  claimed_version: "unstated"
+  rendering: static
+  selectors_verified: true
+  recipe:
+    - {click: "a[onclick*=\"popMenu('metric'\"]"}
+    - {wait: 1500}
+    - {fill: "#cage", value: "40"}
+    - {click: "#csex1", when: {sex: male}}
+    - {click: "#csex2", when: {sex: female}}
+    - {fill: "#cheightmeter", value: "{height}"}
+    - {fill: "#ckg", value: "{weight}"}
+    - {click: "form[name=calform] input[type=submit]"}
+  result: {selector: ".rightresult .bigtext", regex: 'BMI = ([0-9]+(?:\.[0-9]+)?)', unit: "kg/m²"}
+  notes: "Unit tabs are JS (popMenu) that set hidden #ctype and SUBMIT the form (server round-trip) -- so the metric click itself reloads the page. Default render shows 'BMI = 23' for 160 lb / 5 ft 10 (true 22.96): displayed BMI appears rounded -- check precision. US alternative: #cheightfeet/#cheightinch/#cpound."
+
+- id: calculatornet-bsa
+  site: calculator.net
+  title: "Body Surface Area Calculator"
+  url: https://www.calculator.net/body-surface-area-calculator.html
+  formula: bsa_mosteller@1987
+  claimed_version: "multiple formulas listed (Du Bois, Mosteller, Haycock, ...)"
+  also_offers: [bsa_dubois@1916, bsa_haycock@1978]
+  rendering: static
+  selectors_verified: true
+  recipe:
+    - {click: "#csex1", when: {sex: male}}
+    - {click: "#csex2", when: {sex: female}}
+    - {fill: "input[name=bodyweight]", value: "{weight}"}
+    - {select: "select[name=bodyweightunit]", value: "kilogram"}
+    - {fill: "input[name=bodyheightfeet]", value: ""}
+    - {fill: "input[name=bodyheightinch]", value: ""}
+    - {fill: "input[name=bodyheight]", value: "{height}"}
+    - {click: "form[name=calform] input[type=submit]"}
+  result: {selector: ".rightresult", regex: 'Mosteller[^0-9]*([0-9]+(?:\.[0-9]+)?)', unit: "m²"}
+  notes: "Page states formula text, e.g. Mosteller 'BSA = 0.016667 × W^0.5 × H^0.5', Du Bois 0.007184 × W^0.425 × H^0.725, Haycock 0.024265 × W^0.5378 × H^0.3964. Results table lists each formula; use 'Du Bois' / 'Haycock' in regex for the others. Feet/inches default 5/9 -- cleared so the cm field ('OR ... cm') is used. GET round-trip. Result markup not seen pre-submit."
+
+- id: calculatornet-ideal-weight
+  site: calculator.net
+  title: "Ideal Weight Calculator"
+  url: https://www.calculator.net/ideal-weight-calculator.html
+  formula: ibw_devine@1974
+  claimed_version: "multiple: Robinson, Miller, Devine (1974), Hamwi"
+  rendering: static
+  selectors_verified: true
+  recipe:
+    - {click: "a[onclick*=\"popMenu('metric'\"]"}
+    - {wait: 1500}
+    - {fill: "#cage", value: "40"}
+    - {click: "#csex1", when: {sex: male}}
+    - {click: "#csex2", when: {sex: female}}
+    - {fill: "#cheightmeter", value: "{height}"}
+    - {click: "form[name=calform] input[type=submit]"}
+  result: {selector: ".rightresult table.cinfoT", regex: 'Devine \(1974\)\s*([0-9]+(?:\.[0-9]+)?)', unit: "kg"}
+  notes: "Result table (seen in default render) rows: Robinson, Miller, Devine (1974), Hamwi, healthy BMI range. Default render values in lbs; metric mode should give kg. Metric tab click submits (GET)."
+
+# ======================= ClinCalc (ASP.NET WebForms; Calculate = POST postback) =======================
+- id: clincalc-crcl
+  site: ClinCalc
+  title: "Creatinine Clearance Calculator - ClinCalc.com"
+  url: https://clincalc.com/kinetics/crcl.aspx
+  formula: crcl_cockcroft_gault@1976
+  claimed_version: "Cockcroft-Gault 1976 (methods table also lists CKD-EPI 2021, 2009, MDRD)"
+  rendering: static
+  selectors_verified: true
+  recipe:
+    - {fill: "#cphMainContent_txtAge", value: "{age}"}
+    - {click: "#cphMainContent_rdo{sex_title}"}
+    - {click: "#cphMainContent_rdoCm"}
+    - {fill: "#cphMainContent_txtHeight", value: "{height}"}
+    - {click: "#cphMainContent_rdoKg"}
+    - {fill: "#cphMainContent_txtActualBodyWeight", value: "{weight}"}
+    - {select: "#cphMainContent_drpCreatinineUnits", value: "1"}
+    - {fill: "#cphMainContent_txtCreatinine", value: "{scr}"}
+    - {click: "#cphMainContent_rdoStable"}
+    - {click: "#cphMainContent_cmdCalculate"}
+  result: {selector: "#cphMainContent_pnResults", regex: '([0-9]+(?:\.[0-9]+)?)\s*mL/min', unit: "mL/min"}
+  notes: "Calculate is an ASP.NET postback (form POST to ./crcl.aspx) -- server round-trip. Height is optional in canonical inputs but ClinCalc uses it to choose actual/ideal/adjusted weight (BMI-based rules), so its headline CrCl may not be plain actual-weight C-G. Creatinine unit select values: 1=mg/dL, 88.4=µmol/L. Pre-calc panel id cphMainContent_pnResults_NotYet; results panel id guessed."
+
+- id: clincalc-ibw
+  site: ClinCalc
+  title: "Ideal, Adjusted, and Nutritional Body Weight Calculator - ClinCalc.com"
+  url: https://clincalc.com/kinetics/idealbw.aspx
+  formula: ibw_devine@1974
+  claimed_version: "\"uses the Devine 1974 ideal body weight equation\""
+  rendering: static
+  selectors_verified: true
+  recipe:
+    - {click: "#cphMainContent_rdoCm"}
+    - {fill: "#cphMainContent_txtHeight", value: "{height}"}
+    - {click: "#cphMainContent_rdoKg"}
+    - {fill: "#cphMainContent_txtActualBodyWeight", value: "70"}
+    - {click: "#cphMainContent_rdo{sex_title}"}
+    - {click: "#cphMainContent_cmdCalculate"}
+  result: {selector: "#cphMainContent_pnResults", regex: 'Ideal[^0-9]*([0-9]+(?:\.[0-9]+)?)', unit: "kg"}
+  notes: "Postback (POST). Actual weight filler 70 kg (only affects adjusted BW). Result panel id guessed."
+
+# ======================= GlobalRPh (classic forms, method=post without action; JS likely computes) =======================
+- id: globalrph-ckd-epi
+  site: GlobalRPh
+  title: "Chronic Kidney Dx Epidemiology Collaboration (CKD-EPI) - GlobalRPH"
+  url: https://globalrph.com/medcalcs/chronic-kidney-disease-epidemiology-collaboration-ckd-epi-calculator/
+  formula: egfr_ckd_epi_cr@2009
+  claimed_version: "page equation: 141 × ... × 1.159 [if black]; \"Page Updated: 2017-09-07\""
+  rendering: static
+  selectors_verified: true
+  recipe:
+    - {fill: "input[name=age]", value: "{age}"}
+    - {select: "select[name=gender]", value: "0", when: {sex: male}}
+    - {select: "select[name=gender]", value: "1", when: {sex: female}}
+    - {fill: "input[name=scr]", value: "{scr}"}
+    - {select: "select[name=scr_units]", value: "0"}
+    - {select: "select[name=race]", value: "0", when: {black: true}}
+    - {select: "select[name=race]", value: "1", when: {black: false}}
+    - {click: "form[name=myform] input[type=Submit]"}
+  result: {selector: "form[name=myform]", regex: '([0-9]+(?:\.[0-9]+)?)\s*(?:ml|mL)/min', unit: "mL/min/1.73m²"}
+  notes: "PAGE STILL USES 2009 RACE-BASED CKD-EPI: race select 'Black' / 'All other races', equation text with 141/0.993/1.018/1.159, last updated 2017. Title says only 'CKD-EPI'. Optional 'patient'/'room' text fields -- leave blank. Form method=post, no action: probably JS onsubmit; harness must confirm no network POST. Result element not identified."
+
+- id: globalrph-crcl
+  site: GlobalRPh
+  title: "Creatinine Clearance Adult - GlobalRPH CrCl Calculator"
+  url: https://globalrph.com/medcalcs/creatinine-clearance-adult/
+  formula: crcl_cockcroft_gault@1976
+  claimed_version: "Cockcroft-Gault with TBW / IBW / AjBW variants"
+  rendering: static
+  selectors_verified: true
+  recipe:
+    - {fill: "input[name=age]", value: "{age}"}
+    - {fill: "input[name=scr]", value: "{scr}"}
+    - {select: "select[name=scr_units]", value: "0"}
+    - {select: "select[name=sex]", value: "0", when: {sex: male}}
+    - {select: "select[name=sex]", value: "1", when: {sex: female}}
+    - {select: "select[name=creatidms]", value: "scr"}
+    - {fill: "input[name=ht]", value: "{height}"}
+    - {select: "select[name=htut]", value: "1"}
+    - {fill: "input[name=kgs]", value: "{weight}"}
+    - {select: "select[name=wtut]", value: "0"}
+    - {select: "select[name=stable]", value: "0"}
+    - {select: "select[name=max_crcl]", value: "250"}
+    - {click: "input[type=Submit][value='Calculate Clearance Values']"}
+  result: {selector: "form[method=post]", regex: 'TBW[^0-9]*([0-9]+(?:\.[0-9]+)?)', unit: "mL/min"}
+  notes: "scr field pre-filled '1.0'. max_crcl caps result at 125/150 unless 'DO NOT PLACE LIMIT' (250). creatidms option 'idms' probably alters SCr handling (IDMS adjustment) -- worth a separate test. Page text: CrCl = [(140 - age) x TBW] / (Scr x 72) (x 0.85 for females). Result markup unknown."
+
+- id: globalrph-bsa
+  site: GlobalRPh
+  title: "Body Surface Area Calculator - BSA Calculated Surface Area"
+  url: https://globalrph.com/medcalcs/body-surface-area-bsa/
+  formula: bsa_mosteller@1987
+  claimed_version: "page describes Mosteller, Du Bois, Haycock (which one is computed: unstated)"
+  also_offers: [bsa_dubois@1916, bsa_haycock@1978]
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {fill: "input[name=ht]", value: "{height}"}
+    - {select: "select[name=htut]", value: "1"}
+    - {fill: "input[name=kgs]", value: "{weight}"}
+    - {select: "select[name=wtut]", value: "0"}
+    - {click: "input[type=submit][value='Calculate Body Surface Area']"}
+  result: {selector: "form[name=myform]", regex: '([0-9]+\.[0-9]+)\s*m', unit: "m²"}
+  notes: "Input names seen, but htut/wtut <select>s have no options in server HTML (populated by JS) so unit values are guesses (cm=1, kg=0 copied from CrCl page). Also has 'dose' (per m²) field default 100. A multi-formula page exists: /medcalcs/body-surface-area-multi-calc-multiple-analysis/."
+
+- id: globalrph-anion-gap
+  site: GlobalRPh
+  title: "Anion Gap Calculator - Metabolic Acidosis - GlobalRPH"
+  url: https://globalrph.com/medcalcs/anion-gap-calculator-metabolic-acidosis/
+  formula: anion_gap@no-k
+  claimed_version: "three-value AG (Na, Cl, HCO3)"
+  rendering: static
+  selectors_verified: true
+  recipe:
+    - {fill: "input[name=na]", value: "{na}"}
+    - {fill: "input[name=cl]", value: "{cl}"}
+    - {fill: "input[name=hco3]", value: "{hco3}"}
+    - {click: "form[name=anion] input[type=submit]"}
+  result: {selector: "form[name=anion]", regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mEq/L"}
+  notes: "No K input. Page contains a 'not redirected within a few seconds' snippet (possible JS redirect/interstitial). Result element unknown."
+
+- id: globalrph-ibw
+  site: GlobalRPh
+  title: "Adjusted Body Weight (AjBW) AND Ideal Body Weight (IBW) - GlobalRPH"
+  url: https://globalrph.com/medcalcs/adjusted-body-weight-ajbw-and-ideal-body-weight-ibw-calc/
+  formula: ibw_devine@1974
+  claimed_version: "Devine (page: 50 kg + 2.3 kg per inch over 5 feet)"
+  rendering: static
+  selectors_verified: true
+  recipe:
+    - {fill: "input[name=ht]", value: "{height}"}
+    - {select: "select[name=htut]", value: "1"}
+    - {fill: "input[name=kgs]", value: "70"}
+    - {select: "select[name=wtut]", value: "0"}
+    - {select: "select[name=sex]", value: "0", when: {sex: male}}
+    - {select: "select[name=sex]", value: "1", when: {sex: female}}
+    - {select: "select[name=ibwmethod]", value: "0"}
+    - {click: "input[type=Submit][value=Calculate]"}
+  result: {selector: "form[method=post]", regex: 'IBW[^0-9]*([0-9]+(?:\.[0-9]+)?)', unit: "kg"}
+  notes: "ibwmethod select: 0 Intuitive, 1 Baseline, 2 BMI, 3 Hume -- none is labelled 'Devine' although the text cites Devine; which option equals Devine is unclear (flag). Also a 'drugList5' navigation select with onchange -- do not touch."
+
+# ======================= Omni Calculator (React; ids taken from <label for=...> in SSR) =======================
+- id: omni-gfr
+  site: Omni Calculator
+  title: "GFR Calculator - Estimated Glomerular Filtration Rate"
+  url: https://www.omnicalculator.com/health/glomerular-filtration-rate
+  formula: egfr_ckd_epi_cr@2009
+  claimed_version: "results labelled \"CKD-EPI (2009)\" and \"MDRD\""
+  also_offers: [egfr_mdrd@175]
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {select: "[id='blockGroups.0.matrices.1.columns.0.0-input']", value: "{sex_title}"}
+    - {select: "[id='blockGroups.0.matrices.2.columns.0.0-input']", value: "Black", when: {black: true}}
+    - {select: "[id='blockGroups.0.matrices.2.columns.0.0-input']", value: "Other", when: {black: false}}
+    - {fill: "[id='blockGroups.0.matrices.3.columns.0.0-input']", value: "{age}"}
+    - {fill: "[id='blockGroups.0.matrices.5.columns.0.0-input']", value: "{scr}"}
+  result: {selector: "[id='blockGroups.1.matrices.0.columns.0.0-input']", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mL/min/1.73m²"}
+  notes: "ASKS 'Ethnicity'; page formula text includes 1.159 for black (2009 CKD-EPI) and 1.08 in the Cr-CysC text (2012). No 2021 race-free result shown. MDRD output at blockGroups.1.matrices.1. /health/egfr is 404. Select option labels for sex/ethnicity unverified (select by visible label); unit switcher defaults may be locale-based (mg/dL vs µmol/L)."
+
+- id: omni-qtc
+  site: Omni Calculator
+  title: "QTc Calculator"
+  url: https://www.omnicalculator.com/health/qtc
+  formula: qtc_bazett@1920
+  claimed_version: "Bazett main output; Fridericia/Framingham/Hodges in 'Other QT interval correction methods'"
+  also_offers: [qtc_fridericia@1920, qtc_framingham@1992, qtc_hodges@1983]
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {fill: "[id='blockGroups.0.matrices.0.columns.0.0-input']", value: "{qt}"}
+    - {fill: "[id='blockGroups.0.matrices.1.columns.0.0-input']", value: "{hr}"}
+  result: {selector: "[id='blockGroups.0.matrices.3.columns.0.0-input']", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "ms"}
+  notes: "Offers RR interval input (matrices.2) as alternative to HR. Page text writes Framingham as 'QTc = QT + 0.154(1-RR)' (seconds form) while QT is entered in ms -- check whether implementation uses 0.154 with ms (would be a 1000x error). Other methods hidden behind a toggle."
+
+- id: omni-bmi
+  site: Omni Calculator
+  title: "BMI Calculator"
+  url: https://www.omnicalculator.com/health/bmi
+  formula: bmi@quetelet
+  claimed_version: "unstated (also shows BMI Prime)"
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {fill: "[id='blockGroups.0.matrices.1.columns.0.0-input']", value: "{height}"}
+    - {fill: "[id='blockGroups.0.matrices.4.columns.0.0-input']", value: "{weight}"}
+  result: {selector: "[id='blockGroups.0.matrices.6.columns.0.0-input']", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "kg/m²"}
+  notes: "Sex at matrices.0 (affects interpretation only). Height may default to ft/in in US locale -- set unit switcher to cm first."
+
+- id: omni-bsa
+  site: Omni Calculator
+  title: "BSA Calculator"
+  url: https://www.omnicalculator.com/health/bsa
+  formula: bsa_mosteller@1987
+  claimed_version: "main formula unstated in SSR; 'Additional BSA calculations' lists Fujimoto, Gehan & George, Haycock, Mosteller"
+  also_offers: [bsa_dubois@1916, bsa_haycock@1978]
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {fill: "[id='blockGroups.0.matrices.0.columns.0.0-input']", value: "{weight}"}
+    - {fill: "[id='blockGroups.0.matrices.1.columns.0.0-input']", value: "{height}"}
+  result: {selector: "[id='blockGroups.0.matrices.2.columns.0.0-input']", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "m²"}
+  notes: "The listed additional formulas omit Du Bois, so the primary BSA output is probably Du Bois -- formula key may need to be bsa_dubois@1916; verify on first run."
+
+- id: omni-anion-gap
+  site: Omni Calculator
+  title: "Anion Gap Calculator"
+  url: https://www.omnicalculator.com/health/anion-gap
+  formula: anion_gap@no-k
+  claimed_version: "AG = [Na⁺] − ([Cl⁻] + [HCO₃⁻]); optional K⁺/albumin section"
+  also_offers: [anion_gap@with-k]
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {fill: "[id='blockGroups.0.matrices.0.columns.0.0-input']", value: "{na}"}
+    - {fill: "[id='blockGroups.0.matrices.1.columns.0.0-input']", value: "{cl}"}
+    - {fill: "[id='blockGroups.0.matrices.2.columns.0.0-input']", value: "{hco3}"}
+  result: {selector: "[id='blockGroups.0.matrices.3.columns.0.0-input']", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mEq/L"}
+  notes: "For with-K: fill K at blockGroups.1.matrices.0 and read 'Corrected anion gap' at blockGroups.1.matrices.2 -- but that output also applies albumin correction (albumin at blockGroups.1.matrices.1), so it mixes K and albumin adjustments."
+
+- id: omni-corrected-calcium
+  site: Omni Calculator
+  title: "Corrected Calcium Calculator"
+  url: https://www.omnicalculator.com/health/corrected-calcium
+  formula: calcium_corrected@0.8
+  claimed_version: "Payne; mg/dL: 0.8 × (Normal Albumin − Albumin) + Calcium"
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {fill: "[id='blockGroups.0.matrices.0.columns.0.0-input']", value: "{ca}"}
+    - {fill: "[id='blockGroups.0.matrices.1.columns.0.0-input']", value: "{albumin}"}
+  result: {selector: "[id='blockGroups.0.matrices.2.columns.0.0-input']", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mg/dL"}
+  notes: "SI text uses 0.02 × (normal − albumin). Normal albumin value not exposed as an input in SSR labels."
+
+- id: omni-ldl
+  site: Omni Calculator
+  title: "LDL Calculator"
+  url: https://www.omnicalculator.com/health/ldl
+  formula: ldl_friedewald@1972
+  claimed_version: "Friedewald (cited source)"
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {fill: "[id='blockGroups.0.matrices.0.columns.0.0-input']", value: "{tc}"}
+    - {fill: "[id='blockGroups.0.matrices.1.columns.0.0-input']", value: "{hdl}"}
+    - {fill: "[id='blockGroups.0.matrices.2.columns.0.0-input']", value: "{tg}"}
+  result: {selector: "[id='blockGroups.0.matrices.3.columns.0.0-input']", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mg/dL"}
+  notes: "No Martin/Hopkins mention found on page. Check TG > 400 mg/dL handling."
+
+- id: omni-map
+  site: Omni Calculator
+  title: "MAP Calculator (Mean Arterial Pressure)"
+  url: https://www.omnicalculator.com/health/mean-arterial-pressure
+  formula: map@standard
+  claimed_version: "unstated"
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {fill: "[id='blockGroups.0.matrices.0.columns.0.0-input']", value: "{sbp}"}
+    - {fill: "[id='blockGroups.0.matrices.1.columns.0.0-input']", value: "{dbp}"}
+  result: {selector: "[id='blockGroups.0.matrices.2.columns.0.0-input']", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mmHg"}
+  notes: "Labels: 'Systolic (Norm: 90-120 mmHg)', 'Diastolic (Norm: 60-80 mmHg)'."
+
+- id: omni-sodium-correction
+  site: Omni Calculator
+  title: "Sodium Correction Calculator"
+  url: https://www.omnicalculator.com/health/sodium-correction
+  formula: sodium_corrected@katz
+  claimed_version: "page describes both Katz (1973) and Hillier formulas"
+  also_offers: [sodium_corrected@hillier]
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {fill: "[id='blockGroups.0.matrices.0.columns.0.0-input']", value: "{na}"}
+    - {fill: "[id='blockGroups.0.matrices.1.columns.0.0-input']", value: "{glucose}"}
+  result: {selector: "[id='blockGroups.0.matrices.2.columns.0.0-input']", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mEq/L"}
+  notes: "Single 'Corrected sodium' output in SSR labels -- which factor (Katz 1.6 or Hillier 2.4) it uses is unstated; map key after first run."
+
+- id: omni-fena
+  site: Omni Calculator
+  title: "FENa Calculator (Fractional Excretion of Sodium)"
+  url: https://www.omnicalculator.com/health/fena
+  formula: fena@espinel
+  claimed_version: "unstated"
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {fill: "[id='blockGroups.0.matrices.0.columns.0.0-input']", value: "{pcr}"}
+    - {fill: "[id='blockGroups.0.matrices.1.columns.0.0-input']", value: "{pna}"}
+    - {fill: "[id='blockGroups.0.matrices.2.columns.0.0-input']", value: "{ucr}"}
+    - {fill: "[id='blockGroups.0.matrices.3.columns.0.0-input']", value: "{una}"}
+  result: {selector: "[id='blockGroups.0.matrices.4.columns.0.0-input']", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "%"}
+  notes: "Order: serum creatinine, serum sodium, urine creatinine, urine sodium."
+
+- id: omni-winters
+  site: Omni Calculator
+  title: "Winters' Formula Calculator"
+  url: https://www.omnicalculator.com/health/winters-formula
+  formula: winters@1967
+  claimed_version: "unstated"
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {fill: "[id='blockGroups.0.matrices.0.columns.0.0-input']", value: "{hco3}"}
+  result: {selector: "[id='blockGroups.0.matrices.1.columns.0.0-input']", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mmHg"}
+  notes: "Output field labelled pCO2 (expected). Range ±2 may appear in text only."
+
+- id: omni-parkland
+  site: Omni Calculator
+  title: "Parkland Formula Calculator"
+  url: https://www.omnicalculator.com/health/parkland-formula
+  formula: parkland@1968
+  claimed_version: "unstated"
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {fill: "[id='blockGroups.0.matrices.1.columns.0.0-input']", value: "{weight}"}
+    - {fill: "[id='blockGroups.1.matrices.11.columns.0.0-input']", value: "{tbsa}"}
+  result: {selector: "[id='blockGroups.2.matrices.0.columns.0.0-input']", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mL"}
+  notes: "Adult/child select at blockGroups.0.matrices.0. TBSA can be built from body-region selects (native <select id=...> seen in SSR with random option ids) or 'Burn percentage' field -- whether that field is editable directly is unverified. Outputs: Total fluids, Total amount/8h, IV flow, Total amount/16h."
+
+- id: omni-ideal-weight
+  site: Omni Calculator
+  title: "Ideal Weight Calculator"
+  url: https://www.omnicalculator.com/health/ideal-weight
+  formula: ibw_devine@1974
+  claimed_version: "multiple formulas (Miller, Robinson, Devine, Hamwi, Broca, Lorentz...)"
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {select: "[id='blockGroups.0.matrices.0.columns.0.0-input']", value: "{sex_title}"}
+    - {fill: "[id='blockGroups.0.matrices.1.columns.0.0-input']", value: "{height}"}
+  result: {selector: "main", regex: 'Devine[^0-9]*([0-9]+(?:\.[0-9]+)?)', unit: "kg"}
+  notes: "Per-formula output field ids not visible in SSR; result regex on text."
+
+# ======================= MSD / Merck Manuals (EBMcalc iframe; static HTML forms, onchange-driven) =======================
+- id: msd-ckd-epi-2021
+  site: MSD Manuals
+  title: "Glomerular Filtration Rate Estimation (eGFR) by CKD-EPI Equation with Creatinine, without Race (2021)"
+  url: https://www.msdmanuals.com/professional/multimedia/clinical-calculator/glomerular-filtration-rate-estimation-egfr-by-ckd-epi-equation-with-creatinine-without-race-2021
+  iframe_src: https://www.msdmanuals.com/iframe/manual/medical-calculators/gfr_ckd_epi_2021.htm
+  formula: egfr_ckd_epi_cr@2021
+  claimed_version: "2021 without race; equation text 'GFR = 142 * min(...)'"
+  rendering: iframe
+  selectors_verified: true
+  recipe:
+    - {click: "input[name=Sex_radio][value^='{sex_title}']"}
+    - {select: "select[name=Age_unit]", value: "1|0|yr"}
+    - {fill: "input[name=Age_param]", value: "{age}"}
+    - {press: "Tab"}
+    - {select: "select[name=Serum_Creatinine_unit]", value: "1|0|mg/dL_Cr"}
+    - {fill: "input[name=Serum_Creatinine_param]", value: "{scr}"}
+    - {press: "Tab"}
+  result: {selector: "input[name=eGFR_param]", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mL/min/1.73m²"}
+  notes: "Recalculates on onchange (no button). Sex radio values 'Female|1' / 'Male|2'. Optional height/weight produce BSA (Du Bois) and non-indexed eGFR. 'decpts' select controls displayed decimals -- set explicitly if rounding matters. Same calculators mirrored on merckmanuals.com."
+
+- id: msd-ckd-epi-legacy
+  site: MSD Manuals
+  title: "Glomerular Filtration Rate Estimate by CKD-EPI Equation"
+  url: https://www.msdmanuals.com/professional/multimedia/clinical-calculator/glomerular-filtration-rate-estimate-by-ckd-epi-equation
+  iframe_src: https://www.msdmanuals.com/iframe/manual/medical-calculators/gfr_ckd_epi.htm
+  formula: egfr_ckd_epi_cr@2009
+  claimed_version: "unstated year; equation 'GFR = 141 * ... * 0.993^Age * Sex * Race'"
+  rendering: iframe
+  selectors_verified: true
+  recipe:
+    - {click: "input[name=Sex_radio][value={sex_title}]"}
+    - {click: "input[name=Race_radio][value='Black|1.159']", when: {black: true}}
+    - {click: "input[name=Race_radio][value='White or Other|1']", when: {black: false}}
+    - {select: "select[name=Age_unit]", value: "1|0|yr"}
+    - {fill: "input[name=Age_param]", value: "{age}"}
+    - {press: "Tab"}
+    - {select: "select[name=Serum_creatinine_unit]", value: "1|0|mg/dL_Cr"}
+    - {fill: "input[name=Serum_creatinine_param]", value: "{scr}"}
+    - {press: "Tab"}
+  result: {selector: "input[name=GFR_param]", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mL/min/1.73m²"}
+  notes: "STILL PUBLISHED AND LISTED in MSD's clinical-calculator index alongside the 2021 page: generic title, race radio 'Black (1.159)'. Title does not say 2009 or race-based. Sex radios set kappa/alpha in onclick handlers."
+
+- id: msd-ckd-epi-crcys-2021
+  site: MSD Manuals
+  title: "Glomerular Filtration Rate Estimation (eGFR) by CKD-EPI Equation with Creatinine and Cystatin C, without Race (2021)"
+  url: https://www.msdmanuals.com/professional/multimedia/clinical-calculator/glomerular-filtration-rate-estimation-egfr-by-ckd-epi-equation-with-creatinine-and-cystatin-c-without-race-2021
+  iframe_src: https://www.msdmanuals.com/iframe/manual/medical-calculators/gfr_ckd_epi_with_cystatin_2021.htm
+  formula: egfr_ckd_epi_crcys@2021
+  claimed_version: "2021 without race; 'eGFR = 135 * min(...)'"
+  rendering: iframe
+  selectors_verified: true
+  recipe:
+    - {click: "input[name=Sex_radio][value^='{sex_title}']"}
+    - {select: "select[name=Age_unit]", value: "1|0|yr"}
+    - {fill: "input[name=Age_param]", value: "{age}"}
+    - {press: "Tab"}
+    - {select: "select[name=Serum_Creatinine_unit]", value: "1|0|mg/dL_Cr"}
+    - {fill: "input[name=Serum_Creatinine_param]", value: "{scr}"}
+    - {press: "Tab"}
+    - {select: "select[name=Cystatin_C_unit]", value: "1|0|mg/L"}
+    - {fill: "input[name=Cystatin_C_param]", value: "{scys}"}
+    - {press: "Tab"}
+  result: {selector: "input[name=eGFR_param]", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mL/min/1.73m²"}
+  notes: "Cystatin units: mcg/mL or mg/L (both factor 1, correct)."
+
+- id: msd-mdrd
+  site: MSD Manuals
+  title: "Glomerular Filtration Rate Estimate by the MDRD Equation"
+  url: https://www.msdmanuals.com/professional/multimedia/clinical-calculator/glomerular-filtration-rate-estimate-by-the-mdrd-equation
+  iframe_src: https://www.msdmanuals.com/iframe/manual/medical-calculators/gfr_mdrd_full.htm
+  formula: egfr_mdrd@175
+  claimed_version: "6-variable MDRD: 'GFR = 170 * SerumCreat^-0.999 * Age^-0.176 * ... BUN ... Albumin'"
+  rendering: iframe
+  selectors_verified: true
+  recipe:
+    - {select: "select[name=Serum_Creat_unit]", value: "1|0|mg/dL"}
+    - {fill: "input[name=Serum_Creat_param]", value: "{scr}"}
+    - {press: "Tab"}
+    - {select: "select[name=Age_unit]", value: "1|0|yr"}
+    - {fill: "input[name=Age_param]", value: "{age}"}
+    - {press: "Tab"}
+    - {click: "input[name=Sex_radio][value^='{sex_title}']"}
+    - {click: "#togel3", when: {black: true}}
+    - {click: "#togel4", when: {black: false}}
+    - {fill: "input[name=BUN_param]", value: "14"}
+    - {fill: "input[name=Albumin_param]", value: "4"}
+    - {press: "Tab"}
+  result: {selector: "input[name=GFR_param]", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mL/min/1.73m²"}
+  notes: "NOT the 4-variable IDMS 175 equation: this is the original 6-variable MDRD (170 constant) needing BUN and albumin (fixed fillers 14 mg/dL, 4 g/dL here), race factor Black 1.18, female 0.762. Expect systematic disagreement with egfr_mdrd@175 -- a key mismatch, not necessarily a bug. Creatinine unit list has no µmol/L (SI version is a separate page)."
+
+- id: msd-cockcroft-gault
+  site: MSD Manuals
+  title: "Creatinine Clearance Estimate by Cockcroft-Gault Equation"
+  url: https://www.msdmanuals.com/professional/multimedia/clinical-calculator/creatinine-clearance-estimate-by-cockcroft-gault-equation
+  iframe_src: https://www.msdmanuals.com/iframe/manual/medical-calculators/creatininecl_cg-en.htm
+  formula: crcl_cockcroft_gault@1976
+  claimed_version: "'CreatClear = Sex * ((140 - Age) / (SerumCreat)) * (Weight / 72)'"
+  rendering: iframe
+  selectors_verified: true
+  recipe:
+    - {click: "input[name=Sex_radio][value^='{sex_title}']"}
+    - {select: "select[name=Age_unit]", value: "1|0|yr"}
+    - {fill: "input[name=Age_param]", value: "{age}"}
+    - {press: "Tab"}
+    - {select: "select[name=Serum_Creat_unit]", value: "1|0|mg/dL"}
+    - {fill: "input[name=Serum_Creat_param]", value: "{scr}"}
+    - {press: "Tab"}
+    - {select: "select[name=Weight_unit]", value: "1|0|kg"}
+    - {fill: "input[name=Weight_param]", value: "{weight}"}
+    - {press: "Tab"}
+  result: {selector: "input[name=Creat_Clear_param]", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mL/min"}
+  notes: "Page says weight is 'the estimated lean body weight'. Sex radio values Female|0.85, Male|1. Legacy URL /medical-calculators/CreatinineCl_CG-en.htm redirects to the iframe."
+
+- id: msd-bmi
+  site: MSD Manuals
+  title: "Body Mass Index (Quetelet's index)"
+  url: https://www.msdmanuals.com/professional/multimedia/clinical-calculator/body-mass-index-quetelets-index
+  iframe_src: https://www.msdmanuals.com/iframe/manual/medical-calculators/bodymassindex.htm
+  formula: bmi@quetelet
+  claimed_version: "'BMI = (Weight/2.205) / (Height/39.37)^2'"
+  rendering: iframe
+  selectors_verified: true
+  recipe:
+    - {select: "select[name=Height_unit]", value: "0.393700787401575|0|cm"}
+    - {fill: "input[name=Height_param]", value: "{height}"}
+    - {press: "Tab"}
+    - {select: "select[name=Weight_unit]", value: "2.20462262184878|0|kg"}
+    - {fill: "input[name=Weight_param]", value: "{weight}"}
+    - {press: "Tab"}
+  result: {selector: "input[name=BMI_param]", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "kg/m²"}
+  notes: "Internally converts kg->lb (×2.2046) then divides by 2.205 and cm->in then by 39.37: tiny rounding drift from exact Quetelet (~0.02%)."
+
+- id: msd-bsa
+  site: MSD Manuals
+  title: "Body Surface Area (Du Bois Method)"
+  url: https://www.msdmanuals.com/professional/multimedia/clinical-calculator/body-surface-area-du-bois-method
+  iframe_src: https://www.msdmanuals.com/iframe/manual/medical-calculators/bodysurfacearea.htm
+  formula: bsa_dubois@1916
+  claimed_version: "'BSA = 0.007184 * Height^0.725 * Weight^0.425'"
+  rendering: iframe
+  selectors_verified: true
+  recipe:
+    - {select: "select[name=Height_unit]", value: "1|0|cm"}
+    - {fill: "input[name=Height_param]", value: "{height}"}
+    - {press: "Tab"}
+    - {select: "select[name=Weight_unit]", value: "1|0|kg"}
+    - {fill: "input[name=Weight_param]", value: "{weight}"}
+    - {press: "Tab"}
+  result: {selector: "input[name=BSA_param]", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "m²"}
+  notes: "Unit selects include odd options (micm, mg). BSA_unit default should be sqm."
+
+- id: msd-qtc
+  site: MSD Manuals
+  title: "QT Interval Correction (EKG)"
+  url: https://www.msdmanuals.com/professional/multimedia/clinical-calculator/qt-interval-correction-ekg
+  iframe_src: https://www.msdmanuals.com/iframe/manual/medical-calculators/qtintervalcorrection.htm
+  formula: qtc_bazett@1920
+  claimed_version: "'QTICorrected = QTInterval / sqr(RRInterval)' (Bazett)"
+  rendering: iframe
+  selectors_verified: true
+  recipe:
+    - {select: "select[name=QT_Interval_unit]", value: "0.001|0|msec"}
+    - {fill: "input[name=QT_Interval_param]", value: "{qt}"}
+    - {press: "Tab"}
+    - {fill: "input[name=Heart_Rate_param]", value: "{hr}"}
+    - {press: "Tab"}
+    - {select: "select[name=QTI_Corrected_unit]", value: "0.001|0|msec"}
+  result: {selector: "input[name=QTI_Corrected_param]", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "ms"}
+  notes: "Bazett only. Also accepts RR_Interval_param (msec or sec) -- RR = 60/HR. Alternative recipe with {rr_ms}."
+
+- id: msd-calcium-correction
+  site: MSD Manuals
+  title: "Calcium Correction in Hypoalbuminemia"
+  url: https://www.msdmanuals.com/professional/multimedia/clinical-calculator/calcium-correction-in-hypoalbuminemia
+  iframe_src: https://www.msdmanuals.com/iframe/manual/medical-calculators/calciumalbumin.htm
+  formula: calcium_corrected@0.8
+  claimed_version: "'Ca = SerumCa + 0.8 * (NormalAlbumin - PatientAlbumin)'"
+  rendering: iframe
+  selectors_verified: true
+  recipe:
+    - {select: "select[name=Serum_Ca_unit]", value: "1|0|mg/dL"}
+    - {fill: "input[name=Serum_Ca_param]", value: "{ca}"}
+    - {press: "Tab"}
+    - {click: "#togel1"}
+    - {select: "select[name=Patient_Albumin_unit]", value: "1|0|gm/dL"}
+    - {fill: "input[name=Patient_Albumin_param]", value: "{albumin}"}
+    - {press: "Tab"}
+  result: {selector: "input[name=Ca_param]", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mg/dL"}
+  notes: "Normal albumin radio: #togel1 = 4 gm/dL, #togel2 = 4.4 gm/dL (non-standard alternative). SI version: calciumalbumin_si.htm (0.02 × (40 − alb))."
+
+- id: msd-sodium-katz
+  site: MSD Manuals
+  title: "Sodium Correction in Hyperglycemia (Katz 1973)"
+  url: https://www.msdmanuals.com/professional/multimedia/clinical-calculator/sodium-correction-in-hyperglycemia-katz-1973
+  iframe_src: https://www.msdmanuals.com/iframe/manual/medical-calculators/sodiumhyperglycemiakatz.htm
+  formula: sodium_corrected@katz
+  claimed_version: "'CorrectedSodium = MeasuredSodium + 0.016 * (Glucose - 100)'"
+  rendering: iframe
+  selectors_verified: true
+  recipe:
+    - {fill: "input[name=Measured_Sodium_param]", value: "{na}"}
+    - {press: "Tab"}
+    - {select: "select[name=Glucose_unit]", value: "1|0|mg/dL_Glu"}
+    - {fill: "input[name=Glucose_param]", value: "{glucose}"}
+    - {press: "Tab"}
+  result: {selector: "input[name=Corrected_Sodium_param]", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mEq/L"}
+  notes: "Katz only (no Hillier page found in MSD index). Glucose mmol/L factor 18.018."
+
+- id: msd-fena
+  site: MSD Manuals
+  title: "Fractional Excretion of Sodium"
+  url: https://www.msdmanuals.com/professional/multimedia/clinical-calculator/fractional-excretion-of-sodium
+  iframe_src: https://www.msdmanuals.com/iframe/manual/medical-calculators/fractexcsodium.htm
+  formula: fena@espinel
+  claimed_version: "'FENa = (UrineNa / SerumNa) / (UrineCr / SerumCr) * 100'"
+  rendering: iframe
+  selectors_verified: true
+  recipe:
+    - {fill: "input[name=Urine_Na_param]", value: "{una}"}
+    - {press: "Tab"}
+    - {fill: "input[name=Serum_Na_param]", value: "{pna}"}
+    - {press: "Tab"}
+    - {select: "select[name=Urine_Cr_unit]", value: "1|0|mg/dL"}
+    - {fill: "input[name=Urine_Cr_param]", value: "{ucr}"}
+    - {press: "Tab"}
+    - {select: "select[name=Serum_Cr_unit]", value: "1|0|mg/dL"}
+    - {fill: "input[name=Serum_Cr_param]", value: "{pcr}"}
+    - {press: "Tab"}
+  result: {selector: "input[name=FENa_param]", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "%"}
+  notes: "FENa_unit options %, fraction, ratio."
+
+- id: msd-winters
+  site: MSD Manuals
+  title: "Winter's Formula for Expected PCO2"
+  url: https://www.msdmanuals.com/professional/multimedia/clinical-calculator/winters-formula-for-expected-pco2
+  iframe_src: https://www.msdmanuals.com/iframe/manual/medical-calculators/winterformula.htm
+  formula: winters@1967
+  claimed_version: "'PCO2 = HCO3 * 1.5 + 8'"
+  rendering: iframe
+  selectors_verified: true
+  recipe:
+    - {fill: "input[name=HCO3_param]", value: "{hco3}"}
+    - {press: "Tab"}
+  result: {selector: "input[name=PCO2_param]", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mmHg"}
+  notes: "No ±2 range shown (point estimate). PCO2_unit select has many units (Pascal, atm, bar, cmH2O...) -- ensure mmHg selected."
+
+- id: msd-ldl-friedewald
+  site: MSD Manuals
+  title: "Friedewald Equation for Low Density Lipoprotein (LDL-C)"
+  url: https://www.msdmanuals.com/professional/multimedia/clinical-calculator/friedewald-equation-for-low-density-lipoprotein-ldl-c
+  iframe_src: https://www.msdmanuals.com/iframe/manual/medical-calculators/friedewald.htm
+  formula: ldl_friedewald@1972
+  claimed_version: "'LDL = TotalChol - (Triglyceride / 5) - HDL'"
+  rendering: iframe
+  selectors_verified: true
+  recipe:
+    - {select: "select[name=Total_Chol_unit]", value: "1|0|mg/dL"}
+    - {fill: "input[name=Total_Chol_param]", value: "{tc}"}
+    - {press: "Tab"}
+    - {select: "select[name=HDL_unit]", value: "1|0|mg/dL"}
+    - {fill: "input[name=HDL_param]", value: "{hdl}"}
+    - {press: "Tab"}
+    - {select: "select[name=Triglyceride_unit]", value: "1|0|mg/dL"}
+    - {fill: "input[name=Triglyceride_param]", value: "{tg}"}
+    - {press: "Tab"}
+  result: {selector: "input[name=LDL_param]", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mg/dL"}
+  notes: "Units list lacks mmol/L (generic mass units only; SI page separate). Check TG>400 warning."
+
+- id: msd-ldl-martin
+  site: MSD Manuals
+  title: "Martin Equation for Low Density Lipoprotein (LDL-C)"
+  url: https://www.msdmanuals.com/professional/multimedia/clinical-calculator/martin-equation-for-low-density-lipoprotein-ldl-c
+  iframe_src: https://www.msdmanuals.com/iframe/manual/medical-calculators/martinldl.htm
+  formula: ldl_martin_hopkins@2013
+  claimed_version: "'LDL Cholesterol = Non-HDL Cholesterol - (Triglycerides / Novel Factor)'"
+  rendering: iframe
+  selectors_verified: true
+  recipe:
+    - {select: "select[name=Total_Cholesterol_unit]", value: "1|0|mg/dL_Chol"}
+    - {fill: "input[name=Total_Cholesterol_param]", value: "{tc}"}
+    - {press: "Tab"}
+    - {select: "select[name=HDL_Cholesterol_unit]", value: "1|0|mg/dL_HDL"}
+    - {fill: "input[name=HDL_Cholesterol_param]", value: "{hdl}"}
+    - {press: "Tab"}
+    - {fill: "input[name=Triglycerides_param]", value: "{tg}"}
+    - {press: "Tab"}
+  result: {selector: "input[name=LDL_Cholesterol_param]", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mg/dL"}
+  notes: "Exposes intermediate outputs Non_HDL_Cholesterol_param and Novel_Factor_param (the 180-cell table factor) -- great for checking the lookup table. Triglycerides has no unit select (mg/dL only). Best verified Martin/Hopkins target since ldlcalculator.com blocked fetches."
+
+- id: msd-ibw
+  site: MSD Manuals
+  title: "Ideal Body Weight"
+  url: https://www.msdmanuals.com/professional/multimedia/clinical-calculator/ideal-body-weight
+  iframe_src: https://www.msdmanuals.com/iframe/manual/medical-calculators/idealbodywgt.htm
+  formula: ibw_devine@1974
+  claimed_version: "'IBW = Height^2 * Sex' with Sex = 21.5 (female) / 23 (male)"
+  rendering: iframe
+  selectors_verified: true
+  recipe:
+    - {select: "select[name=Height_unit]", value: "0.01|0|cm"}
+    - {fill: "input[name=Height_param]", value: "{height}"}
+    - {press: "Tab"}
+    - {click: "input[name=Sex_radio][value^='{sex_title}']"}
+  result: {selector: "input[name=IBW_param]", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "kg"}
+  notes: "NOT DEVINE: titled 'Ideal Body Weight' but computes a BMI-target method (height[m]^2 × 21.5 or 23). Will diverge from ibw_devine@1974 everywhere except near one height -- flag as 'different equation than reader may expect', not necessarily an error."
+
+- id: msd-parkland
+  site: MSD Manuals
+  title: "Burn Injury Fluid Resuscitation, Adult (Parkland crystalloid estimate)"
+  url: https://www.msdmanuals.com/professional/multimedia/clinical-calculator/burn-injury-fluid-resuscitation-adult-parkland-crystalloid-estimate
+  iframe_src: https://www.msdmanuals.com/iframe/manual/medical-calculators/burninjuryfluidparkland.htm
+  formula: parkland@1968
+  claimed_version: "'TotalCrystalloidForFirst24Hours = 4 * Weight * PercentNonsuperficialBurnArea'"
+  rendering: iframe
+  selectors_verified: true
+  recipe:
+    - {select: "select[name=Weight_unit]", value: "1|0|kg"}
+    - {fill: "input[name=Weight_param]", value: "{weight}"}
+    - {press: "Tab"}
+    - {fill: "input[name=Percent_Nonsuperficial_Burn_Area_param]", value: "{tbsa}"}
+    - {press: "Tab"}
+    - {select: "select[name=Total_Crystalloid_For_First_24_Hours_unit]", value: "1|0|mL"}
+  result: {selector: "input[name=Total_Crystalloid_For_First_24_Hours_param]", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mL"}
+  notes: "Also Rate_First_8_Hours_param (= total/16 per h) and Rate_Next_16_Hours_param (= total/32 per h). TBSA wording: non-superficial (2nd/3rd degree) burns."
+
+- id: msd-maintenance-fluid-children
+  site: MSD Manuals
+  title: "Maintenance Fluid Calculation for Children"
+  url: https://www.msdmanuals.com/professional/multimedia/clinical-calculator/maintenance-fluid-calculation-for-children
+  iframe_src: https://www.msdmanuals.com/iframe/manual/medical-calculators/maintenancefluidchildren.htm
+  formula: holliday_segar@1957
+  claimed_version: "Holliday & Segar 1957; 'FluidRate = DailyVol / 24'"
+  also_offers: [holliday_segar_hourly@4-2-1]
+  rendering: iframe
+  selectors_verified: true
+  recipe:
+    - {select: "select[name=Weight_unit]", value: "1|0|kg"}
+    - {fill: "input[name=Weight_param]", value: "{weight}"}
+    - {press: "Tab"}
+  result: {selector: "input[name=daily_vol_result]", read: value, regex: '([0-9]+(?:\.[0-9]+)?)', unit: "mL/day"}
+  notes: "Hourly = daily/24 (Fluid_Rate_param, mL/hr) -- differs slightly from 4-2-1 hourly rule (e.g. 70 kg: 2500/24 = 104.2 vs 110 mL/h); compare against both keys."
+
+# ======================= QxMD / Medscape (QxMD 'Calculate' engine; formulas embedded in __NEXT_DATA__) =======================
+- id: qxmd-ckd-epi-2021
+  site: QxMD
+  title: "eGFR using CKD-EPI (2021 update)"
+  url: https://qxmd.com/calculate/calculator_251/egfr-using-ckd-epi-2021-update
+  formula: egfr_ckd_epi_cr@2021
+  claimed_version: "\"Calculate eGFR using CKD EPI 2021 Formula\""
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {click: "#input-choice-7207", when: {sex: male}}
+    - {click: "#input-choice-7208", when: {sex: female}}
+    - {fill: "#input-sem-3473", value: "{age}"}
+    - {click: "#button-3473"}
+    - {fill: "#input-sem-3474", value: "{scr_umol}"}
+    - {click: "#button-3474"}
+  result: {selector: "main", regex: 'CKD-EPI 2021 Formula\s*([0-9]+(?:\.[0-9]+)?)', unit: "mL/min/1.73m²"}
+  notes: "Wizard UI (one question at a time). Embedded formula: 142, alpha -0.302/-0.241, -1.200, 0.9938^age, 1.012 female; result toFixed(1). ALSO outputs 'Estimated GFR using MDRD' using 186 constant (pre-IDMS) with female 0.742 and NO race term. Creatinine primary unit µmol/L (unit id 1209, factor 0.011312217). Fetch redirected to a URL with a long ?token= query. Ids follow pattern input-sem-<questionId>, input-choice-<choiceId>, button-<questionId> (seen for first question only)."
+
+- id: medscape-mdrd
+  site: Medscape
+  title: "MDRD eGFR"
+  url: https://reference.medscape.com/calculator/140/mdrd-egfr
+  formula: egfr_mdrd@175
+  claimed_version: "unstated constant (embedded formula uses 186)"
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {click: "#input-choice-6094", when: {sex: male}}
+    - {click: "#input-choice-6095", when: {sex: female}}
+    - {click: "#input-choice-6096", when: {black: false}}
+    - {click: "#input-choice-6097", when: {black: true}}
+    - {fill: "#input-sem-2897", value: "{age}"}
+    - {click: "#button-2897"}
+    - {fill: "#input-sem-2898", value: "{scr_umol}"}
+    - {click: "#button-2898"}
+  result: {selector: "main", regex: 'Estimated GFR\s*([0-9]+(?:\.[0-9]+)?)', unit: "mL/min/1.73m²"}
+  notes: "Asks 'Race?' with choice 'Not African-American' (id 6096; 6097 inferred). Embedded formula: (186 × gender × race) / (Scr^1.154 × age^0.203) -- the non-IDMS 186 constant, ~6% higher than the 175 IDMS-traceable version; rounds to 2 decimals. Medscape also lists 'eGFR using Updated MDRD Equation (2006)' (/calculator/872) -- probably the 175 version."
+
+- id: medscape-qtc
+  site: Medscape
+  title: "ECG: Corrected QT"
+  url: https://reference.medscape.com/calculator/48/ecg-corrected-qt
+  formula: qtc_bazett@1920
+  claimed_version: "choice of Hodges, Bazett, Fridericia, Framingham"
+  also_offers: [qtc_fridericia@1920, qtc_framingham@1992, qtc_hodges@1983]
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {click: "#input-choice-5018"}
+    - {fill: "#input-sem-2439", value: "{qt}"}
+    - {click: "#button-2439"}
+    - {fill: "#input-sem-2440", value: "{hr}"}
+    - {click: "#button-2440"}
+  result: {selector: "main", regex: 'Corrected QT Interval\s*([0-9]+)', unit: "ms"}
+  notes: "Choices: 5017 Hodges, 5018 Bazett, 5019 Fridericia, 5020 Framingham (ids seen in SSR). Embedded code: Bazett qt*sqrt(hr/60); Fridericia qt*(hr/60)^(1/3); Framingham qt+154*(1-60/hr); Hodges qt+1.75*(hr-60); Math.round to integer ms."
+
+- id: medscape-bmi-bsa-mosteller
+  site: Medscape
+  title: "BMI and BSA (Mosteller)"
+  url: https://reference.medscape.com/calculator/28/bmi-and-bsa-mosteller
+  formula: bsa_mosteller@1987
+  claimed_version: "Mosteller (title); BSA = sqrt(weight*height/36) with height in m"
+  also_offers: [bmi@quetelet]
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {click: "#unit-tab-806"}
+    - {fill: "#input-sem-2303", value: "{weight}"}
+    - {click: "#button-2303"}
+    - {click: "#unit-tab-808"}
+    - {fill: "#input-sem-2304", value: "{height_m}"}
+    - {click: "#button-2304"}
+  result: {selector: "main", regex: 'Body Surface Area\s*([0-9]+(?:\.[0-9]+)?)', unit: "m²"}
+  notes: "Ids for weight question (input-sem-2303, unit-tab-806/807, button-2303) seen in SSR; height ids from __NEXT_DATA__. Height units only meters or inches (no cm). sqrt(kg*m/36) == sqrt(kg*cm/3600). BSA rounded to 3 dp, BMI 2 dp."
+
+- id: medscape-bmi-bsa-dubois
+  site: Medscape
+  title: "BMI and BSA (Du Bois)"
+  url: https://reference.medscape.com/calculator/30/bmi-and-bsa-du-bois
+  formula: bsa_dubois@1916
+  claimed_version: "Du Bois (title); 71.84 × W^0.425 × H^0.725 / 10000"
+  also_offers: [bmi@quetelet]
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {click: "#unit-tab-810"}
+    - {fill: "#input-sem-2309", value: "{weight}"}
+    - {click: "#button-2309"}
+    - {click: "#unit-tab-812"}
+    - {fill: "#input-sem-2310", value: "{height_m}"}
+    - {click: "#button-2310"}
+  result: {selector: "main", regex: 'Body Surface Area\s*([0-9]+(?:\.[0-9]+)?)', unit: "m²"}
+  notes: "Height unit 'meters' has factor 100 (converted to cm internally). Formula equivalent to 0.007184 coefficient."
+
+- id: medscape-anion-gap
+  site: Medscape
+  title: "Anion Gap"
+  url: https://reference.medscape.com/calculator/11/anion-gap
+  formula: anion_gap@no-k
+  claimed_version: "Na − Cl − HCO3 (embedded)"
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {fill: "#input-sem-2201", value: "{na}"}
+    - {click: "#button-2201"}
+    - {fill: "#input-sem-2202", value: "{cl}"}
+    - {click: "#button-2202"}
+    - {fill: "#input-sem-2203", value: "{hco3}"}
+    - {click: "#button-2203"}
+  result: {selector: "main", regex: 'Anion Gap\s*([0-9]+)', unit: "mEq/L"}
+  notes: "Rounded to integer. No K."
+
+- id: medscape-calcium-correction
+  site: Medscape
+  title: "Calcium Correction for Hypoalbuminemia"
+  url: https://reference.medscape.com/calculator/267/calcium-correction-for-hypoalbuminemia
+  formula: calcium_corrected@0.8
+  claimed_version: "SI form 0.02 × (40 − albumin[g/L]) + Ca[mmol/L] (embedded)"
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {click: "#unit-tab-1225"}
+    - {fill: "#input-sem-3525", value: "{ca}"}
+    - {click: "#button-3525"}
+    - {click: "#unit-tab-1227"}
+    - {fill: "#input-sem-3526", value: "{albumin}"}
+    - {click: "#button-3526"}
+  result: {selector: "main", regex: 'Corrected Calcium\s*([0-9]+(?:\.[0-9]+)?)', unit: "mg/dL"}
+  notes: "US units converted with mg/dL factor 0.25 (exact 0.2495) then ×4 for output -- a ~0.2% conversion approximation; output not rounded in code (may show long floats)."
+
+- id: medscape-sodium-correction
+  site: Medscape
+  title: "Corrected Sodium in Hyperglycemia"
+  url: https://reference.medscape.com/calculator/360/corrected-sodium-in-hyperglycemia
+  formula: sodium_corrected@hillier
+  claimed_version: "unstated in title; embedded factor 0.024 (Hillier)"
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {fill: "#input-sem-4228", value: "{na}"}
+    - {click: "#button-4228"}
+    - {click: "#unit-tab-1371"}
+    - {fill: "#input-sem-4229", value: "{glucose}"}
+    - {click: "#button-4229"}
+  result: {selector: "main", regex: 'Corrected Sodium\s*([0-9]+)', unit: "mEq/L"}
+  notes: "Title does not say which correction; code uses Hillier 2.4/100 and rounds to integer. Glucose mmol/L factor 18."
+
+- id: medscape-fena
+  site: Medscape
+  title: "Fractional Excretion of Sodium"
+  url: https://reference.medscape.com/calculator/96/fractional-excretion-of-sodium
+  formula: fena@espinel
+  claimed_version: "(UNa × PCr × 100)/(PNa × UCr) (embedded)"
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {fill: "#input-sem-2648", value: "{una}"}
+    - {click: "#button-2648"}
+    - {fill: "#input-sem-2649", value: "{pna}"}
+    - {click: "#button-2649"}
+    - {click: "#unit-tab-894"}
+    - {fill: "#input-sem-2650", value: "{ucr}"}
+    - {click: "#button-2650"}
+    - {click: "#unit-tab-896"}
+    - {fill: "#input-sem-2651", value: "{pcr}"}
+    - {click: "#button-2651"}
+  result: {selector: "main", regex: 'Fractional Excretion of Sodium\s*([0-9]+(?:\.[0-9]+)?)', unit: "%"}
+  notes: "Rounded to 2 dp. Urine creatinine units: mmol/L (factor 1000) or mg/dL (88.4)."
+
+- id: medscape-map
+  site: Medscape
+  title: "Mean Arterial Pressure (MAP)"
+  url: https://reference.medscape.com/calculator/486/mean-arterial-pressure-map
+  formula: map@standard
+  claimed_version: "SBP/3 + 2·DBP/3 (embedded)"
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {fill: "#input-sem-4993", value: "{sbp}"}
+    - {click: "#button-4993"}
+    - {fill: "#input-sem-4994", value: "{dbp}"}
+    - {click: "#button-4994"}
+  result: {selector: "main", regex: 'Mean Arterial Pressure \(MAP\)\s*([0-9]+)', unit: "mmHg"}
+  notes: "toFixed(0) -> integer."
+
+- id: medscape-parkland
+  site: Medscape
+  title: "Parkland Formula"
+  url: https://reference.medscape.com/calculator/175/parkland-formula
+  formula: parkland@1968
+  claimed_version: "burn% × 4 × weight (embedded)"
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {fill: "#input-sem-3073", value: "{tbsa}"}
+    - {click: "#button-3073"}
+    - {click: "#unit-tab-1060"}
+    - {fill: "#input-sem-3074", value: "{weight}"}
+    - {click: "#button-3074"}
+  result: {selector: "main", regex: '1st 24-hours\s*([0-9]+(?:\.[0-9]+)?)', unit: "mL"}
+  notes: "TBSA asked first (2nd/3rd degree). Also half over first 8 h (total/16 mL/h) and next 16 h (total/32 mL/h)."
+
+- id: medscape-maintenance-fluids
+  site: Medscape
+  title: "Maintenance Fluid Calculations"
+  url: https://reference.medscape.com/calculator/526/maintenance-fluid-calculations
+  formula: holliday_segar_hourly@4-2-1
+  claimed_version: "4-2-1 rule (embedded), mL/hour"
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {fill: "#input-sem-5277", value: "{weight}"}
+    - {click: "#button-5277"}
+  result: {selector: "main", regex: '([0-9]+(?:\.[0-9]+)?)\s*mL / hour', unit: "mL/h"}
+  notes: "Result string format 'N mL / hour'; not rounded (fractional kg gives fractional mL/h)."
+
+- id: medscape-ibw
+  site: Medscape
+  title: "Ideal Body Weight"
+  url: https://reference.medscape.com/calculator/246/ideal-body-weight
+  formula: ibw_devine@1974
+  claimed_version: "men 50 + 2.3 × (in − 60); women 49 + 1.7 × (in − 60) (embedded)"
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {click: "#input-choice-7149", when: {sex: male}}
+    - {click: "#input-choice-7150", when: {sex: female}}
+    - {click: "#unit-tab-1198"}
+    - {fill: "#input-sem-3440", value: "{height_in}"}
+    - {click: "#button-3440"}
+  result: {selector: "main", regex: '([0-9]+(?:\.[0-9]+)?)\s*kg', unit: "kg"}
+  notes: "MIXED FORMULAS: male = Devine, female = Robinson (1983) 49 + 1.7/in, not Devine 45.5 + 2.3/in. Female results will differ from ibw_devine@1974 (e.g. 65 in: 57.5 vs 57.0; 70 in: 66 vs 68.5). Page last_modified 2024-10."
+
+- id: medscape-schwartz
+  site: Medscape
+  title: "Schwartz Pediatric Bedside eGFR (2009)"
+  url: https://reference.medscape.com/calculator/281/schwartz-pediatric-bedside-egfr-2009
+  formula: egfr_schwartz_bedside@2009
+  claimed_version: "41.3 × height[m] / Scr (embedded)"
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {click: "#unit-tab-1246"}
+    - {fill: "#input-sem-3628", value: "{scr}"}
+    - {click: "#button-3628"}
+    - {click: "#unit-tab-1247"}
+    - {fill: "#input-sem-3629", value: "{height}"}
+    - {click: "#button-3629"}
+  result: {selector: "main", regex: 'eGFR\s*([0-9]+(?:\.[0-9]+)?)', unit: "mL/min/1.73m²"}
+  notes: "Rounded to 1 dp; cm factor 0.01 so 41.3 × m == 0.413 × cm."
+
+- id: medscape-ckd-epi-crcys-2021
+  site: Medscape
+  title: "eGFR using CKD-EPI (Creatinine-Cystatin C) Equation (2021)"
+  url: https://reference.medscape.com/calculator/863/egfr-using-ckd-epi-creatinine-cystatin-c-equation-2021
+  formula: egfr_ckd_epi_crcys@2021
+  claimed_version: "2021 Cr-CysC (title)"
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {click: "#input-choice-17867", when: {sex: male}}
+    - {click: "#input-choice-17868", when: {sex: female}}
+    - {fill: "#input-sem-7559", value: "{age}"}
+    - {click: "#button-7559"}
+    - {click: "#unit-tab-2380"}
+    - {fill: "#input-sem-7560", value: "{scr}"}
+    - {click: "#button-7560"}
+    - {fill: "#input-sem-7561", value: "{scys}"}
+    - {click: "#button-7561"}
+  result: {selector: "main", regex: '\(2021\)\s*([0-9]+(?:\.[0-9]+)?)', unit: "mL/min/1.73m²"}
+  notes: "UNIT LABEL BUG: the only cystatin C unit is labelled 'mg/dL' (cystatin C is reported in mg/L; formula uses /0.8 mg/L), so users entering lab values in mg/L see a mislabeled field. Embedded code uses breakpoints Scr<=k, CysC<=0.8 with exponents -0.144/-0.544, -0.323/-0.778, female 0.963 (matches 2021)."
+
+# ======================= Other sites =======================
+- id: stanford-rogers-qtc
+  site: Stanford Rogers Lab EP Tools
+  title: "QTc & JTc Calculator — Rogers Lab EP Tools"
+  url: https://rogerslab.stanford.edu/ep-tools/qtc-calculator/
+  formula: qtc_bazett@1920
+  claimed_version: "Bazett, Fridericia, Framingham, Hodges listed with formula text"
+  also_offers: [qtc_fridericia@1920, qtc_framingham@1992, qtc_hodges@1983]
+  rendering: static
+  selectors_verified: true
+  recipe:
+    - {fill: "#qt", value: "{qt}"}
+    - {fill: "#hr", value: "{hr}"}
+  result: {selector: "main", regex: 'Bazett[^0-9]*([0-9]+(?:\.[0-9]+)?)', unit: "ms"}
+  notes: "HR or RR (#rr, ms) -- 'the other fills in automatically'. Optional #qrs for JTc; sex buttons (no ids) affect thresholds. Page formula text: Framingham 'QT + 154·(1 − RR s)'. Live update (no calculate button seen). Result markup not seen."
+
+- id: nhlbi-bmi
+  site: NHLBI (NIH)
+  title: "Calculate Your BMI | NHLBI, NIH"
+  url: https://www.nhlbi.nih.gov/calculate-your-bmi
+  formula: bmi@quetelet
+  claimed_version: "unstated"
+  rendering: static
+  selectors_verified: true
+  recipe:
+    - {click: "#edit-metric"}
+    - {wait: 1500}
+    - {fill: "#edit-height-cm", value: "{height}"}
+    - {fill: "#edit-weight-kg", value: "{weight}"}
+    - {click: "#edit-submit"}
+  result: {selector: "#bmi-result-value-twig", regex: '([0-9]+(?:\.[0-9]+)?)', unit: "kg/m²"}
+  notes: "Old URL /health/educational/lose_wt/BMI/bmicalc.htm redirects here. Standard/Metric buttons are type=submit on a Drupal POST form (server round-trip); Calculate also POSTs. Standard mode uses selects edit-height-feet / edit-height-inches (0.5-in steps) + edit-weight-pounds."
+
+- id: cdc-adult-bmi
+  site: CDC
+  title: "Adult BMI Calculator"
+  url: https://www.cdc.gov/bmi/adult-calculator/index.html
+  formula: bmi@quetelet
+  claimed_version: "unstated"
+  rendering: js
+  selectors_verified: false
+  recipe:
+    - {click: "text=Metric Units"}
+    - {fill: "input[name*=height]", value: "{height}"}
+    - {fill: "input[name*=weight]", value: "{weight}"}
+    - {click: "text=Calculate"}
+  result: {selector: "main", regex: 'BMI[^0-9]*([0-9]+(?:\.[0-9]+)?)', unit: "kg/m²"}
+  notes: "curl returned 403 to our UA; WebFetch summary only: US/metric modes, metric height range 91.44-274.32 cm, weight 24.947-453.592 kg, 'uses JavaScript', embeddable via iframe calculator.html. Selectors are placeholders."
+
+- id: inchcalculator-bmi
+  site: Inch Calculator
+  title: "BMI Calculator - Body Mass Index for Men and Women - Inch Calculator"
+  url: https://www.inchcalculator.com/bmi-calculator/
+  formula: bmi@quetelet
+  claimed_version: "unstated"
+  rendering: static
+  selectors_verified: true
+  recipe:
+    - {fill: "#height", value: "{height}"}
+    - {select: "#height_unit", value: "centimeter"}
+    - {fill: "#weight", value: "{weight}"}
+    - {select: "#weight_unit", value: "kilogram"}
+    - {click: "#uc_bmi_calculator input[type=submit]"}
+  result: {selector: "[data-bmi-results]", regex: '([0-9]+(?:\.[0-9]+)?)', unit: "kg/m²"}
+  notes: "Form POSTs to /bmi-calculator/ (server round-trip). Result partly drawn on <canvas id=bmi_results> -- numeric text location unknown; may need to read a sibling text node."
+
+- id: bmi-calculator-net
+  site: bmi-calculator.net
+  title: "BMI Calculator - Calculate Your Body Mass Index"
+  url: https://www.bmi-calculator.net/
+  formula: bmi@quetelet
+  claimed_version: "'Original BMI Formula' (default) or 'New BMI Formula'"
+  rendering: static
+  selectors_verified: true
+  recipe:
+    - {click: "#mode_metric"}
+    - {fill: "#height_cm", value: "{height}"}
+    - {fill: "#weight_kilos", value: "{weight}"}
+    - {select: "#formula", value: "original"}
+    - {click: "form.calc-form input[type=submit]"}
+  result: {selector: "main", regex: 'BMI[^0-9]*([0-9]+(?:\.[0-9]+)?)', unit: "kg/m²"}
+  notes: "Offers a non-Quetelet 'New BMI Formula' option (likely Trefethen 1.3·W/H^2.5) -- make sure 'original' is selected. Form POSTs to bmi-calculation.php (server round-trip); result page markup unknown."
+
+- id: hopkins-ldl-calculator
+  site: Johns Hopkins (ldlcalculator.com)
+  title: "LDL Calculator"
+  url: https://www.ldlcalculator.com/
+  formula: ldl_martin_hopkins@2013
+  claimed_version: "unstated (could not read page)"
+  also_offers: [ldl_friedewald@1972]
+  rendering: unknown
+  selectors_verified: false
+  recipe:
+    - {fill: "input[name*=total]", value: "{tc}"}
+    - {fill: "input[name*=hdl]", value: "{hdl}"}
+    - {fill: "input[name*=trig]", value: "{tg}"}
+  result: {selector: "main", regex: 'LDL[^0-9]*([0-9]+(?:\.[0-9]+)?)', unit: "mg/dL"}
+  notes: "First fetch returned 200 (16 KB, title 'LDL Calculator', redirect to ldlcalculator.com without www) but later curl and WebFetch requests got 403 (Cloudflare 'Attention Required' challenge; not bypassed). Selectors are placeholders; inspect in a real browser before use. MSD Martin page (msd-ldl-martin) is the verified alternative."

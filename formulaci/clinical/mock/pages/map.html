@@ -1,0 +1,15 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Mean Arterial Pressure (MAP) Calculator</title>
+<link rel="stylesheet" href="_style.css"></head><body>
+<h1>Mean Arterial Pressure</h1>
+<div class="calc">
+ <div class="row"><label for="sbp">Systolic BP (mmHg)</label><input id="sbp" type="number"></div>
+ <div class="row"><label for="dbp">Diastolic BP (mmHg)</label><input id="dbp" type="number"></div>
+ <div class="result" data-testid="map-result"></div>
+</div>
+<script>
+function m() {
+  var s = +document.getElementById('sbp').value, d = +document.getElementById('dbp').value;
+  if (s && d) document.querySelector('[data-testid=map-result]').textContent = 'MAP ' + (d + (s - d) / 3).toFixed(1) + ' mmHg';
+}
+document.getElementById('sbp').oninput = m; document.getElementById('dbp').oninput = m;
+</script></body></html>

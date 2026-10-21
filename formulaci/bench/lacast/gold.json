@@ -1,0 +1,1856 @@
+[
+ {
+  "gold_id": 1,
+  "lacast_page_id": 51,
+  "eid": "math.51.18",
+  "title": "Bessel function",
+  "latex": "\\begin{align}J_{-(m+\\frac{1}{2})}(x) &= (-1)^{m+1} Y_{m+\\frac{1}{2}}(x), \\\\Y_{-(m+\\frac{1}{2})}(x) &= (-1)^m J_{m+\\frac{1}{2}}(x).\\end{align}",
+  "semantic_latex": "\\begin{align}\\BesselJ{- (m + \\frac{1}{2})}@{x} &= (- 1)^{m+1} \\BesselY{m+\\frac{1}{2}}@{x} , \\\\ \\BesselY{- (m + \\frac{1}{2})}@{x} &= (-1)^m \\BesselJ{m+\\frac{1}{2}}@{x} .\\end{align}",
+  "mathematica": "BesselJ[- (m +Divide[1,2]), x] == (- 1)^(m + 1)* BesselY[m +Divide[1,2], x]\nBesselY[- (m +Divide[1,2]), x] == (- 1)^(m)* BesselJ[m +Divide[1,2], x]",
+  "maple": "BesselJ(- (m +(1)/(2)), x) = (- 1)^(m + 1)* BesselY(m +(1)/(2), x); BesselY(- (m +(1)/(2)), x) = (- 1)^(m)* BesselJ(m +(1)/(2), x)",
+  "definiens": [
+   "Bessel function first kind",
+   "Bessel function second kind",
+   "above relation"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "correct",
+   "maple": "correct"
+  }
+ },
+ {
+  "gold_id": 2,
+  "lacast_page_id": 52,
+  "eid": "math.52.404",
+  "title": "Ellipse",
+  "latex": "E(e) \\,=\\, \\int_0^{\\pi/2}\\sqrt {1 - e^2 \\sin^2\\theta}\\ d\\theta",
+  "semantic_latex": "\\compellintEk@{e} = \\int_0^{\\cpi / 2} \\sqrt{1 - e^2 \\sin^2 \\theta} \\diff{\\theta}",
+  "mathematica": "EllipticE[(e)^2] == Integrate[Sqrt[1 - (e)^(2)*(Sin[\\[Theta]])^(2)], {\\[Theta], 0, Pi/2}]",
+  "maple": "EllipticE(e) = int(sqrt(1 - (e)^(2)*(sin(theta))^(2)), theta = 0..Pi/2)",
+  "definiens": [
+   "complete elliptic integral of the second kind",
+   "elementary function",
+   "function"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "wrong"
+  }
+ },
+ {
+  "gold_id": 3,
+  "lacast_page_id": 53,
+  "eid": "math.53.6",
+  "title": "Elliptic integral",
+  "latex": "F(x;k) = u",
+  "semantic_latex": "\\incellintFk@{\\asin@{\\Jacobiellsnk@@{u}{k}}}{k} = u",
+  "mathematica": "EllipticF[ArcSin[JacobiSN[u, (k)^2]], (k)^2] == u",
+  "maple": "EllipticF(JacobiSN(u, k), k) = u",
+  "definiens": [
+   "inverse to the elliptic integral",
+   "Jacobian elliptic function",
+   "Legendre"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "wrong"
+  }
+ },
+ {
+  "gold_id": 4,
+  "lacast_page_id": 54,
+  "eid": "math.54.195",
+  "title": "Gamma function",
+  "latex": "\\frac{1}{\\Gamma(z)} = \\frac{i}{2\\pi}\\int_C (-t)^{-z}e^{-t}\\,dt",
+  "semantic_latex": "\\frac{1}{\\EulerGamma@{z}} = \\frac{\\iunit}{2 \\cpi} \\int_C(- t)^{-z} \\expe^{-t} \\diff{t}",
+  "mathematica": null,
+  "maple": null,
+  "definiens": [
+   "related expression",
+   "integer",
+   "reflection formula"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "none",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 5,
+  "lacast_page_id": 55,
+  "eid": "math.55.18-1",
+  "title": "Logarithm",
+  "latex": "2^{4} = 2 \\times2 \\times 2 \\times 2 = 16",
+  "semantic_latex": "2^{4} = 2 \\times2 \\times 2 \\times 2 = 16",
+  "mathematica": "(2)^(4) == 2 * 2 * 2 * 2 == 16",
+  "maple": "(2)^(4) = 2 * 2 * 2 * 2 = 16",
+  "definiens": [
+   "example"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "correct",
+   "maple": "correct"
+  }
+ },
+ {
+  "gold_id": 6,
+  "lacast_page_id": 56,
+  "eid": "math.56.40",
+  "title": "Riemann zeta function",
+  "latex": "\\psi(x) := \\sum_{n=1}^\\infty e^{-n^2 \\pi x}",
+  "semantic_latex": "\\psi(x) : = \\sum_{n=1}^\\infty \\expe^{- n^2 \\cpi x}",
+  "mathematica": "\\[Psi][x_] := Sum[Exp[-(n)^(2)*Pi*x], {n, 1, Infinity}]",
+  "maple": "psi := (x) -> sum(exp(-(n)^(2)*Pi*x), n=1..infinity)",
+  "definiens": [
+   "analytic continuation",
+   "absolute convergence",
+   "convenience"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "correct",
+   "maple": "correct"
+  }
+ },
+ {
+  "gold_id": 7,
+  "lacast_page_id": 57,
+  "eid": "math.57.2",
+  "title": "Logarithmic integral function",
+  "latex": "\\operatorname{li}(x) = \\lim_{\\varepsilon \\to 0+} \\left( \\int_0^{1-\\varepsilon} \\frac{dt}{\\ln t} + \\int_{1+\\varepsilon}^x \\frac{dt}{\\ln t} \\right)",
+  "semantic_latex": "\\logint@{x} = \\lim_{\\varepsilon \\to 0+}(\\int_0^{1-\\varepsilon} \\frac{\\diff{t}}{\\ln t} + \\int_{1+\\varepsilon}^x \\frac{\\diff{t}}{\\ln t})",
+  "mathematica": "LogIntegral[x] == Limit[Integrate[Divide[1,Log[t]], {t, 0, 1 - \\[CurlyEpsilon]}]+ Integrate[Divide[1,Log[t]], {t, 1 + \\[CurlyEpsilon], x}], \\[CurlyEpsilon] -> 0, Direction -> \"FromAbove\"]",
+  "maple": "Li(x) = limit(int((1)/(ln(t)), t = 0..1 - varepsilon)+ int((1)/(ln(t)), t = 1 + varepsilon..x), varepsilon = 0, right)",
+  "definiens": [
+   "Cauchy principal value",
+   "function",
+   "singularity"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "correct",
+   "maple": "correct"
+  }
+ },
+ {
+  "gold_id": 8,
+  "lacast_page_id": 58,
+  "eid": "math.58.61",
+  "title": "Gaussian quadrature",
+  "latex": "w_{i} = \\frac{1}{p'_{n}(x_{i})}\\int_{a}^{b}\\omega(x)\\frac{p_{n}(x)}{x-x_{i}}dx",
+  "semantic_latex": "w_{i} = \\frac{1}{p'_{n}(x_{i})} \\int_{a}^{b} \\omega(x) \\frac{p_{n}(x)}{x-x_{i}} \\diff{x}",
+  "mathematica": "Subscript[w, i] = Divide[1, Subscript[p\\[Prime], n][Subscript[x, i]]]*Integrate[\\[Omega][x]*Divide[Subscript[p,n][x], x-Subscript[x,i]], {x, a, b}]",
+  "maple": null,
+  "definiens": [
+   "yield",
+   "integral expression for the weight",
+   "integrand"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 9,
+  "lacast_page_id": 59,
+  "eid": "math.59.52",
+  "title": "Lambert W function",
+  "latex": "\\begin{align}x & =ue^u, \\\\[5pt]\\frac{dx}{du} & =(u+1)e^u.\\end{align}",
+  "semantic_latex": "\\begin{align}x & =\\LambertW@{x}\\expe^{\\LambertW@{x}}, \\\\ \\deriv{x}{\\LambertW@{x}} &=(\\LambertW@{x} + 1) \\expe^{\\LambertW@{x}} .\\end{align}",
+  "mathematica": "x == ProductLog[x]*(E)^(ProductLog[x])\nD[x,ProductLog[x]] = (ProductLog[x] + 1)*Exp[ProductLog[x]]",
+  "maple": "x = LambertW(x)*exp(u); diff(x, [LambertW(x)$1]) = (LambertW(x) + 1)*exp(LambertW(x))",
+  "definiens": [
+   "substitution",
+   "third identity",
+   "second identity"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "wrong"
+  }
+ },
+ {
+  "gold_id": 10,
+  "lacast_page_id": 60,
+  "eid": "math.60.57",
+  "title": "Legendre polynomials",
+  "latex": "\\frac{1}{\\left| \\mathbf{x}-\\mathbf{x}' \\right|} = \\frac{1}{\\sqrt{r^2+{r'}^2-2r{r'}\\cos\\gamma}} = \\sum_{\\ell=0}^\\infty \\frac{{r'}^\\ell}{r^{\\ell+1}} P_\\ell(\\cos \\gamma)",
+  "semantic_latex": "\\frac{1}{|\\mathbf{x} - \\mathbf{x} '|} = \\frac{1}{\\sqrt{r^2+{r'}^2-2r{r'}\\cos\\gamma}} = \\sum_{\\ell=0}^\\infty \\frac{{r'}^\\ell}{r^{\\ell+1}} \\LegendrepolyP{\\ell}@{\\cos \\gamma}",
+  "mathematica": "Divide[1, Abs[x - x\\[Prime]]] == Divide[1, Sqrt[r^2+(r\\[Prime])^(2)-2*r*r\\[Prime] Cos[\\[Gamma]]]] == Sum[Divide[(r\\[Prime])^(\\[ScriptL]), r^(\\[ScriptL]+1)]*LegendreP[\\[ScriptL], Cos[\\[Gamma]]], {\\[ScriptL], 0, Infinity}]",
+  "maple": null,
+  "definiens": [
+   "expansion",
+   "Adrien-Marie Legendre as the coefficient",
+   "angle"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 11,
+  "lacast_page_id": 61,
+  "eid": "math.61.27",
+  "title": "Error function",
+  "latex": "\\operatorname{erf}^{(k)}(z) = \\frac{2 (-1)^{k-1}}{\\sqrt{\\pi}} \\mathit{H}_{k-1}(z) e^{-z^2} = \\frac{2}{\\sqrt{\\pi}}  \\frac{d^{k-1}}{dz^{k-1}} \\left(e^{-z^2}\\right),\\qquad k=1, 2, \\dots",
+  "semantic_latex": "\\erf@@{(z)}^{(k)} = \\frac{2 (-1)^{k-1}}{\\sqrt{\\cpi}} \\HermitepolyH{k-1}@{z} \\expe^{-z^2} = \\frac{2}{\\sqrt{\\cpi}} \\deriv [{k-1}]{ }{z}(\\expe^{-z^2}) , \\qquad k = 1 , 2 , \\dots",
+  "mathematica": "D[Erf[z], {z, k}] == Divide[2*(- 1)^(k - 1),Sqrt[Pi]]*HermiteH[k - 1, z]*Exp[- (z)^(2)] == Divide[2,Sqrt[Pi]]*D[Exp[- (z)^(2)], {z, k - 1}]",
+  "maple": "diff(erf(z), [z$k]) = (2*(- 1)^(k - 1))/(sqrt(Pi))*HermiteH(k - 1, z)*exp(- (z)^(2)) = (2)/(sqrt(Pi))*diff(exp(- (z)^(2)), [z$(k - 1)])",
+  "definiens": [
+   "Higher order derivative",
+   "physicists ' Hermite polynomial",
+   "name error function"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "wrong",
+   "maple": "correct"
+  }
+ },
+ {
+  "gold_id": 12,
+  "lacast_page_id": 62,
+  "eid": "math.62.44",
+  "title": "Chebyshev polynomials",
+  "latex": "x_k = \\cos\\left(\\frac{\\pi(k+1/2)}{n}\\right),\\quad k=0,\\ldots,n-1",
+  "semantic_latex": "x_k = \\cos(\\frac{\\cpi(k + 1 / 2)}{n}) , \\quad k = 0 , \\ldots , n - 1",
+  "mathematica": "Subscript[x, k] == Cos[Divide[Pi*(k + 1/2),n]]",
+  "maple": "x[k] = cos((Pi*(k + 1/2))/(n))",
+  "definiens": [
+   "root",
+   "one",
+   "trigonometric definition"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "correct",
+   "maple": "correct"
+  }
+ },
+ {
+  "gold_id": 13,
+  "lacast_page_id": 63,
+  "eid": "math.63.109",
+  "title": "Hermite polynomials",
+  "latex": "E(x, y; u) := \\sum_{n=0}^\\infty u^n \\, \\psi_n (x) \\, \\psi_n (y) = \\frac{1}{\\sqrt{\\pi (1 - u^2)}} \\, \\exp\\left(-\\frac{1 - u}{1 + u} \\, \\frac{(x + y)^2}{4} - \\frac{1 + u}{1 - u} \\, \\frac{(x - y)^2}{4}\\right)",
+  "semantic_latex": "E(x , y ; u) : = \\sum_{n=0}^\\infty u^n \\psi_n(x) \\psi_n(y) = \\frac{1}{\\sqrt{\\cpi(1 - u^2)}} \\exp(- \\frac{1 - u}{1 + u} \\frac{(x + y)^2}{4} - \\frac{1 + u}{1 - u} \\frac{(x - y)^2}{4})",
+  "mathematica": "\\[CapitalEpsilon][x_, y_, u_] := Sum[(u)^(n)* Subscript[\\[Psi], n][x]* Subscript[\\[Psi], n][y], {n, 0, Infinity}] == Divide[1,Sqrt[Pi*(1 - (u)^(2))]]*Exp[-Divide[1 - u,1 + u]*Divide[(x + y)^(2),4]-Divide[1 + u,1 - u]*Divide[(x - y)^(2),4]]",
+  "maple": "Epsilon := (x, y, u) -> sum((u)^(n)* psi[n](x)* psi[n](y), n = 0..infinity) = (1)/(sqrt(Pi*(1 - (u)^(2))))*exp(-(1 - u)/(1 + u)*((x + y)^(2))/(4)-(1 + u)/(1 - u)*((x - y)^(2))/(4))",
+  "definiens": [
+   "distributional identity",
+   "separable kernel",
+   "Mehler 's formula"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "correct",
+   "maple": "correct"
+  }
+ },
+ {
+  "gold_id": 14,
+  "lacast_page_id": 64,
+  "eid": "math.64.8",
+  "title": "Legendre function",
+  "latex": "x = \\pm 1",
+  "semantic_latex": "x = \\pm 1",
+  "mathematica": "x == \\[PlusMinus]1",
+  "maple": "x = &+- 1",
+  "definiens": [
+   "value"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "correct",
+   "maple": "correct"
+  }
+ },
+ {
+  "gold_id": 15,
+  "lacast_page_id": 65,
+  "eid": "math.65.27",
+  "title": "Bernoulli polynomials",
+  "latex": "E_n=2^nE_n(\\tfrac{1}{2})",
+  "semantic_latex": "\\EulernumberE{n} = 2^n\\EulerpolyE{n}@{\\tfrac{1}{2}}",
+  "mathematica": "EulerE[n] == (2)^(n)* EulerE[n, Divide[1,2]]",
+  "maple": "euler(n) = (2)^(n)* euler(n, (1)/(2))",
+  "definiens": [
+   "Euler number"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "wrong"
+  }
+ },
+ {
+  "gold_id": 16,
+  "lacast_page_id": 66,
+  "eid": "math.66.8",
+  "title": "Trigonometric integral",
+  "latex": "\\operatorname{Si}(ix) = i\\operatorname{Shi}(x)",
+  "semantic_latex": "\\sinint@{\\iunit x} = \\iunit \\sinhint@{x}",
+  "mathematica": "SinIntegral[I*x] == I*SinhIntegral[x]",
+  "maple": "Si(I*x) = I*Shi(x)",
+  "definiens": [
+   "ordinary sine",
+   "Trigonometric integral",
+   "hyperbolic sine integral"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "correct"
+  }
+ },
+ {
+  "gold_id": 17,
+  "lacast_page_id": 67,
+  "eid": "math.67.29",
+  "title": "Beta function",
+  "latex": "f(z)=\\frac{1}{\\Beta(x,y)}",
+  "semantic_latex": "f(x, y) = \\frac{1}{\\EulerBeta@{x}{y}}",
+  "mathematica": "f[x_, y_] := Divide[1,Beta[x, y]]",
+  "maple": "f := (x,y) -> (1)/(Beta(x, y))",
+  "definiens": [
+   "function about the form",
+   "reciprocal beta function",
+   "definite integral of trigonometric function"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "wrong"
+  }
+ },
+ {
+  "gold_id": 18,
+  "lacast_page_id": 68,
+  "eid": "math.68.51",
+  "title": "Fresnel integral",
+  "latex": "\\begin{align}\\int x^m e^{ix^n}\\,dx & =\\frac{x^{m+1}}{m+1}\\,_1F_1\\left(\\begin{array}{c} \\frac{m+1}{n}\\\\1+\\frac{m+1}{n}\\end{array}\\mid ix^n\\right) \\\\[6px]& =\\frac{1}{n} i^\\frac{m+1}{n}\\gamma\\left(\\frac{m+1}{n},-ix^n\\right),\\end{align}",
+  "semantic_latex": "\\begin{align}\\int x^m \\exp(\\iunit x^n) \\diff{x} &= \\frac{x^{m+1}}{m+1}\\genhyperF{1}{1}@{\\frac{m+1}{n}}{1+\\frac{m+1}{n}}{\\iunit x^n}\\\\ &=\\frac{1}{n} \\iunit^{(m+1)/n} \\incgamma@{\\frac{m+1}{n}}{-\\iunit x^n}\\end{align}",
+  "mathematica": "Integrate[(x)^(m)* Exp[I*(x)^(n)], x] == Divide[(x)^(m + 1),m + 1]*HypergeometricPFQ[{Divide[m + 1,n]}, {1 +Divide[m + 1,n]}, I*(x)^(n)] == Divide[1,n]*(I)^((m + 1)/n)* Gamma[Divide[m + 1,n], 0, - I*(x)^(n)]",
+  "maple": "int((x)^(m)* exp(I*(x)^(n)), x) = ((x)^(m + 1))/(m + 1)*hypergeom([(m + 1)/(n)], [1 +(m + 1)/(n)], I*(x)^(n)) = (1)/(n)*(I)^((m + 1)/n)* GAMMA((m + 1)/(n))-GAMMA((m + 1)/(n), - I*(x)^(n))",
+  "definiens": [
+   "incomplete gamma function",
+   "confluent hypergeometric function",
+   "Fresnel integral"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "wrong"
+  }
+ },
+ {
+  "gold_id": 19,
+  "lacast_page_id": 69,
+  "eid": "math.69.117",
+  "title": "Classical orthogonal polynomials",
+  "latex": "T_n(x) = \\frac{\\Gamma(1/2)\\sqrt{1-x^2}}{(-2)^n\\,\\Gamma(n+1/2)} \\  \\frac{d^n}{dx^n}\\left([1-x^2]^{n-1/2}\\right)",
+  "semantic_latex": "\\ChebyshevpolyT{n}@{x} = \\frac{\\EulerGamma{1/2}\\sqrt{1-x^2}}{(-2)^n\\EulerGamma{n+1/2}} \\deriv [n]{ }{x}([1 - x^2]^{n-1/2})",
+  "mathematica": "ChebyshevT[n, x] == Divide[Gamma[1/2]*Sqrt[1 - (x)^(2)],(- 2)^(n)* Gamma[n + 1/2]]*D[(1 - (x)^(2))^(n - 1/2), {x, n}]",
+  "maple": "ChebyshevT(n, x) = (GAMMA(1/2)*sqrt(1 - (x)^(2)))/((- 2)^(n)* GAMMA(n + 1/2))*diff((1 - (x)^(2))^(n - 1/2), [x$(n)])",
+  "definiens": [
+   "Rodrigues ' formula",
+   "orthogonal polynomial",
+   "Chebyshev polynomials of the second kind"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "wrong"
+  }
+ },
+ {
+  "gold_id": 20,
+  "lacast_page_id": 70,
+  "eid": "math.70.58",
+  "title": "Generalized hypergeometric function",
+  "latex": "{}_1F_0(1;;z) = \\sum_{n \\geqslant 0} z^n = (1-z)^{-1}",
+  "semantic_latex": "\\genhyperF{1}{0}@{1}{}{z} = \\sum_{n \\geqslant 0} z^n = (1-z)^{-1}",
+  "mathematica": "HypergeometricPFQ[{1}, {}, z] == Sum[(z)^(n), {n, 0, Infinity}] == (1 - z)^(- 1)",
+  "maple": "hypergeom([1], [], z) = sum((z)^(n), n = 0..infinity) = (1 - z)^(- 1)",
+  "definiens": [
+   "geometric series with ratio",
+   "coefficient",
+   "hypergeometric function"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "wrong"
+  }
+ },
+ {
+  "gold_id": 21,
+  "lacast_page_id": 71,
+  "eid": "math.71.1-1",
+  "title": "Dirichlet L-function",
+  "latex": "\\chi(-1) = 1",
+  "semantic_latex": "\\Dirichletchar@@{- 1}{k} = 1",
+  "mathematica": "DirichletCharacter[1, 1, -1] == 1",
+  "maple": null,
+  "definiens": [
+   "primitive character",
+   "integer",
+   "only zero"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 22,
+  "lacast_page_id": 72,
+  "eid": "math.72.15",
+  "title": "Airy function",
+  "latex": "\\operatorname{Bi}'(z)\\sim \\frac{z^{\\frac{1}{4}}e^{\\frac{2}{3}z^{\\frac{3}{2}}}}{\\sqrt\\pi\\,}\\left[ \\sum_{n=0}^{\\infty}\\frac{1+6n}{1-6n} \\dfrac{ \\Gamma(n+\\frac{5}{6})\\Gamma(n+\\frac{1}{6})\\left(\\frac{3}{4}\\right)^n}{2\\pi n! z^{3n/2}} \\right]",
+  "semantic_latex": "\\AiryBi'@{z} \\sim \\frac{z^{\\frac{1}{4}} \\expe^{\\frac{2}{3}z^{\\frac{3}{2}}}}{\\sqrt{\\cpi}} [\\sum_{n=0}^{\\infty} \\frac{1+6n}{1-6n} \\frac{\\EulerGamma@{n + \\frac{5}{6}} \\EulerGamma@{n + \\frac{1}{6}}(\\frac{3}{4})^n{2 \\cpi n! z^{3n/2}}}]",
+  "mathematica": null,
+  "maple": null,
+  "definiens": [
+   "z",
+   "asymptotic formula for Ai",
+   "Bi"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "none",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 23,
+  "lacast_page_id": 73,
+  "eid": "math.73.41",
+  "title": "Dawson function",
+  "latex": "F'(y)=1-2yF(y)",
+  "semantic_latex": "\\DawsonsintF'@{y}=1-2y\\DawsonsintF@{y}",
+  "mathematica": "D[DawsonF[y], {y, 1}] == 1 - 2*y*DawsonF[y]",
+  "maple": "diff( dawson(y), y$(1) ) = 1 - 2*y*dawson(y)",
+  "definiens": [
+   "polynomial",
+   "Dawson function"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "wrong"
+  }
+ },
+ {
+  "gold_id": 24,
+  "lacast_page_id": 74,
+  "eid": "math.74.0-1",
+  "title": "Hurwitz zeta function",
+  "latex": "s\\not =1",
+  "semantic_latex": "s \\neq 1",
+  "mathematica": "s \\[NotEqual] 1",
+  "maple": "s <> 1",
+  "definiens": [
+   "value"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "correct",
+   "maple": "correct"
+  }
+ },
+ {
+  "gold_id": 25,
+  "lacast_page_id": 75,
+  "eid": "math.75.6-1",
+  "title": "Theta function",
+  "latex": "q = e^{i\\pi\\tau}",
+  "semantic_latex": "q = \\expe^{\\iunit \\cpi \\tau}",
+  "mathematica": "q == Exp[I*Pi*\\[Tau]]",
+  "maple": "q = exp(I*Pi*tau)",
+  "definiens": [
+   "term of the nome",
+   "nome"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "correct",
+   "maple": "correct"
+  }
+ },
+ {
+  "gold_id": 26,
+  "lacast_page_id": 76,
+  "eid": "math.76.155",
+  "title": "Jacobi elliptic functions",
+  "latex": "\\frac{\\mathrm{d}}{\\mathrm{d}z} \\operatorname{dn}(z) = - k^2 \\operatorname{sn}(z) \\operatorname{cn}(z)",
+  "semantic_latex": "\\deriv [1]{ }{z} \\Jacobielldnk@@{(z)}{k} = - k^2 \\Jacobiellsnk@@{(z)}{k} \\Jacobiellcnk@@{(z)}{k}",
+  "mathematica": "D[JacobiDN[z, (k)^2], {z, 1}] == - (k)^(2)* JacobiSN[z, (k)^2]*JacobiCN[z, (k)^2]",
+  "maple": "diff(JacobiDN(z, k), [z$(1)]) = - (k)^(2)* JacobiSN(z, k)*JacobiCN(z, k)",
+  "definiens": [
+   "derivative",
+   "elliptic function",
+   "basic Jacobi"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "correct",
+   "maple": "correct"
+  }
+ },
+ {
+  "gold_id": 27,
+  "lacast_page_id": 77,
+  "eid": "math.77.118",
+  "title": "Incomplete gamma function",
+  "latex": "\\int_{-\\infty}^\\infty \\frac {\\gamma\\left(\\frac s 2, z^2 \\pi \\right)} {(z^2 \\pi)^\\frac s 2} e^{-2 \\pi i k z} \\mathrm d z = \\frac {\\Gamma\\left(\\frac {1-s} 2, k^2 \\pi \\right)} {(k^2 \\pi)^\\frac {1-s} 2}",
+  "semantic_latex": "\\int_{-\\infty}^\\infty \\frac{\\incgamma@{\\frac s 2}{z^2 \\cpi}}{(z^2 \\cpi)^\\frac s 2} \\expe^{- 2 \\cpi \\iunit k z} \\diff{z} = \\frac{\\incGamma@{\\frac {1-s} 2}{k^2 \\cpi}}{(k^2 \\cpi)^\\frac {1-s} 2}}",
+  "mathematica": "Integrate[Divide[Gamma[Divide[s,2], 0, (z)^(2)* Pi],((z)^(2)* Pi)^(Divide[s,2])]*Exp[- 2*Pi*I*k*z], {z, - Infinity, Infinity}] == Divide[Gamma[Divide[1 - s,2], (k)^(2)* Pi],((k)^(2)* Pi)^(Divide[1 - s,2])]",
+  "maple": "int((GAMMA((s)/(2))-GAMMA((s)/(2), (z)^(2)* Pi))/(((z)^(2)* Pi)^((s)/(2)))*exp(- 2*Pi*I*k*z), z = - infinity..infinity) = (GAMMA((1 - s)/(2), (k)^(2)* Pi))/(((k)^(2)* Pi)^((1 - s)/(2)))",
+  "definiens": [
+   "Fourier",
+   "upper incomplete Gamma function",
+   "lower incomplete Gamma function"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "wrong",
+   "maple": "correct"
+  }
+ },
+ {
+  "gold_id": 28,
+  "lacast_page_id": 78,
+  "eid": "math.78.0-1",
+  "title": "Polylogarithm",
+  "latex": "_{1}(z) =",
+  "semantic_latex": "\\polylog{1}@{z} = -\\ln@{1-z}",
+  "mathematica": "PolyLog[1, z] = -Log[1 - z]",
+  "maple": "polylog(1, z) = -ln(1 - z)",
+  "definiens": [
+   "natural logarithm",
+   "logarithm",
+   "polylogarithm function"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "wrong"
+  }
+ },
+ {
+  "gold_id": 29,
+  "lacast_page_id": 79,
+  "eid": "math.79.11",
+  "title": "Sinc function",
+  "latex": "\\int_{-\\infty}^\\infty \\operatorname{sinc}(t) \\, e^{-i 2 \\pi f t}\\,dt = \\operatorname{rect}(f)",
+  "semantic_latex": "\\int_{-\\infty}^\\infty \\operatorname{sinc}(t) \\expe^{- \\iunit 2 \\cpi f t} \\diff{t} = \\operatorname{rect}(f)",
+  "mathematica": "Integrate[sinc[(t)]*Exp[- I*2*Pi*f*t], {t, - Infinity, Infinity}] == rect[f]",
+  "maple": "int(sinc((t))*exp(- I*2*Pi*f*t), t = - infinity..infinity) = rect(f)",
+  "definiens": [
+   "argument",
+   "continuous Fourier",
+   "rectangular function"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "wrong",
+   "maple": "correct"
+  }
+ },
+ {
+  "gold_id": 30,
+  "lacast_page_id": 80,
+  "eid": "math.80.26",
+  "title": "Exponential integral",
+  "latex": "N=1",
+  "semantic_latex": "N=1",
+  "mathematica": "N == 1",
+  "maple": "N = 1",
+  "definiens": [
+   "large value",
+   "value"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "correct",
+   "maple": "correct"
+  }
+ },
+ {
+  "gold_id": 31,
+  "lacast_page_id": 81,
+  "eid": "math.81.84",
+  "title": "Laguerre polynomials",
+  "latex": "\\sum_{n=0}^\\infty \\frac{n!\\,\\Gamma\\left(\\alpha + 1\\right)}{\\Gamma\\left(n+\\alpha+1\\right)}L_n^{(\\alpha)}(x)L_n^{(\\alpha)}(y)t^n=\\frac{1}{(1-t)^{\\alpha + 1}}e^{-(x+y)t/(1-t)}\\,_0F_1\\left(;\\alpha + 1;\\frac{xyt}{(1-t)^2}\\right)",
+  "semantic_latex": "\\sum_{n=0}^\\infty \\frac{n! \\EulerGamma@{\\alpha + 1}}{\\EulerGamma@{n + \\alpha + 1}} \\LaguerrepolyL[\\alpha]{n}@{x} \\LaguerrepolyL[\\alpha]{n}@{x} t^n = \\frac{1}{(1-t)^{\\alpha + 1}} \\expe^{-(x+y)t/(1-t)} \\genhyperF{0}{1}@{}{\\alpha + 1}{\\frac{xyt}{(1-t)^2}}",
+  "mathematica": "Sum[Divide[(n)!*Gamma[\\[Alpha]+ 1],Gamma[n + \\[Alpha]+ 1]]*LaguerreL[n, \\[Alpha], x]*LaguerreL[n, \\[Alpha], x]*(t)^(n), {n, 0, Infinity}] == Divide[1,(1 - t)^(\\[Alpha]+ 1)]*Exp[-(x + y)*t/(1 - t)]*HypergeometricPFQ[{}, {\\[Alpha]+ 1}, Divide[x*y*t,(1 - t)^(2)]]",
+  "maple": "sum((factorial(n)*GAMMA(alpha + 1))/(GAMMA(n + alpha + 1))*LaguerreL(n, alpha, x)*LaguerreL(n, alpha, x)*(t)^(n), n = 0..infinity) = (1)/((1 - t)^(alpha + 1))*exp(-(x + y)*t/(1 - t))*hypergeom([], [alpha + 1], (x*y*t)/((1 - t)^(2)))",
+  "definiens": [
+   "Hille formula",
+   "Laguerre polynomial",
+   "series on the left converge"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "wrong"
+  }
+ },
+ {
+  "gold_id": 32,
+  "lacast_page_id": 82,
+  "eid": "math.82.8",
+  "title": "Associated Legendre polynomials",
+  "latex": "c_{lm} = (-1)^m \\frac{(\\ell-m)!}{(\\ell+m)!}",
+  "semantic_latex": "c_{lm} = (-1)^m \\frac{(\\ell-m)!}{(\\ell+m)!}",
+  "mathematica": "Subscript[c, l, m] == (- 1)^(m)*Divide[(\\[ScriptL]- m)!,(\\[ScriptL]+ m)!]",
+  "maple": "c[l, m] = (- 1)^(m)*(factorial(ell - m))/(factorial(ell + m))",
+  "definiens": [
+   "proportionality constant"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "correct",
+   "maple": "correct"
+  }
+ },
+ {
+  "gold_id": 33,
+  "lacast_page_id": 83,
+  "eid": "math.83.3",
+  "title": "Scorer's function",
+  "latex": "\\mathrm{Gi}(x) = \\frac{1}{\\pi} \\int_0^\\infty \\sin\\left(\\frac{t^3}{3} + xt\\right)\\, dt",
+  "semantic_latex": "\\ScorerGi@{x} = \\frac{1}{\\cpi} \\int_0^\\infty \\sin(\\frac{t^3}{3} + xt) \\diff{t}",
+  "mathematica": "ScorerGi[x] == Divide[1,Pi]*Integrate[Sin[Divide[(t)^(3),3]+ x*t], {t, 0, Infinity}]",
+  "maple": "AiryBi(x)*(int(AiryAi(t), t = (x) .. infinity))+AiryAi(x)*(int(AiryBi(t), t = 0 .. (x))) = (1)/(Pi)*int(sin(((t)^(3))/(3)+ x*t), t = 0..infinity)",
+  "definiens": [
+   "Scorer 's function",
+   "special function"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "correct",
+   "maple": "correct"
+  }
+ },
+ {
+  "gold_id": 34,
+  "lacast_page_id": 84,
+  "eid": "math.84.31",
+  "title": "Voigt profile",
+  "latex": "\\frac{\\partial^2}{\\partial x^2} V(x;\\sigma,\\gamma)= \\frac{x^2-\\gamma^2-\\sigma^2}{\\sigma^4} \\frac{\\operatorname{Re}[w(z)]}{\\sigma\\sqrt{2 \\pi}}-\\frac{2 x \\gamma}{\\sigma^4} \\frac{\\operatorname{Im}[w(z)]}{\\sigma\\sqrt{2 \\pi}}+\\frac{\\gamma}{\\sigma^4}\\frac{1}{\\pi}",
+  "semantic_latex": "\\deriv[2]{}{x} V(x ; \\sigma , \\gamma) = \\frac{x^2-\\gamma^2-\\sigma^2}{\\sigma^4} \\frac{\\realpart [\\Faddeevaw@{z}]}{\\sigma \\sqrt{2 \\cpi}} - \\frac{2 x \\gamma}{\\sigma^4} \\frac{\\imagpart [\\Faddeevaw@{z}]}{\\sigma \\sqrt{2 \\cpi}} + \\frac{\\gamma}{\\sigma^4} \\frac{1}{\\cpi}",
+  "mathematica": "D[PDF[VoigtDistribution[\\[Gamma], \\[Sigma]], x], {x, 2}] == Divide[x^2 - \\[Gamma]^2 - \\[Sigma]^2, \\[Sigma]^4] * Divide[ Re[ Exp[-(Divide[x+I*y,\\[Sigma]*Sqrt[2]])^2]*Erfc[-I*(Divide[x+I*y,\\[Sigma]*Sqrt[2]])] ], \\[Sigma]*Sqrt[2*Pi]] - Divide[2*x*y, \\[Sigma]^4] * Divide[Im[Exp[-(Divide[x+I*y,\\[Sigma]*Sqrt[2]])^2]*Erfc[-I*(Divide[x+I*y,\\[Sigma]*Sqrt[2]])]], \\[Sigma]*Sqrt[2*Pi]] + Divide[\\[Gamma],\\[Sigma]^4]*Divide[1,Pi]",
+  "maple": null,
+  "definiens": [
+   "term of the Faddeeva function",
+   "second derivative profile",
+   "real part of the Faddeeva function"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 35,
+  "lacast_page_id": 85,
+  "eid": "math.85.57",
+  "title": "Lerch zeta function",
+  "latex": "\\Phi(z,s,a) = \\frac{1}{1-z} \\frac{1}{a^{s}}    +    \\sum_{n=1}^{N-1} \\frac{(-1)^{n} \\mathrm{Li}_{-n}(z)}{n!} \\frac{(s)_{n}}{a^{n+s}}    +O(a^{-N-s})",
+  "semantic_latex": "\\Phi(z , s , a) = \\frac{1}{1-z} \\frac{1}{a^{s}} + \\sum_{n=1}^{N-1} \\frac{(-1)^{n} \\polylog{-n}@{z}}{n!} \\frac{\\Pochhammersym{s}{n}}{a^{n+s}} + \\bigO{a^{-N-s}}",
+  "mathematica": "\\[CapitalPhi][z, s, a] == Divide[1,1 - z]*Divide[1,(a)^(s)]+ Sum[Divide[(- 1)^(n)* PolyLog[-n, z],(n)!]*Divide[Pochhammer[s, n],(a)^(n + s)], {n, 1, N - 1}]+ O[a]^(- N - s)",
+  "maple": null,
+  "definiens": [
+   "asymptotic expansion",
+   "Pochhammer symbol",
+   "Lerch transcendent"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 36,
+  "lacast_page_id": 86,
+  "eid": "math.86.44",
+  "title": "Confluent hypergeometric function",
+  "latex": "M(1,2,z)=(e^z-1)/z,\\ \\ M(1,3,z)=2!(e^z-1-z)/z^2",
+  "semantic_latex": "\\KummerconfhyperM@{1}{2}{z} = (\\expe^z - 1) / z , \\KummerconfhyperM@{1}{3}{z} = 2! (\\expe^z - 1 - z) / z^2",
+  "mathematica": "Hypergeometric1F1[1, 2, z] == (Exp[z]- 1)/z\n Hypergeometric1F1[1, 3, z] == (2)!*(Exp[z]- 1 - z)/(z)^(2)",
+  "maple": "KummerM(1, 2, z) = (exp(z)- 1)/z; KummerM(1, 3, z) = factorial(2)*(exp(z)- 1 - z)/(z)^(2)",
+  "definiens": [
+   "etc",
+   "Kummer 's function of the first kind",
+   "confluent hypergeometric function"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "correct",
+   "maple": "correct"
+  }
+ },
+ {
+  "gold_id": 37,
+  "lacast_page_id": 87,
+  "eid": "math.87.54",
+  "title": "Mathieu function",
+  "latex": "\\sigma = \\pm 1",
+  "semantic_latex": "\\sigma = \\pm 1",
+  "mathematica": "\\[Sigma] == \\[PlusMinus]1",
+  "maple": "sigma = &+- 1",
+  "definiens": [
+   "value"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "correct",
+   "maple": "correct"
+  }
+ },
+ {
+  "gold_id": 38,
+  "lacast_page_id": 88,
+  "eid": "math.88.0",
+  "title": "Parabolic cylinder function",
+  "latex": "\\frac{d^2f}{dz^2} + \\left(\\tilde{a}z^2+\\tilde{b}z+\\tilde{c}\\right)f=0",
+  "semantic_latex": "\\deriv [2]{f}{z} +(\\tilde{a} z^2 + \\tilde{b} z + \\tilde{c}) f = 0",
+  "mathematica": "D[f[z], {z, 2}] + (a*z^2 + b*z + c)*f[z] == 0",
+  "maple": null,
+  "definiens": [
+   "solution to the differential equation",
+   "special function",
+   "mathematics"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 39,
+  "lacast_page_id": 89,
+  "eid": "math.89.23",
+  "title": "Painlevé transcendents",
+  "latex": "c=\\infty",
+  "semantic_latex": "c=\\infty",
+  "mathematica": "c == Infinity",
+  "maple": "c = infinity",
+  "definiens": [
+   "central charge of the Virasoro algebra",
+   "combination of conformal block",
+   "Painlevé VI equation"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "correct",
+   "maple": "correct"
+  }
+ },
+ {
+  "gold_id": 40,
+  "lacast_page_id": 90,
+  "eid": "math.90.7",
+  "title": "Hypergeometric function",
+  "latex": "c = a + 1",
+  "semantic_latex": "c = a + 1",
+  "mathematica": "c == a + 1",
+  "maple": "c := a + 1",
+  "definiens": [
+   "value"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "correct",
+   "maple": "wrong"
+  }
+ },
+ {
+  "gold_id": 41,
+  "lacast_page_id": 91,
+  "eid": "math.91.47",
+  "title": "Barnes G-function",
+  "latex": "\\frac{1}{\\Gamma(z)}= z e^{\\gamma z} \\prod_{k=1}^\\infty \\left\\{ \\left(1+\\frac{z}{k}\\right)e^{-z/k} \\right\\}",
+  "semantic_latex": "\\frac{1}{\\EulerGamma@{z}} = z \\expe^{\\EulerConstant z} \\prod_{k=1}^\\infty \\{(1 + \\frac{z}{k}) \\expe^{-z/k} \\}",
+  "mathematica": "Divide[1,Gamma[z]] == z*Exp[EulerGamma*z]*Product[(1 +Divide[z,k])*Exp[- z/k], {k, 1, Infinity}]",
+  "maple": "(1)/(GAMMA(z)) = z*exp(gamma*z)*product((1 +(z)/(k))*exp(- z/k), k = 1..infinity)",
+  "definiens": [
+   "Euler",
+   "Mascheroni",
+   "gamma function"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "correct",
+   "maple": "correct"
+  }
+ },
+ {
+  "gold_id": 42,
+  "lacast_page_id": 92,
+  "eid": "math.92.1-1",
+  "title": "Heun function",
+  "latex": "192/24 = 8 = 2 \\times 4",
+  "semantic_latex": "192/24 = 8 = 2 \\times 4",
+  "mathematica": "192/24 == 8 == 2 * 4",
+  "maple": "192/24 = 8 = 2 * 4",
+  "definiens": [],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "correct",
+   "maple": "correct"
+  }
+ },
+ {
+  "gold_id": 43,
+  "lacast_page_id": 93,
+  "eid": "math.93.0-1",
+  "title": "Gegenbauer polynomials",
+  "latex": "=2",
+  "semantic_latex": "\\alpha = 2",
+  "mathematica": "\\[Alpha] = 2",
+  "maple": "alpha = 2",
+  "definiens": [
+   "value"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "wrong"
+  }
+ },
+ {
+  "gold_id": 44,
+  "lacast_page_id": 94,
+  "eid": "math.94.4",
+  "title": "Basic hypergeometric series",
+  "latex": "\\lim_{q\\to 1}\\;_{j}\\phi_k \\left[\\begin{matrix} q^{a_1} & q^{a_2} & \\ldots & q^{a_j} \\\\ q^{b_1} & q^{b_2} & \\ldots & q^{b_k} \\end{matrix} ; q,(q-1)^{1+k-j} z \\right]=\\;_{j}F_k \\left[\\begin{matrix} a_1 & a_2 & \\ldots & a_j \\\\ b_1 & b_2 & \\ldots & b_k \\end{matrix} ;z \\right]",
+  "semantic_latex": "\\lim_{q\\to 1} \\qgenhyperphi{j}{k}@{q^{a_1} , q^{a_2} , \\ldots , q^{a_j}}{q^{b_1} , q^{b_2} , \\ldots , q^{b_k}}{q}{(q - 1)^{1+k-j} z} = \\genhyperF{j}{k}@{a_1 , a_2 , \\ldots , a_j}{b_1 , b_2 , \\ldots , b_k}{z}",
+  "mathematica": null,
+  "maple": null,
+  "definiens": [
+   "q-analog of the hypergeometric series",
+   "unilateral basic hypergeometric series",
+   "basic hypergeometric series"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "none",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 45,
+  "lacast_page_id": 95,
+  "eid": "math.95.0",
+  "title": "Whittaker function",
+  "latex": "\\frac{d^2w}{dz^2}+\\left(-\\frac{1}{4}+\\frac{\\kappa}{z}+\\frac{1/4-\\mu^2}{z^2}\\right)w=0",
+  "semantic_latex": "\\deriv [2]{w}{z} +(- \\frac{1}{4} + \\frac{\\kappa}{z} + \\frac{1/4-\\mu^2}{z^2}) w = 0",
+  "mathematica": "D[w, {z, 2}]+(-Divide[1,4]+Divide[\\[Kappa],z]+Divide[1/4 - \\[Mu]^(2),(z)^(2)])*w == 0",
+  "maple": "diff(w, [z$(2)])+(-(1)/(4)+(kappa)/(z)+(1/4 - (mu)^(2))/((z)^(2)))*w = 0",
+  "definiens": [
+   "Whittaker 's equation",
+   "Whittaker function"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "correct",
+   "maple": "correct"
+  }
+ },
+ {
+  "gold_id": 46,
+  "lacast_page_id": 96,
+  "eid": "math.96.1",
+  "title": "Lemniscatic elliptic function",
+  "latex": "e_1=\\tfrac12,\\qquad e_2=0,\\qquad e_3=-\\tfrac12",
+  "semantic_latex": "e_1=\\tfrac12,\\qquad e_2=0,\\qquad e_3=-\\tfrac12",
+  "mathematica": "Subscript[e, 1] == Divide[1,2]\n Subscript[e, 2] = 0\n Subscript[e, 3] = -Divide[1,2]",
+  "maple": "e[1] := (1)/(2); e[2] := 0; e[3] := -(1)/(2)",
+  "definiens": [
+   "constant"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "wrong",
+   "maple": "wrong"
+  }
+ },
+ {
+  "gold_id": 47,
+  "lacast_page_id": 98,
+  "eid": "math.98.53-1",
+  "title": "Meijer G-function",
+  "latex": "\\gamma> 0,n-p=m-q> 0",
+  "semantic_latex": "\\gamma> 0,n-p=m-q> 0",
+  "mathematica": "\\[Gamma] > 0\n n - p == m - q > 0",
+  "maple": "gamma > 0; n - p = m - q > 0",
+  "definiens": [
+   "constraint"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "correct",
+   "maple": "correct"
+  }
+ },
+ {
+  "gold_id": 48,
+  "lacast_page_id": 99,
+  "eid": "math.99.30",
+  "title": "3-j symbol",
+  "latex": "\\begin{pmatrix}  j \\\\  m \\quad m'\\end{pmatrix}:= \\sqrt{2 j + 1}\\begin{pmatrix}  j & 0 & j \\\\  m & 0 & m'\\end{pmatrix}= (-1)^{j - m'} \\delta_{m, -m'}",
+  "semantic_latex": "\\begin{pmatrix}  j \\\\  m \\quad m'\\end{pmatrix}:= \\sqrt{2 j + 1}\\begin{pmatrix}  j & 0 & j \\\\  m & 0 & m'\\end{pmatrix}= (-1)^{j - m'} \\delta_{m, -m'}",
+  "mathematica": "Wigner[j_, m_, m\\[Prime]_] := Sqrt[2*j+1] * {{j, 0, j}, {m, 0, m\\[Prime]}} = (-1)^(j-m\\[Prime])*Subscript[\\[Delta], m, -m\\[Prime]]",
+  "maple": null,
+  "definiens": [
+   "Wigner 1-jm symbol",
+   "metric tensor in angular-momentum theory",
+   "quantity"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 49,
+  "lacast_page_id": 100,
+  "eid": "math.100.14",
+  "title": "6-j symbol",
+  "latex": "\\begin{Bmatrix}    i & j & \\ell\\\\    k & m & n  \\end{Bmatrix}= (\\Phi_{i,j}^{k,m})_{\\ell,n}",
+  "semantic_latex": "\\Wignersixjsym{i}{j}{\\ell}{k}{m}{n} = (\\Phi_{i,j}^{k,m})_{\\ell,n}",
+  "mathematica": null,
+  "maple": null,
+  "definiens": [
+   "6j symbol",
+   "associativity isomorphism",
+   "symbol"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "none",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 50,
+  "lacast_page_id": 101,
+  "eid": "math.101.32",
+  "title": "9-j symbol",
+  "latex": "\\sum_{j_7 j_8} (2j_7+1)(2j_8+1)  \\begin{Bmatrix}    j_1 & j_2 & j_3\\\\    j_4 & j_5 & j_6\\\\    j_7 & j_8 & j_9  \\end{Bmatrix} \\begin{Bmatrix}    j_1 & j_2 & j_3'\\\\    j_4 & j_5 & j_6'\\\\    j_7 & j_8 & j_9  \\end{Bmatrix}  = \\frac{\\delta_{j_3j_3'}\\delta_{j_6j_6'} \\begin{Bmatrix} j_1 & j_2 & j_3 \\end{Bmatrix} \\begin{Bmatrix} j_4 & j_5 & j_6\\end{Bmatrix} \\begin{Bmatrix} j_3 & j_6 & j_9 \\end{Bmatrix}}         {(2j_3+1)(2j_6+1)}",
+  "semantic_latex": "\\sum_{j_7 j_8} (2j_7+1)(2j_8+1)  \\Wignerninejsym{j_1}{j_2}{j_3}{j_4}{j_5}{j_6}{j_7}{j_8}{j_9} \\Wignerninejsym{j_1}{j_2}{j_3'}{j_4}{j_5}{j_6'}{j_7}{j_8}{j_9} = \\frac{\\delta_{j_3j_3'}\\delta_{j_6j_6'} \\begin{Bmatrix} j_1 & j_2 & j_3 \\end{Bmatrix} \\begin{Bmatrix} j_4 & j_5 & j_6\\end{Bmatrix} \\begin{Bmatrix} j_3 & j_6 & j_9 \\end{Bmatrix}}{(2j_3+1)(2j_6+1)}",
+  "mathematica": null,
+  "maple": null,
+  "definiens": [
+   "orthogonality relation",
+   "triangular delta",
+   "symbol"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "none",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 51,
+  "lacast_page_id": 102,
+  "eid": "math.102.5",
+  "title": "Kravchuk polynomials",
+  "latex": "\\mathcal{K}_k(x; n,q) = \\sum_{j=0}^{k}(-q)^j (q-1)^{k-j} \\binom {n-j}{k-j} \\binom{x}{j}",
+  "semantic_latex": "\\KrawtchoukpolyK{k}@{x}{n}{q} = \\sum_{j=0}^{k}(-q)^j (q-1)^{k-j} \\binom {n-j}{k-j} \\binom{x}{j}",
+  "mathematica": "K[k_, x_, n_, q_] := Sum[(- q)^(j)*(q - 1)^(k - j)*Binomial[n - j,k - j]*Binomial[x,j], {j, 0, k}]",
+  "maple": null,
+  "definiens": [
+   "following alternative expression",
+   "Kravchuk polynomial"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 52,
+  "lacast_page_id": 103,
+  "eid": "math.103.8",
+  "title": "Kelvin functions",
+  "latex": "g_1(x) = \\sum_{k \\geq 1} \\frac{\\sin(k \\pi / 4)}{k! (8x)^k} \\prod_{l = 1}^k (2l - 1)^2",
+  "semantic_latex": "g_1(x) = \\sum_{k \\geq 1} \\frac{\\sin(k \\cpi / 4)}{k! (8x)^k} \\prod_{l = 1}^k(2 l - 1)^2",
+  "mathematica": "Subscript[g, 1][x_] := Sum[Divide[Sin[k*Pi/4],(k)!*(8*x)^(k)]*Product[(2*l - 1)^(2), {l, 1, k}], {k, 1, Infinity}]",
+  "maple": "g[1] := (x) -> sum((sin(k*Pi/4))/(factorial(k)*(8*x)^(k))*product((2*l - 1)^(2), l = 1..k), k = 1..infinity)",
+  "definiens": [
+   "series expansion",
+   "special case",
+   "asymptotic series"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "wrong",
+   "maple": "wrong"
+  }
+ },
+ {
+  "gold_id": 53,
+  "lacast_page_id": 104,
+  "eid": "math.104.2",
+  "title": "Lommel function",
+  "latex": "S_{\\mu,\\nu}(z) = s_{\\mu,\\nu}(z) + 2^{\\mu-1} \\Gamma\\left(\\frac{\\mu + \\nu + 1}{2}\\right) \\Gamma\\left(\\frac{\\mu - \\nu + 1}{2}\\right)\\left(\\sin \\left[(\\mu - \\nu)\\frac{\\pi}{2}\\right] J_\\nu(z) - \\cos \\left[(\\mu - \\nu)\\frac{\\pi}{2}\\right] Y_\\nu(z)\\right)",
+  "semantic_latex": "\\LommelS{\\mu}{\\nu}@{z} = \\Lommels{\\mu}{\\nu}@{z} + 2^{\\mu-1} \\EulerGamma@{\\frac{\\mu + \\nu + 1}{2}} \\EulerGamma@{\\frac{\\mu - \\nu + 1}{2}}(\\sin [(\\mu - \\nu) \\frac{\\cpi}{2}] \\BesselJ{\\nu}@{z} - \\cos [(\\mu - \\nu) \\frac{\\cpi}{2}] \\BesselY{\\nu}@{z})",
+  "mathematica": "S[\\[Mu]_, \\[Nu]_, z_] := Divide[Pi,2]*(BesselY[\\[Nu], z]*Integrate[(x)^\\[Mu]* BesselJ[\\[Nu], x], {x, 0, z}]- BesselJ[\\[Nu], z]*Integrate[(x)^\\[Mu]* BesselY[\\[Nu], x], {x, 0, z}]) + (2)^(\\[Mu]- 1)* Gamma[Divide[\\[Mu]+ \\[Nu]+ 1,2]]*Gamma[Divide[\\[Mu]- \\[Nu]+ 1,2]]*(Sin[((\\[Mu]- \\[Nu])*Divide[Pi,2])*]*BesselJ[\\[Nu], z]- Cos[((\\[Mu]- \\[Nu])*Divide[Pi,2])*]*BesselY[\\[Nu], z])",
+  "maple": "LommelS1(mu, nu, z) = (Pi)/(2)*(BesselY(nu, z)*int((x)^(mu)* BesselJ(nu, x), x = 0..z)- BesselJ(nu, z)*int((x)^(mu)* BesselY(nu, x), x = 0..z))",
+  "definiens": [
+   "Lommel function",
+   "Bessel function of the first kind",
+   "Bessel function of the second kind"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "wrong"
+  }
+ },
+ {
+  "gold_id": 54,
+  "lacast_page_id": 105,
+  "eid": "math.105.18",
+  "title": "Struve function",
+  "latex": "\\mathbf{H}_{\\alpha}(z) = \\frac{z^{\\alpha+1}}{2^{\\alpha}\\sqrt{\\pi} \\Gamma \\left (\\alpha+\\tfrac{3}{2} \\right )} {}_1F_2 \\left (1,\\tfrac{3}{2}, \\alpha+\\tfrac{3}{2},-\\tfrac{z^2}{4} \\right )",
+  "semantic_latex": "\\StruveH{\\alpha}@{z} = \\frac{z^{\\alpha+1}}{2^{\\alpha} \\sqrt{\\cpi} \\EulerGamma@{\\alpha + \\tfrac{3}{2}}} \\genhyperF{1}{2}@{1}{\\tfrac{3}{2}, \\alpha + \\tfrac{3}{2}}{- \\tfrac{z^2}{4}}",
+  "mathematica": "StruveH[\\[Alpha], z] == Divide[(z)^(\\[Alpha]+ 1),(2)^\\[Alpha]*Sqrt[Pi]*Gamma[\\[Alpha]+Divide[3,2]]]*HypergeometricPFQ[{1}, {Divide[3,2], \\[Alpha]+Divide[3,2]}, -Divide[(z)^(2),4]]",
+  "maple": "StruveH(alpha, z) = ((z)^(alpha + 1))/((2)^(alpha)*sqrt(Pi)*GAMMA(alpha +(3)/(2)))*hypergeom([1], [(3)/(2), alpha +(3)/(2)], -((z)^(2))/(4))",
+  "definiens": [
+   "hypergeometric function",
+   "Struve",
+   "Struve function"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "wrong"
+  }
+ },
+ {
+  "gold_id": 55,
+  "lacast_page_id": 106,
+  "eid": "math.106.7",
+  "title": "Hill differential equation",
+  "latex": "f(t+p) = f(t)",
+  "semantic_latex": "f(t+p) = f(t)",
+  "mathematica": "f[t + p] == f[t]",
+  "maple": "f(t + p) = f(t)",
+  "definiens": [
+   "function",
+   "periodic function by minimal period"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "correct",
+   "maple": "correct"
+  }
+ },
+ {
+  "gold_id": 56,
+  "lacast_page_id": 108,
+  "eid": "math.108.3",
+  "title": "Anger function",
+  "latex": "\\mathbf{J}_\\nu(z)=\\cos\\frac{\\pi\\nu}{2}\\sum_{k=0}^\\infty\\frac{(-1)^kz^{2k}}{4^k\\Gamma\\left(k+\\frac{\\nu}{2}+1\\right)\\Gamma\\left(k-\\frac{\\nu}{2}+1\\right)}+\\sin\\frac{\\pi\\nu}{2}\\sum_{k=0}^\\infty\\frac{(-1)^kz^{2k+1}}{2^{2k+1}\\Gamma\\left(k+\\frac{\\nu}{2}+\\frac{3}{2}\\right)\\Gamma\\left(k-\\frac{\\nu}{2}+\\frac{3}{2}\\right)}",
+  "semantic_latex": "\\AngerJ{\\nu}@{z} = \\cos \\frac{\\cpi\\nu}{2} \\sum_{k=0}^\\infty \\frac{(-1)^k z^{2k}}{4^k\\EulerGamma@{k+\\frac{\\nu}{2}+1}\\EulerGamma@{k-\\frac{\\nu}{2}+1}}+\\sin\\frac{\\cpi\\nu}{2}\\sum_{k=0}^\\infty\\frac{(-1)^k z^{2k+1}}{2^{2k+1}\\EulerGamma@{k+\\frac{\\nu}{2}+\\frac{3}{2}}\\EulerGamma@{k-\\frac{\\nu}{2}+\\frac{3}{2}}}",
+  "mathematica": "AngerJ[\\[Nu], z] == Cos[Divide[Pi*\\[Nu],2]]*Sum[Divide[(- 1)^(k)* (z)^(2*k),(4)^(k)* Gamma[k +Divide[\\[Nu],2]+ 1]*Gamma[k -Divide[\\[Nu],2]+ 1]], {k, 0, Infinity}]+ Sin[Divide[Pi*\\[Nu],2]]*Sum[Divide[(- 1)^(k)* (z)^(2*k + 1),(2)^(2*k + 1)* Gamma[k +Divide[\\[Nu],2]+Divide[3,2]]*Gamma[k -Divide[\\[Nu],2]+Divide[3,2]]], {k, 0, Infinity}]",
+  "maple": "AngerJ(nu, z) = cos((Pi*nu)/(2))*sum(((- 1)^(k)* (z)^(2*k))/((4)^(k)* GAMMA(k +(nu)/(2)+ 1)*GAMMA(k -(nu)/(2)+ 1)), k = 0..infinity)+ sin((Pi*nu)/(2))*sum(((- 1)^(k)* (z)^(2*k + 1))/((2)^(2*k + 1)* GAMMA(k +(nu)/(2)+(3)/(2))*GAMMA(k -(nu)/(2)+(3)/(2))), k = 0..infinity)",
+  "definiens": [
+   "power series expansion",
+   "Anger function",
+   "Gamma function"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "wrong"
+  }
+ },
+ {
+  "gold_id": 57,
+  "lacast_page_id": 109,
+  "eid": "math.109.27",
+  "title": "Lamé function",
+  "latex": "(\\operatorname{Ec})^'_{2K} = (\\operatorname{Ec})^'_0 = 0, \\;\\; (\\operatorname{Es})^'_{2K} = (\\operatorname{Es})^'_0 = 0",
+  "semantic_latex": "(\\operatorname{Ec})_{2K}^' =(\\operatorname{Ec})_0^' = 0 ,(\\operatorname{Es})_{2K}^' =(\\operatorname{Es})_0^' = 0",
+  "mathematica": null,
+  "maple": null,
+  "definiens": [
+   "boundary condition",
+   "ellipsoidal wave"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "none",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 58,
+  "lacast_page_id": 110,
+  "eid": "math.110.1",
+  "title": "Gauss–Hermite quadrature",
+  "latex": "\\int_{-\\infty}^{+\\infty} e^{-x^2} f(x)\\,dx \\approx \\sum_{i=1}^n w_i f(x_i)",
+  "semantic_latex": "\\int_{-\\infty}^{+\\infty} \\expe^{-x^2} f(x) \\diff{x} \\approx \\sum_{i=1}^n w_i f(x_i)",
+  "mathematica": null,
+  "maple": null,
+  "definiens": [
+   "value of integral",
+   "form of Gaussian quadrature",
+   "Gauss -- Hermite quadrature"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "none",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 59,
+  "lacast_page_id": 111,
+  "eid": "math.111.0",
+  "title": "Askey–Wilson polynomials",
+  "latex": "p_n(x;a,b,c,d|q) =(ab,ac,ad;q)_na^{-n}\\;_{4}\\phi_3 \\left[\\begin{matrix} q^{-n}&abcdq^{n-1}&ae^{i\\theta}&ae^{-i\\theta} \\\\ ab&ac&ad \\end{matrix} ; q,q \\right]",
+  "semantic_latex": "\\AskeyWilsonpolyp{n}@{x}{a}{b}{c}{d}{q} = \\qmultiPochhammersym{ab , ac , ad}{q}{n} a^{-n} \\qgenhyperphi{4}{3}@{q^{-n} , abcdq^{n-1} , a\\expe^{\\iunit\\theta} , a\\expe^{-\\iunit\\theta}}{ab , ac , ad}{q}{q}",
+  "mathematica": "p[n_, x_, a_, b_, c_, d_, q_] := Product[QPochhammer[Part[{a*b , a*c , a*d},i],q,n],{i,1,Length[{a*b , a*c , a*d}]}]*(a)^(- n)* QHypergeometricPFQ[{(q)^(- n), a*b*c*d*(q)^(n - 1), a*Exp[I*\\[Theta]], a*Exp[- I*\\[Theta]]},{a*b , a*c , a*d},q,q]",
+  "maple": null,
+  "definiens": [
+   "basic hypergeometric function",
+   "q-Pochhammer symbol",
+   "Askey–Wilson polynomials"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 60,
+  "lacast_page_id": 112,
+  "eid": "math.112.0",
+  "title": "Hahn polynomials",
+  "latex": "Q_n(x;\\alpha,\\beta,N)= {}_3F_2(-n,-x,n+\\alpha+\\beta+1;\\alpha+1,-N+1;1).",
+  "semantic_latex": "\\HahnpolyQ{n}@{x}{\\alpha}{\\beta}{N} = \\genhyperF{3}{2}@{- n , - x , n + \\alpha + \\beta + 1}{\\alpha + 1 , - N + 1}{1}",
+  "mathematica": "Q[n_, x_, \\[Alpha]_, \\[Beta]_, N_] := HypergeometricPFQ[{- n , - x , n + \\[Alpha]+ \\[Beta]+ 1}, {\\[Alpha]+ 1 , - N + 1}, 1]",
+  "maple": null,
+  "definiens": [
+   "Hahn polynomial",
+   "basic hypergeometric function",
+   "hypergeometric function"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 61,
+  "lacast_page_id": 113,
+  "eid": "math.113.2",
+  "title": "Charlier polynomials",
+  "latex": "\\sum_{x=0}^\\infty \\frac{\\mu^x}{x!} C_n(x; \\mu)C_m(x; \\mu)=\\mu^{-n} e^\\mu n! \\delta_{nm}, \\quad \\mu>0",
+  "semantic_latex": "\\sum_{x=0}^\\infty \\frac{\\mu^x}{x!} \\CharlierpolyC{n}@{x}{\\mu} \\CharlierpolyC{m}@{x}{\\mu} = \\mu^{-n} \\expe^\\mu n! \\delta_{nm} , \\quad \\mu > 0",
+  "mathematica": "Sum[Divide[\\[Mu]^x, x!] * HypergeometricPFQ[{-n, -x}, {}, -Divide[1,\\[Mu]]] * HypergeometricPFQ[{-m, -x}, {}, -Divide[1,\\[Mu]]], {x, 0, Infinity}] == \\[Mu]^(-n)*Exp[\\[Mu]]*n!*Subscript[\\[Delta], n, m]",
+  "maple": null,
+  "definiens": [
+   "orthogonality relation",
+   "Charlier polynomial"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 62,
+  "lacast_page_id": 114,
+  "eid": "math.114.0",
+  "title": "Q-Racah polynomials",
+  "latex": "p_n(q^{-x}+q^{x+1}cd;a,b,c,d;q) = {}_4\\phi_3\\left[\\begin{matrix} q^{-n} &abq^{n+1}&q^{-x}&q^{x+1}cd\\\\aq&bdq&cq\\\\ \\end{matrix};q;q\\right]",
+  "semantic_latex": "\\qRacahpolyR{n}@{q^{-x} + q^{x+1} cd}{a}{b}{c}{d}{q} = \\qgenhyperphi{4}{3}@{q^{-n}, abq^{n+1}, q^{-x}, q^{x+1}cd}{aq , bdq , cq}{q}{q}",
+  "mathematica": null,
+  "maple": null,
+  "definiens": [
+   "term of basic hypergeometric function"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "none",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 63,
+  "lacast_page_id": 115,
+  "eid": "math.115.0",
+  "title": "Q-Charlier polynomials",
+  "latex": "\\displaystyle c_n(q^{-x};a;q) = {}_2\\phi_1(q^{-n},q^{-x};0;q,-q^{n+1}/a)",
+  "semantic_latex": "c_n(q^{-x} ; a ; q) = \\qgenhyperphi{2}{1}@{q^{-n} , q^{-x}}{0}{q}{- q^{n+1} / a}",
+  "mathematica": null,
+  "maple": null,
+  "definiens": [
+   "q-Charlier polynomial",
+   "term of the basic hypergeometric function"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "none",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 64,
+  "lacast_page_id": 116,
+  "eid": "math.116.0",
+  "title": "Meixner polynomials",
+  "latex": "M_n(x,\\beta,\\gamma) = \\sum_{k=0}^n (-1)^k{n \\choose k}{x\\choose k}k!(x+\\beta)_{n-k}\\gamma^{-k}",
+  "semantic_latex": "\\MeixnerpolyM{n}@{x}{\\beta}{\\gamma} = \\sum_{k=0}^n(- 1)^k{n \\choose k}{x\\choose k} k! \\Pochhammersym{x + \\beta}{n-k} \\gamma^{-k}",
+  "mathematica": "M[n_, x_, \\[Beta]_, \\[Gamma]_] := Sum[(- 1)^(k)*Binomial[n,k]*Binomial[x,k]*(k)!*Pochhammer[x + \\[Beta], n - k]*\\[Gamma]^(- k), {k, 0, n}]",
+  "maple": null,
+  "definiens": [
+   "Meixner polynomial",
+   "Pochhammer symbol",
+   "term of binomial coefficient"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 65,
+  "lacast_page_id": 117,
+  "eid": "math.117.19",
+  "title": "Appell series",
+  "latex": "x(1-x) \\frac {\\partial^2F_1(x,y)} {\\partial x^2} + y(1-x) \\frac {\\partial^2F_1(x,y)} {\\partial x \\partial y} + [c - (a+b_1+1) x] \\frac {\\partial F_1(x,y)} {\\partial x} - b_1 y \\frac {\\partial F_1(x,y)} {\\partial y} - a b_1 F_1(x,y) = 0",
+  "semantic_latex": "x(1-x) \\deriv[2]{\\AppellF{1}@{a}{b_1}{b_2}{\\gamma}{x}{y}}{x} + y(1-x) \\frac{\\pdiff[2]{\\AppellF{1}@{a}{b_1}{b_2}{\\gamma}{x}{y}}}{\\pdiff{x}\\pdiff{y}} + [c - (a+b_1+1) x] \\deriv[1]{\\AppellF{1}@{a}{b_1}{b_2}{\\gamma}{x}{y}}{x} - b_1 y \\deriv[1]{\\AppellF{1}@{a}{b_1}{b_2}{\\gamma}{x}{y}}{y} - a b_1 \\AppellF{1}@{a}{b_1}{b_2}{\\gamma}{x}{y} = 0",
+  "mathematica": "x*(1-x) * D[AppellF[a, Subscript[b, 1], Subscript[b, 2], \\[Gamma], x, y], {x,2}] + y*(1-x) * D[AppellF[a, Subscript[b, 1], Subscript[b, 2], \\[Gamma], x, y], x, y] + (c - (a+Subscript[b, 1]+1)*x) * D[AppellF[a, Subscript[b, 1], Subscript[b, 2], \\[Gamma], x, y], x] - Subscript[b,1] * y * D[AppellF[a, Subscript[b, 1], Subscript[b, 2], \\[Gamma], x, y], y] - a*Subscript[b,1]*AppellF[a, Subscript[b, 1], Subscript[b, 2], \\[Gamma], x, y] == 0",
+  "maple": null,
+  "definiens": [
+   "Appell",
+   "partial differential equation",
+   "system of differential equation"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 66,
+  "lacast_page_id": 118,
+  "eid": "math.118.0",
+  "title": "Theta function of a lattice",
+  "latex": "\\Theta_\\Lambda(\\tau) = \\sum_{x\\in\\Lambda}e^{i\\pi\\tau\\|x\\|^2}\\qquad\\mathrm{Im}\\,\\tau > 0",
+  "semantic_latex": "\\Theta_\\Lambda(\\tau) = \\sum_{x\\in\\Lambda} \\expe^{\\iunit \\cpi \\tau \\|x \\|^2} \\qquad \\imagpart \\tau > 0",
+  "mathematica": "\\[CapitalTheta][\\[CapitalLambda]_, \\[Tau]_] := Sum[Exp[I*Pi*\\[Tau]*(Norm[x])^(2)], {x, \\[CapitalLambda]}]",
+  "maple": null,
+  "definiens": [
+   "theta function",
+   "lattice",
+   "Theta function of a lattice"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 67,
+  "lacast_page_id": 119,
+  "eid": "math.119.0",
+  "title": "Heine–Stieltjes polynomials",
+  "latex": "\\frac{d^2 S}{dz^2}+\\left(\\sum _{j=1}^N \\frac{\\gamma _j}{z - a_j} \\right) \\frac{dS}{dz} + \\frac{V(z)}{\\prod _{j=1}^N (z - a_j)}S = 0",
+  "semantic_latex": "\\deriv [2]{S}{z} +(\\sum_{j=1}^N \\frac{\\gamma _j}{z - a_j}) \\deriv[]{S}{z} + \\frac{V(z)}{\\prod _{j=1}^N (z - a_j)} S = 0",
+  "mathematica": null,
+  "maple": null,
+  "definiens": [
+   "form",
+   "Fuchsian equation",
+   "polynomial"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "none",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 68,
+  "lacast_page_id": 120,
+  "eid": "math.120.0",
+  "title": "Stieltjes–Wigert polynomials",
+  "latex": "w(x) = \\frac{k}{\\sqrt{\\pi}} x^{-1/2} \\exp(-k^2\\log^2 x)",
+  "semantic_latex": "w(x) = \\frac{k}{\\sqrt{\\cpi}} x^{-1/2} \\exp(- k^2 \\log^2 x)",
+  "mathematica": "w[x_] := Divide[k,Sqrt[Pi]]*(x)^(- 1/2)* Exp[- (k)^(2)* (Log[x])^(2)]",
+  "maple": "w := (x) -> (k)/(sqrt(Pi))*(x)^(- 1/2)* exp(- (k)^(2)* (log(x))^(2))",
+  "definiens": [
+   "weight function",
+   "positive real line",
+   "basic Askey scheme"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "wrong",
+   "maple": "wrong"
+  }
+ },
+ {
+  "gold_id": 69,
+  "lacast_page_id": 121,
+  "eid": "math.121.23",
+  "title": "Modular lambda function",
+  "latex": "y^2=x(x-1)(x-\\lambda)",
+  "semantic_latex": "y^2=x(x-1)(x-\\lambda)",
+  "mathematica": "(y)^(2) == x*(x - 1)*(x - \\[Lambda])",
+  "maple": "(y)^(2) = x*(x - 1)*(x - lambda)",
+  "definiens": [
+   "elliptic curve of Legendre form",
+   "relation to the j-invariant",
+   "relation to the j-invariant"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "correct",
+   "maple": "correct"
+  }
+ },
+ {
+  "gold_id": 70,
+  "lacast_page_id": 122,
+  "eid": "math.122.3",
+  "title": "Meixner–Pollaczek polynomials",
+  "latex": "P_1^{(\\lambda)}(x;\\phi)=2(\\lambda\\cos\\phi + x\\sin\\phi)",
+  "semantic_latex": "\\MeixnerPollaczekpolyP{\\lambda}{1}@{x}{\\phi} = 2(\\lambda \\cos \\phi + x \\sin \\phi)",
+  "mathematica": null,
+  "maple": null,
+  "definiens": [
+   "first few Meixner -- Pollaczek polynomial"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "none",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 71,
+  "lacast_page_id": 123,
+  "eid": "math.123.0",
+  "title": "Jacobi polynomials",
+  "latex": "P_n^{(\\alpha,\\beta)}(z)=\\frac{(\\alpha+1)_n}{n!}\\,{}_2F_1\\left(-n,1+\\alpha+\\beta+n;\\alpha+1;\\tfrac{1}{2}(1-z)\\right)",
+  "semantic_latex": "\\JacobipolyP{\\alpha}{\\beta}{n}@{z} = \\frac{\\Pochhammersym{\\alpha + 1}{n}}{n!} \\genhyperF{2}{1}@{- n , 1 + \\alpha + \\beta + n}{\\alpha + 1}{\\tfrac{1}{2}(1 - z)}",
+  "mathematica": "JacobiP[n, \\[Alpha], \\[Beta], z] == Divide[Pochhammer[\\[Alpha]+ 1, n],(n)!]*HypergeometricPFQ[{- n , 1 + \\[Alpha]+ \\[Beta]+ n}, {\\[Alpha]+ 1}, Divide[1,2]*(1 - z)]",
+  "maple": "JacobiP(n, alpha, beta, z) = (pochhammer(alpha + 1, n))/(factorial(n))*hypergeom([- n , 1 + alpha + beta + n], [alpha + 1], (1)/(2)*(1 - z))",
+  "definiens": [
+   "Pochhammer 's symbol",
+   "hypergeometric function",
+   "Jacobi polynomial"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "correct",
+   "maple": "correct"
+  }
+ },
+ {
+  "gold_id": 72,
+  "lacast_page_id": 124,
+  "eid": "math.124.0",
+  "title": "Continuous dual Hahn polynomials",
+  "latex": "S_n(x^2;a,b,c)= {}_3F_2(-n,a+ix,a-ix;a+b,a+c;1).",
+  "semantic_latex": "\\contdualHahnpolyS{n}@{x^2}{a}{b}{c} = \\genhyperF{3}{2}@{- n , a + \\iunit x , a - \\iunit x}{a + b , a + c}{1}",
+  "mathematica": null,
+  "maple": null,
+  "definiens": [
+   "hypergeometric function",
+   "dual Hahn polynomial",
+   "continuous Hahn polynomial"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "none",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 73,
+  "lacast_page_id": 125,
+  "eid": "math.125.15",
+  "title": "Continuous Hahn polynomials",
+  "latex": "P_n^{(\\alpha,\\beta)}=\\lim_{t\\to\\infty}t^{-n}p_n\\left(\\tfrac12xt; \\tfrac12(\\alpha+1-it), \\tfrac12(\\beta+1+it), \\tfrac12(\\alpha+1+it), \\tfrac12(\\beta+1-it)\\right)",
+  "semantic_latex": "\\JacobipolyP{\\alpha}{\\beta}{n}@{x} = \\lim_{t\\to\\infty} t^{-n} \\contHahnpolyp{n}@{\\tfrac12 xt}{\\tfrac12(\\alpha + 1 - \\iunit t)}{\\tfrac12(\\beta + 1 + \\iunit t)}{\\tfrac12(\\alpha + 1 + \\iunit t)}{\\tfrac12(\\beta + 1 - \\iunit t)}",
+  "mathematica": "JacobiP[n, \\[Alpha], \\[Beta], x] == Limit[(t)^(- n)* I^(n)*Divide[Pochhammer[Divide[1,2]*(\\[Alpha]+ 1 - I*t) + Divide[1,2]*(\\[Alpha]+ 1 + I*t), n]*Pochhammer[Divide[1,2]*(\\[Alpha]+ 1 - I*t) + Divide[1,2]*(\\[Beta]+ 1 - I*t), n], (n)!] * HypergeometricPFQ[{-(n), n + 2*Re[Divide[1,2]*(\\[Alpha]+ 1 - I*t) + Divide[1,2]*(\\[Beta]+ 1 + I*t)] - 1, Divide[1,2]*(\\[Alpha]+ 1 - I*t) + I*(Divide[1,2]*x*t)}, {Divide[1,2]*(\\[Alpha]+ 1 - I*t) + Divide[1,2]*(\\[Alpha]+ 1 + I*t), Divide[1,2]*(\\[Alpha]+ 1 - I*t) + Divide[1,2]*(\\[Beta]+ 1 - I*t)}, 1], t -> Infinity]",
+  "maple": null,
+  "definiens": [
+   "case of the continuous Hahn polynomial",
+   "Jacobi polynomial",
+   "continuous Hahn polynomial"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 74,
+  "lacast_page_id": 126,
+  "eid": "math.126.7",
+  "title": "Dual Hahn polynomials",
+  "latex": "\\sum^{b-1}_{s=a}w_n^{(c)}(s,a,b)w_m^{(c)}(s,a,b)\\rho(s)[\\Delta x(s-\\frac{1}{2}) ]=\\delta_{nm}d_n^2",
+  "semantic_latex": "\\sum_{s=a}^{b-1} \\dualHahnpolyR{n}@{c}{s}{a}{b} \\dualHahnpolyR{m}@{c}{s}{a}{b} \\rho(s) [\\Delta x(s - \\frac{1}{2})] = \\delta_{nm} d_n^2",
+  "mathematica": null,
+  "maple": null,
+  "definiens": [
+   "Dual Hahn polynomial"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "none",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 75,
+  "lacast_page_id": 127,
+  "eid": "math.127.0",
+  "title": "Continuous q-Hahn polynomials",
+  "latex": "p_n(x;a,b,c|q)=a^{-n}e^{-inu}(abe^{2iu},ac,ad;q)_n*_4\\Phi_3(q^{-n},abcdq^{n-1},ae^{i{(t+2u)}},ae^{-it};abe^{2iu},ac,ad;q;q)",
+  "semantic_latex": "p_n(x ; a , b , c|q) = a^{-n} \\expe^{-\\iunit nu} \\qmultiPochhammersym{ab\\expe^{2\\iunit u} , ac , ad}{q}{n} * \\qgenhyperphi{4}{3}@{q^{-n} , abcdq^{n-1} , a\\expe^{\\iunit{(t+2u)}} , a\\expe^{-\\iunit t}}{ab\\expe^{2\\iunit u} , ac , ad}{q}{q}",
+  "mathematica": "p[n_, x_, a_, b_, c_, q_] := (a)^(- n)* Exp[- I*\\[Nu]]*Product[QPochhammer[Part[{a*b*Exp[2*I*u], a*c , a*d},i],q,n],{i,1,Length[{a*b*Exp[2*I*u], a*c , a*d}]}]* QHypergeometricPFQ[{(q)^(- n), a*b*c*d*(q)^(n - 1), a*Exp[I*(t + 2*u)], a*Exp[- I*t]},{a*b*Exp[2*I*u], a*c , a*d},q,q]",
+  "maple": null,
+  "definiens": [
+   "polynomial",
+   "term of basic hypergeometric function",
+   "Pochhammer symbol"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 76,
+  "lacast_page_id": 128,
+  "eid": "math.128.0",
+  "title": "Continuous dual q-Hahn polynomials",
+  "latex": "p_n(x;a,b,c\\mid q)=\\frac{(ab,ac;q)_n}{a^n}\\cdot {_3\\Phi_2}(q^-n,ae^{i\\theta},ae^{-i\\theta}; ab, ac \\mid q;q)",
+  "semantic_latex": "p_n(x ; a , b , c \\mid q) = \\frac{\\qmultiPochhammersym{ab , ac}{q}{n}}{a^n} \\cdot \\qgenhyperphi{3}{2}@{q^{- n} , a\\expe^{\\iunit \\theta} , a\\expe^{- \\iunit \\theta}}{ab , ac}{q}{q}",
+  "mathematica": "p[n_, x_, a_, b_, c_, q_] := Divide[Product[QPochhammer[Part[{a*b , a*c},i],q,n],{i,1,Length[{a*b , a*c}]}],(a)^(n)] * QHypergeometricPFQ[{(q)^(- n), a*Exp[I*\\[Theta]], a*Exp[- I*\\[Theta]]},{a*b , a*c},q,q]",
+  "maple": null,
+  "definiens": [
+   "polynomial",
+   "term of basic hypergeometric function",
+   "Pochhammer symbol"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 77,
+  "lacast_page_id": 129,
+  "eid": "math.129.0",
+  "title": "Q-Hahn polynomials",
+  "latex": "Q_n(x;a,b,N;q)=\\;_{3}\\phi_2\\left[\\begin{matrix} q^-n & abq^n+1 &  x \\\\ aq & q^-N  \\end{matrix} ; q,q \\right]",
+  "semantic_latex": "\\qHahnpolyQ{n}@{x}{a}{b}{N}{q} = \\qgenhyperphi{3}{2}@{q^-n , abq^n+1 , x}{aq , q^-N}{q}{q}",
+  "mathematica": "Q[n_, x_, a_, b_, N_, q_] := QHypergeometricPFQ[{(q)^(-)* n , a*b*(q)^(n)+ 1 , x},{a*q , (q)^(-)* N},q,q]",
+  "maple": null,
+  "definiens": [
+   "q - Hahn polynomial",
+   "polynomial",
+   "term of basic hypergeometric function"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 78,
+  "lacast_page_id": 131,
+  "eid": "math.131.0",
+  "title": "Al-Salam–Chihara polynomials",
+  "latex": "x=",
+  "semantic_latex": "x=\\cos@{\\theta}",
+  "mathematica": "x = Cos[\\[Theta]]",
+  "maple": "x = cos(theta)",
+  "definiens": [
+   "cosine function",
+   "substitution"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "wrong"
+  }
+ },
+ {
+  "gold_id": 79,
+  "lacast_page_id": 132,
+  "eid": "math.132.7",
+  "title": "Orthogonal polynomials on the unit circle",
+  "latex": "\\Phi_n^*(z)=z^n\\overline{\\Phi_n(1/\\overline{z})}",
+  "semantic_latex": "\\Phi_n^*(z) = z^n{\\conj{\\Phi_n(1 / \\conj{z})}}",
+  "mathematica": "\\[CapitalPhi]\\[Prima][n_, z_] := z^n*Conjugate[\\[CapitalPhi][n, Divide[1, Conjugate[z]]]]",
+  "maple": null,
+  "definiens": [
+   "polynomial"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 80,
+  "lacast_page_id": 133,
+  "eid": "math.133.8",
+  "title": "Orthogonal polynomials",
+  "latex": "P_n(x) = c_n \\, \\det \\begin{bmatrix}m_0 & m_1 &  m_2 &\\cdots & m_n \\\\m_1 & m_2 &  m_3 &\\cdots & m_{n+1} \\\\&&\\vdots&& \\vdots \\\\m_{n-1} &m_n& m_{n+1} &\\cdots &m_{2n-1}\\\\1 & x & x^2 & \\cdots & x^n\\end{bmatrix}",
+  "semantic_latex": "P_n(x) = c_n  \\det \\begin{bmatrix}m_0 & m_1 &  m_2 &\\cdots & m_n \\\\m_1 & m_2 &  m_3 &\\cdots & m_{n+1} \\\\&&\\vdots&& \\vdots \\\\m_{n-1} &m_n& m_{n+1} &\\cdots &m_{2n-1}\\\\1 & x & x^2 & \\cdots & x^n\\end{bmatrix}",
+  "mathematica": null,
+  "maple": null,
+  "definiens": [
+   "constant",
+   "normalisation",
+   "orthogonal polynomial"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "none",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 81,
+  "lacast_page_id": 134,
+  "eid": "math.134.0",
+  "title": "Little q-Jacobi polynomials",
+  "latex": "\\displaystyle  p_n(x;a,b;q) = {}_2\\phi_1(q^{-n},abq^{n+1};aq;q,xq)",
+  "semantic_latex": "\\littleqJacobipolyp{n}@{x}{a}{b}{q} = \\qgenhyperphi{2}{1}@{q^{-n} , abq^{n+1}}{aq}{q}{xq}",
+  "mathematica": "p[n_, x_, a_, b_, q_] := QHypergeometricPFQ[{(q)^(- n), a*b*(q)^(n + 1)},{a*q},q,x*q]",
+  "maple": null,
+  "definiens": [
+   "Jacobi polynomial",
+   "term of basic hypergeometric function",
+   "Pochhammer symbol"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 82,
+  "lacast_page_id": 135,
+  "eid": "math.135.0",
+  "title": "Big q-Jacobi polynomials",
+  "latex": "\\displaystyle   P_n(x;a,b,c;q)={}_3\\phi_2(q^{-n},abq^{n+1},x;aq,cq;q,q)",
+  "semantic_latex": "\\bigqJacobipolyP{n}@{x}{a}{b}{c}{q} = \\qgenhyperphi{3}{2}@{q^{-n} , abq^{n+1} , x}{aq , cq}{q}{q}",
+  "mathematica": "p[n_, x_, a_, b_, c_, q_] := QHypergeometricPFQ[{(q)^(- n), a*b*(q)^(n + 1), x},{a*q , c*q},q,q]",
+  "maple": null,
+  "definiens": [
+   "polynomial",
+   "term of basic hypergeometric function",
+   "big q - Jacobi polynomial"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 83,
+  "lacast_page_id": 137,
+  "eid": "math.137.0",
+  "title": "Big q-Laguerre polynomials",
+  "latex": "P_n(x;a,b;q)=\\frac{1}{(b^{-1}*q^{-n};q,n)}*_2\\Phi_1(q^{-n},aqx^{-1};aq|q;\\frac{x}{b})",
+  "semantic_latex": "P_n(x;a,b;q) =\\frac{1}{\\qmultiPochhammersym{b^{-1}*q^{-n}}{q}{n}} * \\qgenhyperphi{2}{1}@{q^{-n},aqx^{-1}}{aq}{q}{\\frac{x}{b}}",
+  "mathematica": "P[n_, x_, a_, b_, q_] := Divide[1,Product[QPochhammer[Part[{(b)^(- 1)* (q)^(- n)},i],q,n],{i,1,Length[{(b)^(- 1)* (q)^(- n)}]}]]* QHypergeometricPFQ[{(q)^(- n), a*q*(x)^(- 1)},{a*q},q,Divide[x,b]]",
+  "maple": null,
+  "definiens": [
+   "polynomial",
+   "term of basic hypergeometric function",
+   "Pochhammer symbol"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 84,
+  "lacast_page_id": 138,
+  "eid": "math.138.0",
+  "title": "Dual q-Krawtchouk polynomials",
+  "latex": "K_n(\\lambda(x);c,N|q)=_3\\Phi_2(q^{-n},q^{-x},cq^{x-N};q^{-N},0|q;q)",
+  "semantic_latex": "K_n(\\lambda(x);c,N|q) = \\qgenhyperphi{3}{2}@{q^{-n},q^{-x},cq^{x-N}}{q^{-N},0}{q}{q}",
+  "mathematica": null,
+  "maple": null,
+  "definiens": [
+   "polynomial",
+   "term of basic hypergeometric function",
+   "Pochhammer symbol"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "none",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 85,
+  "lacast_page_id": 139,
+  "eid": "math.139.0",
+  "title": "Continuous q-Laguerre polynomials",
+  "latex": "P_{n}^{(\\alpha)}(x|q)=\\frac{(q^\\alpha+1;q)_{n}}{(q;q)_{n}}",
+  "semantic_latex": "P_{n}^{(\\alpha)}(x|q) = \\frac{\\qmultiPochhammersym{q^\\alpha+1}{q}{n}}{\\qPochhammer{q}{q}{n}} \\qgenhyperphi{3}{2}@{q^{-n},q^{\\alpha/2+1/4}\\expe^{\\iunit\\theta},q^{\\alpha/2+1/4}*\\expe^{-\\iunit\\theta}}{q^{\\alpha+1},0}{q}{q}",
+  "mathematica": "P[n_, \\[Alpha]_, x_, q_] := Divide[Product[QPochhammer[Part[{(q)^\\[Alpha]+ 1},i],q,n],{i,1,Length[{(q)^\\[Alpha]+ 1}]}],QPochhammer[q, q, n]]*QHypergeometricPFQ[{(q)^(- n), (q)^(\\[Alpha]/2 + 1/4)* Exp[I*\\[Theta]], (q)^(\\[Alpha]/2 + 1/4)* Exp[- I*\\[Theta]]},{(q)^(\\[Alpha]+ 1), 0},q,q]",
+  "maple": null,
+  "definiens": [
+   "continuous q - Laguerre polynomial",
+   "family of basic hypergeometric orthogonal polynomial",
+   "Pochhammer symbol"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 86,
+  "lacast_page_id": 142,
+  "eid": "math.142.0",
+  "title": "Little q-Laguerre polynomials",
+  "latex": "\\displaystyle  p_n(x;a|q) = {}_2\\phi_1(q^{-n},0;aq;q,qx) = \\frac{1}{(a^{-1}q^{-n};q)_n}{}_2\\phi_0(q^{-n},x^{-1};;q,x/a)",
+  "semantic_latex": "p_n(x ; a|q) = \\qgenhyperphi{2}{1}@{q^{-n} , 0}{aq}{q}{qx} = \\frac{1}{\\qmultiPochhammersym{a^{-1} q^{-n}}{q}{n}} \\qgenhyperphi{2}{0}@{q^{-n} , x^{-1}}{}{q}{x/a}",
+  "mathematica": "p[n_, x_, a_, q_] := QHypergeometricPFQ[{(q)^(- n), 0},{a*q},q,q*x] == Divide[1,Product[QPochhammer[Part[{(a)^(- 1)* (q)^(- n)},i],q,n],{i,1,Length[{(a)^(- 1)* (q)^(- n)}]}]]*QHypergeometricPFQ[{(q)^(- n), (x)^(- 1)},{},q,x/a]",
+  "maple": null,
+  "definiens": [
+   "polynomial",
+   "term of basic hypergeometric function",
+   "Pochhammer symbol"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 87,
+  "lacast_page_id": 143,
+  "eid": "math.143.0",
+  "title": "Q-Bessel polynomials",
+  "latex": "y_{n}(x;a;q)=\\;_{2}\\phi_1 \\left(\\begin{matrix} q^{-N} & -aq^{n} \\\\ 0  \\end{matrix} ; q,qx \\right)",
+  "semantic_latex": "y_{n}(x;a;q) = \\qgenhyperphi{2}{1}@{q^{-N} , -aq^{n}}{0}{q}{qx}",
+  "mathematica": "y[n_, x_, a_, q_] := QHypergeometricPFQ[{(q)^(- N), - a*(q)^(n)},{0},q,q*x]",
+  "maple": null,
+  "definiens": [
+   "polynomial",
+   "term of basic hypergeometric function",
+   "Pochhammer symbol"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 88,
+  "lacast_page_id": 144,
+  "eid": "math.144.2",
+  "title": "Discrete q-Hermite polynomials",
+  "latex": "h_n(ix;q^{-1}) = i^n\\hat h_n(x;q)",
+  "semantic_latex": "\\discqHermitepolyhI{n}@{\\iunit x}{q^{-1}} = \\iunit^n \\discqHermitepolyhII{n}@{x}{q}",
+  "mathematica": null,
+  "maple": null,
+  "definiens": [
+   "Hermite polynomial",
+   "term of basic hypergeometric function",
+   "Carlitz polynomial"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "none",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 89,
+  "lacast_page_id": 145,
+  "eid": "math.145.0",
+  "title": "Q-Meixner–Pollaczek polynomials",
+  "latex": "P_{n}(x;a\\mid q) = a^{-n} e^{in\\phi} \\frac{a^2;q_n}{(q;q)_n} {_3}\\Phi_2(q^-n, ae^{i(\\theta+2\\phi)}, ae^{-i\\theta}; a^2, 0 \\mid q; q)",
+  "semantic_latex": "P_{n}(x ; a \\mid q) = a^{-n} \\expe^{\\iunit n\\phi} \\frac{\\qmultiPochhammersym{a^2}{q}{n}}{\\qmultiPochhammersym{q}{q}{n}} \\qgenhyperphi{3}{2}@{q^- n , a\\expe^{\\iunit(\\theta + 2 \\phi)} , a\\expe^{- \\iunit \\theta}}{a^2, 0}{q}{q}",
+  "mathematica": "P[n_, x_, a_, q_] := (a)^(- n)* Exp[I*n*\\[Phi]]*Divide[Product[QPochhammer[Part[{(a)^(2)},i],q,n],{i,1,Length[{(a)^(2)}]}],Product[QPochhammer[Part[{q},i],q,n],{i,1,Length[{q}]}]]*QHypergeometricPFQ[{(q)^(-)* n , a*Exp[I*(\\[Theta]+ 2*\\[Phi])], a*Exp[- I*\\[Theta]]},{(a)^(2), 0},q,q]",
+  "maple": null,
+  "definiens": [
+   "polynomial",
+   "term of basic hypergeometric function",
+   "Pochhammer symbol"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 90,
+  "lacast_page_id": 149,
+  "eid": "math.149.0",
+  "title": "Q-Laguerre polynomials",
+  "latex": "\\displaystyle  L_n^{(\\alpha)}(x;q) = \\frac{(q^{\\alpha+1};q)_n}{(q;q)_n} {}_1\\phi_1(q^{-n};q^{\\alpha+1};q,-q^{n+\\alpha+1}x)",
+  "semantic_latex": "\\qLaguerrepolyL{\\alpha}{n}@{x}{q} = \\frac{\\qmultiPochhammersym{q^{\\alpha+1}}{q}{n}}{\\qmultiPochhammersym{q}{q}{n}} \\qgenhyperphi{1}{1}@{q^{-n}}{q^{\\alpha+1}}{q}{- q^{n+\\alpha+1} x}",
+  "mathematica": "L[n_, \\[Alpha]_, x_, q_] := Divide[Product[QPochhammer[Part[{(q)^(\\[Alpha]+ 1)},i],q,n],{i,1,Length[{(q)^(\\[Alpha]+ 1)}]}],Product[QPochhammer[Part[{q},i],q,n],{i,1,Length[{q}]}]]*QHypergeometricPFQ[{(q)^(- n)},{(q)^(\\[Alpha]+ 1)},q,- (q)^(n + \\[Alpha]+ 1)* x]",
+  "maple": null,
+  "definiens": [
+   "Laguerre polynomial",
+   "q - Laguerre polynomial",
+   "term of basic hypergeometric function"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 91,
+  "lacast_page_id": 150,
+  "eid": "math.150.3",
+  "title": "Continuous q-Hermite polynomials",
+  "latex": "\\sum_{n=0}^\\infty H_n(x \\mid q) \\frac{t^n}{(q;q)_n} = \\frac{1}{\\left( t e^{i \\theta},t e^{-i \\theta};q \\right)_\\infty}",
+  "semantic_latex": "\\sum_{n=0}^\\infty \\contqHermitepolyH{n}@{x}{q} \\frac{t^n}{\\qmultiPochhammersym{q}{q}{n}} = \\frac{1}{\\qmultiPochhammersym{t \\expe^{\\iunit \\theta} , t \\expe^{- \\iunit \\theta}}{q}{\\infty}}",
+  "mathematica": null,
+  "maple": null,
+  "definiens": [
+   "continuous q - Hermite polynomial",
+   "q - Pochhammer symbol"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "none",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 92,
+  "lacast_page_id": 151,
+  "eid": "math.151.0",
+  "title": "Ince equation",
+  "latex": "w^{\\prime\\prime}+\\xi\\sin(2z)w^{\\prime}+(\\eta-p\\xi\\cos(2z))w=0. ",
+  "semantic_latex": "w^{\\prime\\prime}+\\xi\\sin(2z)w^{\\prime}+(\\eta-p\\xi\\cos(2z))w=0",
+  "mathematica": "D[w[z], {z, 2}] + \\[Xi]*Sin[2*z]*D[w[z], {z, 1}] + (\\[Eta]-p*\\[Xi]*Cos[2*z])*w[z] == 0",
+  "maple": null,
+  "definiens": [
+   "differential equation",
+   "Ince equation",
+   "mathematics"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 93,
+  "lacast_page_id": 152,
+  "eid": "math.152.1",
+  "title": "Ferrers function",
+  "latex": "Q_v^\\mu(x)= \\cos(\\mu\\pi)\\left(\\frac{1+x}{1-x}\\right)^{\\mu/2}\\frac{F(v+1,-v;1-\\mu;1/2-2/x)}  {\\Gamma(1-\\mu ) }",
+  "semantic_latex": "\\FerrersQ[\\mu]{v}@{x} = \\cos(\\mu \\cpi)(\\frac{1+x}{1-x})^{\\mu/2} \\frac{\\hyperF@{v+1}{-v}{1-\\mu}{1/2-2/x}}{\\EulerGamma@{1-\\mu}}",
+  "mathematica": "LegendreQ[v, \\[Mu], x] == Cos[(\\[Mu]*Pi)]*(Divide[1 + x,1 - x])^(\\[Mu]/2)*Divide[Hypergeometric2F1[v + 1, - v, 1 - \\[Mu], 1/2 - 2/x],Gamma[1 - \\[Mu]]]",
+  "maple": "LegendreQ(v, mu, x) = cos((mu*Pi))*((1 + x)/(1 - x))^(mu/2)*(hypergeom([v + 1, - v], [1 - mu], 1/2 - 2/x))/(GAMMA(1 - mu))",
+  "definiens": [
+   "Ferrers function of the second kind",
+   "Ferrers function of the first kind",
+   "Gamma function"
+  ],
+  "human": {
+   "semantic_latex": "wrong",
+   "mathematica": "wrong",
+   "maple": "wrong"
+  }
+ },
+ {
+  "gold_id": 94,
+  "lacast_page_id": 153,
+  "eid": "math.153.27",
+  "title": "Incomplete Bessel functions",
+  "latex": "H_{-v}^{(1)}(z,w)=e^{v\\pi i}H_v^{(1)}(z,w)",
+  "semantic_latex": "H_{-v}^{(1)}(z,w) = \\expe^{v \\cpi \\iunit} H_v^{(1)}(z , w)",
+  "mathematica": null,
+  "maple": null,
+  "definiens": [
+   "incomplete Bessel function"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "none",
+   "maple": "none"
+  }
+ },
+ {
+  "gold_id": 95,
+  "lacast_page_id": 154,
+  "eid": "math.154.0",
+  "title": "Incomplete Bessel K function/generalized incomplete gamma function",
+  "latex": "K_v(x,y)=\\int_1^\\infty\\frac{e^{-xt-\\frac{y}{t}}}{t^{v+1}}dt",
+  "semantic_latex": "K_v(x , y) = \\int_1^\\infty \\frac{\\expe^{-xt-\\frac{y}{t}}}{t^{v+1}} \\diff{t}",
+  "mathematica": "K[v_, x_, y_] := Integrate[Divide[Exp[- x*t -Divide[y,t]],(t)^(v + 1)], {t, 1, Infinity}]",
+  "maple": null,
+  "definiens": [
+   "mathematician",
+   "type incomplete-version of Bessel function",
+   "type generalized-version of incomplete gamma function"
+  ],
+  "human": {
+   "semantic_latex": "correct",
+   "mathematica": "wrong",
+   "maple": "none"
+  }
+ }
+]

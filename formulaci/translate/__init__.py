@@ -1,1 +1,4 @@
-"""Stage: translate. See SPEC.md. Owner: the translate session."""
+"""Stage: translate. Wikipedia LaTeX -> SymPy expressions (as srepr strings). See README.md."""
+from .runner import run
+
+__all__ = ["run"]

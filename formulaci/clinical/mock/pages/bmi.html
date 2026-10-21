@@ -1,0 +1,18 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>BMI Calculator</title>
+<link rel="stylesheet" href="_style.css"></head><body>
+<h1>Body Mass Index Calculator</h1>
+<div class="calc">
+ <div class="row"><label for="bmi-height">Height (cm)</label><input id="bmi-height" type="number" step="any"></div>
+ <div class="row"><label for="bmi-weight">Weight (kg)</label><input id="bmi-weight" type="number" step="any"></div>
+ <div class="result">Your BMI: <span class="bmi-value"></span> <span class="bmi-cat"></span></div>
+</div>
+<script>
+function bmi() {
+  var h = parseFloat(document.getElementById('bmi-height').value) / 100, w = parseFloat(document.getElementById('bmi-weight').value);
+  if (!(h > 0) || !(w > 0)) return;
+  var b = w / (h * h);
+  document.querySelector('.bmi-value').textContent = b.toFixed(1);
+  document.querySelector('.bmi-cat').textContent = b < 18.5 ? '(Underweight)' : b < 25 ? '(Healthy weight)' : b < 30 ? '(Overweight)' : '(Obesity)';
+}
+document.querySelectorAll('input').forEach(function (i) { i.addEventListener('input', bmi); });
+</script></body></html>

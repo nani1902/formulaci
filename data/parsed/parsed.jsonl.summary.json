@@ -1,0 +1,229 @@
+{
+ "formulas": 180016,
+ "records": 205508,
+ "equation_formulas": 53726,
+ "equation_formulas_any_ok": 30662,
+ "equation_formulas_all_ok": 28142,
+ "equation_records": 72511,
+ "equation_records_ok": 39083,
+ "status": {
+  "not_checkable": 150091,
+  "ok": 45960,
+  "unparsed": 9457
+ },
+ "kinds": {
+  "other": 123478,
+  "equation": 42519,
+  "chain": 21753,
+  "inequality": 9519,
+  "definition_like": 8239
+ },
+ "lark_fallback_records": 0,
+ "top_equation_failures": [
+  [
+   "unsupported:set_notation",
+   2495
+  ],
+  [
+   "unsupported:matrix",
+   2134
+  ],
+  [
+   "unsupported:ellipsis",
+   2113
+  ],
+  [
+   "unsupported:tuple",
+   1864
+  ],
+  [
+   "unsupported:inner_product",
+   1201
+  ],
+  [
+   "unsupported:subscript_on_expression",
+   1057
+  ],
+  [
+   "unsupported:differential_form",
+   1001
+  ],
+  [
+   "unsupported:vector_calculus",
+   986
+  ],
+  [
+   "unsupported:probability",
+   978
+  ],
+  [
+   "unsupported:sum_index_set",
+   952
+  ],
+  [
+   "unsupported:vector_product",
+   916
+  ],
+  [
+   "unsupported:conjugate_star",
+   891
+  ],
+  [
+   "error:unexpected <x>",
+   852
+  ],
+  [
+   "unsupported:uppercase_juxtaposition",
+   843
+  ],
+  [
+   "unsupported:partial_operator",
+   772
+  ],
+  [
+   "unsupported:integral_domain",
+   655
+  ],
+  [
+   "unsupported:accent_expression",
+   586
+  ],
+  [
+   "unsupported:empty_side",
+   562
+  ],
+  [
+   "unsupported:styled_expression",
+   562
+  ],
+  [
+   "unsupported:norm",
+   545
+  ],
+  [
+   "unsupported:transpose",
+   510
+  ],
+  [
+   "unsupported:composition",
+   460
+  ],
+  [
+   "unsupported:semicolon_args",
+   390
+  ],
+  [
+   "unsupported:modular",
+   378
+  ],
+  [
+   "unsupported:overline_expression",
+   366
+  ]
+ ],
+ "top_failures_all": [
+  [
+   "not_checkable:no_relation",
+   80779
+  ],
+  [
+   "unsupported:set_notation",
+   10824
+  ],
+  [
+   "unsupported:tuple",
+   5862
+  ],
+  [
+   "error:unexpected <x>",
+   3510
+  ],
+  [
+   "unsupported:matrix",
+   3235
+  ],
+  [
+   "unsupported:ellipsis",
+   3069
+  ],
+  [
+   "unsupported:list",
+   2507
+  ],
+  [
+   "unsupported:subscript_on_expression",
+   2103
+  ],
+  [
+   "unsupported:conjugate_star",
+   1952
+  ],
+  [
+   "not_checkable:to",
+   1899
+  ],
+  [
+   "not_checkable:in",
+   1848
+  ],
+  [
+   "unsupported:uppercase_juxtaposition",
+   1819
+  ],
+  [
+   "unsupported:inner_product",
+   1772
+  ],
+  [
+   "unsupported:empty_side",
+   1453
+  ],
+  [
+   "unsupported:probability",
+   1323
+  ],
+  [
+   "unsupported:vector_calculus",
+   1202
+  ],
+  [
+   "unsupported:differential_form",
+   1194
+  ],
+  [
+   "not_checkable:approx",
+   1136
+  ],
+  [
+   "unsupported:sum_index_set",
+   1129
+  ],
+  [
+   "unsupported:partial_operator",
+   1123
+  ],
+  [
+   "unsupported:vector_product",
+   1042
+  ],
+  [
+   "unsupported:norm",
+   997
+  ],
+  [
+   "unsupported:styled_expression",
+   906
+  ],
+  [
+   "unsupported:accent_expression",
+   871
+  ],
+  [
+   "unsupported:logic",
+   848
+  ]
+ ],
+ "new_formulas": 180016,
+ "seconds": 98.0,
+ "translator": "formulaci-rd-0.1/sympy-1.14.0"
+}

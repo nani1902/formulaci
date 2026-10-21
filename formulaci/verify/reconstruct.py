@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import ast
 import operator
+import re
 from dataclasses import dataclass, field
 
 import sympy as sp
@@ -22,8 +23,16 @@ SYMPY_NS: dict[str, object] = {
 }
 # srepr spells these as bare names / calls
 SYMPY_NS.update({"oo": sp.oo, "zoo": sp.zoo, "nan": sp.nan, "I": sp.I, "pi": sp.pi, "E": sp.E})
-_FORBIDDEN_NAMES = {"sympify", "S", "parse_expr", "lambdify", "init_printing", "init_session",
-                    "var", "symbols", "preview", "srepr", "pprint", "print_tree", "evaluate"}
+# Names that parse strings, generate code, print, plot or run tests are never callable from srepr.
+_FORBIDDEN_RE = re.compile(
+    r"^(S|var|symbols|python|source|sympify|parse.*|lambdify|preview|init_.*|test|doctest|plot.*|"
+    r"textplot|print.*|pprint.*|pager_print|dotprint|srepr|latex|mathml|multiline_latex|evaluate|"
+    r"interactive|Lambda)$"
+)
+# String literals are only allowed as names/numbers of these constructors.
+_STRING_TAKERS = {"Symbol", "Dummy", "Wild", "Function", "IndexedBase", "Idx"}
+_NUMBER_TAKERS = {"Float", "Integer", "Rational"}
+_NUMBER_RE = re.compile(r"^[+-]?(\d+(\.\d*)?|\.\d+)([eE][+-]?\d+)?(/\d+)?$")
 
 CONSTANTS: dict[str, sp.Basic] = {
     "pi": sp.pi, "E": sp.E, "e": sp.E, "I": sp.I, "i": sp.I, "j": sp.I,
@@ -54,10 +63,26 @@ def _check_srepr_ast(node: ast.AST) -> None:
     if isinstance(node, ast.Expression):
         return _check_srepr_ast(node.body)
     if isinstance(node, ast.Call):
+        if isinstance(node.func, ast.Call):  # Function('f')(x): an undefined function application
+            inner = node.func
+            if not (isinstance(inner.func, ast.Name) and inner.func.id == "Function"):
+                raise UnsafeExpression("only Function(...) may be applied")
+            _check_srepr_ast(inner)
+            for a in node.args:
+                _check_srepr_ast(a)
+            if node.keywords:
+                raise UnsafeExpression("no keywords in function application")
+            return
         if not isinstance(node.func, ast.Name):
             raise UnsafeExpression("call target must be a plain sympy name")
         _check_srepr_ast(node.func)
         for a in node.args:
+            if isinstance(a, ast.Constant) and isinstance(a.value, str):
+                if node.func.id in _STRING_TAKERS:
+                    continue
+                if node.func.id in _NUMBER_TAKERS and _NUMBER_RE.match(a.value):
+                    continue
+                raise UnsafeExpression(f"string argument not allowed for {node.func.id}")
             _check_srepr_ast(a)
         for kw in node.keywords:
             if kw.arg is None or kw.arg.startswith("_"):
@@ -65,14 +90,14 @@ def _check_srepr_ast(node: ast.AST) -> None:
             _check_srepr_ast(kw.value)
         return
     if isinstance(node, ast.Name):
-        if node.id not in SYMPY_NS or node.id in _FORBIDDEN_NAMES or node.id.startswith("_"):
+        if node.id not in SYMPY_NS or _FORBIDDEN_RE.match(node.id) or node.id.startswith("_"):
             raise UnsafeExpression(f"name not allowed: {node.id}")
         return
     if isinstance(node, ast.Constant):
         if not isinstance(node.value, (str, int, float, bool)) or node.value is None:
             raise UnsafeExpression("bad literal")
-        if isinstance(node.value, str) and len(node.value) > 200:
-            raise UnsafeExpression("string literal too long")
+        if isinstance(node.value, str):
+            raise UnsafeExpression("string literal outside a Symbol/Float constructor")
         return
     if isinstance(node, (ast.Tuple, ast.List)):
         for e in node.elts:

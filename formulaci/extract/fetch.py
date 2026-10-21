@@ -65,10 +65,13 @@ def fetch_batch(client: WikiClient | None, page_ids: list[int], cache_dir: Path 
             (pages.append(pg) if pg else missing.append(pid))
         return pages, missing
 
-    info = client.query_pages({"pageids": "|".join(map(str, page_ids)), "prop": "info"})
+    # Pages with no cached revision at all need no revision check: fetch them directly.
+    seen = [pid for pid in page_ids
+            if any((cache_dir / "pages" / f"{pid % 100:02d}").glob(f"{pid}_*.json.gz"))]
+    info = client.query_pages({"pageids": "|".join(map(str, seen)), "prop": "info"}) if seen else {}
     result: dict[int, PageData] = {}
-    to_fetch = []
-    for pid in page_ids:
+    to_fetch = [pid for pid in page_ids if pid not in set(seen)]
+    for pid in seen:
         p = info.get(pid)
         if not p or p.get("missing") or "lastrevid" not in p:
             continue

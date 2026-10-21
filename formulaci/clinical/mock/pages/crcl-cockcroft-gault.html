@@ -1,0 +1,22 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Creatinine Clearance (Cockcroft-Gault)</title>
+<link rel="stylesheet" href="_style.css"></head><body>
+<h1>Creatinine Clearance — Cockcroft-Gault Equation</h1>
+<form class="calc" onsubmit="return false">
+ <div class="row"><label for="cg-age">Age (years)</label><input id="cg-age" type="number"></div>
+ <div class="row"><label for="cg-weight">Weight (lb)</label><input id="cg-weight" type="number" step="any"></div>
+ <div class="row"><label for="cg-scr">Serum creatinine (mg/dL)</label><input id="cg-scr" type="number" step="any"></div>
+ <div class="row"><label>Sex</label><label><input type="radio" name="cg-sex" value="male"> Male</label>
+  <label><input type="radio" name="cg-sex" value="female"> Female</label></div>
+ <button id="cg-calc" type="button">Calculate CrCl</button>
+ <div class="result" id="cg-out"></div>
+</form>
+<script>
+document.getElementById('cg-calc').addEventListener('click', function () {
+  var age = +document.getElementById('cg-age').value;
+  var wt = +document.getElementById('cg-weight').value;   // bug: label says lb, formula expects kg
+  var scr = +document.getElementById('cg-scr').value;
+  var s = document.querySelector('input[name=cg-sex]:checked').value;
+  var c = (140 - age) * wt / (72 * scr) * (s === 'female' ? 0.85 : 1);
+  document.getElementById('cg-out').innerHTML = 'CrCl: <b>' + c.toFixed(1) + '</b> mL/min';
+});
+</script></body></html>

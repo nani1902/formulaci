@@ -1,0 +1,2500 @@
+{
+ "description": "Reference vectors computed by an independent mpmath (40 digits) transcription of each primary-source equation; see vectorgen.py. Inputs are in `units` where given, else the formula's canonical units.",
+ "vectors": [
+  {
+   "formula": "egfr_ckd_epi_cr@2021",
+   "inputs": {
+    "scr": 1.0,
+    "age": 50,
+    "sex": "male"
+   },
+   "units": {},
+   "expected": 91.69147860983323,
+   "tags": [
+    "typical"
+   ],
+   "note": "male, above kappa"
+  },
+  {
+   "formula": "egfr_ckd_epi_cr@2021",
+   "inputs": {
+    "scr": 0.8,
+    "age": 60,
+    "sex": "female"
+   },
+   "units": {},
+   "expected": 84.29815414309137,
+   "tags": [
+    "typical"
+   ],
+   "note": "female, above kappa"
+  },
+  {
+   "formula": "egfr_ckd_epi_cr@2021",
+   "inputs": {
+    "scr": 0.6,
+    "age": 40,
+    "sex": "female"
+   },
+   "units": {},
+   "expected": 116.29545162194957,
+   "tags": [
+    "typical",
+    "edge"
+   ],
+   "note": "female, below kappa (alpha branch)"
+  },
+  {
+   "formula": "egfr_ckd_epi_cr@2021",
+   "inputs": {
+    "scr": 0.9,
+    "age": 70,
+    "sex": "male"
+   },
+   "units": {},
+   "expected": 91.87932861748513,
+   "tags": [
+    "edge"
+   ],
+   "note": "male, Scr exactly at kappa"
+  },
+  {
+   "formula": "egfr_ckd_epi_cr@2021",
+   "inputs": {
+    "scr": 0.7,
+    "age": 18,
+    "sex": "female"
+   },
+   "units": {},
+   "expected": 128.4844945168389,
+   "tags": [
+    "edge"
+   ],
+   "note": "female, Scr at kappa, youngest adult"
+  },
+  {
+   "formula": "egfr_ckd_epi_cr@2021",
+   "inputs": {
+    "scr": 4.5,
+    "age": 75,
+    "sex": "male"
+   },
+   "units": {},
+   "expected": 12.910669682022958,
+   "tags": [
+    "typical"
+   ],
+   "note": "advanced CKD"
+  },
+  {
+   "formula": "egfr_ckd_epi_cr@2021",
+   "inputs": {
+    "scr": 106.1,
+    "age": 50,
+    "sex": "male"
+   },
+   "units": {
+    "scr": "umol/L"
+   },
+   "expected": 73.65686553371226,
+   "tags": [
+    "unit",
+    "typical"
+   ],
+   "note": "µmol/L input"
+  },
+  {
+   "formula": "egfr_ckd_epi_cr@2021",
+   "inputs": {
+    "scr": 70.72,
+    "age": 60,
+    "sex": "female"
+   },
+   "units": {
+    "scr": "umol/L"
+   },
+   "expected": 84.29815414309137,
+   "tags": [
+    "unit"
+   ],
+   "note": "µmol/L, female"
+  },
+  {
+   "formula": "egfr_ckd_epi_crcys@2021",
+   "inputs": {
+    "scr": 1.0,
+    "scys": 1.0,
+    "age": 50,
+    "sex": "male"
+   },
+   "units": {},
+   "expected": 88.1439905436392,
+   "tags": [
+    "typical"
+   ],
+   "note": "both above knots"
+  },
+  {
+   "formula": "egfr_ckd_epi_crcys@2021",
+   "inputs": {
+    "scr": 0.6,
+    "scys": 0.7,
+    "age": 40,
+    "sex": "female"
+   },
+   "units": {},
+   "expected": 120.07992427618527,
+   "tags": [
+    "typical",
+    "edge"
+   ],
+   "note": "both below knots"
+  },
+  {
+   "formula": "egfr_ckd_epi_crcys@2021",
+   "inputs": {
+    "scr": 0.9,
+    "scys": 0.8,
+    "age": 65,
+    "sex": "male"
+   },
+   "units": {},
+   "expected": 104.71885257046749,
+   "tags": [
+    "edge"
+   ],
+   "note": "both exactly at knots"
+  },
+  {
+   "formula": "egfr_ckd_epi_crcys@2021",
+   "inputs": {
+    "scr": 1.4,
+    "scys": 1.6,
+    "age": 72,
+    "sex": "female"
+   },
+   "units": {},
+   "expected": 39.24732742082526,
+   "tags": [
+    "typical"
+   ],
+   "note": "CKD, female"
+  },
+  {
+   "formula": "egfr_ckd_epi_crcys@2021",
+   "inputs": {
+    "scr": 0.5,
+    "scys": 2.0,
+    "age": 30,
+    "sex": "male"
+   },
+   "units": {},
+   "expected": 64.05955027954103,
+   "tags": [
+    "edge"
+   ],
+   "note": "discordant markers"
+  },
+  {
+   "formula": "egfr_ckd_epi_crcys@2021",
+   "inputs": {
+    "scr": 132.6,
+    "scys": 1.2,
+    "age": 55,
+    "sex": "male"
+   },
+   "units": {
+    "scr": "umol/L"
+   },
+   "expected": 60.16040545895432,
+   "tags": [
+    "unit"
+   ],
+   "note": "µmol/L"
+  },
+  {
+   "formula": "egfr_ckd_epi_cr@2009",
+   "inputs": {
+    "scr": 1.0,
+    "age": 50,
+    "sex": "male",
+    "black": false
+   },
+   "units": {},
+   "expected": 87.36967723743615,
+   "tags": [
+    "typical"
+   ],
+   "note": "non-black male"
+  },
+  {
+   "formula": "egfr_ckd_epi_cr@2009",
+   "inputs": {
+    "scr": 1.0,
+    "age": 50,
+    "sex": "male",
+    "black": true
+   },
+   "units": {},
+   "expected": 101.2614559181885,
+   "tags": [
+    "typical"
+   ],
+   "note": "race coefficient 1.159"
+  },
+  {
+   "formula": "egfr_ckd_epi_cr@2009",
+   "inputs": {
+    "scr": 0.6,
+    "age": 40,
+    "sex": "female",
+    "black": false
+   },
+   "units": {},
+   "expected": 114.01508733609072,
+   "tags": [
+    "edge"
+   ],
+   "note": "female below kappa"
+  },
+  {
+   "formula": "egfr_ckd_epi_cr@2009",
+   "inputs": {
+    "scr": 0.8,
+    "age": 60,
+    "sex": "female",
+    "black": true
+   },
+   "units": {},
+   "expected": 92.87374804649818,
+   "tags": [
+    "typical"
+   ],
+   "note": "female, black"
+  },
+  {
+   "formula": "egfr_ckd_epi_cr@2009",
+   "inputs": {
+    "scr": 0.9,
+    "age": 70,
+    "sex": "male",
+    "black": false
+   },
+   "units": {},
+   "expected": 86.23161250110915,
+   "tags": [
+    "edge"
+   ],
+   "note": "at kappa"
+  },
+  {
+   "formula": "egfr_ckd_epi_cr@2009",
+   "inputs": {
+    "scr": 176.8,
+    "age": 65,
+    "sex": "female",
+    "black": false
+   },
+   "units": {
+    "scr": "umol/L"
+   },
+   "expected": 25.55325968363769,
+   "tags": [
+    "unit"
+   ],
+   "note": "µmol/L"
+  },
+  {
+   "formula": "egfr_mdrd@175",
+   "inputs": {
+    "scr": 1.0,
+    "age": 50,
+    "sex": "male",
+    "black": false
+   },
+   "units": {},
+   "expected": 79.09465531827084,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "egfr_mdrd@175",
+   "inputs": {
+    "scr": 1.0,
+    "age": 50,
+    "sex": "female",
+    "black": false
+   },
+   "units": {},
+   "expected": 58.68823424615696,
+   "tags": [
+    "typical"
+   ],
+   "note": "female 0.742"
+  },
+  {
+   "formula": "egfr_mdrd@175",
+   "inputs": {
+    "scr": 1.0,
+    "age": 50,
+    "sex": "male",
+    "black": true
+   },
+   "units": {},
+   "expected": 95.86272224574425,
+   "tags": [
+    "typical"
+   ],
+   "note": "black 1.212"
+  },
+  {
+   "formula": "egfr_mdrd@175",
+   "inputs": {
+    "scr": 2.5,
+    "age": 70,
+    "sex": "female",
+    "black": true
+   },
+   "units": {},
+   "expected": 23.07633854222831,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "egfr_mdrd@175",
+   "inputs": {
+    "scr": 0.4,
+    "age": 19,
+    "sex": "male",
+    "black": false
+   },
+   "units": {},
+   "expected": 277.12380775511974,
+   "tags": [
+    "edge"
+   ],
+   "note": "very low Scr"
+  },
+  {
+   "formula": "egfr_mdrd@175",
+   "inputs": {
+    "scr": 88.4,
+    "age": 60,
+    "sex": "male",
+    "black": false
+   },
+   "units": {
+    "scr": "umol/L"
+   },
+   "expected": 76.22077229137905,
+   "tags": [
+    "unit"
+   ],
+   "note": "1 mg/dL"
+  },
+  {
+   "formula": "egfr_mdrd@186",
+   "inputs": {
+    "scr": 1.0,
+    "age": 50,
+    "sex": "male",
+    "black": false
+   },
+   "units": {},
+   "expected": 84.06631936684786,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "egfr_mdrd@186",
+   "inputs": {
+    "scr": 1.0,
+    "age": 50,
+    "sex": "female",
+    "black": false
+   },
+   "units": {},
+   "expected": 62.37720897020111,
+   "tags": [
+    "typical"
+   ],
+   "note": "female 0.742"
+  },
+  {
+   "formula": "egfr_mdrd@186",
+   "inputs": {
+    "scr": 1.0,
+    "age": 50,
+    "sex": "male",
+    "black": true
+   },
+   "units": {},
+   "expected": 101.8883790726196,
+   "tags": [
+    "typical"
+   ],
+   "note": "black 1.212"
+  },
+  {
+   "formula": "egfr_mdrd@186",
+   "inputs": {
+    "scr": 2.5,
+    "age": 70,
+    "sex": "female",
+    "black": true
+   },
+   "units": {},
+   "expected": 24.526851250596945,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "egfr_mdrd@186",
+   "inputs": {
+    "scr": 0.4,
+    "age": 19,
+    "sex": "male",
+    "black": false
+   },
+   "units": {},
+   "expected": 294.5430185282987,
+   "tags": [
+    "edge"
+   ],
+   "note": "very low Scr"
+  },
+  {
+   "formula": "egfr_mdrd@186",
+   "inputs": {
+    "scr": 88.4,
+    "age": 60,
+    "sex": "male",
+    "black": false
+   },
+   "units": {
+    "scr": "umol/L"
+   },
+   "expected": 81.01179226398003,
+   "tags": [
+    "unit"
+   ],
+   "note": "1 mg/dL"
+  },
+  {
+   "formula": "crcl_cockcroft_gault@1976",
+   "inputs": {
+    "scr": 1.0,
+    "age": 40,
+    "sex": "male",
+    "weight": 72
+   },
+   "units": {},
+   "expected": 100.0,
+   "tags": [
+    "typical"
+   ],
+   "note": "Ccr = 100 exactly"
+  },
+  {
+   "formula": "crcl_cockcroft_gault@1976",
+   "inputs": {
+    "scr": 1.0,
+    "age": 40,
+    "sex": "female",
+    "weight": 72
+   },
+   "units": {},
+   "expected": 85.0,
+   "tags": [
+    "typical"
+   ],
+   "note": "female 0.85"
+  },
+  {
+   "formula": "crcl_cockcroft_gault@1976",
+   "inputs": {
+    "scr": 1.5,
+    "age": 80,
+    "sex": "male",
+    "weight": 60
+   },
+   "units": {},
+   "expected": 33.333333333333336,
+   "tags": [
+    "typical"
+   ],
+   "note": "elderly"
+  },
+  {
+   "formula": "crcl_cockcroft_gault@1976",
+   "inputs": {
+    "scr": 0.8,
+    "age": 30,
+    "sex": "female",
+    "weight": 154
+   },
+   "units": {
+    "weight": "lb"
+   },
+   "expected": 113.39021763246528,
+   "tags": [
+    "unit"
+   ],
+   "note": "lb input"
+  },
+  {
+   "formula": "crcl_cockcroft_gault@1976",
+   "inputs": {
+    "scr": 132.6,
+    "age": 65,
+    "sex": "male",
+    "weight": 80
+   },
+   "units": {
+    "scr": "umol/L"
+   },
+   "expected": 55.55555555555556,
+   "tags": [
+    "unit"
+   ],
+   "note": "µmol/L"
+  },
+  {
+   "formula": "crcl_cockcroft_gault@1976",
+   "inputs": {
+    "scr": 3.0,
+    "age": 139,
+    "sex": "male",
+    "weight": 70
+   },
+   "units": {},
+   "expected": 0.32407407407407407,
+   "tags": [
+    "edge"
+   ],
+   "note": "age near 140"
+  },
+  {
+   "formula": "egfr_schwartz_bedside@2009",
+   "inputs": {
+    "scr": 0.5,
+    "height": 120
+   },
+   "units": {},
+   "expected": 99.12,
+   "tags": [
+    "typical"
+   ],
+   "note": "child"
+  },
+  {
+   "formula": "egfr_schwartz_bedside@2009",
+   "inputs": {
+    "scr": 0.3,
+    "height": 75
+   },
+   "units": {},
+   "expected": 103.25,
+   "tags": [
+    "typical"
+   ],
+   "note": "toddler"
+  },
+  {
+   "formula": "egfr_schwartz_bedside@2009",
+   "inputs": {
+    "scr": 1.2,
+    "height": 150
+   },
+   "units": {},
+   "expected": 51.625,
+   "tags": [
+    "typical"
+   ],
+   "note": "CKD"
+  },
+  {
+   "formula": "egfr_schwartz_bedside@2009",
+   "inputs": {
+    "scr": 0.4,
+    "height": 47.24
+   },
+   "units": {
+    "height": "in"
+   },
+   "expected": 123.889262,
+   "tags": [
+    "unit"
+   ],
+   "note": "height in inches"
+  },
+  {
+   "formula": "egfr_schwartz_bedside@2009",
+   "inputs": {
+    "scr": 44.2,
+    "height": 130
+   },
+   "units": {
+    "scr": "umol/L"
+   },
+   "expected": 107.38,
+   "tags": [
+    "unit"
+   ],
+   "note": "µmol/L"
+  },
+  {
+   "formula": "egfr_schwartz_bedside@2009",
+   "inputs": {
+    "scr": 0.1,
+    "height": 50
+   },
+   "units": {},
+   "expected": 206.5,
+   "tags": [
+    "edge"
+   ],
+   "note": "very low Scr"
+  },
+  {
+   "formula": "bmi@quetelet",
+   "inputs": {
+    "weight": 70,
+    "height": 175
+   },
+   "units": {},
+   "expected": 22.857142857142858,
+   "tags": [
+    "typical"
+   ],
+   "note": "adult"
+  },
+  {
+   "formula": "bmi@quetelet",
+   "inputs": {
+    "weight": 50,
+    "height": 160
+   },
+   "units": {},
+   "expected": 19.53125,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "bmi@quetelet",
+   "inputs": {
+    "weight": 3.5,
+    "height": 50
+   },
+   "units": {},
+   "expected": 14.0,
+   "tags": [
+    "edge"
+   ],
+   "note": "newborn"
+  },
+  {
+   "formula": "bmi@quetelet",
+   "inputs": {
+    "weight": 150,
+    "height": 190
+   },
+   "units": {},
+   "expected": 41.551246537396125,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "bmi@quetelet",
+   "inputs": {
+    "weight": 154.3,
+    "height": 68.9
+   },
+   "units": {
+    "weight": "lb",
+    "height": "in"
+   },
+   "expected": 22.85208283145727,
+   "tags": [
+    "unit"
+   ],
+   "note": "imperial"
+  },
+  {
+   "formula": "bmi@quetelet",
+   "inputs": {
+    "weight": 80,
+    "height": 1.8
+   },
+   "units": {
+    "height": "m"
+   },
+   "expected": 24.691358024691358,
+   "tags": [
+    "unit"
+   ],
+   "note": "height in metres"
+  },
+  {
+   "formula": "bsa_mosteller@1987",
+   "inputs": {
+    "weight": 70,
+    "height": 175
+   },
+   "units": {},
+   "expected": 1.8446619684315546,
+   "tags": [
+    "typical"
+   ],
+   "note": "adult"
+  },
+  {
+   "formula": "bsa_mosteller@1987",
+   "inputs": {
+    "weight": 50,
+    "height": 160
+   },
+   "units": {},
+   "expected": 1.4907119849998598,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "bsa_mosteller@1987",
+   "inputs": {
+    "weight": 3.5,
+    "height": 50
+   },
+   "units": {},
+   "expected": 0.22047927592204922,
+   "tags": [
+    "edge"
+   ],
+   "note": "newborn"
+  },
+  {
+   "formula": "bsa_mosteller@1987",
+   "inputs": {
+    "weight": 150,
+    "height": 190
+   },
+   "units": {},
+   "expected": 2.8136571693556887,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "bsa_mosteller@1987",
+   "inputs": {
+    "weight": 154.3,
+    "height": 68.9
+   },
+   "units": {
+    "weight": "lb",
+    "height": "in"
+   },
+   "expected": 1.8445526337134452,
+   "tags": [
+    "unit"
+   ],
+   "note": "imperial"
+  },
+  {
+   "formula": "bsa_mosteller@1987",
+   "inputs": {
+    "weight": 80,
+    "height": 1.8
+   },
+   "units": {
+    "height": "m"
+   },
+   "expected": 2.0,
+   "tags": [
+    "unit"
+   ],
+   "note": "height in metres"
+  },
+  {
+   "formula": "bsa_dubois@1916",
+   "inputs": {
+    "weight": 70,
+    "height": 175
+   },
+   "units": {},
+   "expected": 1.8481430181213467,
+   "tags": [
+    "typical"
+   ],
+   "note": "adult"
+  },
+  {
+   "formula": "bsa_dubois@1916",
+   "inputs": {
+    "weight": 50,
+    "height": 160
+   },
+   "units": {},
+   "expected": 1.501120524208146,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "bsa_dubois@1916",
+   "inputs": {
+    "weight": 3.5,
+    "height": 50
+   },
+   "units": {},
+   "expected": 0.20861642351154822,
+   "tags": [
+    "edge"
+   ],
+   "note": "newborn"
+  },
+  {
+   "formula": "bsa_dubois@1916",
+   "inputs": {
+    "weight": 150,
+    "height": 190
+   },
+   "units": {},
+   "expected": 2.7120735890759082,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "bsa_dubois@1916",
+   "inputs": {
+    "weight": 154.3,
+    "height": 68.9
+   },
+   "units": {
+    "weight": "lb",
+    "height": "in"
+   },
+   "expected": 1.848068916106167,
+   "tags": [
+    "unit"
+   ],
+   "note": "imperial"
+  },
+  {
+   "formula": "bsa_dubois@1916",
+   "inputs": {
+    "weight": 80,
+    "height": 1.8
+   },
+   "units": {
+    "height": "m"
+   },
+   "expected": 1.996421022275045,
+   "tags": [
+    "unit"
+   ],
+   "note": "height in metres"
+  },
+  {
+   "formula": "bsa_haycock@1978",
+   "inputs": {
+    "weight": 70,
+    "height": 175
+   },
+   "units": {},
+   "expected": 1.8467763490366442,
+   "tags": [
+    "typical"
+   ],
+   "note": "adult"
+  },
+  {
+   "formula": "bsa_haycock@1978",
+   "inputs": {
+    "weight": 50,
+    "height": 160
+   },
+   "units": {},
+   "expected": 1.4873032437105025,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "bsa_haycock@1978",
+   "inputs": {
+    "weight": 3.5,
+    "height": 50
+   },
+   "units": {},
+   "expected": 0.22441495743552523,
+   "tags": [
+    "edge"
+   ],
+   "note": "newborn"
+  },
+  {
+   "formula": "bsa_haycock@1978",
+   "inputs": {
+    "weight": 150,
+    "height": 190
+   },
+   "units": {},
+   "expected": 2.8746177452751422,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "bsa_haycock@1978",
+   "inputs": {
+    "weight": 154.3,
+    "height": 68.9
+   },
+   "units": {
+    "weight": "lb",
+    "height": "in"
+   },
+   "expected": 1.846649661656381,
+   "tags": [
+    "unit"
+   ],
+   "note": "imperial"
+  },
+  {
+   "formula": "bsa_haycock@1978",
+   "inputs": {
+    "weight": 80,
+    "height": 1.8
+   },
+   "units": {
+    "height": "m"
+   },
+   "expected": 2.006559820617422,
+   "tags": [
+    "unit"
+   ],
+   "note": "height in metres"
+  },
+  {
+   "formula": "ibw_devine@1974",
+   "inputs": {
+    "height": 152.4,
+    "sex": "male"
+   },
+   "units": {},
+   "expected": 50.0,
+   "tags": [
+    "edge"
+   ],
+   "note": "exactly 60 in"
+  },
+  {
+   "formula": "ibw_devine@1974",
+   "inputs": {
+    "height": 152.4,
+    "sex": "female"
+   },
+   "units": {},
+   "expected": 45.5,
+   "tags": [
+    "edge"
+   ],
+   "note": "exactly 60 in"
+  },
+  {
+   "formula": "ibw_devine@1974",
+   "inputs": {
+    "height": 180,
+    "sex": "male"
+   },
+   "units": {},
+   "expected": 74.99212598425197,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "ibw_devine@1974",
+   "inputs": {
+    "height": 165,
+    "sex": "female"
+   },
+   "units": {},
+   "expected": 56.90944881889764,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "ibw_devine@1974",
+   "inputs": {
+    "height": 70,
+    "sex": "male"
+   },
+   "units": {
+    "height": "in"
+   },
+   "expected": 73.0,
+   "tags": [
+    "unit"
+   ],
+   "note": "inches"
+  },
+  {
+   "formula": "ibw_devine@1974",
+   "inputs": {
+    "height": 140,
+    "sex": "female"
+   },
+   "units": {},
+   "expected": 34.27165354330709,
+   "tags": [
+    "edge"
+   ],
+   "note": "below 60 in (extrapolated)"
+  },
+  {
+   "formula": "qtc_bazett@1920",
+   "inputs": {
+    "qt": 400,
+    "hr": 60
+   },
+   "units": {},
+   "expected": 400.0,
+   "tags": [
+    "edge"
+   ],
+   "note": "HR 60 -> RR 1 s, QTc = QT"
+  },
+  {
+   "formula": "qtc_bazett@1920",
+   "inputs": {
+    "qt": 360,
+    "hr": 90
+   },
+   "units": {},
+   "expected": 440.90815370097204,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "qtc_bazett@1920",
+   "inputs": {
+    "qt": 440,
+    "hr": 50
+   },
+   "units": {},
+   "expected": 401.66320883712183,
+   "tags": [
+    "typical"
+   ],
+   "note": "bradycardia"
+  },
+  {
+   "formula": "qtc_bazett@1920",
+   "inputs": {
+    "qt": 320,
+    "hr": 120
+   },
+   "units": {},
+   "expected": 452.54833995939043,
+   "tags": [
+    "typical"
+   ],
+   "note": "tachycardia"
+  },
+  {
+   "formula": "qtc_bazett@1920",
+   "inputs": {
+    "qt": 0.38,
+    "hr": 75
+   },
+   "units": {
+    "qt": "s"
+   },
+   "expected": 424.85291572496004,
+   "tags": [
+    "unit"
+   ],
+   "note": "QT in seconds"
+  },
+  {
+   "formula": "qtc_bazett@1920",
+   "inputs": {
+    "qt": 300,
+    "hr": 150
+   },
+   "units": {},
+   "expected": 474.3416490252569,
+   "tags": [
+    "edge"
+   ],
+   "note": "very fast"
+  },
+  {
+   "formula": "qtc_fridericia@1920",
+   "inputs": {
+    "qt": 400,
+    "hr": 60
+   },
+   "units": {},
+   "expected": 400.0,
+   "tags": [
+    "edge"
+   ],
+   "note": "HR 60 -> RR 1 s, QTc = QT"
+  },
+  {
+   "formula": "qtc_fridericia@1920",
+   "inputs": {
+    "qt": 360,
+    "hr": 90
+   },
+   "units": {},
+   "expected": 412.09712731919944,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "qtc_fridericia@1920",
+   "inputs": {
+    "qt": 440,
+    "hr": 50
+   },
+   "units": {},
+   "expected": 414.05585270765255,
+   "tags": [
+    "typical"
+   ],
+   "note": "bradycardia"
+  },
+  {
+   "formula": "qtc_fridericia@1920",
+   "inputs": {
+    "qt": 320,
+    "hr": 120
+   },
+   "units": {},
+   "expected": 403.17473596635944,
+   "tags": [
+    "typical"
+   ],
+   "note": "tachycardia"
+  },
+  {
+   "formula": "qtc_fridericia@1920",
+   "inputs": {
+    "qt": 0.38,
+    "hr": 75
+   },
+   "units": {
+    "qt": "s"
+   },
+   "expected": 409.3425911060579,
+   "tags": [
+    "unit"
+   ],
+   "note": "QT in seconds"
+  },
+  {
+   "formula": "qtc_fridericia@1920",
+   "inputs": {
+    "qt": 300,
+    "hr": 150
+   },
+   "units": {},
+   "expected": 407.16264248923596,
+   "tags": [
+    "edge"
+   ],
+   "note": "very fast"
+  },
+  {
+   "formula": "qtc_framingham@1992",
+   "inputs": {
+    "qt": 400,
+    "hr": 60
+   },
+   "units": {},
+   "expected": 400.0,
+   "tags": [
+    "edge"
+   ],
+   "note": "HR 60 -> RR 1 s, QTc = QT"
+  },
+  {
+   "formula": "qtc_framingham@1992",
+   "inputs": {
+    "qt": 360,
+    "hr": 90
+   },
+   "units": {},
+   "expected": 411.3333333333333,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "qtc_framingham@1992",
+   "inputs": {
+    "qt": 440,
+    "hr": 50
+   },
+   "units": {},
+   "expected": 409.2,
+   "tags": [
+    "typical"
+   ],
+   "note": "bradycardia"
+  },
+  {
+   "formula": "qtc_framingham@1992",
+   "inputs": {
+    "qt": 320,
+    "hr": 120
+   },
+   "units": {},
+   "expected": 397.0,
+   "tags": [
+    "typical"
+   ],
+   "note": "tachycardia"
+  },
+  {
+   "formula": "qtc_framingham@1992",
+   "inputs": {
+    "qt": 0.38,
+    "hr": 75
+   },
+   "units": {
+    "qt": "s"
+   },
+   "expected": 410.8,
+   "tags": [
+    "unit"
+   ],
+   "note": "QT in seconds"
+  },
+  {
+   "formula": "qtc_framingham@1992",
+   "inputs": {
+    "qt": 300,
+    "hr": 150
+   },
+   "units": {},
+   "expected": 392.4,
+   "tags": [
+    "edge"
+   ],
+   "note": "very fast"
+  },
+  {
+   "formula": "qtc_hodges@1983",
+   "inputs": {
+    "qt": 400,
+    "hr": 60
+   },
+   "units": {},
+   "expected": 400.0,
+   "tags": [
+    "edge"
+   ],
+   "note": "HR 60 -> RR 1 s, QTc = QT"
+  },
+  {
+   "formula": "qtc_hodges@1983",
+   "inputs": {
+    "qt": 360,
+    "hr": 90
+   },
+   "units": {},
+   "expected": 412.5,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "qtc_hodges@1983",
+   "inputs": {
+    "qt": 440,
+    "hr": 50
+   },
+   "units": {},
+   "expected": 422.5,
+   "tags": [
+    "typical"
+   ],
+   "note": "bradycardia"
+  },
+  {
+   "formula": "qtc_hodges@1983",
+   "inputs": {
+    "qt": 320,
+    "hr": 120
+   },
+   "units": {},
+   "expected": 425.0,
+   "tags": [
+    "typical"
+   ],
+   "note": "tachycardia"
+  },
+  {
+   "formula": "qtc_hodges@1983",
+   "inputs": {
+    "qt": 0.38,
+    "hr": 75
+   },
+   "units": {
+    "qt": "s"
+   },
+   "expected": 406.25,
+   "tags": [
+    "unit"
+   ],
+   "note": "QT in seconds"
+  },
+  {
+   "formula": "qtc_hodges@1983",
+   "inputs": {
+    "qt": 300,
+    "hr": 150
+   },
+   "units": {},
+   "expected": 457.5,
+   "tags": [
+    "edge"
+   ],
+   "note": "very fast"
+  },
+  {
+   "formula": "map@standard",
+   "inputs": {
+    "sbp": 120,
+    "dbp": 80
+   },
+   "units": {},
+   "expected": 93.33333333333333,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "map@standard",
+   "inputs": {
+    "sbp": 90,
+    "dbp": 60
+   },
+   "units": {},
+   "expected": 70.0,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "map@standard",
+   "inputs": {
+    "sbp": 180,
+    "dbp": 110
+   },
+   "units": {},
+   "expected": 133.33333333333334,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "map@standard",
+   "inputs": {
+    "sbp": 100,
+    "dbp": 100
+   },
+   "units": {},
+   "expected": 100.0,
+   "tags": [
+    "edge"
+   ],
+   "note": "zero pulse pressure"
+  },
+  {
+   "formula": "map@standard",
+   "inputs": {
+    "sbp": 70,
+    "dbp": 30
+   },
+   "units": {},
+   "expected": 43.333333333333336,
+   "tags": [
+    "edge"
+   ],
+   "note": "wide pulse pressure, hypotension"
+  },
+  {
+   "formula": "anion_gap@no-k",
+   "inputs": {
+    "na": 140,
+    "cl": 104,
+    "hco3": 24
+   },
+   "units": {},
+   "expected": 12.0,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "anion_gap@no-k",
+   "inputs": {
+    "na": 135,
+    "cl": 95,
+    "hco3": 10
+   },
+   "units": {},
+   "expected": 30.0,
+   "tags": [
+    "typical"
+   ],
+   "note": "high AG"
+  },
+  {
+   "formula": "anion_gap@no-k",
+   "inputs": {
+    "na": 150,
+    "cl": 120,
+    "hco3": 26
+   },
+   "units": {},
+   "expected": 4.0,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "anion_gap@no-k",
+   "inputs": {
+    "na": 130,
+    "cl": 110,
+    "hco3": 22
+   },
+   "units": {},
+   "expected": -2.0,
+   "tags": [
+    "edge"
+   ],
+   "note": "negative gap"
+  },
+  {
+   "formula": "anion_gap@no-k",
+   "inputs": {
+    "na": 138.5,
+    "cl": 101.2,
+    "hco3": 23.7
+   },
+   "units": {},
+   "expected": 13.6,
+   "tags": [
+    "edge"
+   ],
+   "note": "decimals"
+  },
+  {
+   "formula": "anion_gap@with-k",
+   "inputs": {
+    "na": 140,
+    "k": 4,
+    "cl": 104,
+    "hco3": 24
+   },
+   "units": {},
+   "expected": 16.0,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "anion_gap@with-k",
+   "inputs": {
+    "na": 135,
+    "k": 5.5,
+    "cl": 95,
+    "hco3": 10
+   },
+   "units": {},
+   "expected": 35.5,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "anion_gap@with-k",
+   "inputs": {
+    "na": 150,
+    "k": 3,
+    "cl": 120,
+    "hco3": 26
+   },
+   "units": {},
+   "expected": 7.0,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "anion_gap@with-k",
+   "inputs": {
+    "na": 130,
+    "k": 2.5,
+    "cl": 110,
+    "hco3": 22
+   },
+   "units": {},
+   "expected": 0.5,
+   "tags": [
+    "edge"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "anion_gap@with-k",
+   "inputs": {
+    "na": 138.5,
+    "k": 4.2,
+    "cl": 101.2,
+    "hco3": 23.7
+   },
+   "units": {},
+   "expected": 17.8,
+   "tags": [
+    "edge"
+   ],
+   "note": "decimals"
+  },
+  {
+   "formula": "calcium_corrected@0.8",
+   "inputs": {
+    "ca": 8.0,
+    "albumin": 2.0
+   },
+   "units": {},
+   "expected": 9.6,
+   "tags": [
+    "typical"
+   ],
+   "note": "hypoalbuminaemia"
+  },
+  {
+   "formula": "calcium_corrected@0.8",
+   "inputs": {
+    "ca": 9.5,
+    "albumin": 4.0
+   },
+   "units": {},
+   "expected": 9.5,
+   "tags": [
+    "edge"
+   ],
+   "note": "albumin = 4: no correction"
+  },
+  {
+   "formula": "calcium_corrected@0.8",
+   "inputs": {
+    "ca": 10.0,
+    "albumin": 5.0
+   },
+   "units": {},
+   "expected": 9.2,
+   "tags": [
+    "edge"
+   ],
+   "note": "high albumin: corrected downward"
+  },
+  {
+   "formula": "calcium_corrected@0.8",
+   "inputs": {
+    "ca": 7.2,
+    "albumin": 1.5
+   },
+   "units": {},
+   "expected": 9.2,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "calcium_corrected@0.8",
+   "inputs": {
+    "ca": 2.0,
+    "albumin": 25
+   },
+   "units": {
+    "ca": "mmol/L",
+    "albumin": "g/L"
+   },
+   "expected": 9.216,
+   "tags": [
+    "unit"
+   ],
+   "note": "SI inputs"
+  },
+  {
+   "formula": "calcium_corrected@payne-1973",
+   "inputs": {
+    "ca": 8.0,
+    "albumin": 2.0
+   },
+   "units": {},
+   "expected": 10.0,
+   "tags": [
+    "typical"
+   ],
+   "note": "hypoalbuminaemia"
+  },
+  {
+   "formula": "calcium_corrected@payne-1973",
+   "inputs": {
+    "ca": 9.5,
+    "albumin": 4.0
+   },
+   "units": {},
+   "expected": 9.5,
+   "tags": [
+    "edge"
+   ],
+   "note": "albumin = 4: no correction"
+  },
+  {
+   "formula": "calcium_corrected@payne-1973",
+   "inputs": {
+    "ca": 10.0,
+    "albumin": 5.0
+   },
+   "units": {},
+   "expected": 9.0,
+   "tags": [
+    "edge"
+   ],
+   "note": "high albumin: corrected downward"
+  },
+  {
+   "formula": "calcium_corrected@payne-1973",
+   "inputs": {
+    "ca": 7.2,
+    "albumin": 1.5
+   },
+   "units": {},
+   "expected": 9.7,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "calcium_corrected@payne-1973",
+   "inputs": {
+    "ca": 2.0,
+    "albumin": 25
+   },
+   "units": {
+    "ca": "mmol/L",
+    "albumin": "g/L"
+   },
+   "expected": 9.516,
+   "tags": [
+    "unit"
+   ],
+   "note": "SI inputs"
+  },
+  {
+   "formula": "sodium_corrected@katz",
+   "inputs": {
+    "na": 130,
+    "glucose": 600
+   },
+   "units": {},
+   "expected": 138.0,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "sodium_corrected@katz",
+   "inputs": {
+    "na": 140,
+    "glucose": 100
+   },
+   "units": {},
+   "expected": 140.0,
+   "tags": [
+    "edge"
+   ],
+   "note": "glucose 100: no correction"
+  },
+  {
+   "formula": "sodium_corrected@katz",
+   "inputs": {
+    "na": 125,
+    "glucose": 1000
+   },
+   "units": {},
+   "expected": 139.4,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "sodium_corrected@katz",
+   "inputs": {
+    "na": 135,
+    "glucose": 80
+   },
+   "units": {},
+   "expected": 134.68,
+   "tags": [
+    "edge"
+   ],
+   "note": "glucose below 100"
+  },
+  {
+   "formula": "sodium_corrected@katz",
+   "inputs": {
+    "na": 128,
+    "glucose": 30
+   },
+   "units": {
+    "glucose": "mmol/L"
+   },
+   "expected": 135.04768,
+   "tags": [
+    "unit"
+   ],
+   "note": "glucose mmol/L"
+  },
+  {
+   "formula": "sodium_corrected@hillier",
+   "inputs": {
+    "na": 130,
+    "glucose": 600
+   },
+   "units": {},
+   "expected": 142.0,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "sodium_corrected@hillier",
+   "inputs": {
+    "na": 140,
+    "glucose": 100
+   },
+   "units": {},
+   "expected": 140.0,
+   "tags": [
+    "edge"
+   ],
+   "note": "glucose 100: no correction"
+  },
+  {
+   "formula": "sodium_corrected@hillier",
+   "inputs": {
+    "na": 125,
+    "glucose": 1000
+   },
+   "units": {},
+   "expected": 146.6,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "sodium_corrected@hillier",
+   "inputs": {
+    "na": 135,
+    "glucose": 80
+   },
+   "units": {},
+   "expected": 134.52,
+   "tags": [
+    "edge"
+   ],
+   "note": "glucose below 100"
+  },
+  {
+   "formula": "sodium_corrected@hillier",
+   "inputs": {
+    "na": 128,
+    "glucose": 30
+   },
+   "units": {
+    "glucose": "mmol/L"
+   },
+   "expected": 138.57152,
+   "tags": [
+    "unit"
+   ],
+   "note": "glucose mmol/L"
+  },
+  {
+   "formula": "fena@espinel",
+   "inputs": {
+    "una": 20,
+    "pna": 140,
+    "ucr": 100,
+    "pcr": 1.0
+   },
+   "units": {},
+   "expected": 0.14285714285714285,
+   "tags": [
+    "typical"
+   ],
+   "note": "prerenal range"
+  },
+  {
+   "formula": "fena@espinel",
+   "inputs": {
+    "una": 60,
+    "pna": 135,
+    "ucr": 40,
+    "pcr": 3.0
+   },
+   "units": {},
+   "expected": 3.3333333333333335,
+   "tags": [
+    "typical"
+   ],
+   "note": "ATN range"
+  },
+  {
+   "formula": "fena@espinel",
+   "inputs": {
+    "una": 10,
+    "pna": 140,
+    "ucr": 150,
+    "pcr": 1.4
+   },
+   "units": {},
+   "expected": 0.06666666666666667,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "fena@espinel",
+   "inputs": {
+    "una": 40,
+    "pna": 140,
+    "ucr": 8840,
+    "pcr": 176.8
+   },
+   "units": {
+    "ucr": "umol/L",
+    "pcr": "umol/L"
+   },
+   "expected": 0.5714285714285714,
+   "tags": [
+    "unit"
+   ],
+   "note": "both µmol/L"
+  },
+  {
+   "formula": "fena@espinel",
+   "inputs": {
+    "una": 40,
+    "pna": 140,
+    "ucr": 80,
+    "pcr": 176.8
+   },
+   "units": {
+    "pcr": "umol/L"
+   },
+   "expected": 0.7142857142857143,
+   "tags": [
+    "unit",
+    "edge"
+   ],
+   "note": "mixed units: urine mg/dL, plasma µmol/L"
+  },
+  {
+   "formula": "winters@1967",
+   "inputs": {
+    "hco3": 12
+   },
+   "units": {},
+   "expected": 26.0,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "winters@1967",
+   "inputs": {
+    "hco3": 24
+   },
+   "units": {},
+   "expected": 44.0,
+   "tags": [
+    "edge"
+   ],
+   "note": "normal HCO3"
+  },
+  {
+   "formula": "winters@1967",
+   "inputs": {
+    "hco3": 5
+   },
+   "units": {},
+   "expected": 15.5,
+   "tags": [
+    "edge"
+   ],
+   "note": "severe acidosis"
+  },
+  {
+   "formula": "winters@1967",
+   "inputs": {
+    "hco3": 18
+   },
+   "units": {},
+   "expected": 35.0,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "winters@1967",
+   "inputs": {
+    "hco3": 8.5
+   },
+   "units": {},
+   "expected": 20.75,
+   "tags": [
+    "typical"
+   ],
+   "note": "decimal"
+  },
+  {
+   "formula": "ldl_friedewald@1972",
+   "inputs": {
+    "tc": 200,
+    "hdl": 50,
+    "tg": 150
+   },
+   "units": {},
+   "expected": 120.0,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "ldl_friedewald@1972",
+   "inputs": {
+    "tc": 180,
+    "hdl": 60,
+    "tg": 100
+   },
+   "units": {},
+   "expected": 100.0,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "ldl_friedewald@1972",
+   "inputs": {
+    "tc": 250,
+    "hdl": 40,
+    "tg": 300
+   },
+   "units": {},
+   "expected": 150.0,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "ldl_friedewald@1972",
+   "inputs": {
+    "tc": 160,
+    "hdl": 45,
+    "tg": 80
+   },
+   "units": {},
+   "expected": 99.0,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "ldl_friedewald@1972",
+   "inputs": {
+    "tc": 5.2,
+    "hdl": 1.3,
+    "tg": 1.7
+   },
+   "units": {
+    "tc": "mmol/L",
+    "hdl": "mmol/L",
+    "tg": "mmol/L"
+   },
+   "expected": 120.6992,
+   "tags": [
+    "unit"
+   ],
+   "note": "SI inputs"
+  },
+  {
+   "formula": "ldl_friedewald@1972",
+   "inputs": {
+    "tc": 140,
+    "hdl": 70,
+    "tg": 399
+   },
+   "units": {},
+   "expected": -9.8,
+   "tags": [
+    "edge"
+   ],
+   "note": "TG near Friedewald limit"
+  },
+  {
+   "formula": "ldl_sampson@2020",
+   "inputs": {
+    "tc": 200,
+    "hdl": 50,
+    "tg": 150
+   },
+   "units": {},
+   "expected": 123.39729061516445,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "ldl_sampson@2020",
+   "inputs": {
+    "tc": 180,
+    "hdl": 60,
+    "tg": 100
+   },
+   "units": {},
+   "expected": 101.97284906348888,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "ldl_sampson@2020",
+   "inputs": {
+    "tc": 250,
+    "hdl": 40,
+    "tg": 300
+   },
+   "units": {},
+   "expected": 154.1825162759769,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "ldl_sampson@2020",
+   "inputs": {
+    "tc": 160,
+    "hdl": 45,
+    "tg": 80
+   },
+   "units": {},
+   "expected": 99.74505173966989,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "ldl_sampson@2020",
+   "inputs": {
+    "tc": 5.2,
+    "hdl": 1.3,
+    "tg": 1.7
+   },
+   "units": {
+    "tc": "mmol/L",
+    "hdl": "mmol/L",
+    "tg": "mmol/L"
+   },
+   "expected": 124.10872211849275,
+   "tags": [
+    "unit"
+   ],
+   "note": "SI inputs"
+  },
+  {
+   "formula": "ldl_sampson@2020",
+   "inputs": {
+    "tc": 140,
+    "hdl": 70,
+    "tg": 399
+   },
+   "units": {},
+   "expected": 16.37340614387921,
+   "tags": [
+    "edge"
+   ],
+   "note": "TG near Friedewald limit"
+  },
+  {
+   "formula": "ldl_martin_hopkins@2013",
+   "inputs": {
+    "tc": 200,
+    "hdl": 50,
+    "tg": 150
+   },
+   "units": {},
+   "expected": 123.6842105263158,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "ldl_martin_hopkins@2013",
+   "inputs": {
+    "tc": 180,
+    "hdl": 60,
+    "tg": 100
+   },
+   "units": {},
+   "expected": 100.3921568627451,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "ldl_martin_hopkins@2013",
+   "inputs": {
+    "tc": 250,
+    "hdl": 40,
+    "tg": 300
+   },
+   "units": {},
+   "expected": 163.84615384615384,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "ldl_martin_hopkins@2013",
+   "inputs": {
+    "tc": 160,
+    "hdl": 45,
+    "tg": 80
+   },
+   "units": {},
+   "expected": 98.33333333333333,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "ldl_martin_hopkins@2013",
+   "inputs": {
+    "tc": 5.2,
+    "hdl": 1.3,
+    "tg": 1.7
+   },
+   "units": {
+    "tc": "mmol/L",
+    "hdl": "mmol/L",
+    "tg": "mmol/L"
+   },
+   "expected": 124.39738596491227,
+   "tags": [
+    "unit"
+   ],
+   "note": "SI inputs"
+  },
+  {
+   "formula": "ldl_martin_hopkins@2013",
+   "inputs": {
+    "tc": 140,
+    "hdl": 70,
+    "tg": 399
+   },
+   "units": {},
+   "expected": 28.0,
+   "tags": [
+    "edge"
+   ],
+   "note": "TG near Friedewald limit"
+  },
+  {
+   "formula": "parkland@1968",
+   "inputs": {
+    "weight": 70,
+    "tbsa": 20
+   },
+   "units": {},
+   "expected": 5600.0,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "parkland@1968",
+   "inputs": {
+    "weight": 100,
+    "tbsa": 50
+   },
+   "units": {},
+   "expected": 20000.0,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "parkland@1968",
+   "inputs": {
+    "weight": 20,
+    "tbsa": 15
+   },
+   "units": {},
+   "expected": 1200.0,
+   "tags": [
+    "typical"
+   ],
+   "note": "child"
+  },
+  {
+   "formula": "parkland@1968",
+   "inputs": {
+    "weight": 176.4,
+    "tbsa": 30
+   },
+   "units": {
+    "weight": "lb"
+   },
+   "expected": 9601.64328816,
+   "tags": [
+    "unit"
+   ],
+   "note": "lb"
+  },
+  {
+   "formula": "parkland@1968",
+   "inputs": {
+    "weight": 70,
+    "tbsa": 0
+   },
+   "units": {},
+   "expected": 0.0,
+   "tags": [
+    "edge"
+   ],
+   "note": "no burn"
+  },
+  {
+   "formula": "holliday_segar@1957",
+   "inputs": {
+    "weight": 5
+   },
+   "units": {},
+   "expected": 500.0,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "holliday_segar@1957",
+   "inputs": {
+    "weight": 10
+   },
+   "units": {},
+   "expected": 1000.0,
+   "tags": [
+    "edge"
+   ],
+   "note": "first breakpoint"
+  },
+  {
+   "formula": "holliday_segar@1957",
+   "inputs": {
+    "weight": 15
+   },
+   "units": {},
+   "expected": 1250.0,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "holliday_segar@1957",
+   "inputs": {
+    "weight": 20
+   },
+   "units": {},
+   "expected": 1500.0,
+   "tags": [
+    "edge"
+   ],
+   "note": "second breakpoint"
+  },
+  {
+   "formula": "holliday_segar@1957",
+   "inputs": {
+    "weight": 35
+   },
+   "units": {},
+   "expected": 1800.0,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "holliday_segar@1957",
+   "inputs": {
+    "weight": 44.1
+   },
+   "units": {
+    "weight": "lb"
+   },
+   "expected": 1500.06847034,
+   "tags": [
+    "unit"
+   ],
+   "note": "lb"
+  },
+  {
+   "formula": "holliday_segar_hourly@4-2-1",
+   "inputs": {
+    "weight": 5
+   },
+   "units": {},
+   "expected": 20.0,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "holliday_segar_hourly@4-2-1",
+   "inputs": {
+    "weight": 10
+   },
+   "units": {},
+   "expected": 40.0,
+   "tags": [
+    "edge"
+   ],
+   "note": "first breakpoint"
+  },
+  {
+   "formula": "holliday_segar_hourly@4-2-1",
+   "inputs": {
+    "weight": 15
+   },
+   "units": {},
+   "expected": 50.0,
+   "tags": [
+    "typical"
+   ],
+   "note": ""
+  },
+  {
+   "formula": "holliday_segar_hourly@4-2-1",
+   "inputs": {
+    "weight": 20
+   },
+   "units": {},
+   "expected": 60.0,
+   "tags": [
+    "edge"
+   ],
+   "note": "second breakpoint"
+  },
+  {
+   "formula": "holliday_segar_hourly@4-2-1",
+   "inputs": {
+    "weight": 70
+   },
+   "units": {},
+   "expected": 110.0,
+   "tags": [
+    "typical"
+   ],
+   "note": "adult"
+  },
+  {
+   "formula": "holliday_segar_hourly@4-2-1",
+   "inputs": {
+    "weight": 44.1
+   },
+   "units": {
+    "weight": "lb"
+   },
+   "expected": 60.003423517,
+   "tags": [
+    "unit"
+   ],
+   "note": "lb"
+  }
+ ]
+}

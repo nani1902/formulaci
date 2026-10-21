@@ -1,0 +1,15 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Body Surface Area Calculator (Mosteller)</title>
+<link rel="stylesheet" href="_style.css"></head><body>
+<h1>Body Surface Area (Mosteller)</h1>
+<form class="calc" onsubmit="return false">
+ <div class="row"><label for="ht">Height (in)</label><input id="ht" type="number" step="any"></div>
+ <div class="row"><label for="wt">Weight (lb)</label><input id="wt" type="number" step="any"></div>
+ <input type="submit" id="bsa-submit" value="Calculate">
+ <table class="result"><tr><th>BSA</th><td id="bsa-out"></td></tr></table>
+</form>
+<script>
+document.getElementById('bsa-submit').addEventListener('click', function () {
+  var cm = +document.getElementById('ht').value * 2.54, kg = +document.getElementById('wt').value * 0.45359237;
+  document.getElementById('bsa-out').textContent = Math.sqrt(cm * kg / 3600).toFixed(2) + ' m²';
+});
+</script></body></html>

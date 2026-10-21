@@ -1,0 +1,6 @@
+body{font-family:system-ui,sans-serif;max-width:640px;margin:2rem auto;padding:0 16px;color:#222}
+.calc{border:1px solid #ccc;border-radius:8px;padding:1rem}
+.row{margin:.5rem 0;display:flex;gap:.5rem;align-items:center}
+label{min-width:9rem}
+.result{margin-top:1rem;font-size:1.3rem;font-weight:600}
+.disclaimer{font-size:.8rem;color:#666}

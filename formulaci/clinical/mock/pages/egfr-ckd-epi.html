@@ -1,0 +1,21 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>GFR Calculator — CKD-EPI (updated 2021)</title>
+<link rel="stylesheet" href="_style.css"></head><body>
+<h1>GFR Calculator — CKD-EPI</h1>
+<p>Estimate kidney function with the CKD-EPI equation (updated 2021).</p>
+<form class="calc" onsubmit="return false">
+ <div class="row"><label for="creat">Creatinine (mg/dL)</label><input id="creat" type="number" step="any"></div>
+ <div class="row"><label for="pt-age">Age</label><input id="pt-age" type="number"></div>
+ <div class="row"><label for="gender">Gender</label><select id="gender"><option value="">--</option><option value="M">Male</option><option value="F">Female</option></select></div>
+ <div class="row"><label><input type="checkbox" id="race-black"> Black / African American</label></div>
+ <button id="calc-btn" type="button">Compute</button>
+ <div class="result"><span id="gfr-value">--</span> <span class="unit">mL/min/1.73 m²</span></div>
+</form>
+<script>
+document.getElementById('calc-btn').onclick = function () {
+  var scr = +document.getElementById('creat').value, age = +document.getElementById('pt-age').value;
+  var f = document.getElementById('gender').value === 'F', black = document.getElementById('race-black').checked;
+  var k = f ? 0.7 : 0.9, a = f ? -0.329 : -0.411, r = scr / k;
+  var g = 141 * Math.pow(Math.min(r, 1), a) * Math.pow(Math.max(r, 1), -1.209) * Math.pow(0.993, age) * (f ? 1.018 : 1) * (black ? 1.159 : 1);
+  document.getElementById('gfr-value').textContent = g.toFixed(1);
+};
+</script></body></html>

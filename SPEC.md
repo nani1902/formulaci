@@ -71,6 +71,9 @@ All records are pydantic models serialized one-per-line as JSON.
 - `tolerance: {abs: float, rel: float, dps: int}`
 - `reason: str` — one sentence a human can read
 - FAIL policy: FAIL only if (a) symbolic is not `equal`, and (b) the identity fails at a clear majority of *evaluable* points in **every** regime where ≥5 points were evaluable, with relative error > 1e-8 at mpmath 50 dps, and (c) the failure is not explained by a known special-case rule (sign of sqrt branch, log branch cut, integer-only identity sampled at non-integers → must resample). Anything else is INCONCLUSIVE or PASS. Precision beats recall: a flag should be worth a human's minute.
+  Ratified extensions (verify session): constant identities (no free symbols) use a single `constant` regime and FAIL only when the mismatch is stable at 50 and 65+ digits and symbolic is not `equal`; FAIL needs at least 2 qualifying regimes (3 if the numeric phase hit its deadline); `Tolerance.abs` is 0.0 (near-zero noise is recognised by shrinking with precision).
+- Join key: one formula can yield several `Parsed` records (`index_in_chain`); verify emits one `Verdict` per `formula_id` combining the pieces (any FAIL → FAIL, all PASS → PASS, else INCONCLUSIVE). `index_in_chain`, `skip_pieces`, `function_aliases`, `details` fields were added to the schemas as optional.
+- `skip_reason` vocabulary (semantics): definition, has_undefined_function, functional_identity, operator_notation, congruence, matrix_or_vector, set_notation, statement_not_identity, plus_minus, indefinite_integral, units, no_relation, unparsed, translator_not_checkable, semantics_error, semantics_timeout, equation_to_solve.
 
 ### Finding (stage: report; also produced by human/agent review)
 - `formula_id: str`, `verdict: str`, `confidence: float` (0–1)
@@ -94,5 +97,5 @@ All records are pydantic models serialized one-per-line as JSON.
 - Do not commit. Do not switch branches. The coordinator commits.
 - Tests: `uv run pytest tests/<stage>` must pass; include at least one end-to-end test on real sample data checked into `tests/<stage>/fixtures/`.
 - Write `formulaci/<stage>/README.md`: how to run, what is covered, what is not, known failure modes. Honest coverage numbers over marketing.
-- Network: Wikipedia API only with a descriptive User-Agent and ≤ 5 req/s; cache raw responses under `data/raw/cache/`.
+- Network: Wikipedia API only with a descriptive User-Agent **with contact info** (read from `FORMULACI_CONTACT`, never checked in) and ≤ 5 req/s; cache raw responses under `data/raw/cache/`.
 - When done, your final message must state: what works, measured numbers, what does not work, and the exact command to run your stage.
