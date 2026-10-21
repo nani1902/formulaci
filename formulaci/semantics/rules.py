@@ -841,7 +841,10 @@ def _checkability(pieces, subst, main_latex, latex, remaining_undef, constants, 
                 tr.add("K.pi_named_object", f"`pi = {b}`: pi names an object here (a bivector, a permutation), not 3.14159")
                 return "named_constant"
         for a, b in ((l, r), (r, l)):
-            if a in (sympy.pi, sympy.E, sympy.GoldenRatio, sympy.EulerGamma) and b.is_number and sympy.nsimplify(b).is_Rational:
+            # a literal number or rational expression (355/113, 3.14), not a definite integral or series that
+            # merely evaluates to something nsimplify can rationalise
+            if a in (sympy.pi, sympy.E, sympy.GoldenRatio, sympy.EulerGamma) and (b.is_Number or b.is_rational is True) \
+                    and sympy.nsimplify(b).is_Rational:
                 tr.add("K.irrational_equals_rational", f"{a} equated to the rational {sympy.sstr(b)}: a historical or working approximation")
                 return "approximation"
         if l.has(sympy.acot) or r.has(sympy.acot):
@@ -930,7 +933,11 @@ def _checkability(pieces, subst, main_latex, latex, remaining_undef, constants, 
     if m:
         tr.add("K.existential_context", f"adjacent prose is existential: {m.group(0)!r}")
         return "statement_not_identity"
-    # structure: definitions and relations between distinct quantities
+    # structure: definitions and relations between distinct quantities. A universal cue in the adjacent
+    # prose ("for all real a and b") says the page means an identity: then a non-identity is a FAIL, not a relation.
+    universal = cr.universal_cue(before, after)
+    if universal:
+        tr.add("K.universal_cue", "adjacent prose quantifies universally: relation-shaped formulas stay checkable")
     for (l, r), p in subst:
         fl, fr = _free(l), _free(r)
         for side, other in ((l, r), (r, l)):
@@ -957,13 +964,13 @@ def _checkability(pieces, subst, main_latex, latex, remaining_undef, constants, 
             side = l if fl else r
             try:
                 poly = sympy.Poly(sympy.expand(l - r), *sorted(fl | fr, key=str))
-                if not side.atoms(sympy.Function) and not poly.is_zero and poly.total_degree() >= 1:
+                if not side.atoms(sympy.Function) and not poly.is_zero and poly.total_degree() >= 1 and not universal:
                     tr.add("K.polynomial_equation", "polynomial in the variables equated to a constant: an equation to solve, not an identity")
                     return "statement_not_identity"
             except Exception:
                 pass
             if not side.has(sympy.Sum, sympy.Product, sympy.Integral, sympy.Limit, sympy.Derivative, sympy.Subs) \
-                    and any(_depends(side, s_) for s_ in sorted(_free(side), key=str)):
+                    and any(_depends(side, s_) for s_ in sorted(_free(side), key=str)) and not universal:
                 tr.add("K.nonconstant_equals_constant", "one side is a constant and the other varies with its variables: an equation to solve")
                 return "statement_not_identity"
         if is_eq and fl and fr and not (l.atoms(sympy.Function) | r.atoms(sympy.Function)) \
@@ -971,7 +978,7 @@ def _checkability(pieces, subst, main_latex, latex, remaining_undef, constants, 
                 and all(pw.exp.is_Integer for e_ in (l, r) for pw in e_.atoms(sympy.Pow)):
             try:
                 num, _ = sympy.fraction(sympy.cancel(sympy.together(sympy.expand(l - r))))
-                if num.free_symbols and not sympy.expand(num).is_zero and not _numerically_zero(num):
+                if num.free_symbols and not sympy.expand(num).is_zero and not _numerically_zero(num) and not universal:
                     tr.add("K.rational_relation", "two rational expressions that are not identically equal: a relation that holds only under "
                                                   "extra conditions (the golden-ratio hypothesis, 4p^3+27q^2=0). Wrong rational identities also land here.")
                     return "statement_not_identity"
@@ -981,7 +988,7 @@ def _checkability(pieces, subst, main_latex, latex, remaining_undef, constants, 
                 and not l.has(sympy.Sum, sympy.Product, sympy.Integral, sympy.Limit) and not r.has(sympy.Sum, sympy.Product, sympy.Integral, sympy.Limit):
             try:
                 d = sympy.expand(l - r)
-                if d.free_symbols and sympy.Poly(d, *sorted(fl | fr, key=str)).total_degree() >= 1:
+                if d.free_symbols and sympy.Poly(d, *sorted(fl | fr, key=str)).total_degree() >= 1 and not universal:
                     tr.add("K.polynomial_relation", "two polynomials that are not identically equal: a relation between quantities "
                                                     "(e.g. Descartes' theorem), not an identity. Wrong polynomial identities also land here.")
                     return "statement_not_identity"

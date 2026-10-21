@@ -104,6 +104,16 @@ def tolerance_hints(assumptions_source: list[str]) -> dict:
     return out
 
 
+def stated_type_symbols(assumptions_source: list[str]) -> set[str]:
+    """Symbols whose number type was stated in the prose (P.type_phrase:x, P.member:x, P.interval:x)."""
+    out: set[str] = set()
+    for item in assumptions_source or []:
+        m = re.match(r"^P\.(?:type_phrase|member|interval):(.+)$", item.strip())
+        if m:
+            out.add(m.group(1))
+    return out
+
+
 # ---------------------------------------------------------------- label superscripts
 
 # LaTeX patterns on a *letter* base (a `}` closing a name or subscript counts; a `)` does not, so

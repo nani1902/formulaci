@@ -386,8 +386,9 @@ class Parser:
                 before2 = self.toks[self.pos - 2] if self.pos > 1 else None
                 if t.kind == "DIGIT" and before is not None and before.kind == "LETTER" and before.end == t.start \
                         and before.value not in ("i", "j") \
-                        and not (before2 is not None and before2.kind == "CHAR" and before2.value in "^_"):
-                    raise Unsupported("letter_digit")  # h2 < h1: h_2, not 2h  (but (-1)^k 2^n is fine)
+                        and not (before2 is not None and before2.kind == "CHAR" and before2.value in "^_") \
+                        and not _symbolic_power_follows(self.toks, self.pos):
+                    raise Unsupported("letter_digit")  # h2 < h1: h_2, not 2h  (but (-1)^k 2^n and n2^{n-1} are fine)
                 if _is_char(t, "(") and before is not None and before.kind == "CHAR" and before.value in ")]}" and (
                         before.value != "}" or _standalone_group_before(self.toks, self.pos - 1)):
                     e_ = group_end(self.toks, self.pos)
@@ -866,6 +867,10 @@ class Parser:
                 if sup and _is_char(sup[0], "("):
                     raise Unsupported("nth_derivative")
             args = self.parse_call_args()
+            if name == "B" and len(args) == 2 and sub is None and primes == 0:
+                self.ctx.note("funcapp:B:beta")  # B(x, y): the Beta function, as for \mathrm{B}
+                res = sp.beta(*args)
+                return self.apply_superscript(res, sup) if sup is not None else res
             f = sp.Function(name)
             self.ctx.functions_used.add(name)
             if name in self.ctx.funcs or base in self.ctx.funcs:
@@ -1681,6 +1686,21 @@ def prescan_brackets(toks: list[Tok]) -> set[str]:
             if toks[e].value == "]" and _is_single_atom(toks[i + 2:e]):
                 out.add(t.value)
     return out
+
+
+def _symbolic_power_follows(toks: list[Tok], pos: int) -> bool:
+    """`n2^{n-1}`, `n2^n`: the digit at `pos` is the base of a power whose exponent names a symbol,
+    so it is a juxtaposed factor, not a subscript (`h2` alone stays `h_2`)."""
+    t = toks[pos]
+    if t.kind != "DIGIT" or pos + 2 >= len(toks) or not _is_char(toks[pos + 1], "^"):
+        return False
+    nxt = toks[pos + 2]
+    if nxt.kind == "LETTER":
+        return True
+    if _is_char(nxt, "{"):
+        end = group_end(toks, pos + 2)
+        return any(x.kind == "LETTER" for x in toks[pos + 3:end])
+    return False
 
 
 def prescan_functions(toks: list[Tok]) -> tuple[set[str], list[str], set[str]]:

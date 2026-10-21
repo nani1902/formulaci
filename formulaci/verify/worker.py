@@ -83,7 +83,35 @@ def task_symbolic(payload: dict) -> dict:
 
     p = _problem(payload)
     result, trace = symbolic_check(p)
-    return {"symbolic": result, "trace": trace}
+    out = {"symbolic": result, "trace": trace}
+    if not p.syms and result == "not_equal":
+        out["closed"] = _closed_form_values(p)
+    return out
+
+
+def _closed_form_values(p) -> dict | None:
+    """For a constant identity: SymPy's closed forms of both sides and their values at two precisions.
+    Used only when numeric quadrature/summation fails to converge (oscillatory integrals)."""
+    import sympy as sp
+    try:
+        sides = [e.doit() for e in (p.lhs, p.rhs)]
+        if any(e.has(sp.Integral, sp.Sum, sp.Product, sp.Limit) or e.free_symbols or not e.is_number for e in sides):
+            return None
+        vals = [[sp.N(e, d) for e in sides] for d in (50, 100)]
+        if any(not v.is_number or v.has(sp.nan, sp.zoo, sp.oo) for row in vals for v in row):
+            return None
+        for v50, v100 in zip(*vals):
+            if abs(v50 - v100) > sp.Float(10) ** -40 * max(1, abs(v100)):
+                return None
+        l, r = vals[1]
+        diff = abs(l - r)
+        rel = diff / max(abs(l), abs(r), sp.Integer(1))
+        if rel < sp.Float(10) ** -8:
+            return None
+        return {"lhs": sp.sstr(sides[0]), "rhs": sp.sstr(sides[1]), "lhs_val": sp.sstr(sp.N(l, 50)),
+                "rhs_val": sp.sstr(sp.N(r, 50)), "abs_diff": sp.sstr(sp.N(diff, 20)), "rel_diff": sp.sstr(sp.N(rel, 20))}
+    except Exception:  # noqa: BLE001
+        return None
 
 
 def _point_dict(r: num.PointResult) -> dict:
@@ -166,8 +194,19 @@ def task_numeric(payload: dict) -> dict:
     # failures at non-integer positive points (not just off-branch ones) suggest an integer-only identity
     others_fail = any(r["n_fail"] for r in out["regimes"]
                       if r["name"] in ("small_positive", "unit_interval", "large"))
+    # ... unless the prose stated a real (non-integer) domain: then failing at non-integers is a FAIL
+    stated = guards.stated_type_symbols(payload["semantics"].get("assumptions_source", []))
+    stated_real = any(s.name in stated and not s.is_integer for s in p.syms)
+    # "holds at the integers" means nothing when a bound such as |x| < 1 leaves a single admissible
+    # integer (x = 0): every non-integer symbol must take at least 3 distinct values at evaluable points
+    seen: dict[str, set] = {}
+    for pt in ints["points"]:
+        if pt["status"] != "error":
+            for name_, val in pt["point"].items():
+                seen.setdefault(name_, set()).add(str(val))
+    diverse = all(len(seen.get(s.name, ())) >= 3 for s in p.syms if not s.is_integer)
     if ints["n_points"] - ints["n_error"] >= 5 and ints["n_fail"] == 0 and others_fail \
-            and not all(s.is_integer for s in p.syms):
+            and not all(s.is_integer for s in p.syms) and not stated_real and diverse:
         out["integer_resampled"] = True
         out["regimes"] += _run_regimes(ev, p, fid, INTEGER_RESAMPLE_REGIMES, deadline)
     out["timed_out"] = time.monotonic() > deadline

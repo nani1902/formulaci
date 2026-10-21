@@ -53,9 +53,22 @@ Fields returned by `verify_formula` (each item in `verify_text.results` has the 
 - `skip_reason`: when the formula was skipped.
 - `elapsed_s`: time taken for the check.
 
-Errors never reach the client as exceptions. An exception or a timeout becomes
-`{"verdict": "INCONCLUSIVE", "reason": "<error>", "advice": "Could not verify; ..."}`.
-For `explain_verdict` it becomes the text `INCONCLUSIVE: <error>`.
+Errors inside a check never reach the client as exceptions. For `verify_formula` an exception or a
+timeout becomes `{"verdict": "INCONCLUSIVE", "reason": "<error>", "advice": "Could not verify; ..."}`;
+for `verify_text` it keeps the text shape (`summary` with zero counts, empty `results`, an `error`
+field and an `advice` saying the text was not checked); for `explain_verdict` it becomes the text
+`INCONCLUSIVE: <error>`. Argument validation errors (a missing `latex`, a non-numeric `timeout`) are
+reported by the MCP layer as a tool error (`isError: true`) before the check starts.
+
+Parameter clamping: `timeout` is clamped to 1..60 seconds (non-numeric or non-positive values become
+the default 20); `max_formulas` is clamped to 1..200.
+
+`advice` on a PASS states what was established (symbolic proof, numeric sampling, or both) and warns
+when the identity holds only for integer values. On a FAIL it carries only numbers from the
+counterexample, never symbol names or LaTeX from the input; the structured fields hold those.
+
+Shutdown: closing stdin ends the server after any check in flight completes (at most the per-formula
+timeout plus a few seconds); a client that kills the process earlier leaves no orphaned workers.
 
 ## Configure a client
 
@@ -89,8 +102,8 @@ claude mcp add formulaci -- uv run --directory /path/to/formulaci --extra mcp fo
 
 Everything after `--` is the server command. Add `--scope user` to make the server available in
 every project, or `--scope project` to write it to a shared `.mcp.json`. Check it with
-`claude mcp list`. (This syntax follows the Claude Code docs. It was not re-checked against
-`claude mcp add --help` here because no Claude Code CLI was installed on the machine that wrote this page.)
+`claude mcp list`. Verified against Claude Code CLI 2.1.304: `claude mcp add [options] <name> <commandOrUrl> [args...]`.
+Put options such as `--scope user` *before* the `--`; anything after it is passed to the server as an argument.
 
 ### Any stdio client
 
@@ -146,7 +159,7 @@ and gets back (real output):
     "rel_diff": "0.5000000000000000000000000000000000000000"
   },
   "translation": [
-    {"lhs": "Sum(k**2, (k, 1, n))", "relation": "=", "rhs": "n*(n + 1)*(2*n + 1)/3", "status": "ok"}
+    {"lhs": "Sum(1*k**2, (k, 1, n))", "relation": "=", "rhs": "n*(n + 1)*(2*n + 1)/3", "status": "ok"}
   ],
   "assumptions": {
     "domains": {"n": "positive_integer"},
@@ -154,7 +167,7 @@ and gets back (real output):
     "constraints": [],
     "assumptions_source": ["D.letter_integer:n", "P.type_phrase:n"]
   },
-  "elapsed_s": 1.81
+  "elapsed_s": 0.04
 }
 ```
 

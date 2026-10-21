@@ -30,15 +30,43 @@ deployed. formulaci uses free tools and runs at the scale of the whole encyclope
   *Ginzburg–Landau theory*; a wrong arctangent argument in the *Tridecagon* construction; a sign error on *Universal joint*;
   sin 54° given as 2√5/4 on *54 (number)*; a negative upper bound on *Area of a circle*.
 - **Measured quality on labeled data** (`data/bench/REPORT.md`): precision 100 % (0 false positives on 272 known-true
-  identities), recall 82 % on 1,320 injected errors.
+  identities), recall 79 % on 1,320 injected errors (83 % of the mutations that reach a verdict).
 - **Measured quality on real pages:** pre-review precision was 4.9 % in the first pass (13 of 266 flags) and 10.4 % in the
   second (32 of 308) after the 253 first-pass false positives were tagged by cause and turned into rules and fixtures;
   242 of those 253 no longer fail. The cost: 3 of the 13 first-pass errors became INCONCLUSIVE or skipped. The remaining
   false positives are dominated by notation the translator still misreads (double zeta, elliptic nome, coefficient
   extraction), named constants read as variables, and equations to be solved rather than identities.
 
-Coverage is the honest limitation: only identities with an explicit relation are checked, which is a small fraction of
-all `<math>` tags (most are bare expressions, definitions, operators, matrices or sets).
+### Coverage: what fraction of Wikipedia's mathematics this actually checks
+
+Only an identity between two computable expressions can be decided, and that is a small slice of all `<math>` tags.
+The funnel for the second pass:
+
+| Stage | Formulas | Share |
+|---|---:|---:|
+| `<math>` elements extracted from 64,617 pages | 952,136 | 100 % |
+| contain a relation (`=`, a chain, or an inequality) | 272,013 | 29 % |
+| translated to SymPy without an unsupported construct | 140,226 | 15 % |
+| judged checkable by the semantics stage | 6,437 | 0.7 % |
+| verified (5,076 PASS, 756 INCONCLUSIVE, 308 FAIL) | 6,140 | 0.6 % |
+
+Where the rest goes: about 70 % of Wikipedia math is a bare expression with no relation (an inline symbol, a fragment);
+roughly 50,000 are definitions and 54,000 are statements that are not identities (laws such as F = ma, conditions,
+equations to solve); over 400,000 relations use notation the translator cannot evaluate (operators and functional
+notation, matrices and vectors, sets, sums over index sets, inner products, ellipses, page-specific undefined functions);
+and 47,000 do not parse. Teaching the translator matrices, operators and index sets is where most of the remaining
+coverage lies.
+
+### Where the truth comes from
+
+There is no answer key. The checker never compares a formula with a database of correct formulas; it asks whether the
+two sides are the same mathematical object, by two independent routes: SymPy tries to simplify the difference to zero
+exactly, and mpmath evaluates both sides at random points in several regimes (small positives, the unit interval, small
+integers, mixed signs, complex values, large magnitudes) to 50 significant digits. A wrong identity disagrees at almost
+every random point, so a FAIL comes with a concrete counterexample anyone can recheck. The weak link is the semantics
+stage, which infers what the symbols mean from the surrounding prose; when it guesses wrong the tool reports a false
+error, which is why every flag was reviewed before being listed as confirmed. A PASS means no counterexample was found
+under the inferred assumptions, not a proof.
 
 ## Layout
 

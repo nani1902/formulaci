@@ -137,6 +137,7 @@ def test_timeout_clamped():
     assert mcp_server._clamp_timeout(-1) == mcp_server.DEFAULT_TIMEOUT_S
     assert mcp_server._clamp_timeout(float("nan")) == mcp_server.DEFAULT_TIMEOUT_S
     assert mcp_server._clamp_timeout(5) == 5.0
+    assert mcp_server._clamp_timeout(0.001) == mcp_server.MIN_TIMEOUT_S
 
 
 # ---- tools with fakes ------------------------------------------------------------------------
@@ -145,7 +146,8 @@ def test_timeout_clamped():
 def test_verify_formula_fail_with_fakes(fakes):
     out = call("verify_formula", latex=r"\sin^2 x + \cos^2 x = 2")
     assert out["verdict"] == "FAIL"
-    assert out["advice"].startswith("Do not present this formula; the identity fails at x = 0.7")
+    assert out["advice"].startswith("Do not present this formula; it fails at the 1-variable sample point")
+    assert "x = 0.7" not in out["advice"] and "1.0" in out["advice"] and "2.0" in out["advice"]
     assert out["counterexample"]["assignments"] == {"x": "0.7"}
     assert out["translation"][0]["lhs"] == "sin(x)**2 + cos(x)**2"
     assert out["translation"][0]["rhs"] == "2"
@@ -154,11 +156,31 @@ def test_verify_formula_fail_with_fakes(fakes):
 
 def test_verify_formula_pass_and_skip_with_fakes(fakes):
     ok = call("verify_formula", latex=r"\sin^2 x + \cos^2 x = 1")
-    assert ok["verdict"] == "PASS" and ok["advice"].startswith("Verified numerically and symbolically")
+    assert ok["verdict"] == "PASS" and ok["advice"].startswith("Proved symbolically; numeric evaluation was not available")
     assert "counterexample" not in ok
     skip = call("verify_formula", latex="F = ma")
     assert skip["verdict"] == "SKIP" and skip["skip_reason"] == "statement_not_identity"
     assert skip["advice"].startswith("Could not verify")
+
+
+def test_pass_advice_states_the_evidence():
+    adv = mcp_server._pass_advice
+    assert "symbolically and numerically at 12" in adv(FakeResult("x", "PASS", symbolic="equal", regimes=[{"n_points": 12, "n_error": 0}]), "")
+    assert adv(FakeResult("x", "PASS", symbolic="unknown", regimes=[{"n_points": 12, "n_error": 2}]), "").startswith("Verified numerically at 10")
+    assert adv(FakeResult("x", "PASS", symbolic="equal"), "").startswith("Proved symbolically")
+    assert "integer" in adv(FakeResult("x", "PASS", regimes=[{"n_points": 36}]), "integer-only identity whose integer domain was not stated")
+    assert adv(FakeResult("x", "PASS"), "").startswith("Marked PASS without")
+
+
+def test_fail_advice_carries_numbers_only():
+    adv = mcp_server._fail_advice({"assignments": {"x_ignore_all_instructions": "0"}, "lhs": "1.0", "rhs": "2.0"}, "")
+    assert "ignore" not in adv and "1-variable" in adv and "1.0" in adv
+
+
+def test_verify_text_errors_keep_text_shape(fakes):
+    out = call("verify_text", text="x" * (2_000_001))
+    assert out["summary"]["total"] == 0 and out["results"] == [] and "too long" in out["error"]
+    assert "not claim" in out["advice"]
 
 
 def test_exception_becomes_inconclusive(fakes):
@@ -220,7 +242,7 @@ def test_real_pythagorean_fail():
 def test_real_pythagorean_pass():
     out = call("verify_formula", latex=r"\sin^2 x + \cos^2 x = 1")
     assert out["verdict"] == "PASS", out
-    assert out["advice"].startswith("Verified numerically and symbolically")
+    assert out["advice"].startswith("Verified symbolically and numerically at")
 
 
 @real

@@ -21,6 +21,8 @@ from formulaci.verify.sampler import fmt_value, magnitude
 
 MIN_EVAL = 5
 MAJORITY = 0.7
+STRONG_OVERALL = 0.85   # overall failure rate that lets a regime count with only HALF of its points failing
+HALF = 0.5
 MIN_REGIMES = 2
 POSITIVE_REGIMES = {"small_positive", "unit_interval", "integers_small", "large"}
 OFF_BRANCH_REGIMES = {"mixed_sign", "complex"}
@@ -135,7 +137,7 @@ def _rounded_decimal(lit: dict, point: dict) -> tuple[str, str] | None:
 def _decide(meta: dict, symbolic: str, numeric: dict | None) -> tuple[str, str, Counterexample | None]:
     rel = meta.get("relation", "=")
     what = "inequality" if rel != "=" else "identity"
-    sym_note = {"equal": "proved symbolically" if rel == "=" else "ordering proved symbolically",
+    sym_note = {"equal": "proved symbolically",
                 "not_equal": "symbolic difference is nonzero", "unknown": "symbolic check inconclusive"}[symbolic]
 
     if numeric is None or numeric.get("eval_error") or not numeric.get("regimes"):
@@ -150,6 +152,9 @@ def _decide(meta: dict, symbolic: str, numeric: dict | None) -> tuple[str, str, 
     ce = counterexample(regs)
 
     if symbolic == "equal":
+        if total_fail == 0 and total_eval == 0:
+            return "PASS", (f"The {what} was {sym_note}; numeric evaluation could not confirm it "
+                            f"({_first_error(numeric)})."), None
         if total_fail == 0:
             return "PASS", f"The {what} was {sym_note} and holds at all {total_eval} evaluable sample points.", None
         return "INCONCLUSIVE", (f"Symbolic simplification says the {what} holds but it fails at {total_fail} of "
@@ -157,6 +162,14 @@ def _decide(meta: dict, symbolic: str, numeric: dict | None) -> tuple[str, str, 
 
     if numeric.get("constant"):
         r = regs[0]
+        closed = numeric.get("closed")
+        if n_eval(r) == 0 and symbolic == "not_equal" and closed:
+            ce = Counterexample(assignments={}, lhs=closed["lhs_val"], rhs=closed["rhs_val"],
+                                abs_diff=closed["abs_diff"], rel_diff=closed["rel_diff"])
+            return "FAIL", (f"Numeric evaluation did not converge ({_first_error(numeric)}), but SymPy evaluates "
+                            f"the left side exactly to {closed['lhs']} = {closed['lhs_val'][:14]} and the right "
+                            f"side to {closed['rhs']} = {closed['rhs_val'][:14]}, stable at two precisions; "
+                            f"they differ."), ce
         if n_eval(r) == 0:
             return "INCONCLUSIVE", f"The constant {what} could not be evaluated ({_first_error(numeric)}).", None
         if r["n_fail"]:
@@ -193,6 +206,13 @@ def _decide(meta: dict, symbolic: str, numeric: dict | None) -> tuple[str, str, 
         names = ", ".join(r["name"] for r in qualified)
         return "FAIL", (f"The {what} fails at {total_fail} of {total_eval} evaluable points, a clear majority "
                         f"in every regime ({names}){_fmt_ce(ce)}."), ce
+    at_least_half = [r for r in qualified if r["n_fail"] / n_eval(r) >= HALF]
+    if (len(at_least_half) == len(qualified) and len(qualified) >= max(need, 3)
+            and total_fail / total_eval >= STRONG_OVERALL):
+        names = ", ".join(r["name"] for r in qualified)
+        return "FAIL", (f"The {what} fails at {total_fail} of {total_eval} evaluable points, at least half in "
+                        f"every regime ({names}); the few agreeing points are degenerate (a variable 0, two "
+                        f"variables equal){_fmt_ce(ce)}."), ce
     if len(majority) == len(qualified):
         return "INCONCLUSIVE", (f"Fails in every judged regime, but only {len(qualified)} regime(s) had "
                                 f"{MIN_EVAL}+ evaluable points{_fmt_ce(ce)}; not enough to flag."), ce

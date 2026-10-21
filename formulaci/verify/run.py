@@ -49,6 +49,7 @@ def verify_link(worker: Worker, parsed: Parsed, sem: Semantics, deadline: float)
         cap_sym = SYMBOLIC_TIMEOUT_SLOW if meta.get("slow") else SYMBOLIC_TIMEOUT
         sym = worker.call("symbolic", payload, min(cap_sym, max(left() * 0.4, 0.5)))
         out["symbolic"], out["trace"] = sym["symbolic"], sym["trace"]
+        out["closed"] = sym.get("closed")
     except TaskTimeout:
         out["notes"].append("symbolic check timed out")
     except TaskFailed as e:
@@ -65,6 +66,8 @@ def verify_link(worker: Worker, parsed: Parsed, sem: Semantics, deadline: float)
             out["numeric"] = {"eval_error": "numeric phase timed out", "regimes": []}
         except TaskFailed as e:
             out["numeric"] = {"eval_error": f"numeric phase crashed: {str(e).splitlines()[0]}", "regimes": []}
+    if out.get("closed") and isinstance(out.get("numeric"), dict):
+        out["numeric"]["closed"] = out["closed"]
     verdict, reason, ce = policy.decide(meta, out["symbolic"], out["numeric"])
     if verdict == "FAIL" and out["notes"]:
         reason = reason.rstrip(".") + f" [{'; '.join(out['notes'])}]."

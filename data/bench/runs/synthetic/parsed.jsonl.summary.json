@@ -2,21 +2,40 @@
  "formulas": 1592,
  "records": 1597,
  "equation_formulas": 1509,
- "equation_formulas_any_ok": 1509,
- "equation_formulas_all_ok": 1509,
+ "equation_formulas_any_ok": 1506,
+ "equation_formulas_all_ok": 1506,
  "equation_records": 1509,
- "equation_records_ok": 1509,
+ "equation_records_ok": 1506,
  "status": {
-  "ok": 1597
+  "ok": 1594,
+  "not_checkable": 3
  },
  "kinds": {
   "equation": 1509,
   "inequality": 88
  },
  "lark_fallback_records": 0,
- "top_equation_failures": [],
- "top_failures_all": [],
+ "top_equation_failures": [
+  [
+   "unsupported:superscript_label",
+   2
+  ],
+  [
+   "unsupported:operator_application",
+   1
+  ]
+ ],
+ "top_failures_all": [
+  [
+   "unsupported:superscript_label",
+   2
+  ],
+  [
+   "unsupported:operator_application",
+   1
+  ]
+ ],
  "new_formulas": 1592,
- "seconds": 7.8,
+ "seconds": 1.8,
  "translator": "formulaci-rd-0.1/sympy-1.14.0"
 }

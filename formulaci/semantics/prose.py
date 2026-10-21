@@ -255,7 +255,9 @@ def extract_facts(text: str, forms: SymbolForms, *, source: str, local_span=None
     # "Re(s) = sigma > 1": drop the alias so the bound attaches to the formula's own quantity
     ctext = re.sub(rf"((?:re|im)\(\s*{symre}\s*\)|{symre})\s*=\s*[A-Za-z]\w*\s*(?=<=|>=|<|>)", r"\1 ", text)
     for m in chain.finditer(ctext):
-        parts = re.split(rf"\s*({_OPEQ})\s*", m.group(0))
+        # "0 < p < 1 and positive integers n": the expression grammar reads "1 and" as 1*and; drop the connector
+        mtext = re.sub(r"\s+(?:and|or|if|for|with|where|when|then|while|whenever|so|but)\s*$", "", m.group(0), flags=re.I)
+        parts = re.split(rf"\s*({_OPEQ})\s*", mtext)
         sides, ops = parts[0::2], parts[1::2]
         if all(o == "=" for o in ops):
             continue

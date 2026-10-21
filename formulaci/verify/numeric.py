@@ -201,7 +201,7 @@ def _subdivide(a, b) -> list:
 
 def _infinite(term, a: int, is_sum: bool):
     """Sum or product over [a, oo). Direct accumulation when terms decay fast enough; otherwise
-    nsum/nprod extrapolation, accepted only if two working precisions agree."""
+    nsum/nprod extrapolation of the tail, accepted only if two working precisions agree."""
     target = 0 if is_sum else 1
     try:
         d1, d2 = abs(term(a + 2000) - target), abs(term(a + 8000) - target)
@@ -211,21 +211,36 @@ def _infinite(term, a: int, is_sum: bool):
         raise EvalError(f"term evaluation failed: {e}") from None
     if not (d2 < mp.mpf("1e-3") and d2 <= d1 * 1.0001):
         raise EvalError("series terms do not tend to zero; treated as divergent")
-    # 1) direct accumulation until 5 consecutive terms are negligible
+    # 1) direct accumulation until 5 consecutive terms are negligible. Terms may grow before they
+    #    decay (lambda^k/k! peaks near k = lambda), so "negligible" also requires "no longer growing",
+    #    and a look-ahead confirms the tail really is gone before we stop.
     acc, small = (mp.mpf(0) if is_sum else mp.mpf(1)), 0
     eps = mp.mpf(10) ** (-(mp.mp.dps + 3))
+    prev_dev = None
+    peak_k, peak_dev = a, mp.mpf(-1)
     for k in range(a, a + DIRECT_TERMS):
         t = term(k)
         acc = acc + t if is_sum else acc * t
         dev = abs(t - target)
-        small = small + 1 if dev <= eps * max(abs(acc), eps) else 0
+        if dev > peak_dev:
+            peak_k, peak_dev = k, dev
+        decreasing = prev_dev is not None and dev <= prev_dev
+        small = small + 1 if (dev <= eps * max(abs(acc), eps) and decreasing) else 0
         if small >= 5:
-            return acc
-        if k - a >= 100 and k % 50 == 0:  # slow (non-geometric) decay: leave it to extrapolation
+            ahead = max(abs(term(k + 100) - target), abs(term(k + 1000) - target))
+            if ahead <= eps * max(abs(acc), eps):
+                return acc
+            small = 0
+        if k - a >= 100 and k % 50 == 0 and decreasing and k - 50 >= peak_k:  # slow decay, measured past the peak
             if dev > abs(term(k - 50) - target) * mp.mpf("0.2"):
                 break
-    # 2) extrapolation, cross-checked by restarting it SHIFT terms later at a higher precision
-    #    (a wrong extrapolation rarely survives a change of starting point)
+        prev_dev = dev
+    # 2) extrapolation from the first term, cross-checked by restarting it SHIFT terms later at a higher
+    #    precision (a wrong extrapolation rarely survives a change of starting point). nsum needs the whole
+    #    sequence: starting it past the head loses ~45 digits on 1/k^2. A sequence that grew before it
+    #    decayed (a late peak) is not extrapolated at all: the point is reported as unevaluable.
+    if peak_k > a:
+        raise EvalError("series terms grow before they decay; not extrapolated")
     fn = mp.nsum if is_sum else mp.nprod
     shift = 25
     try:

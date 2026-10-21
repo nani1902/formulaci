@@ -54,6 +54,10 @@ SKIP_SENTENCES = {
     "translator_not_checkable": "The translator marked it as not checkable.",
 }
 
+# semantics rules that skip a formula precisely because its two sides differ (see SECURITY.md / SPEC.md)
+_NOT_IDENTICAL_RULES = {"K.rational_relation", "K.polynomial_relation", "K.polynomial_equation",
+                        "K.nonconstant_equals_constant"}
+
 _LEADING_QUALIFIER = re.compile(r"^\s*(for|where|when|whenever|if|iff|with|valid|provided)\b", re.I)
 
 
@@ -95,8 +99,11 @@ class CheckResult(BaseModel):
             lines.append(f"  counterexample: {where}: lhs = {_short(ce.get('lhs'))}, rhs = {_short(ce.get('rhs'))}, "
                          f"relative difference {_short(ce.get('rel_diff'))}")
         if self.regimes:
-            lines.append("  sampled: " + ", ".join(f"{r['name']} {r['n_points'] - r['n_fail']}/{r['n_points']} ok"
-                                                   for r in self.regimes))
+            def _reg(r):
+                err = r.get("n_error") or 0
+                s = f"{r['name']} {r['n_points'] - r['n_fail'] - err}/{r['n_points']} ok"
+                return s + f" ({err} not evaluable)" if err else s
+            lines.append("  sampled: " + ", ".join(_reg(r) for r in self.regimes))
         lines.append(f"  ({self.elapsed_s:.2f}s)")
         return "\n".join(lines)
 
@@ -288,6 +295,11 @@ def _check(latex, context="", title="", timeout: float = 20.0) -> CheckResult:
         if not sem.checkable:
             why = sem.skip_reason or "not_checkable"
             sentence = SKIP_SENTENCES.get(why, f"Not checkable ({why.replace('_', ' ')}).")
+            if any(tag.split(":")[0] in _NOT_IDENTICAL_RULES for tag in sem.assumptions_source):
+                sentence = ("The two sides are not identically equal. Written this way the formula is read as a "
+                            "relation between particular quantities (an equation to solve) rather than an identity, "
+                            "so it is not reported as an error. If it is meant to hold for all values, say so in the "
+                            "context (for example 'for all real a and b') and it will be checked and fail.")
             if why == "unparsed":
                 errs = "; ".join(dict.fromkeys(p.error for p in pieces if p.error))
                 sentence = f"Could not parse the LaTeX ({errs})." if errs else sentence

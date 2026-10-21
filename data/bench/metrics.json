@@ -5,52 +5,52 @@
     "n": 272,
     "translate_ok": 272,
     "translate_ok_rate": 1.0,
-    "checkable": 271,
-    "checkable_rate_given_translated": 0.9963,
-    "checkable_rate_end_to_end": 0.9963,
+    "checkable": 265,
+    "checkable_rate_given_translated": 0.9743,
+    "checkable_rate_end_to_end": 0.9743,
     "verdicts": {
-     "PASS": 263,
+     "PASS": 259,
      "FAIL": 0,
-     "INCONCLUSIVE": 5,
-     "SKIP": 4,
+     "INCONCLUSIVE": 3,
+     "SKIP": 10,
      "MISSING": 0
     },
     "fail_rate": 0.0,
-    "inconclusive_rate": 0.0184,
-    "inconclusive_rate_given_verified": 0.0187,
+    "inconclusive_rate": 0.011,
+    "inconclusive_rate_given_verified": 0.0115,
     "fail_rate_given_verified": 0.0,
-    "pass_rate_given_verified": 0.9813
+    "pass_rate_given_verified": 0.9885
    },
    "mutated": {
     "n": 1320,
-    "translate_ok": 1320,
-    "translate_ok_rate": 1.0,
-    "checkable": 1305,
-    "checkable_rate_given_translated": 0.9886,
-    "checkable_rate_end_to_end": 0.9886,
+    "translate_ok": 1317,
+    "translate_ok_rate": 0.9977,
+    "checkable": 1261,
+    "checkable_rate_given_translated": 0.9575,
+    "checkable_rate_end_to_end": 0.9553,
     "verdicts": {
-     "PASS": 2,
-     "FAIL": 1082,
-     "INCONCLUSIVE": 212,
-     "SKIP": 24,
+     "PASS": 0,
+     "FAIL": 1047,
+     "INCONCLUSIVE": 207,
+     "SKIP": 66,
      "MISSING": 0
     },
-    "fail_rate": 0.8197,
-    "inconclusive_rate": 0.1606,
-    "inconclusive_rate_given_verified": 0.1636,
+    "fail_rate": 0.7932,
+    "inconclusive_rate": 0.1568,
+    "inconclusive_rate_given_verified": 0.1651,
     "fail_rate_given_verified": 0.8349,
-    "pass_rate_given_verified": 0.0015
+    "pass_rate_given_verified": 0.0
    },
-   "tp": 1082,
+   "tp": 1047,
    "fp": 0,
    "n_mutated": 1320,
    "n_known_good": 272,
    "precision": 1.0,
-   "recall": 0.8197,
+   "recall": 0.7932,
    "recall_given_verified": 0.8349,
    "false_positive_rate": 0.0,
-   "recall_on_mutations_of_passing_identities": 0.8346,
-   "n_mutations_of_passing_identities": 1282
+   "recall_on_mutations_of_passing_identities": 0.8131,
+   "n_mutations_of_passing_identities": 1279
   },
   "per_category": {
    "algebra": {
@@ -58,14 +58,14 @@
      "n": 12,
      "translate_ok": 12,
      "translate_ok_rate": 1.0,
-     "checkable": 12,
-     "checkable_rate_given_translated": 1.0,
-     "checkable_rate_end_to_end": 1.0,
+     "checkable": 11,
+     "checkable_rate_given_translated": 0.9167,
+     "checkable_rate_end_to_end": 0.9167,
      "verdicts": {
-      "PASS": 12,
+      "PASS": 11,
       "FAIL": 0,
       "INCONCLUSIVE": 0,
-      "SKIP": 0,
+      "SKIP": 1,
       "MISSING": 0
      },
      "fail_rate": 0.0,
@@ -76,31 +76,31 @@
     },
     "mutated": {
      "n": 62,
-     "translate_ok": 62,
-     "translate_ok_rate": 1.0,
-     "checkable": 62,
-     "checkable_rate_given_translated": 1.0,
-     "checkable_rate_end_to_end": 1.0,
+     "translate_ok": 61,
+     "translate_ok_rate": 0.9839,
+     "checkable": 58,
+     "checkable_rate_given_translated": 0.9508,
+     "checkable_rate_end_to_end": 0.9355,
      "verdicts": {
       "PASS": 0,
-      "FAIL": 59,
-      "INCONCLUSIVE": 3,
-      "SKIP": 0,
+      "FAIL": 58,
+      "INCONCLUSIVE": 0,
+      "SKIP": 4,
       "MISSING": 0
      },
-     "fail_rate": 0.9516,
-     "inconclusive_rate": 0.0484,
-     "inconclusive_rate_given_verified": 0.0484,
-     "fail_rate_given_verified": 0.9516,
+     "fail_rate": 0.9355,
+     "inconclusive_rate": 0.0,
+     "inconclusive_rate_given_verified": 0.0,
+     "fail_rate_given_verified": 1.0,
      "pass_rate_given_verified": 0.0
     },
-    "tp": 59,
+    "tp": 58,
     "fp": 0,
     "n_mutated": 62,
     "n_known_good": 12,
     "precision": 1.0,
-    "recall": 0.9516,
-    "recall_given_verified": 0.9516,
+    "recall": 0.9355,
+    "recall_given_verified": 1.0,
     "false_positive_rate": 0.0
    },
    "binomial": {
@@ -128,29 +128,29 @@
      "n": 94,
      "translate_ok": 94,
      "translate_ok_rate": 1.0,
-     "checkable": 94,
-     "checkable_rate_given_translated": 1.0,
-     "checkable_rate_end_to_end": 1.0,
+     "checkable": 93,
+     "checkable_rate_given_translated": 0.9894,
+     "checkable_rate_end_to_end": 0.9894,
      "verdicts": {
       "PASS": 0,
-      "FAIL": 67,
-      "INCONCLUSIVE": 27,
-      "SKIP": 0,
+      "FAIL": 62,
+      "INCONCLUSIVE": 31,
+      "SKIP": 1,
       "MISSING": 0
      },
-     "fail_rate": 0.7128,
-     "inconclusive_rate": 0.2872,
-     "inconclusive_rate_given_verified": 0.2872,
-     "fail_rate_given_verified": 0.7128,
+     "fail_rate": 0.6596,
+     "inconclusive_rate": 0.3298,
+     "inconclusive_rate_given_verified": 0.3333,
+     "fail_rate_given_verified": 0.6667,
      "pass_rate_given_verified": 0.0
     },
-    "tp": 67,
+    "tp": 62,
     "fp": 0,
     "n_mutated": 94,
     "n_known_good": 18,
     "precision": 1.0,
-    "recall": 0.7128,
-    "recall_given_verified": 0.7128,
+    "recall": 0.6596,
+    "recall_given_verified": 0.6667,
     "false_positive_rate": 0.0
    },
    "complex": {
@@ -183,24 +183,24 @@
      "checkable_rate_end_to_end": 1.0,
      "verdicts": {
       "PASS": 0,
-      "FAIL": 35,
-      "INCONCLUSIVE": 3,
+      "FAIL": 36,
+      "INCONCLUSIVE": 2,
       "SKIP": 0,
       "MISSING": 0
      },
-     "fail_rate": 0.9211,
-     "inconclusive_rate": 0.0789,
-     "inconclusive_rate_given_verified": 0.0789,
-     "fail_rate_given_verified": 0.9211,
+     "fail_rate": 0.9474,
+     "inconclusive_rate": 0.0526,
+     "inconclusive_rate_given_verified": 0.0526,
+     "fail_rate_given_verified": 0.9474,
      "pass_rate_given_verified": 0.0
     },
-    "tp": 35,
+    "tp": 36,
     "fp": 0,
     "n_mutated": 38,
     "n_known_good": 7,
     "precision": 1.0,
-    "recall": 0.9211,
-    "recall_given_verified": 0.9211,
+    "recall": 0.9474,
+    "recall_given_verified": 0.9474,
     "false_positive_rate": 0.0
    },
    "derivatives": {
@@ -226,31 +226,31 @@
     },
     "mutated": {
      "n": 79,
-     "translate_ok": 79,
-     "translate_ok_rate": 1.0,
+     "translate_ok": 78,
+     "translate_ok_rate": 0.9873,
      "checkable": 78,
-     "checkable_rate_given_translated": 0.9873,
+     "checkable_rate_given_translated": 1.0,
      "checkable_rate_end_to_end": 0.9873,
      "verdicts": {
       "PASS": 0,
-      "FAIL": 71,
-      "INCONCLUSIVE": 6,
+      "FAIL": 73,
+      "INCONCLUSIVE": 4,
       "SKIP": 2,
       "MISSING": 0
      },
-     "fail_rate": 0.8987,
-     "inconclusive_rate": 0.0759,
-     "inconclusive_rate_given_verified": 0.0779,
-     "fail_rate_given_verified": 0.9221,
+     "fail_rate": 0.9241,
+     "inconclusive_rate": 0.0506,
+     "inconclusive_rate_given_verified": 0.0519,
+     "fail_rate_given_verified": 0.9481,
      "pass_rate_given_verified": 0.0
     },
-    "tp": 71,
+    "tp": 73,
     "fp": 0,
     "n_mutated": 79,
     "n_known_good": 20,
     "precision": 1.0,
-    "recall": 0.8987,
-    "recall_given_verified": 0.9221,
+    "recall": 0.9241,
+    "recall_given_verified": 0.9481,
     "false_positive_rate": 0.0
    },
    "exp_log": {
@@ -258,14 +258,14 @@
      "n": 19,
      "translate_ok": 19,
      "translate_ok_rate": 1.0,
-     "checkable": 19,
-     "checkable_rate_given_translated": 1.0,
-     "checkable_rate_end_to_end": 1.0,
+     "checkable": 17,
+     "checkable_rate_given_translated": 0.8947,
+     "checkable_rate_end_to_end": 0.8947,
      "verdicts": {
-      "PASS": 19,
+      "PASS": 17,
       "FAIL": 0,
       "INCONCLUSIVE": 0,
-      "SKIP": 0,
+      "SKIP": 2,
       "MISSING": 0
      },
      "fail_rate": 0.0,
@@ -278,29 +278,29 @@
      "n": 62,
      "translate_ok": 62,
      "translate_ok_rate": 1.0,
-     "checkable": 62,
-     "checkable_rate_given_translated": 1.0,
-     "checkable_rate_end_to_end": 1.0,
+     "checkable": 59,
+     "checkable_rate_given_translated": 0.9516,
+     "checkable_rate_end_to_end": 0.9516,
      "verdicts": {
       "PASS": 0,
-      "FAIL": 60,
-      "INCONCLUSIVE": 2,
-      "SKIP": 0,
+      "FAIL": 55,
+      "INCONCLUSIVE": 4,
+      "SKIP": 3,
       "MISSING": 0
      },
-     "fail_rate": 0.9677,
-     "inconclusive_rate": 0.0323,
-     "inconclusive_rate_given_verified": 0.0323,
-     "fail_rate_given_verified": 0.9677,
+     "fail_rate": 0.8871,
+     "inconclusive_rate": 0.0645,
+     "inconclusive_rate_given_verified": 0.0678,
+     "fail_rate_given_verified": 0.9322,
      "pass_rate_given_verified": 0.0
     },
-    "tp": 60,
+    "tp": 55,
     "fp": 0,
     "n_mutated": 62,
     "n_known_good": 19,
     "precision": 1.0,
-    "recall": 0.9677,
-    "recall_given_verified": 0.9677,
+    "recall": 0.8871,
+    "recall_given_verified": 0.9322,
     "false_positive_rate": 0.0
    },
    "finite_series": {
@@ -333,24 +333,24 @@
      "checkable_rate_end_to_end": 0.9646,
      "verdicts": {
       "PASS": 0,
-      "FAIL": 100,
-      "INCONCLUSIVE": 9,
+      "FAIL": 101,
+      "INCONCLUSIVE": 8,
       "SKIP": 4,
       "MISSING": 0
      },
-     "fail_rate": 0.885,
-     "inconclusive_rate": 0.0796,
-     "inconclusive_rate_given_verified": 0.0826,
-     "fail_rate_given_verified": 0.9174,
+     "fail_rate": 0.8938,
+     "inconclusive_rate": 0.0708,
+     "inconclusive_rate_given_verified": 0.0734,
+     "fail_rate_given_verified": 0.9266,
      "pass_rate_given_verified": 0.0
     },
-    "tp": 100,
+    "tp": 101,
     "fp": 0,
     "n_mutated": 113,
     "n_known_good": 18,
     "precision": 1.0,
-    "recall": 0.885,
-    "recall_given_verified": 0.9174,
+    "recall": 0.8938,
+    "recall_given_verified": 0.9266,
     "false_positive_rate": 0.0
    },
    "gamma_beta": {
@@ -362,45 +362,45 @@
      "checkable_rate_given_translated": 1.0,
      "checkable_rate_end_to_end": 1.0,
      "verdicts": {
-      "PASS": 17,
+      "PASS": 16,
       "FAIL": 0,
-      "INCONCLUSIVE": 0,
+      "INCONCLUSIVE": 1,
       "SKIP": 3,
       "MISSING": 0
      },
      "fail_rate": 0.0,
-     "inconclusive_rate": 0.0,
-     "inconclusive_rate_given_verified": 0.0,
+     "inconclusive_rate": 0.05,
+     "inconclusive_rate_given_verified": 0.0588,
      "fail_rate_given_verified": 0.0,
-     "pass_rate_given_verified": 1.0
+     "pass_rate_given_verified": 0.9412
     },
     "mutated": {
      "n": 84,
      "translate_ok": 84,
      "translate_ok_rate": 1.0,
-     "checkable": 84,
-     "checkable_rate_given_translated": 1.0,
-     "checkable_rate_end_to_end": 1.0,
+     "checkable": 77,
+     "checkable_rate_given_translated": 0.9167,
+     "checkable_rate_end_to_end": 0.9167,
      "verdicts": {
       "PASS": 0,
-      "FAIL": 68,
-      "INCONCLUSIVE": 8,
-      "SKIP": 8,
+      "FAIL": 66,
+      "INCONCLUSIVE": 5,
+      "SKIP": 13,
       "MISSING": 0
      },
-     "fail_rate": 0.8095,
-     "inconclusive_rate": 0.0952,
-     "inconclusive_rate_given_verified": 0.1053,
-     "fail_rate_given_verified": 0.8947,
+     "fail_rate": 0.7857,
+     "inconclusive_rate": 0.0595,
+     "inconclusive_rate_given_verified": 0.0704,
+     "fail_rate_given_verified": 0.9296,
      "pass_rate_given_verified": 0.0
     },
-    "tp": 68,
+    "tp": 66,
     "fp": 0,
     "n_mutated": 84,
     "n_known_good": 20,
     "precision": 1.0,
-    "recall": 0.8095,
-    "recall_given_verified": 0.8947,
+    "recall": 0.7857,
+    "recall_given_verified": 0.9296,
     "false_positive_rate": 0.0
    },
    "hyperbolic": {
@@ -428,29 +428,29 @@
      "n": 115,
      "translate_ok": 115,
      "translate_ok_rate": 1.0,
-     "checkable": 115,
-     "checkable_rate_given_translated": 1.0,
-     "checkable_rate_end_to_end": 1.0,
+     "checkable": 114,
+     "checkable_rate_given_translated": 0.9913,
+     "checkable_rate_end_to_end": 0.9913,
      "verdicts": {
       "PASS": 0,
-      "FAIL": 76,
-      "INCONCLUSIVE": 39,
-      "SKIP": 0,
+      "FAIL": 71,
+      "INCONCLUSIVE": 43,
+      "SKIP": 1,
       "MISSING": 0
      },
-     "fail_rate": 0.6609,
-     "inconclusive_rate": 0.3391,
-     "inconclusive_rate_given_verified": 0.3391,
-     "fail_rate_given_verified": 0.6609,
+     "fail_rate": 0.6174,
+     "inconclusive_rate": 0.3739,
+     "inconclusive_rate_given_verified": 0.3772,
+     "fail_rate_given_verified": 0.6228,
      "pass_rate_given_verified": 0.0
     },
-    "tp": 76,
+    "tp": 71,
     "fp": 0,
     "n_mutated": 115,
     "n_known_good": 23,
     "precision": 1.0,
-    "recall": 0.6609,
-    "recall_given_verified": 0.6609,
+    "recall": 0.6174,
+    "recall_given_verified": 0.6228,
     "false_positive_rate": 0.0
    },
    "inequalities": {
@@ -458,14 +458,14 @@
      "n": 24,
      "translate_ok": 24,
      "translate_ok_rate": 1.0,
-     "checkable": 24,
-     "checkable_rate_given_translated": 1.0,
-     "checkable_rate_end_to_end": 1.0,
+     "checkable": 22,
+     "checkable_rate_given_translated": 0.9167,
+     "checkable_rate_end_to_end": 0.9167,
      "verdicts": {
-      "PASS": 24,
+      "PASS": 22,
       "FAIL": 0,
       "INCONCLUSIVE": 0,
-      "SKIP": 0,
+      "SKIP": 2,
       "MISSING": 0
      },
      "fail_rate": 0.0,
@@ -478,20 +478,20 @@
      "n": 59,
      "translate_ok": 59,
      "translate_ok_rate": 1.0,
-     "checkable": 58,
-     "checkable_rate_given_translated": 0.9831,
-     "checkable_rate_end_to_end": 0.9831,
+     "checkable": 52,
+     "checkable_rate_given_translated": 0.8814,
+     "checkable_rate_end_to_end": 0.8814,
      "verdicts": {
       "PASS": 0,
       "FAIL": 22,
-      "INCONCLUSIVE": 36,
-      "SKIP": 1,
+      "INCONCLUSIVE": 30,
+      "SKIP": 7,
       "MISSING": 0
      },
      "fail_rate": 0.3729,
-     "inconclusive_rate": 0.6102,
-     "inconclusive_rate_given_verified": 0.6207,
-     "fail_rate_given_verified": 0.3793,
+     "inconclusive_rate": 0.5085,
+     "inconclusive_rate_given_verified": 0.5769,
+     "fail_rate_given_verified": 0.4231,
      "pass_rate_given_verified": 0.0
     },
     "tp": 22,
@@ -500,7 +500,7 @@
     "n_known_good": 24,
     "precision": 1.0,
     "recall": 0.3729,
-    "recall_given_verified": 0.3793,
+    "recall_given_verified": 0.4231,
     "false_positive_rate": 0.0
    },
    "infinite_series": {
@@ -508,14 +508,14 @@
      "n": 21,
      "translate_ok": 21,
      "translate_ok_rate": 1.0,
-     "checkable": 20,
-     "checkable_rate_given_translated": 0.9524,
-     "checkable_rate_end_to_end": 0.9524,
+     "checkable": 19,
+     "checkable_rate_given_translated": 0.9048,
+     "checkable_rate_end_to_end": 0.9048,
      "verdicts": {
-      "PASS": 20,
+      "PASS": 19,
       "FAIL": 0,
       "INCONCLUSIVE": 0,
-      "SKIP": 1,
+      "SKIP": 2,
       "MISSING": 0
      },
      "fail_rate": 0.0,
@@ -528,29 +528,29 @@
      "n": 122,
      "translate_ok": 122,
      "translate_ok_rate": 1.0,
-     "checkable": 119,
-     "checkable_rate_given_translated": 0.9754,
-     "checkable_rate_end_to_end": 0.9754,
+     "checkable": 114,
+     "checkable_rate_given_translated": 0.9344,
+     "checkable_rate_end_to_end": 0.9344,
      "verdicts": {
-      "PASS": 2,
-      "FAIL": 88,
-      "INCONCLUSIVE": 29,
-      "SKIP": 3,
+      "PASS": 0,
+      "FAIL": 77,
+      "INCONCLUSIVE": 37,
+      "SKIP": 8,
       "MISSING": 0
      },
-     "fail_rate": 0.7213,
-     "inconclusive_rate": 0.2377,
-     "inconclusive_rate_given_verified": 0.2437,
-     "fail_rate_given_verified": 0.7395,
-     "pass_rate_given_verified": 0.0168
+     "fail_rate": 0.6311,
+     "inconclusive_rate": 0.3033,
+     "inconclusive_rate_given_verified": 0.3246,
+     "fail_rate_given_verified": 0.6754,
+     "pass_rate_given_verified": 0.0
     },
-    "tp": 88,
+    "tp": 77,
     "fp": 0,
     "n_mutated": 122,
     "n_known_good": 21,
     "precision": 1.0,
-    "recall": 0.7213,
-    "recall_given_verified": 0.7395,
+    "recall": 0.6311,
+    "recall_given_verified": 0.6754,
     "false_positive_rate": 0.0
    },
    "integrals": {
@@ -578,29 +578,29 @@
      "n": 119,
      "translate_ok": 119,
      "translate_ok_rate": 1.0,
-     "checkable": 118,
-     "checkable_rate_given_translated": 0.9916,
-     "checkable_rate_end_to_end": 0.9916,
+     "checkable": 116,
+     "checkable_rate_given_translated": 0.9748,
+     "checkable_rate_end_to_end": 0.9748,
      "verdicts": {
       "PASS": 0,
-      "FAIL": 108,
-      "INCONCLUSIVE": 10,
-      "SKIP": 1,
+      "FAIL": 107,
+      "INCONCLUSIVE": 9,
+      "SKIP": 3,
       "MISSING": 0
      },
-     "fail_rate": 0.9076,
-     "inconclusive_rate": 0.084,
-     "inconclusive_rate_given_verified": 0.0847,
-     "fail_rate_given_verified": 0.9153,
+     "fail_rate": 0.8992,
+     "inconclusive_rate": 0.0756,
+     "inconclusive_rate_given_verified": 0.0776,
+     "fail_rate_given_verified": 0.9224,
      "pass_rate_given_verified": 0.0
     },
-    "tp": 108,
+    "tp": 107,
     "fp": 0,
     "n_mutated": 119,
     "n_known_good": 22,
     "precision": 1.0,
-    "recall": 0.9076,
-    "recall_given_verified": 0.9153,
+    "recall": 0.8992,
+    "recall_given_verified": 0.9224,
     "false_positive_rate": 0.0
    },
    "probability": {
@@ -612,45 +612,45 @@
      "checkable_rate_given_translated": 1.0,
      "checkable_rate_end_to_end": 1.0,
      "verdicts": {
-      "PASS": 17,
+      "PASS": 20,
       "FAIL": 0,
-      "INCONCLUSIVE": 3,
+      "INCONCLUSIVE": 0,
       "SKIP": 0,
       "MISSING": 0
      },
      "fail_rate": 0.0,
-     "inconclusive_rate": 0.15,
-     "inconclusive_rate_given_verified": 0.15,
+     "inconclusive_rate": 0.0,
+     "inconclusive_rate_given_verified": 0.0,
      "fail_rate_given_verified": 0.0,
-     "pass_rate_given_verified": 0.85
+     "pass_rate_given_verified": 1.0
     },
     "mutated": {
      "n": 119,
-     "translate_ok": 119,
-     "translate_ok_rate": 1.0,
-     "checkable": 115,
-     "checkable_rate_given_translated": 0.9664,
-     "checkable_rate_end_to_end": 0.9664,
+     "translate_ok": 118,
+     "translate_ok_rate": 0.9916,
+     "checkable": 109,
+     "checkable_rate_given_translated": 0.9237,
+     "checkable_rate_end_to_end": 0.916,
      "verdicts": {
       "PASS": 0,
-      "FAIL": 93,
-      "INCONCLUSIVE": 22,
-      "SKIP": 4,
+      "FAIL": 96,
+      "INCONCLUSIVE": 13,
+      "SKIP": 10,
       "MISSING": 0
      },
-     "fail_rate": 0.7815,
-     "inconclusive_rate": 0.1849,
-     "inconclusive_rate_given_verified": 0.1913,
-     "fail_rate_given_verified": 0.8087,
+     "fail_rate": 0.8067,
+     "inconclusive_rate": 0.1092,
+     "inconclusive_rate_given_verified": 0.1193,
+     "fail_rate_given_verified": 0.8807,
      "pass_rate_given_verified": 0.0
     },
-    "tp": 93,
+    "tp": 96,
     "fp": 0,
     "n_mutated": 119,
     "n_known_good": 20,
     "precision": 1.0,
-    "recall": 0.7815,
-    "recall_given_verified": 0.8087,
+    "recall": 0.8067,
+    "recall_given_verified": 0.8807,
     "false_positive_rate": 0.0
    },
    "trig": {
@@ -678,29 +678,29 @@
      "n": 213,
      "translate_ok": 213,
      "translate_ok_rate": 1.0,
-     "checkable": 212,
-     "checkable_rate_given_translated": 0.9953,
-     "checkable_rate_end_to_end": 0.9953,
+     "checkable": 204,
+     "checkable_rate_given_translated": 0.9577,
+     "checkable_rate_end_to_end": 0.9577,
      "verdicts": {
       "PASS": 0,
-      "FAIL": 210,
-      "INCONCLUSIVE": 2,
-      "SKIP": 1,
+      "FAIL": 199,
+      "INCONCLUSIVE": 5,
+      "SKIP": 9,
       "MISSING": 0
      },
-     "fail_rate": 0.9859,
-     "inconclusive_rate": 0.0094,
-     "inconclusive_rate_given_verified": 0.0094,
-     "fail_rate_given_verified": 0.9906,
+     "fail_rate": 0.9343,
+     "inconclusive_rate": 0.0235,
+     "inconclusive_rate_given_verified": 0.0245,
+     "fail_rate_given_verified": 0.9755,
      "pass_rate_given_verified": 0.0
     },
-    "tp": 210,
+    "tp": 199,
     "fp": 0,
     "n_mutated": 213,
     "n_known_good": 39,
     "precision": 1.0,
-    "recall": 0.9859,
-    "recall_given_verified": 0.9906,
+    "recall": 0.9343,
+    "recall_given_verified": 0.9755,
     "false_positive_rate": 0.0
    },
    "zeta": {
@@ -728,29 +728,29 @@
      "n": 41,
      "translate_ok": 41,
      "translate_ok_rate": 1.0,
-     "checkable": 41,
-     "checkable_rate_given_translated": 1.0,
-     "checkable_rate_end_to_end": 1.0,
+     "checkable": 40,
+     "checkable_rate_given_translated": 0.9756,
+     "checkable_rate_end_to_end": 0.9756,
      "verdicts": {
       "PASS": 0,
-      "FAIL": 25,
+      "FAIL": 24,
       "INCONCLUSIVE": 16,
-      "SKIP": 0,
+      "SKIP": 1,
       "MISSING": 0
      },
-     "fail_rate": 0.6098,
+     "fail_rate": 0.5854,
      "inconclusive_rate": 0.3902,
-     "inconclusive_rate_given_verified": 0.3902,
-     "fail_rate_given_verified": 0.6098,
+     "inconclusive_rate_given_verified": 0.4,
+     "fail_rate_given_verified": 0.6,
      "pass_rate_given_verified": 0.0
     },
-    "tp": 25,
+    "tp": 24,
     "fp": 0,
     "n_mutated": 41,
     "n_known_good": 9,
     "precision": 1.0,
-    "recall": 0.6098,
-    "recall_given_verified": 0.6098,
+    "recall": 0.5854,
+    "recall_given_verified": 0.6,
     "false_positive_rate": 0.0
    }
   },
@@ -759,245 +759,424 @@
     "n": 151,
     "translate_ok": 151,
     "translate_ok_rate": 1.0,
-    "checkable": 149,
-    "checkable_rate_given_translated": 0.9868,
-    "checkable_rate_end_to_end": 0.9868,
+    "checkable": 141,
+    "checkable_rate_given_translated": 0.9338,
+    "checkable_rate_end_to_end": 0.9338,
     "verdicts": {
      "PASS": 0,
-     "FAIL": 125,
-     "INCONCLUSIVE": 23,
-     "SKIP": 3,
+     "FAIL": 119,
+     "INCONCLUSIVE": 21,
+     "SKIP": 11,
      "MISSING": 0
     },
-    "fail_rate": 0.8278,
-    "inconclusive_rate": 0.1523,
-    "inconclusive_rate_given_verified": 0.1554,
-    "fail_rate_given_verified": 0.8446,
+    "fail_rate": 0.7881,
+    "inconclusive_rate": 0.1391,
+    "inconclusive_rate_given_verified": 0.15,
+    "fail_rate_given_verified": 0.85,
     "pass_rate_given_verified": 0.0,
-    "recall": 0.8278,
-    "recall_given_verified": 0.8446,
+    "recall": 0.7881,
+    "recall_given_verified": 0.85,
     "missed_as_pass": 0
    },
    "exponent_pm1": {
     "n": 165,
     "translate_ok": 165,
     "translate_ok_rate": 1.0,
-    "checkable": 165,
-    "checkable_rate_given_translated": 1.0,
-    "checkable_rate_end_to_end": 1.0,
+    "checkable": 162,
+    "checkable_rate_given_translated": 0.9818,
+    "checkable_rate_end_to_end": 0.9818,
     "verdicts": {
      "PASS": 0,
-     "FAIL": 149,
-     "INCONCLUSIVE": 16,
-     "SKIP": 0,
+     "FAIL": 147,
+     "INCONCLUSIVE": 15,
+     "SKIP": 3,
      "MISSING": 0
     },
-    "fail_rate": 0.903,
-    "inconclusive_rate": 0.097,
-    "inconclusive_rate_given_verified": 0.097,
-    "fail_rate_given_verified": 0.903,
+    "fail_rate": 0.8909,
+    "inconclusive_rate": 0.0909,
+    "inconclusive_rate_given_verified": 0.0926,
+    "fail_rate_given_verified": 0.9074,
     "pass_rate_given_verified": 0.0,
-    "recall": 0.903,
-    "recall_given_verified": 0.903,
+    "recall": 0.8909,
+    "recall_given_verified": 0.9074,
     "missed_as_pass": 0
    },
    "missing_term": {
     "n": 182,
-    "translate_ok": 182,
-    "translate_ok_rate": 1.0,
-    "checkable": 174,
-    "checkable_rate_given_translated": 0.956,
-    "checkable_rate_end_to_end": 0.956,
+    "translate_ok": 179,
+    "translate_ok_rate": 0.9835,
+    "checkable": 161,
+    "checkable_rate_given_translated": 0.8994,
+    "checkable_rate_end_to_end": 0.8846,
     "verdicts": {
      "PASS": 0,
-     "FAIL": 136,
-     "INCONCLUSIVE": 36,
-     "SKIP": 10,
+     "FAIL": 125,
+     "INCONCLUSIVE": 35,
+     "SKIP": 22,
      "MISSING": 0
     },
-    "fail_rate": 0.7473,
-    "inconclusive_rate": 0.1978,
-    "inconclusive_rate_given_verified": 0.2093,
-    "fail_rate_given_verified": 0.7907,
+    "fail_rate": 0.6868,
+    "inconclusive_rate": 0.1923,
+    "inconclusive_rate_given_verified": 0.2188,
+    "fail_rate_given_verified": 0.7812,
     "pass_rate_given_verified": 0.0,
-    "recall": 0.7473,
-    "recall_given_verified": 0.7907,
+    "recall": 0.6868,
+    "recall_given_verified": 0.7812,
     "missed_as_pass": 0
    },
    "num_den_swap": {
     "n": 141,
     "translate_ok": 141,
     "translate_ok_rate": 1.0,
-    "checkable": 141,
-    "checkable_rate_given_translated": 1.0,
-    "checkable_rate_end_to_end": 1.0,
+    "checkable": 139,
+    "checkable_rate_given_translated": 0.9858,
+    "checkable_rate_end_to_end": 0.9858,
     "verdicts": {
      "PASS": 0,
-     "FAIL": 110,
-     "INCONCLUSIVE": 30,
-     "SKIP": 1,
+     "FAIL": 109,
+     "INCONCLUSIVE": 29,
+     "SKIP": 3,
      "MISSING": 0
     },
-    "fail_rate": 0.7801,
-    "inconclusive_rate": 0.2128,
-    "inconclusive_rate_given_verified": 0.2143,
-    "fail_rate_given_verified": 0.7857,
+    "fail_rate": 0.773,
+    "inconclusive_rate": 0.2057,
+    "inconclusive_rate_given_verified": 0.2101,
+    "fail_rate_given_verified": 0.7899,
     "pass_rate_given_verified": 0.0,
-    "recall": 0.7801,
-    "recall_given_verified": 0.7857,
+    "recall": 0.773,
+    "recall_given_verified": 0.7899,
     "missed_as_pass": 0
    },
    "off_by_one": {
     "n": 83,
     "translate_ok": 83,
     "translate_ok_rate": 1.0,
-    "checkable": 82,
-    "checkable_rate_given_translated": 0.988,
-    "checkable_rate_end_to_end": 0.988,
+    "checkable": 81,
+    "checkable_rate_given_translated": 0.9759,
+    "checkable_rate_end_to_end": 0.9759,
     "verdicts": {
      "PASS": 0,
-     "FAIL": 64,
-     "INCONCLUSIVE": 18,
-     "SKIP": 1,
+     "FAIL": 59,
+     "INCONCLUSIVE": 22,
+     "SKIP": 2,
      "MISSING": 0
     },
-    "fail_rate": 0.7711,
-    "inconclusive_rate": 0.2169,
-    "inconclusive_rate_given_verified": 0.2195,
-    "fail_rate_given_verified": 0.7805,
+    "fail_rate": 0.7108,
+    "inconclusive_rate": 0.2651,
+    "inconclusive_rate_given_verified": 0.2716,
+    "fail_rate_given_verified": 0.7284,
     "pass_rate_given_verified": 0.0,
-    "recall": 0.7711,
-    "recall_given_verified": 0.7805,
+    "recall": 0.7108,
+    "recall_given_verified": 0.7284,
     "missed_as_pass": 0
    },
    "sign_flip": {
     "n": 272,
     "translate_ok": 272,
     "translate_ok_rate": 1.0,
-    "checkable": 271,
-    "checkable_rate_given_translated": 0.9963,
-    "checkable_rate_end_to_end": 0.9963,
+    "checkable": 261,
+    "checkable_rate_given_translated": 0.9596,
+    "checkable_rate_end_to_end": 0.9596,
     "verdicts": {
      "PASS": 0,
-     "FAIL": 238,
-     "INCONCLUSIVE": 30,
-     "SKIP": 4,
+     "FAIL": 227,
+     "INCONCLUSIVE": 31,
+     "SKIP": 14,
      "MISSING": 0
     },
-    "fail_rate": 0.875,
-    "inconclusive_rate": 0.1103,
-    "inconclusive_rate_given_verified": 0.1119,
-    "fail_rate_given_verified": 0.8881,
+    "fail_rate": 0.8346,
+    "inconclusive_rate": 0.114,
+    "inconclusive_rate_given_verified": 0.1202,
+    "fail_rate_given_verified": 0.8798,
     "pass_rate_given_verified": 0.0,
-    "recall": 0.875,
-    "recall_given_verified": 0.8881,
+    "recall": 0.8346,
+    "recall_given_verified": 0.8798,
     "missed_as_pass": 0
    },
    "swapped_symbols": {
     "n": 116,
     "translate_ok": 116,
     "translate_ok_rate": 1.0,
-    "checkable": 116,
-    "checkable_rate_given_translated": 1.0,
-    "checkable_rate_end_to_end": 1.0,
+    "checkable": 115,
+    "checkable_rate_given_translated": 0.9914,
+    "checkable_rate_end_to_end": 0.9914,
     "verdicts": {
      "PASS": 0,
-     "FAIL": 86,
-     "INCONCLUSIVE": 30,
-     "SKIP": 0,
+     "FAIL": 89,
+     "INCONCLUSIVE": 26,
+     "SKIP": 1,
      "MISSING": 0
     },
-    "fail_rate": 0.7414,
-    "inconclusive_rate": 0.2586,
-    "inconclusive_rate_given_verified": 0.2586,
-    "fail_rate_given_verified": 0.7414,
+    "fail_rate": 0.7672,
+    "inconclusive_rate": 0.2241,
+    "inconclusive_rate_given_verified": 0.2261,
+    "fail_rate_given_verified": 0.7739,
     "pass_rate_given_verified": 0.0,
-    "recall": 0.7414,
-    "recall_given_verified": 0.7414,
+    "recall": 0.7672,
+    "recall_given_verified": 0.7739,
     "missed_as_pass": 0
    },
    "wrong_constant": {
     "n": 210,
     "translate_ok": 210,
     "translate_ok_rate": 1.0,
-    "checkable": 207,
-    "checkable_rate_given_translated": 0.9857,
-    "checkable_rate_end_to_end": 0.9857,
+    "checkable": 201,
+    "checkable_rate_given_translated": 0.9571,
+    "checkable_rate_end_to_end": 0.9571,
     "verdicts": {
-     "PASS": 2,
-     "FAIL": 174,
-     "INCONCLUSIVE": 29,
-     "SKIP": 5,
+     "PASS": 0,
+     "FAIL": 172,
+     "INCONCLUSIVE": 28,
+     "SKIP": 10,
      "MISSING": 0
     },
-    "fail_rate": 0.8286,
-    "inconclusive_rate": 0.1381,
-    "inconclusive_rate_given_verified": 0.1415,
-    "fail_rate_given_verified": 0.8488,
-    "pass_rate_given_verified": 0.0098,
-    "recall": 0.8286,
-    "recall_given_verified": 0.8488,
-    "missed_as_pass": 2
+    "fail_rate": 0.819,
+    "inconclusive_rate": 0.1333,
+    "inconclusive_rate_given_verified": 0.14,
+    "fail_rate_given_verified": 0.86,
+    "pass_rate_given_verified": 0.0,
+    "recall": 0.819,
+    "recall_given_verified": 0.86,
+    "missed_as_pass": 0
    }
   },
   "per_translator_status": {
+   "not_checkable": {
+    "known_good": {
+     "n": 0
+    },
+    "mutated": {
+     "n": 3,
+     "translate_ok": 0,
+     "translate_ok_rate": 0.0,
+     "checkable": 0,
+     "checkable_rate_given_translated": null,
+     "checkable_rate_end_to_end": 0.0,
+     "verdicts": {
+      "PASS": 0,
+      "FAIL": 0,
+      "INCONCLUSIVE": 0,
+      "SKIP": 3,
+      "MISSING": 0
+     },
+     "fail_rate": 0.0,
+     "inconclusive_rate": 0.0,
+     "inconclusive_rate_given_verified": null,
+     "fail_rate_given_verified": null,
+     "pass_rate_given_verified": null
+    }
+   },
    "ok": {
     "known_good": {
      "n": 272,
      "translate_ok": 272,
      "translate_ok_rate": 1.0,
-     "checkable": 271,
-     "checkable_rate_given_translated": 0.9963,
-     "checkable_rate_end_to_end": 0.9963,
+     "checkable": 265,
+     "checkable_rate_given_translated": 0.9743,
+     "checkable_rate_end_to_end": 0.9743,
      "verdicts": {
-      "PASS": 263,
+      "PASS": 259,
       "FAIL": 0,
-      "INCONCLUSIVE": 5,
-      "SKIP": 4,
+      "INCONCLUSIVE": 3,
+      "SKIP": 10,
       "MISSING": 0
      },
      "fail_rate": 0.0,
-     "inconclusive_rate": 0.0184,
-     "inconclusive_rate_given_verified": 0.0187,
+     "inconclusive_rate": 0.011,
+     "inconclusive_rate_given_verified": 0.0115,
      "fail_rate_given_verified": 0.0,
-     "pass_rate_given_verified": 0.9813
+     "pass_rate_given_verified": 0.9885
     },
     "mutated": {
-     "n": 1320,
-     "translate_ok": 1320,
+     "n": 1317,
+     "translate_ok": 1317,
      "translate_ok_rate": 1.0,
-     "checkable": 1305,
-     "checkable_rate_given_translated": 0.9886,
-     "checkable_rate_end_to_end": 0.9886,
+     "checkable": 1261,
+     "checkable_rate_given_translated": 0.9575,
+     "checkable_rate_end_to_end": 0.9575,
      "verdicts": {
-      "PASS": 2,
-      "FAIL": 1082,
-      "INCONCLUSIVE": 212,
-      "SKIP": 24,
+      "PASS": 0,
+      "FAIL": 1047,
+      "INCONCLUSIVE": 207,
+      "SKIP": 63,
       "MISSING": 0
      },
-     "fail_rate": 0.8197,
-     "inconclusive_rate": 0.1606,
-     "inconclusive_rate_given_verified": 0.1636,
+     "fail_rate": 0.795,
+     "inconclusive_rate": 0.1572,
+     "inconclusive_rate_given_verified": 0.1651,
      "fail_rate_given_verified": 0.8349,
-     "pass_rate_given_verified": 0.0015
+     "pass_rate_given_verified": 0.0
     }
    }
   },
   "false_positives": [],
   "missed_mutations": [
    {
-    "formula_id": "bench:mut:0023:missing_term",
+    "formula_id": "bench:mut:0010:swapped_symbols",
     "category": "trig",
-    "mutation": "missing_term",
-    "detail": "remove term 'x'",
-    "name": "Product-to-sum formula for sine and cosine",
-    "latex": "\\sin x \\cos y = \\frac{1}{2}\\left[\\sin(x + y) + \\sin( - y)\\right]",
+    "mutation": "swapped_symbols",
+    "detail": "\\sin->\\cos",
+    "name": "Double-angle formula for cosine",
+    "latex": "\\cos 2x = \\cos^2 x - \\cos^2 x",
     "translate": "ok",
     "checkable": true,
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 56 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at x=0.185291, y=0.141111: lhs=0.182401353519, rhs=0.089996959826).",
+    "reason": "Not zero at sample points, but an expression set equal to 0 usually states an equation to solve rather than an identity (e.g. at x=0.0128088: lhs=0.999671887229, rhs=0).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0021:sign_flip",
+    "category": "trig",
+    "mutation": "sign_flip",
+    "detail": "'+'->'-' at 54",
+    "name": "Product-to-sum formula for sines",
+    "latex": "\\sin x \\sin y = \\frac{1}{2}\\left[\\cos(x - y) - \\cos(x - y)\\right]",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Not zero at sample points, but an expression set equal to 0 usually states an equation to solve rather than an identity (e.g. at x=0.0990648, y=0.071383: lhs=0.007053987600, rhs=0).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0028:missing_term",
+    "category": "trig",
+    "mutation": "missing_term",
+    "detail": "remove term '+ \\\\arccos x'",
+    "name": "Complementary inverse functions",
+    "latex": "\\arcsin x = \\frac{\\pi}{2} \\quad -1 \\le x \\le 1",
+    "translate": "ok",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0028:sign_flip",
+    "category": "trig",
+    "mutation": "sign_flip",
+    "detail": "'+'->'-' at 10",
+    "name": "Complementary inverse functions",
+    "latex": "\\arcsin x - \\arccos x = \\frac{\\pi}{2} \\quad -1 \\le x \\le 1",
+    "translate": "ok",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0028:swapped_symbols",
+    "category": "trig",
+    "mutation": "swapped_symbols",
+    "detail": "\\arcsin->\\arccos",
+    "name": "Complementary inverse functions",
+    "latex": "\\arccos x + \\arccos x = \\frac{\\pi}{2} \\quad -1 \\le x \\le 1",
+    "translate": "ok",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0029:missing_term",
+    "category": "trig",
+    "mutation": "missing_term",
+    "detail": "remove term '\\\\arctan x'",
+    "name": "Arctangent reflection",
+    "latex": "\\arctan\\frac{1}{x} = \\frac{\\pi}{2}, \\quad x > 0",
+    "translate": "ok",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0029:num_den_swap",
+    "category": "trig",
+    "mutation": "num_den_swap",
+    "detail": "\\frac{1}{x} swapped",
+    "name": "Arctangent reflection",
+    "latex": "\\arctan x + \\arctan\\frac{x}{1} = \\frac{\\pi}{2}, \\quad x > 0",
+    "translate": "ok",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0029:sign_flip",
+    "category": "trig",
+    "mutation": "sign_flip",
+    "detail": "'+'->'-' at 10",
+    "name": "Arctangent reflection",
+    "latex": "\\arctan x - \\arctan\\frac{1}{x} = \\frac{\\pi}{2}, \\quad x > 0",
+    "translate": "ok",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0029:wrong_constant",
+    "category": "trig",
+    "mutation": "wrong_constant",
+    "detail": "1->e",
+    "name": "Arctangent reflection",
+    "latex": "\\arctan x + \\arctan\\frac{e}{x} = \\frac{\\pi}{2}, \\quad x > 0",
+    "translate": "ok",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0030:missing_term",
+    "category": "trig",
+    "mutation": "missing_term",
+    "detail": "remove term '- x'",
+    "name": "Supplementary angle identity",
+    "latex": "\\sin(\\pi ) = \\sin x",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Not zero at sample points, but an expression set equal to 0 usually states an equation to solve rather than an identity (e.g. at x=0.0555039: lhs=0, rhs=0.055475406069).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0032:swapped_symbols",
+    "category": "trig",
+    "mutation": "swapped_symbols",
+    "detail": "\\sin->\\cos",
+    "name": "Difference of fourth powers",
+    "latex": "\\cos^4 x - \\cos^4 x = \\cos 2x",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Not zero at sample points, but an expression set equal to 0 usually states an equation to solve rather than an identity (e.g. at x=0: lhs=0, rhs=1.000000000000).",
     "counterexample": null
    },
    {
@@ -1012,6 +1191,22 @@
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
     "reason": "Too few evaluable points (1) to judge; typical error: no point could be evaluated.",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0037:missing_term",
+    "category": "trig",
+    "mutation": "missing_term",
+    "detail": "remove term '+ 2\\\\sum_{k=1}^{n} \\\\cos kx'",
+    "name": "Dirichlet kernel",
+    "latex": "1 = \\frac{\\sin\\left(\\left(n + \\frac{1}{2}\\right)x\\right)}{\\sin\\frac{x}{2}}",
+    "translate": "ok",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
     "counterexample": null
    },
    {
@@ -1042,20 +1237,6 @@
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
     "reason": "Fails at 42 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, mixed_sign, small_positive, unit_interval) (e.g. at x=0, y=0: lhs=1.000000000000, rhs=0).",
-    "counterexample": null
-   },
-   {
-    "formula_id": "bench:mut:0042:missing_term",
-    "category": "hyperbolic",
-    "mutation": "missing_term",
-    "detail": "remove term '+ \\\\sinh x \\\\sinh y'",
-    "name": "Addition formula for hyperbolic cosine",
-    "latex": "\\cosh(x + y) = \\cosh x \\cosh y",
-    "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 56 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at x=0.0776155, y=0.0976396: lhs=1.015396522440, rhs=1.007798505715).",
     "counterexample": null
    },
    {
@@ -1283,6 +1464,48 @@
     "counterexample": null
    },
    {
+    "formula_id": "bench:mut:0050:exponent_pm1",
+    "category": "hyperbolic",
+    "mutation": "exponent_pm1",
+    "detail": "^{2}->^{3}",
+    "name": "Hyperbolic secant identity",
+    "latex": "1 - \\tanh^2 x = \\operatorname{sech}^{3} x",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Possible label superscript: the LaTeX has a superscript on an operator name, which usually indexes rather than exponentiates; read as a power the formula fails (e.g. at x=0.0604386: lhs=0.996356052669, rhs=0.994539061414).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0050:missing_term",
+    "category": "hyperbolic",
+    "mutation": "missing_term",
+    "detail": "remove term '1'",
+    "name": "Hyperbolic secant identity",
+    "latex": "- \\tanh^2 x = \\operatorname{sech}^2 x",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Possible label superscript: the LaTeX has a superscript on an operator name, which usually indexes rather than exponentiates; read as a power the formula fails (e.g. at x=0: lhs=0, rhs=1.000000000000).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0050:sign_flip",
+    "category": "hyperbolic",
+    "mutation": "sign_flip",
+    "detail": "'-'->'+' at 2",
+    "name": "Hyperbolic secant identity",
+    "latex": "1 + \\tanh^2 x = \\operatorname{sech}^2 x",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Possible label superscript: the LaTeX has a superscript on an operator name, which usually indexes rather than exponentiates; read as a power the formula fails (e.g. at x=0.0542518: lhs=1.002937492242, rhs=0.997062507757).",
+    "counterexample": null
+   },
+   {
     "formula_id": "bench:mut:0050:swapped_symbols",
     "category": "hyperbolic",
     "mutation": "swapped_symbols",
@@ -1294,6 +1517,62 @@
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
     "reason": "Fails at 44 of 59 evaluable points but not at a clear majority in every regime (failing: integers_small, mixed_sign, small_positive, unit_interval) (e.g. at x=0.0812762: lhs=0.993423162034, rhs=151.0487512772).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0050:wrong_constant",
+    "category": "hyperbolic",
+    "mutation": "wrong_constant",
+    "detail": "1->e",
+    "name": "Hyperbolic secant identity",
+    "latex": "e - \\tanh^2 x = \\operatorname{sech}^2 x",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Possible label superscript: the LaTeX has a superscript on an operator name, which usually indexes rather than exponentiates; read as a power the formula fails (e.g. at e=0.0526032, x=0.142424: lhs=0.032589794015, rhs=0.979986594015).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0051:exponent_pm1",
+    "category": "hyperbolic",
+    "mutation": "exponent_pm1",
+    "detail": "^{2}->^{3}",
+    "name": "Hyperbolic cosecant identity",
+    "latex": "\\coth^2 x - 1 = \\operatorname{csch}^{3} x",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Possible label superscript: the LaTeX has a superscript on an operator name, which usually indexes rather than exponentiates; read as a power the formula fails (e.g. at x=0.0289303: lhs=1194.463728336, rhs=41281.87832230).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0051:missing_term",
+    "category": "hyperbolic",
+    "mutation": "missing_term",
+    "detail": "remove term '- 1'",
+    "name": "Hyperbolic cosecant identity",
+    "latex": "\\coth^2 x = \\operatorname{csch}^2 x",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Possible label superscript: the LaTeX has a superscript on an operator name, which usually indexes rather than exponentiates; read as a power the formula fails (e.g. at x=0.0518702: lhs=372.3425347342, rhs=371.3425347342).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0051:sign_flip",
+    "category": "hyperbolic",
+    "mutation": "sign_flip",
+    "detail": "'-'->'+' at 10",
+    "name": "Hyperbolic cosecant identity",
+    "latex": "\\coth^2 x + 1 = \\operatorname{csch}^2 x",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Possible label superscript: the LaTeX has a superscript on an operator name, which usually indexes rather than exponentiates; read as a power the formula fails (e.g. at x=0.0531983: lhs=355.0163637175, rhs=353.0163637175).",
     "counterexample": null
    },
    {
@@ -1311,6 +1590,20 @@
     "counterexample": null
    },
    {
+    "formula_id": "bench:mut:0051:wrong_constant",
+    "category": "hyperbolic",
+    "mutation": "wrong_constant",
+    "detail": "2->3",
+    "name": "Hyperbolic cosecant identity",
+    "latex": "\\coth^2 x - 1 = \\operatorname{csch}^3 x",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Possible label superscript: the LaTeX has a superscript on an operator name, which usually indexes rather than exponentiates; read as a power the formula fails (e.g. at x=0.0397402: lhs=632.8653094319, rhs=15920.87511292).",
+    "counterexample": null
+   },
+   {
     "formula_id": "bench:mut:0052:sign_flip",
     "category": "hyperbolic",
     "mutation": "sign_flip",
@@ -1322,6 +1615,22 @@
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
     "reason": "Too few evaluable points (0) to judge; typical error: no point could be evaluated.",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0054:sign_flip",
+    "category": "hyperbolic",
+    "mutation": "sign_flip",
+    "detail": "'-'->'+' at 55",
+    "name": "Logarithmic form of inverse hyperbolic tangent",
+    "latex": "\\operatorname{artanh} x = \\frac{1}{2}\\ln\\frac{1 + x}{1 + x}, \\quad |x| < 1",
+    "translate": "ok",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
     "counterexample": null
    },
    {
@@ -1420,34 +1729,6 @@
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
     "reason": "Fails at 35 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, mixed_sign, small_positive, unit_interval) (e.g. at x=0: lhs=0, rhs=1.000000000000).",
-    "counterexample": null
-   },
-   {
-    "formula_id": "bench:mut:0058:missing_term",
-    "category": "hyperbolic",
-    "mutation": "missing_term",
-    "detail": "remove term '+ \\\\sinh y'",
-    "name": "Sum-to-product formula for hyperbolic sine",
-    "latex": "\\sinh x = 2 \\sinh\\left(\\frac{x + y}{2}\\right) \\cosh\\left(\\frac{x - y}{2}\\right)",
-    "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 54 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at x=0.134088, y=0.142178: lhs=0.134490169288, rhs=0.277147665185).",
-    "counterexample": null
-   },
-   {
-    "formula_id": "bench:mut:0058:swapped_symbols",
-    "category": "hyperbolic",
-    "mutation": "swapped_symbols",
-    "detail": "\\cosh->\\sinh",
-    "name": "Sum-to-product formula for hyperbolic sine",
-    "latex": "\\sinh x + \\sinh y = 2 \\sinh\\left(\\frac{x + y}{2}\\right) \\sinh\\left(\\frac{x - y}{2}\\right)",
-    "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 56 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at x=0.0527699, y=0.070797: lhs=0.123650550925, rhs=-0.00111450024).",
     "counterexample": null
    },
    {
@@ -1563,45 +1844,123 @@
     "counterexample": null
    },
    {
-    "formula_id": "bench:mut:0062:swapped_symbols",
-    "category": "hyperbolic",
-    "mutation": "swapped_symbols",
-    "detail": "\\cosh->\\sinh",
-    "name": "Difference formula for hyperbolic cosine",
-    "latex": "\\sinh(x - y) = \\cosh x \\cosh y - \\sinh x \\sinh y",
+    "formula_id": "bench:mut:0071:dropped_factor",
+    "category": "exp_log",
+    "mutation": "dropped_factor",
+    "detail": "drop 'x'",
+    "name": "Exponential with arbitrary base",
+    "latex": "a^{x} = e^{ \\ln a}",
     "translate": "ok",
     "checkable": true,
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 56 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at x=0.040211, y=0.112604: lhs=-0.07245624879, rhs=1.002621517817).",
+    "reason": "Possible label superscript: x occurs only as the superscript of a, so a^x is probably a label; read as a power the formula fails (e.g. at a=0.131075, x=0.165543: lhs=0.714350891797, rhs=0.131075000000).",
     "counterexample": null
    },
    {
-    "formula_id": "bench:mut:0073:wrong_constant",
+    "formula_id": "bench:mut:0074:missing_term",
     "category": "exp_log",
-    "mutation": "wrong_constant",
-    "detail": "1->e",
-    "name": "Reciprocal of a logarithm",
-    "latex": "\\log_{b} x = \\frac{e}{\\log_{x} b}",
+    "mutation": "missing_term",
+    "detail": "remove term '+ b'",
+    "name": "Product of powers",
+    "latex": "x^{a} x^{b} = x^{a }",
     "translate": "ok",
     "checkable": true,
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 55 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at b=1.02698, e=0.986309, x=0.834805: lhs=-6.78213574809, rhs=-6.68928152757).",
+    "reason": "Possible label superscript: b occurs only as the superscript of x, so x^b is probably a label; read as a power the formula fails (e.g. at a=0.0591763, b=0.0529045, x=0.0819487: lhs=0.755490357781, rhs=0.862397401978).",
     "counterexample": null
    },
    {
-    "formula_id": "bench:mut:0075:num_den_swap",
+    "formula_id": "bench:mut:0075:missing_term",
     "category": "exp_log",
-    "mutation": "num_den_swap",
-    "detail": "\\frac{x^{a}}{x^{b}} swapped",
+    "mutation": "missing_term",
+    "detail": "remove term 'a'",
     "name": "Quotient of powers",
-    "latex": "\\frac{x^{b}}{x^{a}} = x^{a - b}",
+    "latex": "\\frac{x^{a}}{x^{b}} = x^{ - b}",
     "translate": "ok",
     "checkable": true,
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 56 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at a=0.0851758, b=0.088947, x=0.184718: lhs=0.993650967089, rhs=1.006389600695).",
+    "reason": "Possible label superscript: a occurs only as the superscript of x, so x^a is probably a label; read as a power the formula fails (e.g. at a=0.199866, b=0.0944194, x=0.300401: lhs=0.880897516744, rhs=1.120250439278).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0076:dropped_factor",
+    "category": "exp_log",
+    "mutation": "dropped_factor",
+    "detail": "drop 'x'",
+    "name": "Power of a product",
+    "latex": "( y)^{a} = x^{a} y^{a}",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Possible label superscript: a occurs only as the superscript of y, so y^a is probably a label; read as a power the formula fails (e.g. at a=0.0679107, x=0.0335469, y=0.275784: lhs=0.916238746793, rhs=0.727586572681).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0077:dropped_factor",
+    "category": "exp_log",
+    "mutation": "dropped_factor",
+    "detail": "drop 'y'",
+    "name": "Square root of a product",
+    "latex": "\\sqrt{x } = \\sqrt{x}\\sqrt{y}",
+    "translate": "ok",
+    "checkable": false,
+    "skip_reasons": [
+     "defining_equation"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (defining_equation).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0077:sign_flip",
+    "category": "exp_log",
+    "mutation": "sign_flip",
+    "detail": "negate side 0",
+    "name": "Square root of a product",
+    "latex": "-\\left(\\sqrt{xy}\\right) = \\sqrt{x}\\sqrt{y}",
+    "translate": "ok",
+    "checkable": false,
+    "skip_reasons": [
+     "defining_equation"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (defining_equation).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0078:sign_flip",
+    "category": "exp_log",
+    "mutation": "sign_flip",
+    "detail": "negate side 1",
+    "name": "Inverse property of logarithms",
+    "latex": "a^{\\log_a x} = -\\left(x\\right)",
+    "translate": "ok",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0082:missing_term",
+    "category": "gamma_beta",
+    "mutation": "missing_term",
+    "detail": "remove term 'x'",
+    "name": "Recurrence relation of the gamma function",
+    "latex": "\\Gamma( 1) = x\\,\\Gamma(x)",
+    "translate": "ok",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
     "counterexample": null
    },
    {
@@ -1616,6 +1975,22 @@
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
     "reason": "Fails at 40 of 54 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at e=3, n=3: lhs=2.000000000000, rhs=1.000000000000).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0084:wrong_constant",
+    "category": "gamma_beta",
+    "mutation": "wrong_constant",
+    "detail": "1->e",
+    "name": "Gamma function at one half",
+    "latex": "\\Gamma\\left(\\frac{e}{2}\\right) = \\sqrt{\\pi}",
+    "translate": "ok",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
     "counterexample": null
    },
    {
@@ -1647,6 +2022,22 @@
     "counterexample": null
    },
    {
+    "formula_id": "bench:mut:0090:dropped_factor",
+    "category": "gamma_beta",
+    "mutation": "dropped_factor",
+    "detail": "drop 't^{x - 1}'",
+    "name": "Euler integral of the second kind",
+    "latex": "\\Gamma(x) = \\int_0^\\infty e^{-t}\\,dt",
+    "translate": "ok",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
+    "counterexample": null
+   },
+   {
     "formula_id": "bench:mut:0090:missing_term",
     "category": "gamma_beta",
     "mutation": "missing_term",
@@ -1654,10 +2045,12 @@
     "name": "Euler integral of the second kind",
     "latex": "\\Gamma(x) = \\int_0^\\infty t^{ - 1} e^{-t}\\,dt",
     "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Too few evaluable points (0) to judge; typical error: integral did not converge.",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
     "counterexample": null
    },
    {
@@ -1682,10 +2075,12 @@
     "name": "Recurrence relation of the digamma function",
     "latex": "\\psi( 1) = \\psi(x) + \\frac{1}{x}",
     "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
     "verdict": "SKIP",
-    "reason": "Not checkable: has_undefined_function.",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
     "counterexample": null
    },
    {
@@ -1752,24 +2147,12 @@
     "name": "Digamma function at one",
     "latex": "\\psi(e) = -\\gamma",
     "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
     "verdict": "SKIP",
-    "reason": "Not checkable: has_undefined_function.",
-    "counterexample": null
-   },
-   {
-    "formula_id": "bench:mut:0093:dropped_factor",
-    "category": "gamma_beta",
-    "mutation": "dropped_factor",
-    "detail": "drop '\\\\prod_{k=0}^{n - 1} (x + k)'",
-    "name": "Gamma function and Pochhammer product",
-    "latex": "\\Gamma(x + n) = \\Gamma(x)",
-    "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 54 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at n=1, x=0.0614444: lhs=0.968070094306, rhs=15.75522088760).",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
     "counterexample": null
    },
    {
@@ -1787,17 +2170,19 @@
     "counterexample": null
    },
    {
-    "formula_id": "bench:mut:0093:sign_flip",
+    "formula_id": "bench:mut:0095:dropped_factor",
     "category": "gamma_beta",
-    "mutation": "sign_flip",
-    "detail": "'+'->'-' at 9",
-    "name": "Gamma function and Pochhammer product",
-    "latex": "\\Gamma(x - n) = \\Gamma(x) \\prod_{k=0}^{n - 1} (x + k)",
+    "mutation": "dropped_factor",
+    "detail": "drop '\\\\frac{(2n)!}{4^{n}\\\\, n!}'",
+    "name": "Gamma function at half-integers",
+    "latex": "\\Gamma\\left(n + \\tfrac{1}{2}\\right) = \\sqrt{\\pi}",
     "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 54 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at n=1, x=0.355248: lhs=-3.88842693985, rhs=0.890631975064).",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
     "counterexample": null
    },
    {
@@ -1839,7 +2224,7 @@
     "checkable": true,
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
-    "reason": "Too few evaluable points (2) to judge; typical error: series extrapolation did not converge.",
+    "reason": "Too few evaluable points (5) to judge; typical error: series extrapolation did not converge.",
     "counterexample": null
    },
    {
@@ -1867,7 +2252,7 @@
     "checkable": true,
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
-    "reason": "Too few evaluable points (2) to judge; typical error: series extrapolation did not converge.",
+    "reason": "Too few evaluable points (5) to judge; typical error: series extrapolation did not converge.",
     "counterexample": null
    },
    {
@@ -1881,7 +2266,7 @@
     "checkable": true,
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
-    "reason": "Too few evaluable points (2) to judge; typical error: series extrapolation did not converge.",
+    "reason": "Too few evaluable points (5) to judge; typical error: series extrapolation did not converge.",
     "counterexample": null
    },
    {
@@ -1923,7 +2308,7 @@
     "checkable": true,
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
-    "reason": "Too few evaluable points (2) to judge; typical error: point evaluation exceeded 5s.",
+    "reason": "Too few evaluable points (5) to judge; typical error: series extrapolation did not converge.",
     "counterexample": null
    },
    {
@@ -1955,6 +2340,22 @@
     "counterexample": null
    },
    {
+    "formula_id": "bench:mut:0108:wrong_constant",
+    "category": "zeta",
+    "mutation": "wrong_constant",
+    "detail": "1->e",
+    "name": "Zeta function at minus one",
+    "latex": "\\zeta(-e) = -\\frac{1}{12}",
+    "translate": "ok",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
+    "counterexample": null
+   },
+   {
     "formula_id": "bench:mut:0110:dropped_factor",
     "category": "zeta",
     "mutation": "dropped_factor",
@@ -1965,7 +2366,7 @@
     "checkable": true,
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
-    "reason": "Too few evaluable points (1) to judge; typical error: series terms do not tend to zero; treated as divergent.",
+    "reason": "Too few evaluable points (3) to judge; typical error: series terms do not tend to zero; treated as divergent.",
     "counterexample": null
    },
    {
@@ -1979,7 +2380,7 @@
     "checkable": true,
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
-    "reason": "Too few evaluable points (2) to judge; typical error: point evaluation exceeded 5s.",
+    "reason": "Too few evaluable points (4) to judge; typical error: series extrapolation did not converge.",
     "counterexample": null
    },
    {
@@ -1993,7 +2394,7 @@
     "checkable": true,
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
-    "reason": "Too few evaluable points (1) to judge; typical error: series extrapolation did not converge.",
+    "reason": "Too few evaluable points (2) to judge; typical error: series extrapolation did not converge.",
     "counterexample": null
    },
    {
@@ -2021,7 +2422,7 @@
     "checkable": true,
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
-    "reason": "Too few evaluable points (1) to judge; typical error: series extrapolation did not converge.",
+    "reason": "Too few evaluable points (2) to judge; typical error: series extrapolation did not converge.",
     "counterexample": null
    },
    {
@@ -2035,7 +2436,7 @@
     "checkable": true,
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
-    "reason": "Too few evaluable points (2) to judge; typical error: point evaluation exceeded 5s.",
+    "reason": "Too few evaluable points (4) to judge; typical error: series extrapolation did not converge.",
     "counterexample": null
    },
    {
@@ -2049,7 +2450,7 @@
     "checkable": true,
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
-    "reason": "Too few evaluable points (1) to judge; typical error: point evaluation exceeded 5s.",
+    "reason": "Too few evaluable points (2) to judge; typical error: series extrapolation did not converge.",
     "counterexample": null
    },
    {
@@ -2221,6 +2622,62 @@
     "counterexample": null
    },
    {
+    "formula_id": "bench:mut:0115:off_by_one",
+    "category": "binomial",
+    "mutation": "off_by_one",
+    "detail": "\\sum upper n->n - 1",
+    "name": "Alternating sum of binomial coefficients",
+    "latex": "\\sum_{k=0}^{n - 1} (-1)^{k} \\binom{n}{k} = 0",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Not zero at sample points, but an expression set equal to 0 usually states an equation to solve rather than an identity (e.g. at n=1: lhs=1.000000000000, rhs=0).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0115:sign_flip",
+    "category": "binomial",
+    "mutation": "sign_flip",
+    "detail": "'-'->'+' at 16",
+    "name": "Alternating sum of binomial coefficients",
+    "latex": "\\sum_{k=0}^{n} (+1)^{k} \\binom{n}{k} = 0",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Not zero at sample points, but an expression set equal to 0 usually states an equation to solve rather than an identity (e.g. at n=1: lhs=2.000000000000, rhs=0).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0115:swapped_symbols",
+    "category": "binomial",
+    "mutation": "swapped_symbols",
+    "detail": "binom args n<->k",
+    "name": "Alternating sum of binomial coefficients",
+    "latex": "\\sum_{k=0}^{n} (-1)^{k} \\binom{k}{n} = 0",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Not zero at sample points, but an expression set equal to 0 usually states an equation to solve rather than an identity (e.g. at n=1: lhs=-1.00000000000, rhs=0).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0115:wrong_constant",
+    "category": "binomial",
+    "mutation": "wrong_constant",
+    "detail": "1->e",
+    "name": "Alternating sum of binomial coefficients",
+    "latex": "\\sum_{k=0}^{n} (-e)^{k} \\binom{n}{k} = 0",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Not zero at sample points, but an expression set equal to 0 usually states an equation to solve rather than an identity (e.g. at e=0.637244, n=1: lhs=0.362756000000, rhs=0).",
+    "counterexample": null
+   },
+   {
     "formula_id": "bench:mut:0116:off_by_one",
     "category": "binomial",
     "mutation": "off_by_one",
@@ -2260,20 +2717,6 @@
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
     "reason": "Fails at 45 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at n=2, x=0.753623, y=0.634016: lhs=1.925541994321, rhs=1.447732954353).",
-    "counterexample": null
-   },
-   {
-    "formula_id": "bench:mut:0118:missing_term",
-    "category": "binomial",
-    "mutation": "missing_term",
-    "detail": "remove term 'x'",
-    "name": "Binomial theorem",
-    "latex": "( y)^{n} = \\sum_{k=0}^{n} \\binom{n}{k} x^{n - k} y^{k}",
-    "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 53 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at n=1, x=0.4255, y=0.448659: lhs=0.448659000000, rhs=0.874159000000).",
     "counterexample": null
    },
    {
@@ -2333,6 +2776,22 @@
     "counterexample": null
    },
    {
+    "formula_id": "bench:mut:0121:missing_term",
+    "category": "binomial",
+    "mutation": "missing_term",
+    "detail": "remove term 'k'",
+    "name": "Absorption identity",
+    "latex": "k \\binom{n}{k} = n \\binom{n - 1}{ - 1}",
+    "translate": "ok",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
+    "counterexample": null
+   },
+   {
     "formula_id": "bench:mut:0121:sign_flip",
     "category": "binomial",
     "mutation": "sign_flip",
@@ -2344,20 +2803,6 @@
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
     "reason": "Fails at 44 of 54 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at k=2, n=2: lhs=2.000000000000, rhs=6.000000000000).",
-    "counterexample": null
-   },
-   {
-    "formula_id": "bench:mut:0121:swapped_symbols",
-    "category": "binomial",
-    "mutation": "swapped_symbols",
-    "detail": "binom args n - 1<->k - 1",
-    "name": "Absorption identity",
-    "latex": "k \\binom{n}{k} = n \\binom{k - 1}{n - 1}",
-    "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 46 of 54 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at k=1, n=2: lhs=2.000000000000, rhs=0).",
     "counterexample": null
    },
    {
@@ -2417,6 +2862,20 @@
     "counterexample": null
    },
    {
+    "formula_id": "bench:mut:0128:missing_term",
+    "category": "binomial",
+    "mutation": "missing_term",
+    "detail": "remove term 'n'",
+    "name": "Negative binomial series",
+    "latex": "\\sum_{k=0}^{\\infty} \\binom{k + n}{k} x^{k} = \\frac{1}{(1 - x)^{ 1}}",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Fails at 23 of 30 evaluable points but not at a clear majority in every regime (failing: large, mixed_sign, small_positive, unit_interval) (e.g. at n=1, x=-0.600912: lhs=0.390180067953, rhs=0.624643952946).",
+    "counterexample": null
+   },
+   {
     "formula_id": "bench:mut:0128:num_den_swap",
     "category": "binomial",
     "mutation": "num_den_swap",
@@ -2427,7 +2886,21 @@
     "checkable": true,
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
-    "reason": "Holds at small integers but fails elsewhere, including some integer resamples (e.g. at n=0, x=0.0271816: lhs=1.027941083351, rhs=0.972818400000); not flagged.",
+    "reason": "Fails at 24 of 30 evaluable points but not at a clear majority in every regime (failing: large, mixed_sign, small_positive, unit_interval) (e.g. at n=0, x=-0.259285: lhs=0.794101414691, rhs=1.259285000000).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0128:sign_flip",
+    "category": "binomial",
+    "mutation": "sign_flip",
+    "detail": "'-'->'+' at 57",
+    "name": "Negative binomial series",
+    "latex": "\\sum_{k=0}^{\\infty} \\binom{k + n}{k} x^{k} = \\frac{1}{(1 + x)^{n + 1}}",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Fails at 24 of 30 evaluable points but not at a clear majority in every regime (failing: large, mixed_sign, small_positive, unit_interval) (e.g. at n=0, x=0.447019: lhs=1.808380396433, rhs=0.691075929203).",
     "counterexample": null
    },
    {
@@ -2477,34 +2950,6 @@
     "counterexample": null
    },
    {
-    "formula_id": "bench:mut:0133:sign_flip",
-    "category": "finite_series",
-    "mutation": "sign_flip",
-    "detail": "'-'->'+' at 46",
-    "name": "Finite geometric series",
-    "latex": "\\sum_{k=0}^{n - 1} x^{k} = \\frac{1 - x^{n}}{1 + x}, \\quad x \\ne 1",
-    "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 53 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at n=1, x=0.987048: lhs=1.000000000000, rhs=0.006518211940).",
-    "counterexample": null
-   },
-   {
-    "formula_id": "bench:mut:0133:wrong_constant",
-    "category": "finite_series",
-    "mutation": "wrong_constant",
-    "detail": "1->e",
-    "name": "Finite geometric series",
-    "latex": "\\sum_{k=0}^{n - 1} x^{k} = \\frac{1 - x^{n}}{e - x}, \\quad x \\ne 1",
-    "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 51 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at e=0.268781, n=1, x=0.198235: lhs=1.000000000000, rhs=11.36513764068).",
-    "counterexample": null
-   },
-   {
     "formula_id": "bench:mut:0135:missing_term",
     "category": "finite_series",
     "mutation": "missing_term",
@@ -2551,31 +2996,59 @@
     "counterexample": null
    },
    {
-    "formula_id": "bench:mut:0142:dropped_factor",
+    "formula_id": "bench:mut:0144:exponent_pm1",
     "category": "finite_series",
-    "mutation": "dropped_factor",
-    "detail": "drop 'd'",
-    "name": "Arithmetic series",
-    "latex": "\\sum_{k=0}^{n} (a + k ) = \\frac{(n + 1)(2a + nd)}{2}",
+    "mutation": "exponent_pm1",
+    "detail": "^{k}->^{k + 1}",
+    "name": "Product of Fermat-type factors",
+    "latex": "\\prod_{k=0}^{n - 1} \\left(1 + x^{2^{k + 1}}\\right) = \\frac{1 - x^{2^{n}}}{1 - x}",
     "translate": "ok",
     "checkable": true,
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 55 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at a=0.0409074, d=0.594598, n=1: lhs=1.081814800000, rhs=0.676412800000).",
+    "reason": "Fails at 48 of 57 evaluable points but not at a clear majority in every regime (failing: large, mixed_sign, small_positive, unit_interval) (e.g. at n=1, x=-0.595082: lhs=1.354122586724, rhs=0.404918000000).",
     "counterexample": null
    },
    {
-    "formula_id": "bench:mut:0142:swapped_symbols",
+    "formula_id": "bench:mut:0144:num_den_swap",
     "category": "finite_series",
-    "mutation": "swapped_symbols",
-    "detail": "swap a<->d in side 0",
-    "name": "Arithmetic series",
-    "latex": "\\sum_{k=0}^{n} (d + ka) = \\frac{(n + 1)(2a + nd)}{2}",
+    "mutation": "num_den_swap",
+    "detail": "\\frac{1 - x^{2^{n}}}{1 - x} swapped",
+    "name": "Product of Fermat-type factors",
+    "latex": "\\prod_{k=0}^{n - 1} \\left(1 + x^{2^{k}}\\right) = \\frac{1 - x}{1 - x^{2^{n}}}",
     "translate": "ok",
     "checkable": true,
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 52 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at a=0.0792873, d=0.492159, n=0: lhs=0.492159000000, rhs=0.079287300000).",
+    "reason": "Fails at 48 of 57 evaluable points but not at a clear majority in every regime (failing: large, mixed_sign, small_positive, unit_interval) (e.g. at n=1, x=0.86092: lhs=1.860920000000, rhs=0.537368613374).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0144:off_by_one",
+    "category": "finite_series",
+    "mutation": "off_by_one",
+    "detail": "\\prod lower 0->1",
+    "name": "Product of Fermat-type factors",
+    "latex": "\\prod_{k=1}^{n - 1} \\left(1 + x^{2^{k}}\\right) = \\frac{1 - x^{2^{n}}}{1 - x}",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Fails at 48 of 59 evaluable points but not at a clear majority in every regime (failing: large, mixed_sign, small_positive, unit_interval) (e.g. at n=1, x=-0.685886: lhs=1.000000000000, rhs=0.314114000000).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0144:sign_flip",
+    "category": "finite_series",
+    "mutation": "sign_flip",
+    "detail": "'+'->'-' at 28",
+    "name": "Product of Fermat-type factors",
+    "latex": "\\prod_{k=0}^{n - 1} \\left(1 - x^{2^{k}}\\right) = \\frac{1 - x^{2^{n}}}{1 - x}",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Fails at 48 of 57 evaluable points but not at a clear majority in every regime (failing: large, mixed_sign, small_positive, unit_interval) (e.g. at n=1, x=-0.957596: lhs=1.957596000000, rhs=0.042404000000).",
     "counterexample": null
    },
    {
@@ -2590,20 +3063,6 @@
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
     "reason": "Fails at 40 of 47 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at n=1: lhs=0.500000000000, rhs=1.000000000000).",
-    "counterexample": null
-   },
-   {
-    "formula_id": "bench:mut:0145:sign_flip",
-    "category": "finite_series",
-    "mutation": "sign_flip",
-    "detail": "'+'->'-' at 45",
-    "name": "Sum of k over powers of two",
-    "latex": "\\sum_{k=1}^{n} \\frac{k}{2^{k}} = 2 - \\frac{n - 2}{2^{n}}",
-    "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 37 of 43 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at n=1: lhs=0.500000000000, rhs=2.500000000000).",
     "counterexample": null
    },
    {
@@ -2631,7 +3090,7 @@
     "checkable": true,
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
-    "reason": "The constant identity could not be evaluated (point evaluation exceeded 8s).",
+    "reason": "The constant identity could not be evaluated (series extrapolation did not converge).",
     "counterexample": null
    },
    {
@@ -2677,6 +3136,90 @@
     "counterexample": null
    },
    {
+    "formula_id": "bench:mut:0151:exponent_pm1",
+    "category": "infinite_series",
+    "mutation": "exponent_pm1",
+    "detail": "^{2n + 1}->^{2n + 1 - 1}",
+    "name": "Taylor series of the sine function",
+    "latex": "\\sin x = \\sum_{n=0}^{\\infty} \\frac{(-1)^{n} x^{2n + 1 - 1}}{(2n + 1)!}",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Fails at 26 of 30 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at x=0.063917: lhs=0.063873487986, rhs=0.999319241924).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0151:off_by_one",
+    "category": "infinite_series",
+    "mutation": "off_by_one",
+    "detail": "\\sum lower 0->1",
+    "name": "Taylor series of the sine function",
+    "latex": "\\sin x = \\sum_{n=1}^{\\infty} \\frac{(-1)^{n} x^{2n + 1}}{(2n + 1)!}",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Fails at 26 of 30 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at x=0.098581: lhs=0.098421405699, rhs=-0.00015959430).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0151:sign_flip",
+    "category": "infinite_series",
+    "mutation": "sign_flip",
+    "detail": "'+'->'-' at 50",
+    "name": "Taylor series of the sine function",
+    "latex": "\\sin x = \\sum_{n=0}^{\\infty} \\frac{(-1)^{n} x^{2n - 1}}{(2n + 1)!}",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Fails at 25 of 30 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at x=0.205286: lhs=0.203847163017, rhs=4.837110476769).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0151:swapped_symbols",
+    "category": "infinite_series",
+    "mutation": "swapped_symbols",
+    "detail": "\\sin->\\cos",
+    "name": "Taylor series of the sine function",
+    "latex": "\\cos x = \\sum_{n=0}^{\\infty} \\frac{(-1)^{n} x^{2n + 1}}{(2n + 1)!}",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Fails at 26 of 30 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at x=0: lhs=1.000000000000, rhs=0).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0151:wrong_constant",
+    "category": "infinite_series",
+    "mutation": "wrong_constant",
+    "detail": "1->e",
+    "name": "Taylor series of the sine function",
+    "latex": "\\sin x = \\sum_{n=0}^{\\infty} \\frac{(-e)^{n} x^{2n + 1}}{(2n + 1)!}",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Fails at 23 of 30 evaluable points but not at a clear majority in every regime (failing: integers_small, mixed_sign, small_positive, unit_interval) (e.g. at e=0.0217863, x=0.124255: lhs=0.123935511592, rhs=0.124248034271).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0152:off_by_one",
+    "category": "infinite_series",
+    "mutation": "off_by_one",
+    "detail": "\\sum lower 0->1",
+    "name": "Taylor series of the cosine function",
+    "latex": "\\cos x = \\sum_{n=1}^{\\infty} \\frac{(-1)^{n} x^{2n}}{(2n)!}",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Fails at 26 of 30 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at x=0: lhs=1.000000000000, rhs=0).",
+    "counterexample": null
+   },
+   {
     "formula_id": "bench:mut:0153:num_den_swap",
     "category": "infinite_series",
     "mutation": "num_den_swap",
@@ -2688,6 +3231,20 @@
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
     "reason": "Too few evaluable points (0) to judge; typical error: series terms do not tend to zero; treated as divergent.",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0153:off_by_one",
+    "category": "infinite_series",
+    "mutation": "off_by_one",
+    "detail": "\\sum lower 0->1",
+    "name": "Taylor series of the exponential function",
+    "latex": "e^{x} = \\sum_{n=1}^{\\infty} \\frac{x^{n}}{n!}",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Fails at 24 of 30 evaluable points but not at a clear majority in every regime (failing: integers_small, mixed_sign, small_positive, unit_interval) (e.g. at x=0.109878: lhs=1.116141892841, rhs=0.116141892841).",
     "counterexample": null
    },
    {
@@ -2790,8 +3347,8 @@
     "translate": "ok",
     "checkable": true,
     "skip_reasons": [],
-    "verdict": "PASS",
-    "reason": "Holds at all 12 integer sample points but not at non-integers, so it is an integer-only identity whose integer domain was not stated.",
+    "verdict": "INCONCLUSIVE",
+    "reason": "Fails at 24 of 30 evaluable points but not at a clear majority in every regime (failing: large, mixed_sign, small_positive, unit_interval) (e.g. at e=0.123178, x=0.195491: lhs=0.193056247454, rhs=1.583609721621).",
     "counterexample": null
    },
    {
@@ -2907,6 +3464,22 @@
     "counterexample": null
    },
    {
+    "formula_id": "bench:mut:0162:dropped_factor",
+    "category": "infinite_series",
+    "mutation": "dropped_factor",
+    "detail": "drop 'x^{n}'",
+    "name": "Mercator series",
+    "latex": "\\ln(1 + x) = \\sum_{n=1}^{\\infty} \\frac{(-1)^{n+1} }{n} \\quad |x| < 1",
+    "translate": "ok",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
+    "counterexample": null
+   },
+   {
     "formula_id": "bench:mut:0162:num_den_swap",
     "category": "infinite_series",
     "mutation": "num_den_swap",
@@ -2930,8 +3503,22 @@
     "translate": "ok",
     "checkable": true,
     "skip_reasons": [],
-    "verdict": "PASS",
-    "reason": "Holds at all 12 integer sample points but not at non-integers, so it is an integer-only identity whose integer domain was not stated.",
+    "verdict": "INCONCLUSIVE",
+    "reason": "Fails at 18 of 24 evaluable points but not at a clear majority in every regime (failing: mixed_sign, small_positive, unit_interval) (e.g. at e=0.161402, x=0.0774723: lhs=0.074617835008, rhs=0.002005686566).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0163:missing_term",
+    "category": "infinite_series",
+    "mutation": "missing_term",
+    "detail": "remove term '- x'",
+    "name": "Logarithmic series",
+    "latex": "\\sum_{n=1}^{\\infty} \\frac{x^{n}}{n} = -\\ln(1 )",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Not zero at sample points, but an expression set equal to 0 usually states an equation to solve rather than an identity (e.g. at x=0.0161753: lhs=0.016307548207, rhs=0).",
     "counterexample": null
    },
    {
@@ -2991,6 +3578,22 @@
     "counterexample": null
    },
    {
+    "formula_id": "bench:mut:0165:exponent_pm1",
+    "category": "infinite_series",
+    "mutation": "exponent_pm1",
+    "detail": "^{n}->^{n + 1}",
+    "name": "Alternating series for 1/e",
+    "latex": "\\sum_{n=0}^{\\infty} \\frac{(-1)^{n + 1}}{n!} = \\frac{1}{e}",
+    "translate": "ok",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
+    "counterexample": null
+   },
+   {
     "formula_id": "bench:mut:0165:num_den_swap",
     "category": "infinite_series",
     "mutation": "num_den_swap",
@@ -2998,10 +3601,44 @@
     "name": "Alternating series for 1/e",
     "latex": "\\sum_{n=0}^{\\infty} \\frac{n!}{(-1)^{n}} = \\frac{1}{e}",
     "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "The constant identity could not be evaluated (series terms do not tend to zero; treated as divergent).",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0165:off_by_one",
+    "category": "infinite_series",
+    "mutation": "off_by_one",
+    "detail": "\\sum lower 0->1",
+    "name": "Alternating series for 1/e",
+    "latex": "\\sum_{n=1}^{\\infty} \\frac{(-1)^{n}}{n!} = \\frac{1}{e}",
+    "translate": "ok",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0165:sign_flip",
+    "category": "infinite_series",
+    "mutation": "sign_flip",
+    "detail": "'-'->'+' at 27",
+    "name": "Alternating series for 1/e",
+    "latex": "\\sum_{n=0}^{\\infty} \\frac{(+1)^{n}}{n!} = \\frac{1}{e}",
+    "translate": "ok",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
     "counterexample": null
    },
    {
@@ -3089,20 +3726,6 @@
     "counterexample": null
    },
    {
-    "formula_id": "bench:mut:0168:wrong_constant",
-    "category": "infinite_series",
-    "mutation": "wrong_constant",
-    "detail": "1->e",
-    "name": "Series for the hyperbolic sine",
-    "latex": "\\sinh x = \\sum_{n=0}^{\\infty} \\frac{x^{2n + 1}}{(2n + e)!}",
-    "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 27 of 30 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at e=2, x=0.921365: lhs=1.057371238189, rhs=0.494208779234).",
-    "counterexample": null
-   },
-   {
     "formula_id": "bench:mut:0170:dropped_factor",
     "category": "integrals",
     "mutation": "dropped_factor",
@@ -3117,17 +3740,33 @@
     "counterexample": null
    },
    {
-    "formula_id": "bench:mut:0172:swapped_symbols",
+    "formula_id": "bench:mut:0171:missing_term",
     "category": "integrals",
-    "mutation": "swapped_symbols",
-    "detail": "\\sin->\\cos",
-    "name": "Integral of sine over a half period",
-    "latex": "\\int_0^{\\pi} \\cos x\\,dx = 2",
+    "mutation": "missing_term",
+    "detail": "remove term 'n'",
+    "name": "Integral of a power",
+    "latex": "\\int_0^1 x^{n}\\,dx = \\frac{1}{ 1}",
     "translate": "ok",
     "checkable": true,
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
-    "reason": "The constant identity could not be evaluated (integral did not converge).",
+    "reason": "Possible label superscript: n occurs only as the superscript of x, so x^n is probably a label; read as a power the formula fails (e.g. at n=1: lhs=0.500000000000, rhs=1.000000000000).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0174:dropped_factor",
+    "category": "integrals",
+    "mutation": "dropped_factor",
+    "detail": "drop 'a'",
+    "name": "Integral of a decaying exponential",
+    "latex": "\\int_0^\\infty e^{- x}\\,dx = \\frac{1}{a}",
+    "translate": "ok",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
     "counterexample": null
    },
    {
@@ -3217,20 +3856,6 @@
     "counterexample": null
    },
    {
-    "formula_id": "bench:mut:0180:exponent_pm1",
-    "category": "integrals",
-    "mutation": "exponent_pm1",
-    "detail": "^{2}->^{1}",
-    "name": "Integral of cosine squared over a period",
-    "latex": "\\int_0^{2\\pi} \\cos^{1} x\\,dx = \\pi",
-    "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "The constant identity could not be evaluated (integral did not converge).",
-    "counterexample": null
-   },
-   {
     "formula_id": "bench:mut:0181:dropped_factor",
     "category": "integrals",
     "mutation": "dropped_factor",
@@ -3259,17 +3884,19 @@
     "counterexample": null
    },
    {
-    "formula_id": "bench:mut:0196:wrong_constant",
-    "category": "derivatives",
-    "mutation": "wrong_constant",
-    "detail": "1->e",
-    "name": "Power rule",
-    "latex": "\\frac{d}{dx} x^{n} = n x^{n - e}",
+    "formula_id": "bench:mut:0190:dropped_factor",
+    "category": "integrals",
+    "mutation": "dropped_factor",
+    "detail": "drop 'a'",
+    "name": "Integral of a squared exponential decay",
+    "latex": "\\int_0^\\infty x^2 e^{- x}\\,dx = \\frac{2}{a^3}",
     "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 51 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at e=0.207063, n=1, x=0.912414: lhs=1.000000000000, rhs=0.929896721779).",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
     "counterexample": null
    },
    {
@@ -3287,6 +3914,34 @@
     "counterexample": null
    },
    {
+    "formula_id": "bench:mut:0199:dropped_factor",
+    "category": "derivatives",
+    "mutation": "dropped_factor",
+    "detail": "drop 'a^{x}'",
+    "name": "Derivative of an exponential with base a",
+    "latex": "\\frac{d}{dx} a^{x} = \\ln a",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Possible label superscript: x occurs only as the superscript of a, so a^x is probably a label; read as a power the formula fails (e.g. at a=0.294325, x=0.235337: lhs=-0.91716385453, rhs=-1.22307068001).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0199:sign_flip",
+    "category": "derivatives",
+    "mutation": "sign_flip",
+    "detail": "negate side 1",
+    "name": "Derivative of an exponential with base a",
+    "latex": "\\frac{d}{dx} a^{x} = -\\left(a^{x} \\ln a\\right)",
+    "translate": "ok",
+    "checkable": true,
+    "skip_reasons": [],
+    "verdict": "INCONCLUSIVE",
+    "reason": "Possible label superscript: x occurs only as the superscript of a, so a^x is probably a label; read as a power the formula fails (e.g. at a=0.0752986, x=0.0522862: lhs=-2.25917203413, rhs=2.259172034137).",
+    "counterexample": null
+   },
+   {
     "formula_id": "bench:mut:0200:swapped_symbols",
     "category": "derivatives",
     "mutation": "swapped_symbols",
@@ -3301,61 +3956,19 @@
     "counterexample": null
    },
    {
-    "formula_id": "bench:mut:0201:exponent_pm1",
-    "category": "derivatives",
-    "mutation": "exponent_pm1",
-    "detail": "^{2}->^{1}",
-    "name": "Derivative of hyperbolic tangent",
-    "latex": "\\frac{d}{dx} \\tanh x = 1 - \\tanh^{1} x",
-    "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 54 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at x=0.0587718: lhs=0.996553813968, rhs=0.941295775007).",
-    "counterexample": null
-   },
-   {
-    "formula_id": "bench:mut:0202:exponent_pm1",
-    "category": "derivatives",
-    "mutation": "exponent_pm1",
-    "detail": "^{2}->^{1}",
-    "name": "Second derivative of sine",
-    "latex": "\\frac{d^2}{dx^2} \\sin(ax) = -a^{1} \\sin(ax)",
-    "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 56 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at a=0.0647092, x=0.082294: lhs=-0.00002229791, rhs=-0.00034458643).",
-    "counterexample": null
-   },
-   {
-    "formula_id": "bench:mut:0202:wrong_constant",
-    "category": "derivatives",
-    "mutation": "wrong_constant",
-    "detail": "2->3",
-    "name": "Second derivative of sine",
-    "latex": "\\frac{d^2}{dx^2} \\sin(ax) = -a^3 \\sin(ax)",
-    "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 56 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at a=0.0577816, x=0.0920218: lhs=-0.00001775241, rhs=-0.00000102576).",
-    "counterexample": null
-   },
-   {
     "formula_id": "bench:mut:0203:missing_term",
     "category": "derivatives",
     "mutation": "missing_term",
     "detail": "remove term '+ \\\\ln x'",
     "name": "Derivative of x to the x",
     "latex": "\\frac{d}{dx} x^{x} = x^{x} (1 )",
-    "translate": "ok",
+    "translate": "not_checkable",
     "checkable": false,
     "skip_reasons": [
-     "has_undefined_function"
+     "operator_notation"
     ],
     "verdict": "SKIP",
-    "reason": "Semantics marked it not checkable (has_undefined_function).",
+    "reason": "Semantics marked it not checkable (operator_notation).",
     "counterexample": null
    },
    {
@@ -3436,10 +4049,12 @@
     "name": "Logarithm inequality",
     "latex": "\\ln x \\le - 1 \\quad x > 0",
     "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 50 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at x=0.368225: lhs=-0.99906111460, rhs=-1.00000000000).",
+    "checkable": false,
+    "skip_reasons": [
+     "condition"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (condition).",
     "counterexample": null
    },
    {
@@ -3468,20 +4083,6 @@
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
     "reason": "Fails at 28 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive) (e.g. at e=1.53499, x=0.51372: lhs=-0.66607690903, rhs=-1.02127000000).",
-    "counterexample": null
-   },
-   {
-    "formula_id": "bench:mut:0214:missing_term",
-    "category": "inequalities",
-    "mutation": "missing_term",
-    "detail": "remove term '+ |y|'",
-    "name": "Triangle inequality",
-    "latex": "|x + y| \\le |x|",
-    "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 55 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at x=0.0738487, y=0.17844: lhs=0.252288700000, rhs=0.073848700000).",
     "counterexample": null
    },
    {
@@ -3607,7 +4208,7 @@
     "checkable": true,
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 42 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at n=1, x=0.888153: lhs=0.111847000000, rhs=1.888153000000).",
+    "reason": "Fails at 46 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at n=1, x=0.888153: lhs=0.111847000000, rhs=1.888153000000).",
     "counterexample": null
    },
    {
@@ -3620,10 +4221,10 @@
     "translate": "ok",
     "checkable": false,
     "skip_reasons": [
-     "definition"
+     "condition"
     ],
     "verdict": "SKIP",
-    "reason": "Semantics marked it not checkable (definition).",
+    "reason": "Semantics marked it not checkable (condition).",
     "counterexample": null
    },
    {
@@ -3634,10 +4235,28 @@
     "name": "Sum of a number and its reciprocal",
     "latex": "x - \\frac{1}{x} \\ge 2, \\quad x > 0",
     "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 28 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, mixed_sign, small_positive, unit_interval) (e.g. at x=0.0543444: lhs=-18.3468156091, rhs=2.000000000000).",
+    "checkable": false,
+    "skip_reasons": [
+     "condition"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (condition).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0220:missing_term",
+    "category": "inequalities",
+    "mutation": "missing_term",
+    "detail": "remove term '+ x'",
+    "name": "Lower bound for the logarithm",
+    "latex": "\\frac{x}{1 + x} \\le \\ln(1 )",
+    "translate": "ok",
+    "checkable": false,
+    "skip_reasons": [
+     "condition"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (condition).",
     "counterexample": null
    },
    {
@@ -3693,7 +4312,7 @@
     "checkable": true,
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
-    "reason": "Holds at small integers but fails elsewhere, including some integer resamples (e.g. at x=0.00220314: lhs=0.999997573088, rhs=0.999999994653); not flagged.",
+    "reason": "Fails at 31 of 60 evaluable points but not at a clear majority in every regime (failing: mixed_sign, small_positive, unit_interval) (e.g. at x=0.00220314: lhs=0.999997573088, rhs=0.999999994653).",
     "counterexample": null
    },
    {
@@ -3721,7 +4340,7 @@
     "checkable": true,
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
-    "reason": "Holds at small integers but fails elsewhere, including some integer resamples (e.g. at a=0.0607576, b=0.180416, c=0.0827999, d=0.582832: lhs=0.012140280557, rhs=0.003314399375); not flagged.",
+    "reason": "Fails at 17 of 60 evaluable points but not at a clear majority in every regime (failing: mixed_sign, small_positive, unit_interval) (e.g. at a=0.0607576, b=0.180416, c=0.0827999, d=0.582832: lhs=0.012140280557, rhs=0.003314399375).",
     "counterexample": null
    },
    {
@@ -3763,7 +4382,7 @@
     "checkable": true,
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
-    "reason": "Holds at small integers but fails elsewhere, including some integer resamples (e.g. at a=0.520485, b=0.37085, c=0.695991, d=0.569088: lhs=0.328671927355, rhs=0.260186470916); not flagged.",
+    "reason": "Fails at 18 of 60 evaluable points but not at a clear majority in every regime (failing: mixed_sign, small_positive, unit_interval) (e.g. at a=0.520485, b=0.37085, c=0.695991, d=0.569088: lhs=0.328671927355, rhs=0.260186470916).",
     "counterexample": null
    },
    {
@@ -3809,17 +4428,19 @@
     "counterexample": null
    },
    {
-    "formula_id": "bench:mut:0230:sign_flip",
+    "formula_id": "bench:mut:0231:sign_flip",
     "category": "inequalities",
     "mutation": "sign_flip",
     "detail": "negate side 0",
-    "name": "Tangent line of the exponential at one",
-    "latex": "-\\left(e^{x}\\right) \\ge e x",
+    "name": "Sum of mixed powers",
+    "latex": "-\\left(x^{y} + y^{x}\\right) > 1",
     "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 54 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at x=0: lhs=-1.00000000000, rhs=0).",
+    "checkable": false,
+    "skip_reasons": [
+     "condition"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (condition).",
     "counterexample": null
    },
    {
@@ -3830,10 +4451,12 @@
     "name": "Logarithm lower bound",
     "latex": "1 \\le \\ln x",
     "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 29 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, mixed_sign, small_positive, unit_interval) (e.g. at x=0.0190496: lhs=1.000000000000, rhs=-3.96070917500).",
+    "checkable": false,
+    "skip_reasons": [
+     "condition"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (condition).",
     "counterexample": null
    },
    {
@@ -3872,10 +4495,12 @@
     "name": "Jordan's inequality",
     "latex": "\\frac{2 }{\\pi} \\le \\sin x",
     "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 30 of 50 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at x=0: lhs=0.636619772367, rhs=0).",
+    "checkable": false,
+    "skip_reasons": [
+     "condition"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (condition).",
     "counterexample": null
    },
    {
@@ -3904,20 +4529,6 @@
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
     "reason": "Too few evaluable points (1) to judge; typical error: integral did not converge.",
-    "counterexample": null
-   },
-   {
-    "formula_id": "bench:mut:0235:swapped_symbols",
-    "category": "probability",
-    "mutation": "swapped_symbols",
-    "detail": "swap mu<->sigma in side 0",
-    "name": "Mean of the normal distribution",
-    "latex": "\\int_{-\\infty}^{\\infty} x \\frac{1}{\\mu\\sqrt{2\\pi}} e^{-\\frac{(x - \\sigma)^2}{2\\mu^2}}\\,dx = \\mu",
-    "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 24 of 26 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at mu=0.172113, sigma=0.0769106: lhs=0.076910600000, rhs=0.172113000000).",
     "counterexample": null
    },
    {
@@ -4031,7 +4642,7 @@
     "checkable": true,
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 25 of 30 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at lambda=0.0874836: lhs=0.083766102236, rhs=1.000000000000).",
+    "reason": "Fails at 24 of 30 evaluable points but not at a clear majority in every regime (failing: integers_small, mixed_sign, small_positive, unit_interval) (e.g. at lambda=0.0874836: lhs=0.083766102236, rhs=1.000000000000).",
     "counterexample": null
    },
    {
@@ -4046,20 +4657,6 @@
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
     "reason": "Fails at 23 of 34 evaluable points but not at a clear majority in every regime (failing: mixed_sign, small_positive, unit_interval) (e.g. at n=2, p=0.732312: lhs=0, rhs=1.464624000000).",
-    "counterexample": null
-   },
-   {
-    "formula_id": "bench:mut:0244:wrong_constant",
-    "category": "probability",
-    "mutation": "wrong_constant",
-    "detail": "1->e",
-    "name": "Mean of the binomial distribution",
-    "latex": "\\sum_{k=0}^{n} k \\binom{n}{k} p^{k} (e - p)^{n - k} = np",
-    "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 42 of 48 evaluable points but not at a clear majority in every regime (failing: large, mixed_sign, small_positive, unit_interval) (e.g. at e=0.123325, n=2, p=0.370479: lhs=0.091378645350, rhs=0.740958000000).",
     "counterexample": null
    },
    {
@@ -4088,20 +4685,6 @@
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
     "reason": "Fails at 40 of 48 evaluable points but not at a clear majority in every regime (failing: large, mixed_sign, small_positive, unit_interval) (e.g. at n=2, p=0.945803: lhs=3.680692629618, rhs=7.258865888854).",
-    "counterexample": null
-   },
-   {
-    "formula_id": "bench:mut:0246:off_by_one",
-    "category": "probability",
-    "mutation": "off_by_one",
-    "detail": "\\sum lower 0->1",
-    "name": "Normalisation of the binomial distribution",
-    "latex": "\\sum_{k=1}^{n} \\binom{n}{k} p^{k} (1 - p)^{n - k} = 1",
-    "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 42 of 48 evaluable points but not at a clear majority in every regime (failing: large, mixed_sign, small_positive, unit_interval) (e.g. at n=1, p=0.0048517: lhs=0.004851700000, rhs=1.000000000000).",
     "counterexample": null
    },
    {
@@ -4135,17 +4718,19 @@
     "counterexample": null
    },
    {
-    "formula_id": "bench:mut:0250:dropped_factor",
+    "formula_id": "bench:mut:0249:missing_term",
     "category": "probability",
-    "mutation": "dropped_factor",
-    "detail": "drop 'x^{\\\\alpha - 1}'",
-    "name": "Mean of the beta distribution",
-    "latex": "\\int_0^1 x \\frac{ (1 - x)^{\\beta - 1}}{\\mathrm{B}(\\alpha, \\beta)}\\,dx = \\frac{\\alpha}{\\alpha + \\beta}",
+    "mutation": "missing_term",
+    "detail": "remove term '\\\\int_a^b \\\\frac{x^2}{b - a}\\\\,dx'",
+    "name": "Variance of the continuous uniform distribution",
+    "latex": "- \\left(\\frac{a + b}{2}\\right)^2 = \\frac{(b - a)^2}{12}",
     "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails in every judged regime, but only 1 regime(s) had 5+ evaluable points (e.g. at alpha=0.231472, beta=0.429779: lhs=0.273722476638, rhs=0.350051644534); not enough to flag.",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
     "counterexample": null
    },
    {
@@ -4155,41 +4740,13 @@
     "detail": "remove term '- x'",
     "name": "Mean of the beta distribution",
     "latex": "\\int_0^1 x \\frac{x^{\\alpha - 1} (1 )^{\\beta - 1}}{\\mathrm{B}(\\alpha, \\beta)}\\,dx = \\frac{\\alpha}{\\alpha + \\beta}",
-    "translate": "ok",
+    "translate": "not_checkable",
     "checkable": false,
     "skip_reasons": [
-     "has_undefined_function"
+     "operator_notation"
     ],
     "verdict": "SKIP",
-    "reason": "Semantics marked it not checkable (has_undefined_function).",
-    "counterexample": null
-   },
-   {
-    "formula_id": "bench:mut:0250:swapped_symbols",
-    "category": "probability",
-    "mutation": "swapped_symbols",
-    "detail": "swap alpha<->beta in side 0",
-    "name": "Mean of the beta distribution",
-    "latex": "\\int_0^1 x \\frac{x^{\\beta - 1} (1 - x)^{\\alpha - 1}}{\\mathrm{B}(\\beta, \\alpha)}\\,dx = \\frac{\\alpha}{\\alpha + \\beta}",
-    "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails in every judged regime, but only 1 regime(s) had 5+ evaluable points (e.g. at alpha=0.266931, beta=0.151051: lhs=0.361381590594, rhs=0.638618409405); not enough to flag.",
-    "counterexample": null
-   },
-   {
-    "formula_id": "bench:mut:0250:wrong_constant",
-    "category": "probability",
-    "mutation": "wrong_constant",
-    "detail": "1->e",
-    "name": "Mean of the beta distribution",
-    "latex": "\\int_0^1 x \\frac{x^{\\alpha - 1} (1 - x)^{\\beta - e}}{\\mathrm{B}(\\alpha, \\beta)}\\,dx = \\frac{\\alpha}{\\alpha + \\beta}",
-    "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails in every judged regime, but only 2 regime(s) had 5+ evaluable points (e.g. at alpha=0.624235, beta=0.0689516, e=0.297722: lhs=0.056504887427, rhs=0.900529525527); not enough to flag.",
+    "reason": "Semantics marked it not checkable (operator_notation).",
     "counterexample": null
    },
    {
@@ -4219,119 +4776,165 @@
     "checkable": true,
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 20 of 30 evaluable points but not at a clear majority in every regime (failing: integers_small, mixed_sign, small_positive, unit_interval) (e.g. at k=1, theta=0.395033: lhs=0.110967711007, rhs=0.395033000000).",
+    "reason": "Fails at 18 of 30 evaluable points but not at a clear majority in every regime (failing: integers_small, mixed_sign, small_positive, unit_interval) (e.g. at k=1, theta=0.0202811: lhs=3.935193172142, rhs=0.020281100000).",
     "counterexample": null
    },
    {
-    "formula_id": "bench:mut:0252:dropped_factor",
+    "formula_id": "bench:mut:0253:dropped_factor",
     "category": "probability",
     "mutation": "dropped_factor",
-    "detail": "drop 'x'",
-    "name": "Moment-generating function of the standard normal",
-    "latex": "\\int_{-\\infty}^{\\infty} e^{t } \\frac{1}{\\sqrt{2\\pi}} e^{-x^2/2}\\,dx = e^{t^2/2}",
+    "detail": "drop 'p'",
+    "name": "Variance of the Bernoulli distribution",
+    "latex": "(1 - p)^2 + (1 - p)p^2 = p(1 - p)",
     "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails in every judged regime, but only 2 regime(s) had 5+ evaluable points (e.g. at t=0.0309363: lhs=1.031419800352, rhs=1.000478641841); not enough to flag.",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
     "counterexample": null
    },
    {
-    "formula_id": "bench:mut:0252:exponent_pm1",
+    "formula_id": "bench:mut:0253:exponent_pm1",
     "category": "probability",
     "mutation": "exponent_pm1",
-    "detail": "^{t^2/2}->^{t^2/2 - 1}",
-    "name": "Moment-generating function of the standard normal",
-    "latex": "\\int_{-\\infty}^{\\infty} e^{tx} \\frac{1}{\\sqrt{2\\pi}} e^{-x^2/2}\\,dx = e^{t^2/2 - 1}",
+    "detail": "^{2}->^{3}",
+    "name": "Variance of the Bernoulli distribution",
+    "latex": "p(1 - p)^2 + (1 - p)p^{3} = p(1 - p)",
     "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails in every judged regime, but only 1 regime(s) had 5+ evaluable points (e.g. at t=-0.040611: lhs=1.000824966758, rhs=0.368182929481); not enough to flag.",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
     "counterexample": null
    },
    {
-    "formula_id": "bench:mut:0252:sign_flip",
+    "formula_id": "bench:mut:0253:missing_term",
     "category": "probability",
-    "mutation": "sign_flip",
-    "detail": "negate side 0",
-    "name": "Moment-generating function of the standard normal",
-    "latex": "-\\left(\\int_{-\\infty}^{\\infty} e^{tx} \\frac{1}{\\sqrt{2\\pi}} e^{-x^2/2}\\,dx\\right) = e^{t^2/2}",
-    "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails in every judged regime, but only 2 regime(s) had 5+ evaluable points (e.g. at t=0: lhs=-1.00000000000, rhs=1.000000000000); not enough to flag.",
-    "counterexample": null
-   },
-   {
-    "formula_id": "bench:mut:0262:sign_flip",
-    "category": "algebra",
-    "mutation": "sign_flip",
-    "detail": "'-'->'+' at 29",
-    "name": "Brahmagupta–Fibonacci identity",
-    "latex": "(a^2 + b^2)(c^2 + d^2) = (ac + bd)^2 + (ad + bc)^2",
-    "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 56 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at a=0.253785, b=0.234025, c=0.575106, d=0.277974: lhs=0.048625168080, rhs=0.086603883379).",
-    "counterexample": null
-   },
-   {
-    "formula_id": "bench:mut:0262:swapped_symbols",
-    "category": "algebra",
-    "mutation": "swapped_symbols",
-    "detail": "swap a<->c in side 0",
-    "name": "Brahmagupta–Fibonacci identity",
-    "latex": "(c^2 + b^2)(a^2 + d^2) = (ac - bd)^2 + (ad + bc)^2",
-    "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 56 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at a=0.0799004, b=0.0926497, c=0.477234, d=0.281302: lhs=0.020210268870, rhs=0.004593438860).",
-    "counterexample": null
-   },
-   {
-    "formula_id": "bench:mut:0266:exponent_pm1",
-    "category": "algebra",
-    "mutation": "exponent_pm1",
-    "detail": "^{2}->^{1}",
-    "name": "Factorisation of a fourth-power difference",
-    "latex": "a^4 - b^4 = (a - b)(a + b)(a^{1} + b^2)",
-    "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 55 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at a=0.0721502, b=0.0632303: lhs=0.000011114235, rhs=0.000091955168).",
-    "counterexample": null
-   },
-   {
-    "formula_id": "bench:mut:0269:missing_term",
-    "category": "complex",
     "mutation": "missing_term",
-    "detail": "remove term '+ i \\\\sin x'",
-    "name": "De Moivre's formula",
-    "latex": "(\\cos x )^{n} = \\cos nx + i \\sin nx",
+    "detail": "remove term '1'",
+    "name": "Variance of the Bernoulli distribution",
+    "latex": "p(1 - p)^2 + (1 - p)p^2 = p( - p)",
     "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 51 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at n=1, x=0.849536: lhs=0.660331668934, rhs=(0.66033166893).",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
     "counterexample": null
    },
    {
-    "formula_id": "bench:mut:0269:sign_flip",
+    "formula_id": "bench:mut:0253:sign_flip",
+    "category": "probability",
+    "mutation": "sign_flip",
+    "detail": "'+'->'-' at 11",
+    "name": "Variance of the Bernoulli distribution",
+    "latex": "p(1 - p)^2 - (1 - p)p^2 = p(1 - p)",
+    "translate": "ok",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0253:wrong_constant",
+    "category": "probability",
+    "mutation": "wrong_constant",
+    "detail": "2->3",
+    "name": "Variance of the Bernoulli distribution",
+    "latex": "p(1 - p)^3 + (1 - p)p^2 = p(1 - p)",
+    "translate": "ok",
+    "checkable": false,
+    "skip_reasons": [
+     "statement_not_identity"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (statement_not_identity).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0261:exponent_pm1",
+    "category": "algebra",
+    "mutation": "exponent_pm1",
+    "detail": "^{2}->^{3}",
+    "name": "Square root of a square",
+    "latex": "\\sqrt{a^{3}} = |a|",
+    "translate": "ok",
+    "checkable": false,
+    "skip_reasons": [
+     "defining_equation"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (defining_equation).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0261:sign_flip",
+    "category": "algebra",
+    "mutation": "sign_flip",
+    "detail": "negate side 1",
+    "name": "Square root of a square",
+    "latex": "\\sqrt{a^2} = -\\left(|a|\\right)",
+    "translate": "ok",
+    "checkable": false,
+    "skip_reasons": [
+     "defining_equation"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (defining_equation).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0261:wrong_constant",
+    "category": "algebra",
+    "mutation": "wrong_constant",
+    "detail": "2->3",
+    "name": "Square root of a square",
+    "latex": "\\sqrt{a^3} = |a|",
+    "translate": "ok",
+    "checkable": false,
+    "skip_reasons": [
+     "defining_equation"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (defining_equation).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0266:missing_term",
+    "category": "algebra",
+    "mutation": "missing_term",
+    "detail": "remove term 'a'",
+    "name": "Factorisation of a fourth-power difference",
+    "latex": "a^4 - b^4 = (a - b)( b)(a^2 + b^2)",
+    "translate": "not_checkable",
+    "checkable": false,
+    "skip_reasons": [
+     "operator_notation"
+    ],
+    "verdict": "SKIP",
+    "reason": "Semantics marked it not checkable (operator_notation).",
+    "counterexample": null
+   },
+   {
+    "formula_id": "bench:mut:0272:sign_flip",
     "category": "complex",
     "mutation": "sign_flip",
-    "detail": "'+'->'-' at 8",
-    "name": "De Moivre's formula",
-    "latex": "(\\cos x - i \\sin x)^{n} = \\cos nx + i \\sin nx",
+    "detail": "'-'->'+' at 27",
+    "name": "Sine via complex exponentials",
+    "latex": "\\sin x = \\frac{e^{ix} - e^{+ix}}{2i}",
     "translate": "ok",
     "checkable": true,
     "skip_reasons": [],
     "verdict": "INCONCLUSIVE",
-    "reason": "Fails at 53 of 60 evaluable points but not at a clear majority in every regime (failing: integers_small, large, mixed_sign, small_positive, unit_interval) (e.g. at n=1, x=0.500419: lhs=(0.87738160556, rhs=(0.87738160556).",
+    "reason": "Not zero at sample points, but an expression set equal to 0 usually states an equation to solve rather than an identity (e.g. at x=0.0521929: lhs=0.052169206791, rhs=0).",
     "counterexample": null
    },
    {
@@ -4356,21 +4959,21 @@
    "n": 95,
    "translate_ok": 38,
    "translate_ok_rate": 0.4,
-   "checkable": 6,
-   "checkable_rate_given_translated": 0.1579,
-   "checkable_rate_end_to_end": 0.0632,
+   "checkable": 4,
+   "checkable_rate_given_translated": 0.1053,
+   "checkable_rate_end_to_end": 0.0421,
    "verdicts": {
-    "PASS": 2,
-    "FAIL": 2,
-    "INCONCLUSIVE": 2,
-    "SKIP": 89,
+    "PASS": 3,
+    "FAIL": 0,
+    "INCONCLUSIVE": 1,
+    "SKIP": 91,
     "MISSING": 0
    },
-   "fail_rate": 0.0211,
-   "inconclusive_rate": 0.0211,
-   "inconclusive_rate_given_verified": 0.3333,
-   "fail_rate_given_verified": 0.3333,
-   "pass_rate_given_verified": 0.3333
+   "fail_rate": 0.0,
+   "inconclusive_rate": 0.0105,
+   "inconclusive_rate_given_verified": 0.25,
+   "fail_rate_given_verified": 0.0,
+   "pass_rate_given_verified": 0.75
   },
   "translate_vs_human_labels": {
    "human_mathematica=correct": {
@@ -4380,8 +4983,8 @@
     "not_checkable": 5
    },
    "human_mathematica=none": {
-    "not_checkable": 14,
-    "unparsed": 3,
+    "not_checkable": 15,
+    "unparsed": 2,
     "ok": 1
    },
    "human_mathematica=wrong": {
@@ -4398,64 +5001,12 @@
    },
    "human_semantic_latex=wrong": {
     "ok": 11,
-    "not_checkable": 27,
+    "not_checkable": 28,
     "partial": 1,
-    "unparsed": 8
+    "unparsed": 7
    }
   },
-  "fails_for_review": [
-   {
-    "formula_id": "lacast:gold:016",
-    "category": "lacast",
-    "mutation": null,
-    "detail": null,
-    "name": "Trigonometric integral",
-    "latex": "\\operatorname{Si}(ix) = i\\operatorname{Shi}(x)",
-    "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "FAIL",
-    "reason": "The identity fails at 55 of 60 evaluable points, a clear majority in every regime (small_positive, unit_interval, integers_small, mixed_sign, large) (e.g. at i=1, x=0.950562: lhs=0.904119241841, rhs=0.999592054218).",
-    "counterexample": {
-     "assignments": {
-      "i": "1",
-      "x": "0.950562"
-     },
-     "lhs": "0.9041192418411862804212690068543380657790",
-     "rhs": "0.9995920542186825513273697844746791380451",
-     "abs_diff": "0.09547281237749627090610077762034107226612",
-     "rel_diff": "0.09551177600358306974679990529677932455199"
-    }
-   },
-   {
-    "formula_id": "lacast:gold:092",
-    "category": "lacast",
-    "mutation": null,
-    "detail": null,
-    "name": "Ince equation",
-    "latex": "w^{\\prime\\prime}+\\xi\\sin(2z)w^{\\prime}+(\\eta-p\\xi\\cos(2z))w=0. ",
-    "translate": "ok",
-    "checkable": true,
-    "skip_reasons": [],
-    "verdict": "FAIL",
-    "reason": "The identity fails at 72 of 72 evaluable points, a clear majority in every regime (small_positive, unit_interval, integers_small, mixed_sign, complex, large) (e.g. at eta=0.612903, p=0.76285, w=0.0348903, w_prime=0.522981, w_prime_prime=0.605665, xi=0.0741549, z=0.136218: lhs=0.635583743214, rhs=0).",
-    "counterexample": {
-     "assignments": {
-      "eta": "0.612903",
-      "p": "0.76285",
-      "w": "0.0348903",
-      "w_prime": "0.522981",
-      "w_prime_prime": "0.605665",
-      "xi": "0.0741549",
-      "z": "0.136218"
-     },
-     "lhs": "0.6355837432142682717493837123904705063902",
-     "rhs": "0",
-     "abs_diff": "0.6355837432142682717493837123904705063902",
-     "rel_diff": "1.000000000000000000000000000000000000000"
-    }
-   }
-  ]
+  "fails_for_review": []
  },
  "runs": {
   "synthetic": {
@@ -4463,42 +5014,42 @@
     "translate": {
      "status": "ok",
      "where": "formulaci.translate.run",
-     "seconds": 7.81
+     "seconds": 1.81
     },
     "semantics": {
      "status": "ok",
      "where": "formulaci.semantics.run",
-     "seconds": 12.08
+     "seconds": 5.95
     },
     "verify": {
      "status": "ok",
      "where": "formulaci.verify.run.run",
-     "seconds": 490.79
+     "seconds": 367.4
     }
    },
    "n_formulas": 1592,
-   "seconds": 510.8
+   "seconds": 375.17
   },
   "lacast": {
    "stages": {
     "translate": {
      "status": "ok",
      "where": "formulaci.translate.run",
-     "seconds": 6.28
+     "seconds": 1.35
     },
     "semantics": {
      "status": "ok",
      "where": "formulaci.semantics.run",
-     "seconds": 0.29
+     "seconds": 0.25
     },
     "verify": {
      "status": "ok",
      "where": "formulaci.verify.run",
-     "seconds": 18.86
+     "seconds": 19.0
     }
    },
    "n_formulas": 95,
-   "seconds": 25.42
+   "seconds": 20.59
   }
  },
  "stages_requested": [
@@ -4507,6 +5058,6 @@
   "verify"
  ],
  "limit": null,
- "total_seconds": 536.4,
- "generated_at": "2026-10-21 14:12:07"
+ "total_seconds": 395.86,
+ "generated_at": "2026-10-21 23:04:55"
 }

@@ -145,9 +145,19 @@ def parse_simple_expr(text: str, names: Mapping[str, sp.Basic]) -> sp.Expr | Non
     for kind, val in tokens:
         if kind == "name" and val not in names and val not in _FUNCS and val not in _CONSTS:
             return None
+    # rename every identifier to a neutral placeholder so Python keywords (lambda, in, not) parse
+    alias: dict[str, str] = {}
+    safe_tokens: list[tuple[str, str]] = []
+    for kind, val in tokens:
+        if kind == "name" and val not in _FUNCS and val not in _CONSTS:
+            alias.setdefault(val, f"v{len(alias)}")
+            safe_tokens.append((kind, alias[val]))
+        else:
+            safe_tokens.append((kind, val))
+    safe_names = {**names, **{a: names[v] for v, a in alias.items()}}  # a symbol named E or re keeps priority
     try:
-        tree = ast.parse(_with_implicit_multiplication(tokens), mode="eval")
-        e = _build(tree, names)
+        tree = ast.parse(_with_implicit_multiplication(safe_tokens), mode="eval")
+        e = _build(tree, safe_names)
     except (UnsafeExpression, SyntaxError, ValueError, TypeError, ZeroDivisionError, RecursionError):
         return None
     except Exception:

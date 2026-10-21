@@ -67,6 +67,9 @@ def test_prose_parser_builds_expected_expressions():
     assert parse_simple_expr("sqrt(2) x", names) == sp.sqrt(2) * x
     assert parse_simple_expr("n(n+1)/2", names) == n * (n + 1) / 2
     assert parse_simple_expr("x^2 - 1", names) == x ** 2 - 1
+    lam = sp.Symbol("lambda")   # Python keywords as symbol names
+    assert parse_simple_expr("2 lambda + 1", {"lambda": lam}) == 2 * lam + 1
+    assert parse_simple_expr("lambda", {"lambda": lam}) == lam
 
 
 @pytest.mark.parametrize("text", [

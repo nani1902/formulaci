@@ -13,9 +13,10 @@ import logging
 import os
 import re
 import sys
-from typing import Any
+from typing import Annotated, Any
 
 import anyio
+from pydantic import Field
 import anyio.to_thread
 
 try:  # mcp >= 2: FastMCP was renamed MCPServer
@@ -82,8 +83,8 @@ Limits:
 - Context text helps: it is used to infer variable domains (n integer, x > 0, |x| < 1).
 """
 
-_ADVICE_PASS = "Verified numerically and symbolically; you may present this formula."
 _ADVICE_UNSURE = "Could not verify; say so or rephrase as a checkable identity."
+MIN_TIMEOUT_S = 1.0
 
 _INSTRUCTIONS = (
     "formulaci machine-checks mathematical identities written in LaTeX. Call verify_formula "
@@ -102,7 +103,7 @@ def _clamp_timeout(timeout: float | None) -> float:
         t = DEFAULT_TIMEOUT_S
     if t != t or t <= 0:  # NaN or non-positive
         t = DEFAULT_TIMEOUT_S
-    return min(t, MAX_TIMEOUT_S)
+    return min(max(t, MIN_TIMEOUT_S), MAX_TIMEOUT_S)
 
 
 def _error_result(reason: str, latex: str | None = None) -> dict:
@@ -110,6 +111,12 @@ def _error_result(reason: str, latex: str | None = None) -> dict:
     if latex is not None:
         out = {"latex": latex, **out}
     return out
+
+
+def _text_error_result(reason: str) -> dict:
+    """verify_text failures keep the verify_text shape so callers can always read summary/results."""
+    return {"summary": {"total": 0, "PASS": 0, "FAIL": 0, "INCONCLUSIVE": 0, "SKIP": 0}, "results": [],
+            "error": reason, "advice": "The text could not be checked (" + reason + "); do not claim it was verified."}
 
 
 def _get(obj: Any, name: str, default: Any = None) -> Any:
@@ -169,26 +176,44 @@ def _short(value: Any) -> Any:
 
 
 def _fail_advice(counterexample: dict | None, reason: str) -> str:
+    # advice is an instruction sentence: it carries numbers only, never symbol names from the input
     if counterexample:
         at = counterexample.get("assignments")
-        where = ", ".join(f"{k} = {_short(v)}" for k, v in at.items()) if isinstance(at, dict) and at else ""
+        n = len(at) if isinstance(at, dict) else 0
         lhs, rhs = _short(counterexample.get("lhs")), _short(counterexample.get("rhs"))
-        if where and lhs is not None and rhs is not None:
-            return (
-                f"Do not present this formula; the identity fails at {where}, "
-                f"where the left side is {lhs} and the right side is {rhs}."
-            )
         if lhs is not None and rhs is not None:
-            return f"Do not present this formula; the left side is {lhs} but the right side is {rhs}."
-    detail = f" ({reason})" if reason else ""
-    return f"Do not present this formula; the identity fails{detail}."
+            where = f"at the {n}-variable sample point given in `counterexample`" if n else "as a constant"
+            return (f"Do not present this formula; it fails {where}, where the left side is {lhs} "
+                    f"and the right side is {rhs}.")
+    return "Do not present this formula; the identity fails (see `reason`)."
 
 
-def _advice(verdict: str, counterexample: dict | None, reason: str) -> str:
+def _pass_advice(result: Any, reason: str) -> str:
+    """What was actually established: symbolic proof, numeric sampling, or both."""
+    symbolic = _get(result, "symbolic") == "equal"
+    regimes = _get(result, "regimes") or []
+    n_eval = 0
+    for r in regimes:
+        r = r if isinstance(r, dict) else _get(r, "model_dump", lambda: {})()
+        n_eval += int(r.get("n_points", 0)) - int(r.get("n_error", 0) or 0)
+    if "integer-only" in reason or "integer domain was not stated" in reason:
+        return (f"Holds only for integer values of its variables (verified at {n_eval} sample points); state that "
+                f"domain explicitly before presenting it, or do not present it for real variables.")
+    if symbolic and n_eval:
+        return f"Verified symbolically and numerically at {n_eval} sample points; you may present this formula."
+    if symbolic:
+        return "Proved symbolically; numeric evaluation was not available. You may present this formula."
+    if n_eval:
+        return (f"Verified numerically at {n_eval} sample points (no symbolic proof); you may present this "
+                f"formula, noting that it was checked by sampling.")
+    return "Marked PASS without numeric or symbolic evidence; treat as unverified."
+
+
+def _advice(verdict: str, counterexample: dict | None, reason: str, result: Any = None) -> str:
     if verdict == "FAIL":
         return _fail_advice(counterexample, reason)
     if verdict == "PASS":
-        return _ADVICE_PASS
+        return _pass_advice(result, reason)
     return _ADVICE_UNSURE
 
 
@@ -201,7 +226,7 @@ def _compact(result: Any) -> dict:
         "latex": _get(result, "latex"),
         "verdict": verdict,
         "reason": reason,
-        "advice": _advice(verdict, counterexample, reason),
+        "advice": _advice(verdict, counterexample, reason, result),
     }
     if counterexample:
         out["counterexample"] = counterexample
@@ -239,7 +264,12 @@ async def _run_blocking(fn, *args: Any, wall_s: float, **kwargs: Any):
 
 
 @mcp.tool()
-async def verify_formula(latex: str, context: str = "", timeout: float = DEFAULT_TIMEOUT_S) -> dict:
+async def verify_formula(
+    latex: Annotated[str, Field(description="One relation in LaTeX (=, <, <=, >, >=), without $...$ delimiters.")],
+    context: Annotated[str, Field(description="The sentence around the formula; used to infer domains "
+                                              "('n a positive integer', '|x| < 1', 'for all real x').")] = "",
+    timeout: Annotated[float, Field(description="Seconds per check; clamped to 1..60.", ge=0)] = DEFAULT_TIMEOUT_S,
+) -> dict:
     """Machine-check one mathematical identity written in LaTeX before you present it.
 
     Call this before showing a user any non-trivial identity, series, integral, closed form,
@@ -266,7 +296,13 @@ async def verify_formula(latex: str, context: str = "", timeout: float = DEFAULT
 
 
 @mcp.tool()
-async def verify_text(text: str, max_formulas: int = 50, timeout: float = DEFAULT_TIMEOUT_S) -> dict:
+async def verify_text(
+    text: Annotated[str, Field(description="A draft with formulas in $...$, $$...$$, \\[...\\], \\(...\\) or "
+                                           "<math>...</math>; at most 2,000,000 characters.")],
+    max_formulas: Annotated[int, Field(description="How many formulas to check, in document order; "
+                                                   "clamped to 1..200.")] = 50,
+    timeout: Annotated[float, Field(description="Seconds per formula; clamped to 1..60.", ge=0)] = DEFAULT_TIMEOUT_S,
+) -> dict:
     """Check every formula in a draft answer (Markdown/LaTeX or wiki text) before you send it.
 
     Call this on a draft that contains several displayed or inline formulas ($...$, $$...$$,
@@ -282,9 +318,9 @@ async def verify_text(text: str, max_formulas: int = 50, timeout: float = DEFAUL
     try:
         from formulaci.safeload import MAX_TEXT_CHARS
         if not isinstance(text, str):
-            return _error_result("text must be a string")
+            return _text_error_result("text must be a string")
         if len(text) > MAX_TEXT_CHARS:
-            return _error_result(f"text too long ({len(text)} chars; limit {MAX_TEXT_CHARS})")
+            return _text_error_result(f"text too long ({len(text)} chars; limit {MAX_TEXT_CHARS})")
         t = _clamp_timeout(timeout)
         n = max(1, min(int(max_formulas), 200))
         formulas = await _run_blocking(extract_formulas, text, wall_s=60.0)
@@ -305,10 +341,10 @@ async def verify_text(text: str, max_formulas: int = 50, timeout: float = DEFAUL
         return out
     except TimeoutError:
         log.warning("verify_text timed out")
-        return _error_result("timeout while checking the text")
+        return _text_error_result("timeout while checking the text")
     except Exception as exc:
         log.exception("verify_text failed")
-        return _error_result(f"{type(exc).__name__}: {exc}")
+        return _text_error_result(f"{type(exc).__name__}: {exc}")
 
 
 def _text_advice(results: list[dict]) -> str:
@@ -319,9 +355,9 @@ def _text_advice(results: list[dict]) -> str:
     parts = []
     if fails:
         # advice names formulas by index only; the LaTeX itself stays in the results (data), not in instructions
-        listed = "; ".join(f"#{i}: {r['advice']}" for i, r in fails)
+        listed = "; ".join(f"#{i}: {r['advice'].rstrip('.')}" for i, r in fails)
         n = len(fails)
-        parts.append(f"Fix {n} formula{'s' if n > 1 else ''} before presenting the text: {listed}")
+        parts.append(f"Fix {n} formula{'s' if n > 1 else ''} before presenting the text: {listed}.")
     else:
         parts.append("No formula failed.")
     if unsure:
@@ -330,7 +366,11 @@ def _text_advice(results: list[dict]) -> str:
 
 
 @mcp.tool()
-async def explain_verdict(latex: str, context: str = "", timeout: float = DEFAULT_TIMEOUT_S) -> str:
+async def explain_verdict(
+    latex: Annotated[str, Field(description="One relation in LaTeX, without $...$ delimiters.")],
+    context: Annotated[str, Field(description="The sentence around the formula (optional).")] = "",
+    timeout: Annotated[float, Field(description="Seconds; clamped to 1..60.", ge=0)] = DEFAULT_TIMEOUT_S,
+) -> str:
     """Check one LaTeX identity and return a human-readable explanation of the verdict.
 
     Use after verify_formula when you need to show the user why a formula fails (how it was
