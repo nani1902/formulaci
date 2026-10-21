@@ -16,20 +16,19 @@ It found 36 real errors on live pages. 🧵
 
 **2/**
 Examples it caught:
-• Taylor series: the series for the 2nd and 3rd derivatives of 1/(1−x) are missing factors of 2 and 6
+• Taylor series: series for the 2nd and 3rd derivatives of 1/(1−x) missing factors of 2 and 6
 • Euler's constant: a limit that converges to −γ, not γ
 • Volume of an n-ball: Γ(3/2) given as π/2 (it's √π/2)
-• Extreme learning machine: arccos defined by the arcsin integral
 
-Each one recomputed to 30 digits and still live today.
+Each recomputed to 30 digits, all still live today.
 
 **3/**
 More:
-• Dirichlet integral: two wrong series in the page's own proof, one of which breaks the bound used in the next line
+• Dirichlet integral: two wrong series in the page's own proof
 • List of trigonometric identities: two "sine" identities that sum cosines
-• List of definite integrals: reduction formulas with ∞ where it should be m−1 (one side collapses to 0)
-• Gautschi's inequality: upper and lower bounds swapped
+• Gautschi's inequality: bounds swapped
 • Ginzburg–Landau: e^{ix} = e^{ix+2πn}, missing an i
+• Extreme learning machine: arccos defined by the arcsin integral
 
 **4/**
 How it works: extract 952k formulas from 64,617 articles → translate Wikipedia LaTeX to SymPy → infer domains and constraints from the prose → check symbolically and numerically at 50 digits across several sampling regimes → review every flag by hand before calling it an error.
@@ -46,11 +45,11 @@ That loop is the actual product: a checker that learns what fooled it.
 This builds on real prior work: Greiner-Petter et al. proved the idea on 103 pages in 2022 (IEEE TPAMI) with Maple and Mathematica. It was never deployed. formulaci uses free tools and runs on the whole encyclopedia.
 
 **8/**
-It's MIT licensed, with the labeled benchmark, all 36 errors with evidence, and ready-to-paste Wikipedia fixes:
+MIT licensed, with the labeled benchmark, all 36 errors with evidence, and ready-to-paste Wikipedia fixes:
 
 https://github.com/nani1902/formulaci
 
-Built by directing a set of AI coding agents from a written spec, with every finding verified by hand. Next: clinical calculators.
+Built by directing AI coding agents from a written spec, every finding verified by hand. Next: clinical calculators.
 
 ---
 
