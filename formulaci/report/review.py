@@ -90,6 +90,10 @@ def import_reviews(data_dir="data", in_path=None, reviewer=""):
             continue
         d = json.loads(line)
         d.setdefault("verdict", "FAIL")
+        if d.get("evidence") is None:
+            d["evidence"] = ""
+        if d.get("suggested_fix") in ("null", ""):
+            d["suggested_fix"] = None
         rec = Finding.model_validate(d)
         if reviewer and not rec.review.reviewer:
             rec.review.reviewer = reviewer
