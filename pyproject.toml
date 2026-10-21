@@ -20,9 +20,11 @@ dependencies = [
 [project.optional-dependencies]
 dev = ["pytest>=8.2", "pytest-timeout>=2.3", "hypothesis>=6.100"]
 web = ["playwright>=1.45"]
+mcp = ["mcp>=1.2"]
 
 [project.scripts]
 formulaci = "formulaci.cli:app"
+formulaci-mcp = "formulaci.mcp_server:main"
 
 [build-system]
 requires = ["hatchling"]
