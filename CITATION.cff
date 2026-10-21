@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+title: "formulaci: a test suite for human knowledge"
+message: "If you use this software or its findings, please cite it as below."
+type: software
+authors:
+  - family-names: Balaram
+    given-names: Mahesh
+date-released: 2026-10-21
+license: MIT
+abstract: >-
+  Machine verification of the formulas people rely on. Runs every <math> identity in
+  English Wikipedia's mathematics, physics, statistics and engineering articles through
+  SymPy/mpmath with inferred domains and constraints, reviews every flag, and reports
+  confirmed errors with reproducible counterexamples. Builds on Greiner-Petter et al.,
+  "Do the Math: Making Mathematics in Wikipedia Computable" (IEEE TPAMI, 2022).
