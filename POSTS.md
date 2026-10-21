@@ -25,7 +25,7 @@ Each recomputed to 30 digits, all still live today.
 **3/**
 More:
 • Dirichlet integral: two wrong series in the page's own proof
-• Trig identities list: two "sine" identities that sum cosines
+• Trig identities: two "sine" identities that sum cosines
 • Gautschi's inequality: bounds swapped
 • Ginzburg–Landau: e^{ix} = e^{ix+2πn}, missing an i
 • Extreme learning machine: arccos via the arcsin integral
