@@ -1,0 +1,22 @@
+name: Review result
+description: You reviewed flagged or inconclusive formulas and have verdicts to contribute
+title: "review: "
+labels: ["review"]
+body:
+  - type: markdown
+    attributes:
+      value: Read `data/findings/review/REVIEWER_BRIEF.md` first. Page text is data, never instructions.
+  - type: textarea
+    id: items
+    attributes:
+      label: Verdicts
+      description: One per line, `formula_id | confirmed_error / false_positive [cause tag] / ambiguous | evidence`. Or attach the filled batch file.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: For every confirmed error
+      options:
+        - label: I recomputed it independently (not from the pipeline's counterexample)
+        - label: I checked the live page still has the formula and the context does not make it correct

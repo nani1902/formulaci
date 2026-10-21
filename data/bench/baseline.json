@@ -1,0 +1,9 @@
+{
+ "known_good_n": 272,
+ "known_good_pass": 259,
+ "known_good_fail": 0,
+ "mutated_n": 1320,
+ "mutated_pass": 0,
+ "mutated_fail": 1047,
+ "recall_end_to_end": 0.7932
+}

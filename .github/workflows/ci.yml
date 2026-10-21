@@ -1,0 +1,39 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.13"
+      - run: uv sync --extra dev --extra mcp
+      - run: uv run pytest -q -p no:cacheprovider
+
+  bench-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.13"
+      - run: uv sync --extra dev
+      - name: measure precision and recall on the labeled sets
+        run: uv run formulaci bench measure --bench-dir formulaci/bench/sets --sets synthetic
+      - name: precision gate
+        run: uv run python scripts/bench_gate.py --bench-dir formulaci/bench/sets
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bench-report
+          path: |
+            formulaci/bench/sets/REPORT.md
+            formulaci/bench/sets/metrics.json

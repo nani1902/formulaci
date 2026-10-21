@@ -68,6 +68,14 @@ stage, which infers what the symbols mean from the surrounding prose; when it gu
 error, which is why every flag was reviewed before being listed as confirmed. A PASS means no counterexample was found
 under the inferred assumptions, not a proof.
 
+## Contributing
+
+Coverage is where help matters most. [`docs/COVERAGE.md`](docs/COVERAGE.md) ranks every construct the
+pipeline cannot check yet by how many relations it costs, with example formulas and what a fix looks like;
+[`CONTRIBUTING.md`](CONTRIBUTING.md) explains the four ways to contribute (coverage code, known-true
+fixtures, reviewing flagged formulas, fixing the confirmed errors on Wikipedia) and the one rule: every pull
+request runs the labeled bench in CI, and a change that produces a single false FAIL is refused.
+
 ## Layout
 
 ```

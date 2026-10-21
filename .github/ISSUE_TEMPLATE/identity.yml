@@ -1,0 +1,35 @@
+name: Identity the pipeline gets wrong
+description: A true identity that comes back FAIL, or a false one that comes back PASS
+title: "verdict: "
+labels: ["verdict"]
+body:
+  - type: input
+    id: latex
+    attributes:
+      label: LaTeX
+    validations:
+      required: true
+  - type: input
+    id: context
+    attributes:
+      label: Context sentence
+      description: The prose around it, if any ("for all real x", "where n is a positive integer")
+  - type: dropdown
+    id: truth
+    attributes:
+      label: Is the identity true?
+      options: ["true (false FAIL)", "false (false PASS)", "not sure"]
+    validations:
+      required: true
+  - type: textarea
+    id: explain
+    attributes:
+      label: Output of `check(latex, context).explain()`
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why the verdict is wrong
+      description: The domain, branch, convention or misreading that explains it. A recomputation (SymPy, mpmath, by hand) is the best evidence.

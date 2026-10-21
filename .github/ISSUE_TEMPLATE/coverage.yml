@@ -1,0 +1,35 @@
+name: Coverage gap
+description: A construct the pipeline cannot check yet (a translator, semantics or verify limitation)
+title: "coverage: "
+labels: ["coverage"]
+body:
+  - type: input
+    id: tag
+    attributes:
+      label: Construct tag
+      description: The `Unsupported` tag or `skip_reason` from `CheckResult.explain()`, e.g. `ellipsis`, `matrix`, `has_undefined_function`
+    validations:
+      required: true
+  - type: textarea
+    id: examples
+    attributes:
+      label: Example formulas
+      description: LaTeX as written on the page, with the page title. Three or more, including at least one that is a true identity.
+      placeholder: "- *Pi*: `\\frac{\\pi^2}{6} = \\frac{1}{1^2} + \\frac{1}{2^2} + \\cdots`"
+    validations:
+      required: true
+  - type: textarea
+    id: reading
+    attributes:
+      label: Correct reading
+      description: What a mathematician reads each example as, and the SymPy object it should become.
+  - type: dropdown
+    id: stage
+    attributes:
+      label: Stage
+      options: [translate, semantics, verify, extract, not sure]
+  - type: textarea
+    id: risk
+    attributes:
+      label: Precision risk
+      description: When would reading this construct the proposed way produce a false FAIL? Which fixtures guard against it?

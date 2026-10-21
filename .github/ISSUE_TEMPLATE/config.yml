@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Coverage ladder
+    url: https://github.com/nani1902/formulaci/blob/main/docs/COVERAGE.md
+    about: Every construct the pipeline cannot check yet, with counts and what a fix looks like.
+  - name: Security
+    url: https://github.com/nani1902/formulaci/blob/main/SECURITY.md
+    about: How to report something that could run code or leak data.

@@ -5,3 +5,7 @@ data/raw/cache/
 data/**/*.jsonl
 !tests/**/fixtures/**
 .pytest_cache/
+formulaci/bench/sets/runs/
+formulaci/bench/sets/metrics.json
+formulaci/bench/sets/REPORT.md
+formulaci/bench/sets/rows.jsonl
