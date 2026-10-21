@@ -1,0 +1,33 @@
+[14:37:44] translate
+translated 0 new formulas in 1.9s -> data/parsed/parsed.jsonl
+formulas: 180016  records: 205508  status: {'not_checkable': 150091, 'ok': 45960, 'unparsed': 9457}
+kinds: {'other': 123478, 'equation': 42519, 'chain': 21753, 'inequality': 9519, 'definition_like': 8239}
+equation-kind formulas: 53726  with >=1 ok equation record: 30662 (57.1%)  all equation records ok: 28142 (52.4%)
+equation-kind records: 72511  ok: 39083 (53.9%)   lark fallback records: 0
+top failure categories (equation-kind records):
+    2495  unsupported:set_notation
+    2134  unsupported:matrix
+    2113  unsupported:ellipsis
+    1864  unsupported:tuple
+    1201  unsupported:inner_product
+    1057  unsupported:subscript_on_expression
+    1001  unsupported:differential_form
+     986  unsupported:vector_calculus
+     978  unsupported:probability
+     952  unsupported:sum_index_set
+     916  unsupported:vector_product
+     891  unsupported:conjugate_star
+     852  error:unexpected <x>
+     843  unsupported:uppercase_juxtaposition
+     772  unsupported:partial_operator
+     655  unsupported:integral_domain
+     586  unsupported:accent_expression
+     562  unsupported:empty_side
+     562  unsupported:styled_expression
+     545  unsupported:norm
+     510  unsupported:transpose
+     460  unsupported:composition
+     390  unsupported:semicolon_args
+     378  unsupported:modular
+     366  unsupported:overline_expression
+[14:37:50] semantics
