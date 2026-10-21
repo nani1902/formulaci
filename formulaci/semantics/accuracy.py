@@ -59,9 +59,9 @@ def _parse_constraint(c: str, names):
     key = (c, tuple(sorted(names)))
     if key not in _cache:
         loc = {n: sympy.Symbol(n) for n in names}
-        loc.update({"Q": sympy.Q})
+        from formulaci.safeload import parse_constraint
         try:
-            _cache[key] = sympy.sympify(c, locals=loc)
+            _cache[key] = parse_constraint(c, loc)
         except Exception:
             _cache[key] = None
     return _cache[key]

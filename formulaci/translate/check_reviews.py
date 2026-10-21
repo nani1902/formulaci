@@ -106,7 +106,8 @@ def classify(review: dict, f: Formula | None) -> tuple[str, str]:
         rec = oks[0]
     if rec.status != "ok":
         return "refused", f"{rec.status} {rec.has_unsupported or rec.error}"
-    oks = [(str(sp.sympify(r.lhs)), str(sp.sympify(r.rhs))) for r in recs if r.status == "ok"]
+    from formulaci.safeload import readable
+    oks = [(readable(r.lhs), readable(r.rhs)) for r in recs if r.status == "ok"]
     accepted = ACCEPTED_READINGS.get(f.formula_id, [])
     if all(o in accepted for o in oks):
         return "fixed", "; ".join(f"{a} = {b}" for a, b in oks)

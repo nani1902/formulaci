@@ -246,6 +246,11 @@ def _check(latex, context="", title="", timeout: float = 20.0) -> CheckResult:
         timeout = float(timeout) if timeout and timeout > 0 else 20.0
     except Exception as e:  # noqa: BLE001 - never raise for bad input
         return CheckResult(latex=repr(latex), verdict="INCONCLUSIVE", reason=f"Bad input: {_summarize(e)}.")
+    from formulaci.safeload import MAX_CONTEXT_CHARS, MAX_LATEX_CHARS
+    if len(latex) > MAX_LATEX_CHARS or len(context) > MAX_CONTEXT_CHARS:
+        return CheckResult(latex=latex[:200] + "...", verdict="SKIP", skip_reason="input_too_long",
+                           reason=f"Input too long: LaTeX is limited to {MAX_LATEX_CHARS} characters and context to {MAX_CONTEXT_CHARS}.",
+                           elapsed_s=round(time.monotonic() - t0, 3))
     res = CheckResult(latex=latex, verdict="INCONCLUSIVE", reason="", context=context)
 
     def done(verdict: str, reason: str, **kw) -> CheckResult:
@@ -329,7 +334,8 @@ def check_many(items: list[dict] | list[tuple[str, str]], *, timeout: float = 20
     Items are dicts with `latex` and optional `context` / `title`, or `(latex, context)` tuples.
     `timeout` applies per formula; `workers` is the number of parallel worker processes.
     """
-    items = list(items or [])
+    from formulaci.safeload import MAX_ITEMS
+    items = list(items or [])[:MAX_ITEMS]
     if not items:
         return []
     n = max(1, min(int(workers or 1), len(items)))
@@ -370,6 +376,10 @@ def extract_formulas(text: str) -> list[tuple[str, str]]:
     pairs in document order; the sentence is the surrounding text with the math delimiters removed
     (formulas kept inline), which can be passed to `check` as its `context`.
     """
+    from formulaci.safeload import MAX_TEXT_CHARS
+    text = "" if text is None else str(text)
+    if len(text) > MAX_TEXT_CHARS:
+        text = text[:MAX_TEXT_CHARS]
     if not text:
         return []
     found = []

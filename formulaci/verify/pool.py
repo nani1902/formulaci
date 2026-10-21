@@ -26,7 +26,28 @@ def _context():
 _CTX = None
 
 
+MEMORY_LIMIT_BYTES = 8 * 1024 ** 3   # best effort: a runaway expression must not exhaust the machine
+
+
+def _limit_memory() -> None:
+    try:
+        import resource
+        for name in ("RLIMIT_AS", "RLIMIT_DATA"):
+            lim = getattr(resource, name, None)
+            if lim is None:
+                continue
+            soft, hard = resource.getrlimit(lim)
+            cap = MEMORY_LIMIT_BYTES if hard in (resource.RLIM_INFINITY, -1) else min(MEMORY_LIMIT_BYTES, hard)
+            try:
+                resource.setrlimit(lim, (cap, hard))
+            except (ValueError, OSError):
+                pass
+    except Exception:  # platform without resource limits; the supervisor's kill still bounds time
+        pass
+
+
 def _entry(conn):
+    _limit_memory()
     from formulaci.verify.worker import worker_main
 
     worker_main(conn)

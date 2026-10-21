@@ -186,7 +186,8 @@ def test_verify_text_with_fakes(fakes):
     out = call("verify_text", text=text)
     assert out["summary"] == {"total": 3, "PASS": 1, "FAIL": 1, "INCONCLUSIVE": 0, "SKIP": 1}
     assert [r["verdict"] for r in out["results"]] == ["SKIP", "PASS", "FAIL"]
-    assert "#3" in out["advice"] and r"\cos^2 x = 2" in out["advice"]
+    # advice names formulas by index only; untrusted LaTeX stays in results (data), never in instructions
+    assert "#3" in out["advice"] and r"\cos^2 x = 2" not in out["advice"]
     assert out["advice"].startswith("Fix 1 formula before presenting the text: #3")
 
     capped = call("verify_text", text=text, max_formulas=1)

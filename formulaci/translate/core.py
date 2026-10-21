@@ -139,7 +139,11 @@ def _lark_parse(latex: str):
         raise ParseError("lark: relation in side")
     # lark symbols/functions carry lark Token objects as names; normalize through the srepr text
     text = re.sub(r"Token\('\w+', ('(?:[^'\\]|\\.)*')\)", r"\1", sp.srepr(e))
-    return sp.sympify(text)
+    from formulaci.verify.reconstruct import UnsafeExpression, from_srepr
+    try:
+        return from_srepr(text)
+    except UnsafeExpression as exc:
+        raise ParseError(f"lark: unsafe srepr ({exc})")
 
 
 def _parse_one(tokens: list[Tok], src: str, ctx: Ctx, use_lark: bool) -> Side:
@@ -215,12 +219,16 @@ def roundtrip(expr) -> tuple[str, object]:
 
     Auto-evaluation can make the first srepr a non-fixpoint (`(1/2)**(1-1/a)` is rebuilt as
     `2**(1/a - 1)`); one more srepr/sympify pass yields the canonical, equal-valued form."""
+    from formulaci.verify.reconstruct import UnsafeExpression, from_srepr
     s = sp.srepr(expr)
-    back = sp.sympify(s)
-    if back == expr:
-        return s, expr
-    s2 = sp.srepr(back)
-    back2 = sp.sympify(s2)
+    try:
+        back = from_srepr(s)
+        if back == expr:
+            return s, expr
+        s2 = sp.srepr(back)
+        back2 = from_srepr(s2)
+    except UnsafeExpression as exc:
+        raise ParseError(f"srepr not loadable safely ({exc})")
     if back2 == back:
         return s2, back
     raise ParseError("srepr round-trip mismatch")

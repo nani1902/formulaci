@@ -49,7 +49,7 @@ def one(latex: str, context: str = typer.Option("", help="Prose before the formu
         d = r.model_dump()
         for k in ("lhs", "rhs"):
             if d[k]:
-                d[k + "_str"] = str(sp.sympify(d[k]))
+                d[k + "_str"] = __import__('formulaci.safeload', fromlist=['readable']).readable(d[k])
         typer.echo(json.dumps(d, indent=1))
 
 

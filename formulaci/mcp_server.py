@@ -126,9 +126,9 @@ def _readable(expr: Any) -> Any:
     if not isinstance(expr, str) or not _SREPR.match(expr):
         return expr
     try:
-        import sympy
+        from formulaci.safeload import readable
 
-        return sympy.sstr(sympy.sympify(expr))
+        return readable(expr)  # AST-whitelisted; never sympify text from a model
     except Exception:
         return expr
 
@@ -280,6 +280,11 @@ async def verify_text(text: str, max_formulas: int = 50, timeout: float = DEFAUL
     the text is shown; fix them and call again.
     """
     try:
+        from formulaci.safeload import MAX_TEXT_CHARS
+        if not isinstance(text, str):
+            return _error_result("text must be a string")
+        if len(text) > MAX_TEXT_CHARS:
+            return _error_result(f"text too long ({len(text)} chars; limit {MAX_TEXT_CHARS})")
         t = _clamp_timeout(timeout)
         n = max(1, min(int(max_formulas), 200))
         formulas = await _run_blocking(extract_formulas, text, wall_s=60.0)
@@ -313,7 +318,8 @@ def _text_advice(results: list[dict]) -> str:
     unsure = sum(r["verdict"] in ("INCONCLUSIVE", "SKIP") for r in results)
     parts = []
     if fails:
-        listed = "; ".join(f"#{i} {r.get('latex')}: {r['advice']}" for i, r in fails)
+        # advice names formulas by index only; the LaTeX itself stays in the results (data), not in instructions
+        listed = "; ".join(f"#{i}: {r['advice']}" for i, r in fails)
         n = len(fails)
         parts.append(f"Fix {n} formula{'s' if n > 1 else ''} before presenting the text: {listed}")
     else:

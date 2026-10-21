@@ -202,19 +202,11 @@ def _which(m, words, prefix):
 
 
 def _parse_side(s: str, forms: SymbolForms):
-    s = s.strip()
-    s = re.sub(r"\|([^|]*)\|", r"Abs(\1)", s).replace("^", "**")
+    # Prose is untrusted page text: parse with the strict arithmetic grammar, never parse_expr/sympify.
+    from formulaci.safeload import parse_simple_expr
     local = {f: sympy.Symbol(n) for f, n in forms.by_form.items()}
-    local.update({"pi": sympy.pi, "oo": sympy.oo, "re": sympy.re, "im": sympy.im, "Abs": sympy.Abs, "sqrt": sympy.sqrt})
-    from sympy.parsing.sympy_parser import parse_expr, standard_transformations, implicit_multiplication_application
-    try:
-        e = parse_expr(s, local_dict=local, transformations=standard_transformations + (implicit_multiplication_application,), evaluate=True)
-    except Exception:
-        return None
-    if not isinstance(e, sympy.Expr):
-        return None
-    names = set(local.values())
-    if not e.free_symbols <= names:
+    e = parse_simple_expr(s.strip(), local)
+    if e is None or not e.free_symbols <= set(local.values()):
         return None
     return e
 

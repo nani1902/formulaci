@@ -23,6 +23,9 @@ SYMPY_NS: dict[str, object] = {
 }
 # srepr spells these as bare names / calls
 SYMPY_NS.update({"oo": sp.oo, "zoo": sp.zoo, "nan": sp.nan, "I": sp.I, "pi": sp.pi, "E": sp.E})
+# srepr-only container constructors that are not exported at the top level
+from sympy.functions.elementary.piecewise import ExprCondPair as _ExprCondPair  # noqa: E402
+SYMPY_NS["ExprCondPair"] = _ExprCondPair
 # Names that parse strings, generate code, print, plot or run tests are never callable from srepr.
 _FORBIDDEN_RE = re.compile(
     r"^(S|var|symbols|python|source|sympify|parse.*|lambdify|preview|init_.*|test|doctest|plot.*|"

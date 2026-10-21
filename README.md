@@ -78,6 +78,13 @@ Designed and directed by Mahesh Balaram. The stages were implemented by a coordi
 agents (Claude) working from the written spec, with every flagged formula reviewed and every confirmed
 error recomputed independently before being reported. Nothing on Wikipedia has been edited by the tool.
 
+## Security
+
+Untrusted text never reaches `eval`, `sympify` or `parse_expr`: every stage rebuilds expressions through an
+AST-whitelisted loader, inputs are size-capped, verification runs in killable workers with memory limits, the
+HTML report autoescapes, and page text is fenced as data wherever an AI reads it. Threat model, findings and
+limits are in [`SECURITY.md`](SECURITY.md); adversarial tests live in `tests/security/`.
+
 ## License
 
 MIT. Findings and data may be reused with attribution; see `CITATION.cff`.

@@ -64,14 +64,9 @@ def load_expr(s: str | None):
     """Rebuild a sympy object from the translator's srepr string (or a plain sympy string)."""
     if s is None or s == "":
         return None
-    try:
-        with sympy.evaluate(False):   # keep the formula as written: e^{log z} must not collapse to z
-            return eval(s, {"__builtins__": {}}, _namespace())  # noqa: S307 - srepr from our own pipeline
-    except Exception:
-        try:
-            return sympy.sympify(s)
-        except Exception:
-            return None
+    from formulaci.safeload import load_srepr
+    # keep the formula as written: e^{log z} must not collapse to z. AST-whitelisted; never eval/sympify.
+    return load_srepr(s, evaluate=False)
 
 
 # --------------------------------------------------------------------------- internal domain
@@ -713,7 +708,8 @@ def _multiplies(exprs, sym) -> bool:
 
 def _single_symbol_offset(a):
     """`n - 1` -> (n, -1); `n` -> (n, 0); anything else -> None."""
-    a = sympy.sympify(a)
+    if not isinstance(a, sympy.Basic):
+        return None
     syms = a.free_symbols
     if len(syms) != 1:
         return None

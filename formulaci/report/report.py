@@ -9,7 +9,6 @@ Writes:
 """
 from __future__ import annotations
 
-import html
 import json
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
@@ -19,7 +18,7 @@ from jinja2 import Template
 
 from formulaci.schemas import (Finding, Formula, Parsed, Review, Semantics, Verdict, read_jsonl)
 
-TEMPLATE = Template(r"""<!doctype html>
+TEMPLATE = Template(autoescape=True, source=r"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>formulaci report</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -63,6 +62,11 @@ details summary{cursor:pointer}
 </div>
 {% endfor %}
 </body></html>""")
+
+
+def _safe_url(u: str) -> str:
+    """Only plain https Wikipedia links are rendered as links (everything is autoescaped by Jinja)."""
+    return u if isinstance(u, str) and u.startswith("https://en.wikipedia.org/") and "\n" not in u else ""
 
 
 def _load(data_dir: Path):
@@ -126,14 +130,14 @@ def run(data_dir="data", out_dir=None, include_inconclusive=False):
         v = verdicts[f.formula_id]
         rows.append(dict(
             formula_id=f.formula_id, verdict=f.verdict, confidence=f.confidence,
-            review_status=f.review.status, notes=html.escape(f.review.notes),
-            suggested_fix=html.escape(f.suggested_fix or ""),
-            url=fm.url if fm else "", page_title=html.escape(fm.page_title if fm else f.formula_id),
-            section=html.escape(fm.section if fm else ""), latex=html.escape(fm.latex if fm else ""),
-            reason=html.escape(v.reason),
-            counterexample=html.escape(json.dumps(v.counterexample.model_dump(), indent=1)) if v.counterexample else "",
-            context_before=html.escape((fm.context_before if fm else "")[-200:]),
-            context_after=html.escape((fm.context_after if fm else "")[:200]),
+            review_status=f.review.status, notes=f.review.notes,
+            suggested_fix=f.suggested_fix or "",
+            url=_safe_url(fm.url if fm else ""), page_title=(fm.page_title if fm else f.formula_id),
+            section=(fm.section if fm else ""), latex=(fm.latex if fm else ""),
+            reason=v.reason,
+            counterexample=json.dumps(v.counterexample.model_dump(), indent=1) if v.counterexample else "",
+            context_before=(fm.context_before if fm else "")[-200:],
+            context_after=(fm.context_after if fm else "")[:200],
         ))
     n_inc = sum(1 for v in verdicts.values() if v.verdict == "INCONCLUSIVE") if not include_inconclusive else 0
     page = TEMPLATE.render(
