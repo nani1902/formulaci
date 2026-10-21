@@ -74,3 +74,15 @@ def test_holdout_floors():
     assert rep["n"] >= 30
     assert rep["checkable_precision"] >= 0.95
     assert rep["unsafe_cases"] <= 2
+
+
+def test_review_cases_floors():
+    """148 human-reviewed real FAILs: semantics-caused false positives must be skipped or fixed,
+    and the confirmed real errors must stay checkable."""
+    rep = score_file(Path(__file__).parent / "fixtures" / "review_cases.jsonl")
+    print("\n" + format_report(rep))
+    errors = [r for r in rep["results"] if r["case"].startswith("confirmed_error:")]
+    assert sum(r["got"]["checkable"] for r in errors) >= len(errors) - 1     # the semigroup one is skipped by design
+    fps = [r for r in rep["results"] if not r["case"].startswith("confirmed_error:")]
+    still_checkable_wrongly = [r["case"] for r in fps if r["got"]["checkable"] and not r["expected"]["checkable"]]
+    assert len(still_checkable_wrongly) <= 6, still_checkable_wrongly

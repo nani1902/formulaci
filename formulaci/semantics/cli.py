@@ -43,3 +43,17 @@ def score(
 
     rep = score_file(fixtures)
     typer.echo(format_report(rep, verbose=verbose))
+
+
+@app.command("review-check")
+def review_check(
+    reviews: str = typer.Option("data/findings/reviews.jsonl"),
+    formulas: str = typer.Option(stage.DEFAULT_FORMULAS),
+    parsed: str = typer.Option(stage.DEFAULT_PARSED),
+    out_dir: str = typer.Option("data/semantics/review_check"),
+    verify: bool = typer.Option(True, help="Run the verify stage (via its CLI) on the reviewed ids"),
+):
+    """Recompute semantics for human-reviewed FAILs and report how many are now skipped / no longer FAIL."""
+    from formulaci.semantics.review_check import check, format_report
+
+    typer.echo(format_report(check(reviews, formulas, parsed, out_dir=out_dir, verify=verify)))

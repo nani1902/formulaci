@@ -3,15 +3,18 @@
 FAIL requires all of:
   (a) symbolic result is not "equal";
   (b) in every regime with >= MIN_EVAL evaluable points, at least MAJORITY of them fail with
-      relative error > 1e-8 at 50 dps (each failure confirmed stable under input perturbation,
-      climbing to 800 dps when cancellation makes 50 digits untrustworthy), and there are at
-      least MIN_REGIMES such regimes (3 if the numeric phase hit its deadline);
+      relative error > 1e-8 at 50 dps (or a wider `tol:` hint), each failure reproduced at the next
+      rung of a 50..1000-digit precision ladder, and there are at least MIN_REGIMES such regimes
+      (3 if the numeric phase hit its deadline);
   (c) no special-case rule applies (definition of a bare symbol, branch cuts, integer-only
       identities, failures confined to a measure-zero set).
 Constant identities (no free symbols) are the one extension: one point, confirmed at two precisions.
-Two guards (see `decide`) block FAIL for formulas that are probably statements, not identities.
+Guards (see `decide`) turn FAIL into PASS or INCONCLUSIVE for rounded decimals, approximations and
+formulas that are probably statements or contain label superscripts rather than wrong identities.
 """
 from __future__ import annotations
+
+import mpmath as mp
 
 from formulaci.schemas import Counterexample, RegimeResult
 from formulaci.verify.sampler import fmt_value, magnitude
@@ -62,14 +65,39 @@ def _fmt_ce(ce: Counterexample | None) -> str:
 def decide(meta: dict, symbolic: str, numeric: dict | None) -> tuple[str, str, Counterexample | None]:
     """Return (verdict, reason, counterexample).
 
-    Two guards turn a FAIL into INCONCLUSIVE because on real Wikipedia data the formula is far more
-    likely a statement than a wrong identity: a symbol named like a constant (e, i, pi) that
-    Semantics neither mapped nor typed, and an equation with a literal 0 side and free variables
-    (an equation to solve, e.g. ax^2+bx+c=0).
+    A FAIL from `_decide` is re-examined, in this order:
+      - a constant formula with one decimal-literal side: PASS within half a unit in the last
+        digit (a rounded value; a full unit below if the digits end in an ellipsis), FAIL beyond;
+      - an irrational constant set equal to a fraction (pi = 355/113): an approximation;
+      - a `tol:approx` hint from Semantics (the context says the formula is approximate);
+      - a superscript that is probably a label (B^s, X^{(0)}, H_s^{xp}), not a power;
+      - an unmapped symbol named like a constant (e, i, pi);
+      - an equation with a literal 0 side and free variables (an equation to solve).
+    The last four make it INCONCLUSIVE: on real Wikipedia data such formulas are far more often
+    statements or translation artefacts than wrong identities.
     """
     verdict, reason, ce = _decide(meta, symbolic, numeric)
+    tol = meta.get("tol") or {}
+    if verdict == "PASS" and (tol.get("rel") or tol.get("abs")):
+        widened = ", ".join(f"{k} {tol[k]:g}" for k in ("rel", "abs") if tol.get(k))
+        return verdict, reason.rstrip(".") + f", within the tolerance semantics allows ({widened}).", ce
     if verdict != "FAIL":
         return verdict, reason, ce
+    if numeric and numeric.get("constant") and len(meta.get("decimal_sides") or []) == 1:
+        judged = _rounded_decimal(meta["decimal_sides"][0], numeric["regimes"][0]["points"][0])
+        if judged is not None:
+            if judged[0] != "FAIL":
+                return judged[0], judged[1], (ce if judged[0] == "INCONCLUSIVE" else None)
+            reason = judged[1]
+    if meta.get("rational_approx") and not meta.get("decimal_sides"):
+        return "INCONCLUSIVE", (f"An irrational constant set equal to a fraction is usually a stated approximation "
+                                f"(like pi = 355/113), not an identity{_fmt_ce(ce)}."), ce
+    if (meta.get("tol") or {}).get("approx"):
+        return "INCONCLUSIVE", (f"Differs beyond tolerance, but semantics marks the formula as approximate"
+                                f"{_fmt_ce(ce)}."), ce
+    if meta.get("label"):
+        return "INCONCLUSIVE", (f"Possible label superscript: {meta['label']}; read as a power the formula "
+                                f"fails{_fmt_ce(ce)}."), ce
     if meta.get("unmapped_constants"):
         names = ", ".join(meta["unmapped_constants"])
         return "INCONCLUSIVE", (f"Would fail with {names} as plain variable(s), but {names} is probably a "
@@ -79,6 +107,29 @@ def decide(meta: dict, symbolic: str, numeric: dict | None) -> tuple[str, str, C
         return "INCONCLUSIVE", (f"Not zero at sample points, but an expression set equal to 0 usually states an "
                                 f"equation to solve rather than an identity{_fmt_ce(ce)}."), ce
     return verdict, reason, ce
+
+
+def _rounded_decimal(lit: dict, point: dict) -> tuple[str, str] | None:
+    """Judge `<exact constant> = <decimal literal>` against the literal's own precision."""
+    try:
+        with mp.workdps(60):
+            exact = mp.mpf(point["rhs"] if lit["side"] == 0 else point["lhs"])
+            stated = mp.mpf(lit["text"])
+            ulp = mp.mpf(10) ** -lit["decimals"]
+            diff = abs(exact - stated)
+            truncation = lit["truncated"] and stated * exact >= 0 and 0 <= abs(exact) - abs(stated) < ulp
+            exact_s = mp.nstr(exact, lit["decimals"] + 6)
+    except (ValueError, TypeError, KeyError):
+        return None  # complex or unparsable value: leave the FAIL to the other rules
+    k, text = lit["decimals"], lit["text"]
+    if diff <= ulp / 2 * (1 + mp.mpf("1e-9")) or truncation:
+        how = "truncated" if truncation and diff > ulp / 2 else "rounded"
+        return "PASS", (f"The decimal {text} is the exact value {exact_s}... {how} to {k} decimal places, "
+                        f"so it agrees to the precision it states.")
+    with mp.workdps(60):
+        correct = mp.nstr(mp.nint(exact * 10**k) / mp.mpf(10)**k, k + len(str(int(abs(exact)))) + 1)
+    return "FAIL", (f"The decimal {text} does not match the exact value {exact_s}...: rounded to {k} decimal "
+                    f"places it would be {correct}.")
 
 
 def _decide(meta: dict, symbolic: str, numeric: dict | None) -> tuple[str, str, Counterexample | None]:

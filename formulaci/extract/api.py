@@ -35,7 +35,7 @@ class APIError(RuntimeError):
 
 
 class WikiClient:
-    def __init__(self, api_url: str = API_URL, rps: float | None = None, max_retries: int = 10):
+    def __init__(self, api_url: str = API_URL, rps: float | None = None, max_retries: int = 30):
         self.api_url = api_url
         self.min_interval = 1.0 / min(rps or default_rps(), 5.0)
         self.max_retries = max_retries

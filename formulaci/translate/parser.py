@@ -13,6 +13,7 @@ from contextlib import contextmanager
 from dataclasses import dataclass, field
 
 import sympy as sp
+from sympy.core.function import AppliedUndef
 
 from .lexer import Tok
 from .preprocess import RELATION_CMDS, is_relation
@@ -86,6 +87,7 @@ UNSUPPORTED_WORDS = {
     "Cor": "probability", "Prob": "probability", "Ex": "probability", "Std": "probability", "SD": "probability",
 }
 INDEX_LETTERS = set("ijklmnpqrst")
+GREEK_FUNCS = {"Gamma", "zeta", "Beta"}
 ALWAYS_FUNC = {"f", "g", "h", "F", "G", "H", "phi", "psi", "Phi", "Psi", "chi", "o", "O"}
 TENSOR_INDEX = {"mu", "nu", "alpha", "beta", "rho", "sigma", "kappa", "lambda", "tau"}
 NEVER_FUNC = {"e", "i"}
@@ -145,6 +147,16 @@ class Ctx:
     ambiguous_funcs: set[str] = field(default_factory=set)
     # names indexed with square brackets somewhere (`x[n]`)
     bracket_funcs: set[str] = field(default_factory=set)
+    # prose around the formula talks about complex numbers / conjugates
+    complex_context: bool = False
+    # prose mentions Legendre/Jacobi/residue symbols
+    residue_context: bool = False
+    # prose mentions the incomplete gamma function
+    incomplete_gamma_context: bool = False
+    # letters used on their own, without a subscript (`z` in `z \bar z`, not `X` in `X_i`)
+    plain_letters: set[str] = field(default_factory=set)
+    # symbol names built from a base plus a written subscript (`x_1`, `B_{1,2}`), as opposed to styled names
+    subscripted_names: set[str] = field(default_factory=set)
 
     def note(self, s: str) -> None:
         if s not in self.notes:
@@ -368,10 +380,20 @@ class Parser:
                     # `x/2\lambda`, `1/2\pi`: (x/2)*lambda or x/(2*lambda)? both readings are common
                     raise Unsupported("ambiguous_division")
                 before = self.toks[self.pos - 1] if self.pos > 0 else None
-                if _is_char(t, "(") and before is not None and before.kind == "CHAR" and before.value in ")]":
+                if (_is_cmd(t, "frac", "tfrac", "dfrac") and factors[-1].is_Integer and before is not None
+                        and before.kind == "DIGIT" and _numeric_frac_follows(self.toks, self.pos)):
+                    raise Unsupported("mixed_number")  # 3\frac12 = 3 + 1/2, not 3 * 1/2
+                before2 = self.toks[self.pos - 2] if self.pos > 1 else None
+                if t.kind == "DIGIT" and before is not None and before.kind == "LETTER" and before.end == t.start \
+                        and before.value not in ("i", "j") \
+                        and not (before2 is not None and before2.kind == "CHAR" and before2.value in "^_"):
+                    raise Unsupported("letter_digit")  # h2 < h1: h_2, not 2h  (but (-1)^k 2^n is fine)
+                if _is_char(t, "(") and before is not None and before.kind == "CHAR" and before.value in ")]}" and (
+                        before.value != "}" or _standalone_group_before(self.toks, self.pos - 1)):
                     e_ = group_end(self.toks, self.pos)
                     inner_ = self.toks[self.pos + 1:e_]
-                    if _is_single_atom(inner_) or (inner_ and _is_char(inner_[0], "-") and _is_single_atom(inner_[1:])):
+                    if not all(x.kind == "DIGIT" for x in inner_) and (
+                            _is_single_atom(inner_) or (inner_ and _is_char(inner_[0], "-") and _is_single_atom(inner_[1:]))):
                         # `(f*g)(t)`, `[L f](y)`: an operator expression applied to an argument
                         raise Unsupported("operator_application")
                 f = self.parse_factor()
@@ -462,6 +484,8 @@ class Parser:
         if len(arg) >= 1 and all(_is_cmd(a, "prime") or _is_char(a, "'") for a in arg):
             raise Unsupported("prime_on_expression")
         if len(arg) == 1 and _is_cmd(arg[0], "circ"):
+            if not base.is_Number:
+                raise Unsupported("superscript_label")  # G^\circ: standard state, not degrees
             self.ctx.note("degrees")
             return base * sp.pi / 180
         if len(arg) == 1 and (_is_char(arg[0], "*") or _is_cmd(arg[0], "ast")):
@@ -471,18 +495,19 @@ class Parser:
         if len(arg) == 1 and arg[0].kind == "CHAR" and arg[0].value in "+-":
             raise Unsupported("one_sided_superscript")
         word = _roman_word(arg)
-        if word == "T" and not (base.is_Number or base == sp.Symbol("e")):
+        plain = base.is_Number or base == sp.Symbol("e")
+        if word == "T" and not plain:
             raise Unsupported("transpose")  # A^T, A^\mathsf{T}, u^\textsf{T}
-        if word is not None and len(word) >= 2 or _plain_word(arg, 3):
-            # X^{\mathrm{qc}}, z^{ideal}: a label, not a power
-            w = word if word is not None else "".join(a.value for a in arg)
-            if isinstance(base, sp.Symbol):
-                self.ctx.note(f"superscript_label:{base.name}^{w}")
-                return sp.Symbol(f"{base.name}^{w}")
-            raise Unsupported("label_superscript")
-        if not (base.is_Number or base == sp.Symbol("e")) and _tensor_indices(arg):
+        if not plain:
+            label = _superscript_label(base, arg, word, self.ctx.subscripted_names)
+            if label:
+                # X^{(0)}, f^{(n)}, F^H, M^X, A^\mathrm{g}, G^\circ, E^\infty, a^\omega, h^i_k, C_3^0
+                raise Unsupported("superscript_label")
+        if not plain and _tensor_indices(arg):
             raise Unsupported("tensor_index")  # \gamma^\mu, B^{i\alpha}
         exp = self.sub(arg)
+        if exp == -1 and isinstance(base, sp.Symbol) and base.name[:1].isupper() and len(base.name) == 1:
+            raise Unsupported("inverse_or_reciprocal")  # U^{-1}, H^{-1}: inverse map, matrix inverse
         if self._vector_count(base):
             raise Unsupported("vector_power")
         return _check_pow(base, exp)
@@ -559,6 +584,11 @@ class Parser:
             raise Unsupported("interval")
         inner = self.toks[self.pos:e]
         self.pos = e + 1
+        if _is_lone_cmd(inner, ("binom", "tbinom", "dbinom"), 2):
+            raise Unsupported("multiset_coefficient")  # \left(\!\binom{n}{k}\!\right)
+        if _is_lone_cmd(inner, ("frac", "dfrac", "tfrac"), 2) and not _is_char(self.peek(), "^") and (
+                open_ == "[" or self.ctx.residue_context):
+            raise Unsupported("residue_symbol")  # Legendre/Jacobi (a/p), quartic [a/p]
         parts = _split_top(inner, ",")
         if len(parts) > 1:
             raise Unsupported("tuple")
@@ -606,10 +636,11 @@ class Parser:
             return self.parse_named(w, t)
         if " " in w or not w.isalpha():
             raise Unsupported("prose")
-        if w.isalpha() and len(w) <= 16:
+        if len(w) == 1:
             self.ctx.note(f"text_symbol:{w}")
             return self.finish_symbol(w, t)
-        raise ParseError(f"text in expression: {w!r}")
+        # `\text{rpi}(x)` is a named function; `\text{median}`, `\text{kg}` alone are words
+        return self.parse_named(w, t)
 
     def parse_command(self):
         t = self.next()
@@ -623,10 +654,22 @@ class Parser:
         if v in ("infty", "infin"):
             return sp.oo
         if g is not None:
+            nxt = self.peek()
+            if g in ("Delta", "delta") and nxt is not None and (nxt.kind == "LETTER" or (
+                    _sym_cmd_name(nxt) is not None and nxt.value not in GREEK_FUNCS)) and not _is_char(self.peek(1), "("):
+                # `\Delta f`, `\Delta\epsilon`, `\delta y`: one increment quantity, not Delta*f
+                self.pos += 1
+                inner = nxt.value if nxt.kind == "LETTER" else _sym_cmd_name(nxt)
+                self.ctx.note(f"increment:{g}{inner}")
+                return self.parse_symbol_from(f"{g}_{inner}", nxt)
             if g in ("Gamma", "zeta", "Beta") and self.function_follows():
                 return self.parse_named(g, t)
             if g == "gamma" and self._paren_arity() == 2:
-                return self.apply_known("lowergamma", sp.lowergamma)
+                if self.ctx.incomplete_gamma_context:
+                    return self.apply_known("lowergamma", sp.lowergamma)
+                # \gamma(a, q) is also the Euler-Lehmer constant, Stieltjes constants, ...
+                self.ctx.funcs.add("gamma")
+                return self.parse_symbol_from("gamma", t)
             return self.parse_symbol_from(g, t)
         if v in ("frac", "dfrac", "tfrac", "cfrac"):
             return self.parse_frac()
@@ -781,7 +824,9 @@ class Parser:
         if sub is not None:
             sname, simple = _script_name(sub)
             letters = _script_letters(sub)
-            word_sub = sum(1 for x in sub if x.kind == "LETTER") >= 2 and all(x.kind == "LETTER" for x in sub)
+            word_sub = (sum(1 for x in sub if x.kind == "LETTER") >= 2 and all(x.kind == "LETTER" for x in sub)) or any(
+                x.kind in ("TEXT", "OPNAME") or _is_cmd(x, "mathrm", "rm", "text", "textrm", "mathit", "mathsf") for x in sub
+            ) or _label_subscript(sub)
             indexed = (self.bound and any(x in self.bound for x in letters)) or (
                 not word_sub and any(x in self.ctx.main_letters for x in letters)) or (
                 base in self.ctx.indexed_bases and letters and not word_sub)
@@ -793,13 +838,16 @@ class Parser:
                 indexed_arg = [y for x in sub for y in (x, Tok("CHAR", ",", 0, 0))][:-1]
             else:
                 name = f"{base}_{sname}"
+                self.ctx.subscripted_names.add(name)
                 if not simple:
                     self.ctx.note(f"subscript_expr:{name}")
         if vector:
             self.ctx.vector_syms.add(name)
         if _is_char(self.peek(), "(") and base in self.ctx.ambiguous_funcs and primes == 0:
             raise Unsupported("ambiguous_application")
-        if _is_char(self.peek(), "[") and base in self.ctx.bracket_funcs:
+        greek_base = base in GREEK or base in GREEK_ALIAS.values()
+        if _is_char(self.peek(), "[") and base not in NEVER_FUNC and (
+                base in self.ctx.bracket_funcs or sub is not None or greek_base):
             # x[n], u[1]: sequence indexing (signal processing), an undefined function of the index
             e_ = group_end(self.toks, self.pos)
             inner = self.toks[self.pos + 1:e_]
@@ -808,7 +856,8 @@ class Parser:
             self.ctx.functions_used.add(name)
             res = sp.Function(name)(*[self.sub(p) for p in _split_top(inner, ",")])
             return self.apply_superscript(res, sup) if sup is not None else res
-        is_app = _is_char(self.peek(), "(") and base not in NEVER_FUNC and (base in self.ctx.funcs or primes > 0)
+        is_app = _is_char(self.peek(), "(") and (base not in NEVER_FUNC or sub is not None) and (
+            base in self.ctx.funcs or name in self.ctx.funcs or primes > 0)
         if is_app:
             if sup is not None:
                 sup_text = "".join(x.value for x in sup)
@@ -828,6 +877,8 @@ class Parser:
                 else:
                     raise Unsupported("prime_at_point")
             if sup is not None:
+                if sub is not None:
+                    raise Unsupported("superscript_label")  # Y_7^{-7}(theta, phi), P_l^m(x): an index
                 self.ctx.note(f"power_of_function:{name}")
                 e = self.apply_superscript(e, sup)
             return e
@@ -892,6 +943,13 @@ class Parser:
                 return sp.Function(fname)(*args)
             if func is None:
                 raise Unsupported(f"function:{name}")
+            if len(name) > 1:
+                nxt = self.peek()
+                if nxt is not None and self.can_start_factor(nxt) and not _is_char(nxt, "^"):
+                    # `\operatorname{vers}\theta`, `\operatorname{cis} x`: an operator we do not know
+                    raise Unsupported("named_operator")
+                # `\text{median}`, `\mathrm{Re}`, `\text{kg}`: a word, not a variable we can sample
+                raise Unsupported("word_symbol")
             return self.parse_symbol_from(name, t)
         return self.apply_known(name, func)
 
@@ -899,8 +957,8 @@ class Parser:
         nxt = self.peek()
         if len(name) > 1 and (nxt is None or (not self.can_start_factor(nxt) and not _is_char(nxt, "^")
                                               and not _is_char(nxt, "_") and not _is_char(nxt, "'"))):
-            self.ctx.note(f"function_name_as_symbol:{name}")
-            return sp.Symbol(name)
+            # `\mathrm{Re} = U l/\nu` (Reynolds number): a function name used as a word
+            raise Unsupported("word_symbol")
         sub, sup = self.read_scripts()
         inverse = False
         power = None
@@ -940,6 +998,16 @@ class Parser:
                     raise ParseError("mismatched brackets")
                 self.toks = self.toks[:self.pos] + [Tok("CHAR", "(", 0, 0)] + self.toks[self.pos + 1:e] + [Tok("CHAR", ")", 0, 0)] + self.toks[e + 1:]
             args = self.parse_call_args()
+            nxt = self.peek()
+            if (func in _TRIG.values() or func in _INV.values()) and not (self.integrals and self.is_differential()):
+                after = self.peek(1)
+                bare_atom = nxt is not None and (
+                    (nxt.kind == "LETTER" and nxt.value not in ("e", "d")) or (
+                        _sym_cmd_name(nxt) is not None and nxt.value not in GREEK_FUNCS)) and not (
+                    after is not None and after.kind == "CHAR" and after.value in "^_({")
+                if bare_atom:
+                    # `\cos(2k-1)\alpha`, `\sin(k+1)x`: cos((2k-1)alpha) or cos(2k-1)*alpha?
+                    raise Unsupported("ambiguous_function_argument")
         else:
             if name in ("max", "min", "gcd", "lcm", "Beta", "B"):
                 raise Unsupported(f"function_without_parens:{name}")
@@ -963,6 +1031,10 @@ class Parser:
             return self._finish_known(e, power, primes, args)
         if name == "Gamma" and len(args) == 2:
             func = sp.uppergamma
+        if func in (sp.gcd, sp.lcm) and not all(a.is_Integer for a in args):
+            # sympy's gcd of symbols is a polynomial gcd (gcd(a, b, c) -> 1)
+            self.ctx.functions_used.add(name)
+            return self._finish_known(sp.Function(name)(*args), power, primes, args)
         try:
             e = func(*args)
         except TypeError as ex:
@@ -983,6 +1055,10 @@ class Parser:
         """Argument of `\\sin 2x`: one factor, then further simple atoms (letters, digits after
         none, greek symbols), stopping at operators, other functions, brackets and fractions."""
         factors = [self.parse_factor()]
+        if factors[0].is_Number and _is_char(self.peek(), "("):
+            # `\sin\tfrac12(\theta+\varphi)` = sin((theta+phi)/2)
+            factors.append(self.parse_factor())
+            self.ctx.note("numeric_coefficient_function_arg")
         integral = self.integrals[-1] if self.integrals else None
         while True:
             t = self.peek()
@@ -1029,6 +1105,9 @@ class Parser:
         if word in KNOWN_FUNCS or word in UNSUPPORTED_WORDS:
             return self.parse_named(word, arg[0])
         if len(word) == 1:
+            nxt = self.peek()
+            if word == "p" and nxt is not None and (nxt.kind == "LETTER" or nxt.kind == "CMD"):
+                raise Unsupported("p_function")  # pK = -log10 K, pH
             if word in ("B",) and _is_char(self.peek(), "("):
                 return self.parse_named("Beta", arg[0])
             if word == "E" and (_is_char(self.peek(), "[") or _is_char(self.peek(), "(")):
@@ -1036,8 +1115,7 @@ class Parser:
             return self.parse_symbol_from(word, arg[0])
         if word.isdigit():
             return sp.Integer(word)
-        self.ctx.note(f"roman_word:{word}")
-        return self.parse_symbol_from(word, arg[0])
+        return self.parse_named(word, arg[0])
 
     def parse_styled_symbol(self, style: str):
         arg = self.read_arg()
@@ -1056,6 +1134,18 @@ class Parser:
         if len(arg) == 1 and (arg[0].kind == "LETTER" or _sym_cmd_name(arg[0])):
             base = arg[0].value if arg[0].kind == "LETTER" else _sym_cmd_name(arg[0])
             name = f"{base}_{acc}"
+            if acc == "bar" and base in self.ctx.plain_letters and not _is_char(self.peek(), "_") \
+                    and not _is_char(self.peek(), "("):
+                # \bar z next to a plain z: complex conjugate (or a mean of z?)
+                if self.ctx.complex_context or base in ("z", "w", "zeta"):
+                    self.ctx.note(f"conjugate:{base}")
+                    e = sp.conjugate(sp.Symbol(base))
+                    sup = None
+                    if _is_char(self.peek(), "^"):
+                        self.pos += 1
+                        return self.apply_superscript(e, self.read_arg())
+                    return e
+                raise Unsupported("ambiguous_bar")
             if acc in ("bar",):
                 self.ctx.note(f"ambig:bar:{name}")
             if acc in ("dot", "ddot", "dddot"):
@@ -1071,6 +1161,8 @@ class Parser:
     def parse_frac(self):
         num = self.read_arg()
         den = self.read_arg()
+        if num and den and _is_cmd(num[0], "delta") and _is_cmd(den[0], "delta"):
+            raise Unsupported("variational_derivative")  # \frac{\delta^2 u}{\delta\theta^2}, \frac{\delta F}{\delta f}
         d = _match_derivative(num, den)
         if d is not None:
             n_order, rest, dvars = d
@@ -1194,6 +1286,10 @@ class Parser:
             body = self.parse_term()
         finally:
             self.bound.pop()
+        names = {s.name for s in body.free_symbols} | {type(fn).__name__ for fn in body.atoms(AppliedUndef)}
+        if var not in body.free_symbols and not any(var.name in nm.split("_")[1:] for nm in names):
+            # `\lim_{\beta\to 0}\mu`: mu depends on beta only through prose
+            raise Unsupported("limit_of_unrelated_symbol")
         if target in (sp.oo, -sp.oo):
             return sp.Limit(body, var, target)
         return sp.Limit(body, var, target, dir=direction)
@@ -1483,6 +1579,15 @@ def _script_name(toks: list[Tok]) -> tuple[str, bool]:
     return s, True
 
 
+def _label_subscript(sub: list[Tok]) -> bool:
+    """`V_{w2}`, `N_{A0}`, `\\rho_{de0}`, `\\delta_{k0}`: letters followed by digits label a quantity;
+    `x_{2k}` (digit before letter) is index arithmetic."""
+    if not sub or not all(t.kind in ("LETTER", "DIGIT") for t in sub) or sub[0].kind != "LETTER":
+        return False
+    kinds = "".join("L" if t.kind == "LETTER" else "D" for t in sub)
+    return "D" in kinds and "DL" not in kinds
+
+
 def _script_letters(toks: list[Tok]) -> set[str]:
     out = set()
     for t in toks:
@@ -1511,10 +1616,18 @@ def _is_dmark(toks: list[Tok], i: int) -> int | None:
     return None
 
 
+ONE_ARG_CMDS = {"mathrm", "rm", "mathit", "mathbf", "mathsf", "mathtt", "mathcal", "mathscr", "mathfrak", "mathbb",
+                "boldsymbol", "bm", "vec", "hat", "widehat", "bar", "overline", "tilde", "widetilde", "dot", "ddot",
+                "check", "breve", "textbf"}
+
+
 def _read_script_toks(toks: list[Tok], i: int) -> tuple[list[Tok], int]:
     if i < len(toks) and _is_char(toks[i], "{"):
         e = group_end(toks, i)
         return toks[i + 1:e], e + 1
+    if i + 1 < len(toks) and toks[i].kind == "CMD" and toks[i].value in ONE_ARG_CMDS and _is_char(toks[i + 1], "{"):
+        e = group_end(toks, i + 1)  # `_\mathrm{el}`: the command with its argument
+        return toks[i:e + 1], e + 1
     return toks[i:i + 1], i + 1
 
 
@@ -1583,10 +1696,14 @@ def prescan_functions(toks: list[Tok]) -> tuple[set[str], list[str], set[str]]:
     funcs: set[str] = set()
     notes: list[str] = []
     ambiguous: set[str] = set()
+    n_apps: dict[str, int] = {}
     applied: dict[str, tuple[str, bool]] = {}  # name -> (reason, strong)
     bare: set[str] = set()
     n = len(toks)
+    skip_to = 0
     for i, t in enumerate(toks):
+        if i < skip_to:
+            continue  # inside \\mathrm{N}, \\hat{f}, ...: already handled with the command
         j = i + 1
         if t.kind == "LETTER":
             name = t.value
@@ -1600,6 +1717,7 @@ def prescan_functions(toks: list[Tok]) -> tuple[set[str], list[str], set[str]]:
             arg, j = _read_script_toks(toks, i + 1)
             if not (len(arg) == 1 and (arg[0].kind == "LETTER" or _sym_cmd_name(arg[0]))):
                 continue
+            skip_to = j
             base = arg[0].value if arg[0].kind == "LETTER" else _sym_cmd_name(arg[0])
             if t.value in ACCENTS:
                 name = f"{base}_{ACCENTS[t.value]}"
@@ -1614,14 +1732,16 @@ def prescan_functions(toks: list[Tok]) -> tuple[set[str], list[str], set[str]]:
                 name = ("vec_" if t.value in ("vec", "overrightarrow") or base.islower() else "bf_") + base
         else:
             continue
-        if name in NEVER_FUNC:
+        if name in NEVER_FUNC and not (i + 1 < n and _is_char(toks[i + 1], "_")):
             continue
         primed = False
+        had_sub = False
         while j < n and (_is_char(toks[j], "_") or _is_char(toks[j], "^") or _is_char(toks[j], "'")):
             if _is_char(toks[j], "'"):
                 primed = True
                 j += 1
                 continue
+            had_sub = had_sub or _is_char(toks[j], "_")
             is_sup = _is_char(toks[j], "^")
             arg, j = _read_script_toks(toks, j + 1)
             if is_sup and arg and all(_is_cmd(a, "prime") or _is_char(a, "'") for a in arg):
@@ -1653,18 +1773,35 @@ def prescan_functions(toks: list[Tok]) -> tuple[set[str], list[str], set[str]]:
             reason = "greek_or_styled_name"
         elif name.isupper():
             reason = "uppercase"
-        if reason and (name not in applied or strong):
+        if reason is None and had_sub:
+            continue  # k_3(c-1), a_n(x-c)^n: a subscripted coefficient times a bracket
+        n_apps[name] = n_apps.get(name, 0) + 1
+        if name not in applied or strong or (applied[name][0] is None and reason is not None):
             applied[name] = (reason, strong or applied.get(name, ("", False))[1])
     coefficient_run = len(bare & set("abcde")) >= 3  # integral tables: (a+bx)...(e+fx)
+    whole_side = _whole_side_names(toks)  # `E = E(R/p)`: the bare name is an entire side
     for name, (reason, strong) in applied.items():
+        if reason is None and name == "pi":
+            continue  # 2\pi(r+h)
+        if reason is None:
+            # lowercase letter with a compound argument: `s(1-t)` once is a product; the same letter
+            # applied again and never used plainly, `p(2n+1) = \sum p(n-k) q(2k+1)`, is a function
+            if name not in bare and not coefficient_run and n_apps.get(name, 0) >= 2:
+                ambiguous.add(name)
+                notes.append(f"ambiguous_application:{name}")
+            continue
         if strong or name not in bare:
             funcs.add(name)
             notes.append(f"funcapp_rule:{name}:{reason}")
-        elif reason == "conventional_name" and not coefficient_run:
+        elif coefficient_run and reason == "conventional_name":
+            notes.append(f"mult_not_call:{name}")
+        elif reason != "conventional_name" and name not in whole_side:
+            # N(1/(s+1) + ...) with N also inside a fraction: a product, as written
+            notes.append(f"mult_not_call:{name}")
+        else:
+            # `E = E(R/p)`, `\mathcal{L}_T f ... f(y/2)`: the same name bare and applied
             ambiguous.add(name)
             notes.append(f"ambiguous_application:{name}")
-        else:
-            notes.append(f"mult_not_call:{name}")
     return funcs, notes, ambiguous
 
 
@@ -1680,7 +1817,7 @@ def indexed_bases(toks: list[Tok]) -> set[str]:
         sub, _ = _read_script_toks(toks, i + 2)
         has_letter = any(x.kind == "LETTER" or _sym_cmd_name(x) for x in sub)
         has_arith = any(x.kind == "CHAR" and x.value in "+-" for x in sub) or (
-            any(x.kind == "DIGIT" for x in sub) and has_letter)
+            any(x.kind == "DIGIT" for x in sub) and has_letter and not _label_subscript(sub))
         if has_letter and has_arith:
             out.add(base)
     return out
@@ -1688,7 +1825,7 @@ def indexed_bases(toks: list[Tok]) -> set[str]:
 
 def _roman_word(arg: list[Tok]) -> str | None:
     r"""`\mathrm{qc}`, `\text{in}`, `\mathsf{T}`, a bare `T` -> the word; else None."""
-    if len(arg) == 1 and arg[0].kind == "TEXT":
+    if len(arg) == 1 and arg[0].kind in ("TEXT", "OPNAME"):
         w = arg[0].value.strip()
         return w if w.isalnum() and w else None
     if len(arg) == 1 and arg[0].kind == "LETTER" and arg[0].value == "T":
@@ -1699,6 +1836,84 @@ def _roman_word(arg: list[Tok]) -> str | None:
     if len(arg) == 2 and arg[0].kind == "CMD" and arg[0].value in ("mathrm", "rm", "mathsf", "textsf") and arg[1].kind == "LETTER":
         return arg[1].value
     return None
+
+
+EXPONENT_LETTERS = set("nkmpqrjxyztil")
+
+
+def _superscript_label(base, arg: list[Tok], word: str | None, subscripted: set[str] = frozenset()) -> bool:
+    """Is this superscript a label/index rather than an exponent? (base is not a number or e)"""
+    if not arg:
+        return False
+    if _is_char(arg[0], "(") and _is_char(arg[-1], ")"):
+        return True  # X^{(0)}, f^{(n)}, w^{(i)}_k: iterate / derivative order / index
+    if word is not None and word != "T":
+        return True  # A^\mathrm{g}, H^\text{cp}, \operatorname{Ric}^g
+    names = [a.value if a.kind in ("LETTER", "DIGIT") else (_sym_cmd_name(a) or ("infty" if _is_cmd(a, "infty") else None))
+             for a in arg]
+    if any(nm in ("infty", "omega", "Omega") for nm in names):
+        return True  # E^\infty (spectral sequence page), a^\omega (idempotent power)
+    if len(arg) == 1 and arg[0].kind == "DIGIT" and arg[0].value == "0" and (
+            isinstance(base, AppliedUndef) or (isinstance(base, sp.Symbol) and base.name in subscripted)):
+        return True  # C_3^0, g_i^0, Y_0^0(theta, phi): an index on an indexed name
+    has_letter = any(a.kind == "LETTER" or _sym_cmd_name(a) for a in arg)
+    if has_letter and ((isinstance(base, sp.Symbol) and base.name in subscripted) or isinstance(base, AppliedUndef)):
+        return True  # h^i_k, B_{1,2}^s, \nu_k^{ij}, {\beta_j}^{k+1}, H_{\rm v}^{px}: indices on an indexed name
+    if isinstance(base, sp.Symbol) and base.name[:1].isupper() and len(base.name) == 1 and len(arg) == 1 \
+            and arg[0].kind == "LETTER" and arg[0].value not in EXPONENT_LETTERS:
+        return True  # F^H, M^X, T^a, A^g: a label on a capital
+    return False
+
+
+def _numeric_frac_follows(toks: list[Tok], i: int) -> bool:
+    """toks[i] is \\frac; are both arguments plain integers?"""
+    j = i + 1
+    for _ in range(2):
+        if j >= len(toks):
+            return False
+        if _is_char(toks[j], "{"):
+            e = group_end(toks, j)
+            if not all(t.kind == "DIGIT" for t in toks[j + 1:e]) or e == j + 1:
+                return False
+            j = e + 1
+        elif toks[j].kind == "DIGIT":
+            j += 1
+        else:
+            return False
+    return True
+
+
+def _standalone_group_before(toks: list[Tok], close: int) -> bool:
+    """toks[close] is `}`: is its group a free-standing `{...}` (like `{\\mathcal P}`), not an argument
+    of `_`, `^`, `\\frac`, `\\mathbf`, ...?"""
+    depth = 0
+    for j in range(close, -1, -1):
+        t = toks[j]
+        if _is_char(t, "}"):
+            depth += 1
+        elif _is_char(t, "{"):
+            depth -= 1
+            if depth == 0:
+                prev = toks[j - 1] if j > 0 else None
+                return not (prev is not None and (prev.kind == "CMD" or _is_char(prev, "_") or _is_char(prev, "^")
+                                                   or _is_char(prev, "}")))
+    return False
+
+
+def _is_lone_cmd(toks: list[Tok], names: tuple[str, ...], nargs: int) -> bool:
+    """toks is exactly `\\cmd{..}{..}` (or single-token arguments)."""
+    toks = [t for t in toks if t.kind != "SPACE"]
+    if not toks or not (toks[0].kind == "CMD" and toks[0].value in names):
+        return False
+    i = 1
+    for _ in range(nargs):
+        if i >= len(toks):
+            return False
+        if _is_char(toks[i], "{"):
+            i = group_end(toks, i) + 1
+        else:
+            i += 1
+    return i == len(toks)
 
 
 def _plain_word(arg: list[Tok], n: int) -> bool:
@@ -1715,14 +1930,30 @@ def _tensor_indices(arg: list[Tok]) -> bool:
     return all(nm in TENSOR_INDEX or nm in INDEX_LETTERS for nm in names) and any(nm in TENSOR_INDEX for nm in names)
 
 
+def plain_letters(toks: list[Tok]) -> set[str]:
+    """Letters used without a subscript (and outside subscripts and accent arguments)."""
+    out: set[str] = set()
+    i, n = 0, len(toks)
+    while i < n:
+        t = toks[i]
+        if _is_char(t, "_") or (t.kind == "CMD" and (t.value in ACCENTS or t.value in VECTOR_STYLE or t.value in SCRIPT_STYLE)):
+            _, i = _read_script_toks(toks, i + 1)
+            continue
+        nm = t.value if t.kind == "LETTER" else _sym_cmd_name(t)
+        if nm and not (i + 1 < n and _is_char(toks[i + 1], "_")):
+            out.add(nm)
+        i += 1
+    return out
+
+
 def main_letters(toks: list[Tok]) -> set[str]:
     """Single-letter / greek names used as symbols outside of subscripts and bigop limits."""
     out: set[str] = set()
     i, n = 0, len(toks)
     while i < n:
         t = toks[i]
-        if _is_char(t, "_"):
-            _, i = _read_script_toks(toks, i + 1)
+        if _is_char(t, "_") or (t.kind == "CMD" and (t.value in ACCENTS or t.value in VECTOR_STYLE or t.value in SCRIPT_STYLE)):
+            _, i = _read_script_toks(toks, i + 1)  # subscripts and accent/style arguments are not plain uses
             continue
         if t.kind == "LETTER":
             out.add(t.value)
@@ -1732,12 +1963,37 @@ def main_letters(toks: list[Tok]) -> set[str]:
     return out - {"d", "e", "i"}
 
 
+def _whole_side_names(toks: list[Tok]) -> set[str]:
+    """Names that make up an entire side of a relation on their own (`E` in `E = E(R/p)`)."""
+    out = set()
+    side: list[Tok] = []
+    depth = 0
+    for t in toks + [Tok("CHAR", "=", 0, 0)]:
+        if depth == 0 and is_relation(t):
+            core = [x for x in side if x.kind != "SPACE"]
+            if len(core) == 1:
+                nm = core[0].value if core[0].kind == "LETTER" else _sym_cmd_name(core[0])
+                if nm:
+                    out.add(nm)
+            side = []
+            continue
+        if t.kind == "CHAR" and t.value in "([{":
+            depth += 1
+        elif t.kind == "CHAR" and t.value in ")]}":
+            depth -= 1
+        side.append(t)
+    return out
+
+
 def _is_single_atom(inner: list[Tok]) -> bool:
     if not inner:
         return False
     if all(t.kind == "DIGIT" for t in inner):
         return True
     t = inner[0]
+    if t.kind == "CMD" and (t.value in VECTOR_STYLE or t.value in ACCENTS or t.value in SCRIPT_STYLE) and len(inner) > 1:
+        arg, k = _read_script_toks(inner, 1)  # n(\mathbf r), f(\hat x)
+        return len(arg) == 1 and (arg[0].kind == "LETTER" or bool(_sym_cmd_name(arg[0]))) and k == len(inner)
     if not (t.kind == "LETTER" or _sym_cmd_name(t)):
         return False
     rest = inner[1:]

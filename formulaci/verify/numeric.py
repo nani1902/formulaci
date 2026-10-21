@@ -272,6 +272,8 @@ class Evaluator:
     rhs_f: object = None
     names: list[str] = field(default_factory=list)
     point_seconds: float = POINT_SECONDS
+    rel_tol: object = REL_TOL  # widened only by a `tol:` hint from Semantics
+    abs_tol: object = mp.mpf(0)
     hard_deadline: float | None = None  # time.monotonic() value no point may run past
     slow: bool = False  # integrals or infinite sums/products: sample fewer points
     zero_sides: tuple = (False, False)  # sides that are literally 0, where an exact 0 is trustworthy
@@ -404,13 +406,13 @@ class Evaluator:
         scale = max(abs(l), abs(r))
         rd = ad / scale if scale else mp.mpf(0)
         if rel == "=":
-            return ("pass" if rd <= REL_TOL else "fail"), ad, rd
+            return ("pass" if rd <= self.rel_tol or ad <= self.abs_tol else "fail"), ad, rd
         # inequality: both sides must be real
         if _nonreal(l) or _nonreal(r):
             raise EvalError("complex value in an inequality")
         l, r = mp.re(l), mp.re(r)
         violation = l - r if rel in ("<", "<=") else r - l
-        ok = violation <= REL_TOL * scale  # strict relations are accepted at equality within tolerance
+        ok = violation <= max(self.rel_tol * scale, self.abs_tol)  # strict relations are accepted at equality within tolerance
         return ("pass" if ok else "fail"), ad, rd
 
 

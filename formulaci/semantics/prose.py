@@ -28,7 +28,7 @@ GREEK_NAMES = [
     "Gamma", "Delta", "Theta", "Lambda", "Xi", "Pi", "Sigma", "Upsilon", "Phi", "Psi", "Omega",
 ]
 VAR_VARIANTS = {"varphi": "phi", "vartheta": "theta", "varepsilon": "epsilon", "varrho": "rho",
-                "varsigma": "sigma", "varpi": "pi", "lamda": "lambda"}
+                "varsigma": "sigma", "lamda": "lambda"}   # varpi is the lemniscate constant, not pi
 
 
 def sym_key(name: str) -> str:

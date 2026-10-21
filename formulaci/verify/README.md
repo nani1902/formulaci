@@ -8,7 +8,7 @@ uv pip install gmpy2            # until it is in pyproject (see PROPOSALS.md); ~
 uv run formulaci verify run --parsed data/parsed/parsed.jsonl --semantics data/semantics/semantics.jsonl \
     --out data/verdicts/verdicts.jsonl --workers 4      # --limit N, --force, --cap 20, --quiet
 uv run formulaci verify one 'wiki:en:12316:1381182218:61'   # every regime and point, for debugging
-uv run pytest tests/verify                                  # 45 tests, 60–100 s with 4 workers
+uv run pytest tests/verify                                  # 52 tests, 25–60 s with 4 workers
 ```
 
 The run is resumable: ids already in `--out` are skipped, `--force` starts over. Each verdict is appended
@@ -88,7 +88,37 @@ as soon as it is ready. A completed run rewrites the file in input order. Sampli
      INCONCLUSIVE.
    - **PASS:** symbolic `equal` with no numeric failure, or no failure at ≥10 evaluable points
      (unless symbolic is `not_equal`).
-   - **Statement guards (FAIL → INCONCLUSIVE):**
+   - **Rounded decimals** (`guards.py`, from the review of real FAILs). A constant formula with one
+     side that is nothing but a decimal literal, as recorded in the translator's
+     `sides: L || R` note and equal to the reconstructed Rational, is judged at the literal's own
+     precision:
+     - PASS within half a unit in the last digit (`π/(3√2) = 0.74048`, `2/3 = 0.67`);
+     - PASS within one unit *below* when the digits end in `\ldots` (truncation);
+     - otherwise FAIL, naming the correctly rounded value. `10+1.372√2/√11 = 9.414` is a confirmed
+       Wikipedia error: rounding gives 9.415.
+   - **Tolerance hints** from `Semantics.assumptions_source`:
+     - `tol:rel=X` and `tol:abs=X` widen the comparison and are reported in `Verdict.tolerance`;
+     - `tol:digits=K` means half a unit in the K-th decimal;
+     - `tol:approx` means the context says ≈, so the formula can never FAIL.
+   - **Guards (FAIL → INCONCLUSIVE)**, for formulas that are more likely statements or translation
+     artefacts than wrong identities:
+     - an irrational constant set equal to a fraction (`π = 355/113`, `π = 3927/1250`): a stated
+       approximation;
+     - **possible label superscript**, any of:
+       - a `superscript_label:` translator note, or a symbol whose name contains `^`;
+       - LaTeX superscripts on a letter that are parenthesised (`X^{(0)}`, `f^{(n)}`), `0` (`C_3^0`),
+         text (`A^\mathrm{g}`) or `\circ` (standard state, `G^\circ`), or sit on an `\operatorname`.
+         Big-operator limits such as `\sum_{k=0}^{(n)}` and `\int_0^\infty` are stripped first, and
+         `(-1)^{(k+1)}` is not a letter base;
+       - a symbol raised to `oo` or to an exponent involving `I` (`h^i_k` with `i` read as the
+         imaginary unit);
+       - an uppercase letter raised to an uppercase letter (`M^X`) or to −1 (operator/matrix inverse);
+       - a multi-letter superscript (`H_s^{xp}` → `H_s**(p*x)`);
+       - a free symbol that occurs only as a bare exponent of other symbols (`B^s`, `F^D + F^H`,
+         `a a^ω = a^ω`, `J^k J^k` → `J^{2k}`).
+
+       Exponents that take part in arithmetic (`x^{a+1}`, `x^{2a}` vs `x^{3a}`) and bound summation
+       indices (`Σ x^k`) are genuine powers, so exponent-law mutations still FAIL;
      - a free symbol named `e`, `i`, `j` or `pi` that Semantics neither mapped to a constant nor gave
        a domain;
      - an equation with a literal 0 side and free variables (an equation to solve, not an identity).
@@ -108,16 +138,18 @@ as soon as it is ready. A completed run rewrites the file in input order. Sampli
    - The per-formula cap is 20 s. An internal error becomes INCONCLUSIVE and never stops the batch. The
      run shows a rich progress bar with live verdict counts.
 
-## Measured on the built-in corpus (`tests/verify/fixtures/corpus.jsonl`, 131 Parsed+Semantics pairs)
+## Measured on the built-in corpus (`tests/verify/fixtures/corpus.jsonl`, 155 Parsed+Semantics pairs)
 
 | category | n | PASS | FAIL | INCONCLUSIVE | SKIP |
 |---|---|---|---|---|---|
-| true identities (trig, hyperbolic, log/exp, gamma/beta reflection & duplication, binomial & Vandermonde sums, finite/telescoping/geometric/infinite series & products, definite/indefinite integrals, derivatives, AM–GM, Bernoulli, Cauchy–Schwarz, triangle, tangent-line inequalities) | 56 | **56** | 0 | 0 | 0 |
-| mutations (sign flip, exponent ±1, dropped factor/term, wrong constant/function/operator, swapped symbols, off-by-one value/bound, flipped inequality) | 55 | 0 | **54** | 1 | 0 |
+| true identities (trig, hyperbolic, log/exp, exponent laws, gamma/beta reflection & duplication, binomial & Vandermonde sums, finite/telescoping/geometric/infinite series & products, definite/indefinite integrals, derivatives, AM–GM, Bernoulli, Cauchy–Schwarz, triangle, tangent-line inequalities) | 58 | **58** | 0 | 0 | 0 |
+| mutations (sign flip, exponent ±1, dropped factor/term, wrong constant/function/operator, swapped symbols, off-by-one value/bound, flipped inequality, wrong decimal digit, truncated-not-rounded decimal, approximation stated as identity) | 61 | 0 | **59** | 2 | 0 |
 | branch-cut traps (`√(xy)=√x√y`, `√(x²)=x`, `asin(sin x)=x`, `acos∘cos`, `atan∘tan`, `atan x+atan 1/x=π/2`, `log(xy)`, `log(x/y)`, `log z²`, `(z³)^{1/3}`, `√x/√y`, `(xy)^a`, `z^{ab}` with complex or unrestricted symbols) | 14 | 0 | **0** | **14** | 0 |
+| approximations (rounded decimals `π/(3√2)=0.74048`, `2/3=0.67`, `10+1.372√2/√11=10.585`, `e=2.7183`, truncated `√3=1.7320\ldots`; `π=355/113`, `π=3927/1250`; Stirling with `tol:rel=1e-3` / `tol:approx`) | 9 | 6 | **0** | 3 | 0 |
+| label superscripts (`B_{1,2}=B_{1,2}^s`, `F=F^H+F^D`, `aa^ω=a^ω`, `H_s^{xp}=x/p`, `X^{(0)}=0`, `C_3^0=3`, translator `superscript_label:e^iax`) | 7 | 0 | **0** | 7 | 0 |
 | special rules (solves-for-symbol, integer-only `sin(πn)=0`, measure-zero `⌊x⌋+⌊−x⌋=−1`, undefined function, not checkable, `e^{iπ}+1=0`) | 6 | 2 | 0 | 2 | 2 |
 
-**Precision on the corpus: 54 FAIL verdicts, 54 correct (0 false FAILs); recall on mutations 54/55.**
+**Precision on the corpus: 59 FAIL verdicts, 59 correct (0 false FAILs); recall on mutations 59/61.**
 - *Asymptotic misses.* Both are mutations that agree with the truth to 1e-8 in the `large` regime, so
   "every regime fails" cannot hold. They are marked "known miss" in the corpus:
   - `tanh x` vs `(e^x−1)/(e^x+1)`: both → 1;
@@ -125,8 +157,8 @@ as soon as it is ready. A completed run rewrites the file in input order. Sampli
 
   The second still FAILs when its large-regime points run out of time, which they did in the
   measured run.
-- *Wall time.* 50 s for the whole corpus with 4 workers on an 8-core Apple Silicon laptop with gmpy2.
-  The full `pytest tests/verify` (45 tests) takes 60–100 s.
+- *Wall time.* 10–50 s for the whole corpus with 4 workers on an 8-core Apple Silicon laptop with gmpy2.
+  The full `pytest tests/verify` (52 tests) takes 25–60 s.
 
 Real Wikipedia formulas (`fixtures/wiki_sample.jsonl`): 17 formulas with real ids, hand-translated, 2 of them
 chains (`\tbinom42 = … = 6`, `Γ(bi)Γ(−bi)=…=π/(b sinh πb)`).
@@ -134,6 +166,23 @@ chains (`\tbinom42 = … = 6`, `Γ(bi)Γ(−bi)=…=π/(b sinh πb)`).
 - 1 INCONCLUSIVE (solves for symbol), 2 SKIP, 0 FAIL.
 - 3 can come back INCONCLUSIVE for time: Euler's infinite product for Γ, `|Γ(a+bi)|²` as an infinite
   product, and `Γ²(z)/Γ(2z)=∫…` (quad refuses the sharply peaked or strongly singular cases).
+
+**Real data, after the human review of the first 266 FAILs** (13 confirmed Wikipedia errors, 253 pipeline
+mistakes). This is a rerun of the 2,731 formulas that were not SKIP, on a snapshot of
+`data/parsed` + `data/semantics` taken 2026-10-21. It ran in 9.6 min with 6 workers and was written to a
+scratch file, not `data/verdicts/`.
+- Overall: 1,989 PASS, 404 INCONCLUSIVE, 211 SKIP, 127 FAIL.
+- The 266 reviewed FAILs: 124 still FAIL, 107 are now SKIP (translate marks them `not_checkable`), 22
+  INCONCLUSIVE, 13 PASS. Of the verdicts that are not upstream SKIPs, the new rules account for:
+  - decimal rounding: 3 (2 PASS, plus the confirmed `9.414` error kept as FAIL);
+  - rational approximation: 2;
+  - label superscript: 7.
+- Confirmed errors: 11 of 13 still FAIL; the other 2 are now SKIPped upstream, not by verify.
+- `approximation_or_rounding` (6 reviewed): 0 FAIL now.
+- `superscript_is_label` (32 reviewed): 0 FAIL now. On the earlier parsed snapshot, before translate
+  started marking them, the label guard alone moved 31 of 32 to INCONCLUSIVE.
+- Regressions: none from verify. One formula went PASS → FAIL because of a new translate inconsistency:
+  in `\Delta{ct} = c\Delta t` the right side became `Delta_t` but the left side stayed `Delta·c·t`.
 
 **Real translate output, no semantics yet (diagnostic, not a precision claim).**
 - Sample: 300 random formulas from `data/parsed/parsed.jsonl` (all links `ok`, not `definition_like`).

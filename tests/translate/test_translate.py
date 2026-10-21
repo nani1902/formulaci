@@ -314,8 +314,8 @@ def test_lark_fallback_only_accepts_unambiguous_parses():
 
 # ------------------------------------------------------------------ rules added after the first real-data run
 def test_real_data_rules():
-    L, R, r = sides(r"\mathrm{Re}=U l/\nu_\infty")  # a known function name with no argument is a symbol
-    assert L == sp.Symbol("Re") and R == sp.Symbol("U") * sp.Symbol("l") / sp.Symbol("nu_inf")
+    r = tr(r"\mathrm{Re}=U l/\nu_\infty")[0]  # a function name used as a word: refused, not a variable
+    assert r.status == "not_checkable" and "word_symbol" in r.has_unsupported
     L, R, _ = sides(r"L = rmv_\perp")  # relation symbols as subscript labels
     assert sp.Symbol("v_perp") in R.free_symbols
     L, R, _ = sides(r"d(x,y)=d(y,x)")  # metric
@@ -358,8 +358,8 @@ def test_real_data_guards_second_round():
     assert L == sp.Symbol("a") * e ** (sp.Symbol("lambda") * x)
     r = tr(r"x^{\alpha\beta} = 1")[0]  # only index letters: read as tensor indices (documented)
     assert "tensor_index" in r.has_unsupported
-    L, R, _ = sides(r"X^{\mathrm{qc}}_0 = z^{ideal}")
-    assert L == sp.Symbol("X_0^qc") and R == sp.Symbol("z^ideal")
+    r = tr(r"X^{\mathrm{qc}}_0 = 1")[0]  # roman superscript: a label
+    assert "superscript_label" in r.has_unsupported
     L, R, _ = sides(r"y[n] = x[n] + x[n-1]")
     assert L == sp.Function("y")(n) and R == sp.Function("x")(n) + sp.Function("x")(n - 1)
     L, R, _ = sides(r"d(k) = k + o(k)")

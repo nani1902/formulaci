@@ -10,6 +10,13 @@ uv run python -m formulaci.cli extract stats                                    
 uv run pytest tests/extract
 ```
 
+Full run, views and extraction in parallel within the 200 req/min tier. Requires a contact; the
+script refuses to run without one, and the contact is read only from the environment:
+
+```bash
+FORMULACI_CONTACT="<email or URL>" data/raw/full_run.sh   # writes formulas.next.jsonl; move it over formulas.jsonl when done
+```
+
 `run` is resumable. It skips every page already listed in `data/raw/formulas_pages.tsv` (one row per
 processed page, including pages with zero formulas) or present in the output. `--force` discards the
 output and the log and redoes every page; with a warm cache that costs one request per 50 pages.
@@ -93,7 +100,72 @@ n_display, n_hidden, n_chem, n_html_math, n_empty.
 
 ## Measured counts
 
-COUNTS_PLACEHOLDER
+Full run of 2026-10-21. Revisions as of that day; parser as in this directory.
+
+| | count |
+|---|---:|
+| Articles in the four WikiProjects (deduplicated, talk page → article) | **64,617** |
+| Pages fetched and parsed | 64,617 (0 missing, 0 parse errors) |
+| Pages with ≥1 formula | **23,804** (36.8%) |
+| **Formulas extracted** | **952,136** |
+| ├ from `<math>` | 933,427 |
+| └ from `{{tmath}}` | 18,709 |
+| Inline / display | **769,928 / 182,208** (80.9% / 19.1%) |
+| Outside running prose (infobox, ref, caption, other templates) | 40,564 (4.3%) |
+| Skipped: pure-HTML `{{math}}` without `<math>` | 132,597 |
+| Skipped: `<chem>`, `<ce>`, `<math chem>` | 696 |
+| Skipped: empty `<math></math>` | 53 |
+
+By project (a page in several projects counts in each):
+
+| project | pages | with formulas | formulas |
+|---|---:|---:|---:|
+| Mathematics | 28,236 | 15,606 | 709,374 |
+| Physics | 24,518 | 7,135 | 224,624 |
+| Statistics | 5,586 | 2,442 | 109,749 |
+| Engineering | 9,635 | 642 | 14,714 |
+
+By best assessment class:
+
+| class | pages | with formulas | formulas |
+|---|---:|---:|---:|
+| FA | 96 | 41 | 1,978 |
+| FL | 15 | 3 | 37 |
+| A | 5 | 0 | 0 |
+| GA | 463 | 229 | 12,618 |
+| B | 3,207 | 1,835 | 146,163 |
+| List | 1,056 | 195 | 12,728 |
+| C | 11,667 | 5,395 | 312,965 |
+| Start | 30,992 | 11,647 | 399,603 |
+| Stub | 16,696 | 4,396 | 63,926 |
+| Unassessed | 420 | 63 | 2,118 |
+
+By page views (60 days, `pages.txt` order; all 64,617 pages have views):
+
+| pages by views | with formulas | formulas |
+|---|---:|---:|
+| top 200 | 100 | 6,508 |
+| top 1,000 | 564 | 42,024 |
+| top 5,000 | 2,893 | 205,185 |
+| top 20,000 | 10,945 | 596,323 |
+| top 64,617 | 23,804 | 952,136 |
+
+The most-viewed pages are often biographies and history (Ted Kaczynski, Albert Einstein, Manhattan
+Project), so formula density rises further down the list.
+
+Formulas per page: 0 on 40,813 pages, 1–9 on 8,390, 10–99 on 12,973, 100–999 on 2,433, and 1000+ on 8.
+The median formula is 12 characters of LaTeX, the 99th percentile 310 (measured on the top-5,000
+subset). Of the 952,136 records, only a minority are standalone identities; most are inline symbols
+and fragments (see failure modes).
+
+Record order: `formulas.jsonl` is in extraction order (best assessment class first), while `pages.txt`
+is in views order. Join on `page_id` to prioritise by views.
+
+Output sizes: `formulas.jsonl` 1.17 GB; wikitext cache 428 MB (gzip). The run took ~1.3 h of wall
+clock at ≤3 req/s with a contact User-Agent, plus ~25 min at 10 req/min for the first 5,000 pages.
+Extraction is CPU-bound on 4 workers at that rate (~25 pages/s). Interruptions (a session restart,
+an ~8-minute network outage) were resumed from the cache with no refetch. The client now retries
+network errors for up to ~1 h.
 
 ## Tests
 

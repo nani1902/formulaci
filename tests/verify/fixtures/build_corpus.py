@@ -25,7 +25,8 @@ ROWS: list[dict] = []
 
 
 def add(cid, category, lhs, rhs, expected, *, domains=None, constants=None, constraints=None,
-        relation=None, kind=None, mutation=None, source=None, checkable=True, skip_reason=None, note=""):
+        relation=None, kind=None, mutation=None, source=None, checkable=True, skip_reason=None, note="",
+        notes=None, hints=None):
     kind = kind or ("inequality" if relation not in (None, "=") else "equation")
     fid = f"fixture:verify:{cid}"
     ROWS.append({
@@ -34,11 +35,11 @@ def add(cid, category, lhs, rhs, expected, *, domains=None, constants=None, cons
         "parsed": {"formula_id": fid, "status": "ok", "kind": kind, "relation": relation,
                    "lhs": sp.srepr(lhs), "rhs": sp.srepr(rhs),
                    "free_symbols": sorted(s.name for s in (sp.sympify(lhs).free_symbols | sp.sympify(rhs).free_symbols)),
-                   "translator": "fixture"},
+                   "translator": "fixture", "notes": notes},
         "semantics": {"formula_id": fid, "checkable": checkable, "skip_reason": skip_reason,
                       "domains": {k_: (v if isinstance(v, dict) else {"type": v}) for k_, v in (domains or {}).items()},
                       "constants": constants or {}, "constraints": constraints or [],
-                      "assumptions_source": ["fixture"]},
+                      "assumptions_source": ["fixture"] + list(hints or [])},
     })
 
 
@@ -216,6 +217,64 @@ add("special_measure_zero", "special", floor(x) + floor(-x), -1, "INCONCLUSIVE",
 add("special_undefined_function", "special", f(x), x**2, "SKIP", note="defines f")
 add("special_not_checkable", "special", x, x, "SKIP", checkable=False, skip_reason="statement_not_identity")
 add("special_constant_e_i_pi", "special", e_**(i_*pi) + 1, 0, "PASS", constants={"e": "E", "i": "I"})
+
+
+# ---- rounded decimals and approximations (the side's LaTeX comes from the translator's `sides:` note)
+def sides(lhs_tex, rhs_tex):
+    return f"sides: {lhs_tex}  ||  {rhs_tex}"
+
+
+Fr = sp.Rational
+add("decimal_rounded_5", "approx", pi/(3*sqrt(2)), Fr("0.74048"), "PASS",
+    notes=sides(r"\frac{\pi}{3\sqrt{2}}", "0.74048"), note="Kepler conjecture density, rounded to 5 places")
+add("decimal_rounded_2", "approx", Fr(2, 3), Fr("0.67"), "PASS", notes=sides(r"\frac{2}{3}", "0.67"))
+add("decimal_rounded_sum", "approx", 10 + Fr("1.372")*sqrt(2)/sqrt(11), Fr("10.585"), "PASS",
+    notes=sides(r"10 + 1.372\, \frac{\sqrt{2}}{ \sqrt{11} }", "10.585."))
+add("decimal_truncated_ellipsis", "approx", sqrt(3), Fr("1.7320"), "PASS",
+    notes=sides(r"\sqrt{3}", r"1.7320\ldots"), note="truncated digits marked by an ellipsis")
+add("decimal_truncated_unmarked", "mutated", sqrt(3), Fr("1.7320"), "FAIL", mutation="truncated_not_rounded",
+    notes=sides(r"\sqrt{3}", "1.7320"), note="1.73205... rounds to 1.7321 and no ellipsis marks truncation")
+add("decimal_wrong_digit", "mutated", pi/(3*sqrt(2)), Fr("0.74084"), "FAIL", mutation="swapped_digits",
+    source="decimal_rounded_5", notes=sides(r"\frac{\pi}{3\sqrt{2}}", "0.74084"))
+add("decimal_wrong_rounding", "mutated", sp.E, Fr("2.7183"), "FAIL", mutation="wrong_last_digit",
+    notes=sides("e", "2.7183"), note="e = 2.718281..., so 2.7183 is correctly rounded: expect PASS",)
+ROWS[-1]["expected"], ROWS[-1]["category"], ROWS[-1]["mutation"] = "PASS", "approx", None
+add("decimal_wrong_rounding_2", "mutated", sp.E, Fr("2.7186"), "FAIL", mutation="wrong_last_digit",
+    notes=sides("e", "2.7186"))
+add("pi_rational_355_113", "approx", pi, Fr(355, 113), "INCONCLUSIVE", notes=sides(r"\pi", "355/113"),
+    note="'Taking pi = 355/113': a working approximation")
+add("pi_rational_3927_1250", "approx", pi, Fr(3927, 1250), "INCONCLUSIVE",
+    notes=sides(r"\pi", r"\frac{3927}{1250}"))
+add("stirling_with_tolerance_hint", "approx", gamma(x + 1), sqrt(2*pi*x)*(x/sp.E)**x, "PASS",
+    domains={"x": {"type": "positive", "lower": 2000}}, hints=["tol:rel=1e-3"],
+    note="Stirling's approximation, relative error 1/(12x) < 1e-3 here")
+add("stirling_approx_hint", "approx", gamma(x + 1), sqrt(2*pi*x)*(x/sp.E)**x, "INCONCLUSIVE",
+    domains={"x": {"type": "positive", "lower": 2000}}, hints=["tol:approx"])
+add("stirling_no_hint", "mutated", gamma(x + 1), sqrt(2*pi*x)*(x/sp.E)**x, "FAIL", mutation="approximation_as_identity",
+    domains={"x": {"type": "positive", "lower": 2000}}, note="without a hint an approximation is not an identity")
+
+# ---- superscripts that are labels, not powers (FAIL would be a translation artefact)
+B12 = sp.Symbol("B_{1,2}")
+s_, F_, D_, H_, Hs, p_, w_ = sp.symbols("s F D H H_s p omega")
+add("label_bayes_factor", "label", B12, B12**s_, "INCONCLUSIVE",
+    domains={"B_{1,2}": "positive", "s": "complex"}, notes=sides("B_{1,2}", "B_{1,2}^s"))
+add("label_force_parts", "label", F_, F_**D_ + F_**H_, "INCONCLUSIVE",
+    domains={"F": "positive", "D": "positive", "H": "positive"}, notes=sides("F", "F^H + F^D"))
+add("label_idempotent_power", "label", a*a**w_, a**w_, "INCONCLUSIVE",
+    domains={"a": "real", "omega": "positive"}, notes=sides(r"aa^\omega", r"a^\omega"))
+add("label_multiletter", "label", Hs**(x*p_), x/p_, "INCONCLUSIVE",
+    domains={"H_s": "positive", "p": "positive", "x": "real"}, notes=sides(r"H_\text{s}^{xp}", r"\frac{x}{p}"))
+add("label_parenthesised_zero", "label", sp.Integer(1), sp.Integer(0), "INCONCLUSIVE",
+    notes=sides("X^{(0)}", "0"), note="the translator collapsed X^{(0)} to 1")
+add("label_superscript_zero", "label", sp.Integer(1), sp.Integer(3), "INCONCLUSIVE", notes=sides("C_3^0", "3"))
+add("label_translator_note", "label", cos(a*x), sp.Symbol("e^iax")/2 + exp(-i_*a*x)/2, "INCONCLUSIVE",
+    domains={"a": "real", "x": "real", "e^iax": "positive"}, constants={"i": "I"},
+    notes="superscript_label:e^iax\n" + sides(r"\cos(a x)", r"\tfrac{e^{i a x} + e^{-i a x} }{2}"))
+# exponents that take part in arithmetic are real powers: these mutations must still FAIL
+pair("exponent_sum", x**(a + b)*x**c, x**(a + b + c), x**(a + b)*x**c, x**(a + b - c), "sign_flip",
+     domains={"x": "positive", "a": "real", "b": "real", "c": "real"})
+pair("exponent_scaling", (x**2)**a, x**(2*a), (x**2)**a, x**(2*a + 1), "exponent_off_by_one",
+     domains={"x": "positive", "a": "real"})
 
 
 def main() -> None:

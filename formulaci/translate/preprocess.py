@@ -266,6 +266,8 @@ def clean_tokens(toks: list[Tok], notes: list[str]) -> list[Tok]:
             # `v_\perp`, `\epsilon_\parallel`: a label, not a relation; `W^\perp` stays unsupported
             out[j] = Tok("TEXT", t.value, t.start, t.end) if out[j - 1].value == "_" else Tok("CMD", "perp_sup", t.start, t.end)
             tags.add("script_relation_symbol")
+    out = _font_switches(out, tags)
+    out = _unwrap_single_command_groups(out, tags)
     out = _unwrap_braced_parens(out, tags)
     if any(t.kind == "SPACE" for t in out):
         tags.add("spacing")
@@ -280,6 +282,59 @@ ARG_CMDS = {
     "ddot", "underline", "overbrace", "underbrace", "stackrel", "overset", "underset", "mathit", "rm",
     "operatorname", "begin", "end", "left", "right", "mathop", "pmod", "color",
 }
+
+
+FONT_SWITCH = {"rm": "mathrm", "it": "mathit", "bf": "mathbf", "sf": "mathsf", "tt": "mathtt", "cal": "mathcal"}
+
+
+def _unwrap_single_command_groups(toks: list[Tok], tags: set[str]) -> list[Tok]:
+    """`{\\exp}\\bigl(…\\bigr)` -> `\\exp(…)`: braces around a lone argument-free command."""
+    out = list(toks)
+    i = 0
+    while i + 2 < len(out):
+        a, b, c = out[i], out[i + 1], out[i + 2]
+        prev = out[i - 1] if i > 0 else None
+        if (a.is_("CHAR", "{") and b.kind == "CMD" and b.value.isalpha() and b.value not in ARG_CMDS
+                and b.value not in FONT_SWITCH and c.is_("CHAR", "}")
+                and not (prev is not None and (prev.kind == "CMD" or prev.is_("CHAR", "_") or prev.is_("CHAR", "^")))):
+            out[i:i + 3] = [b]
+            tags.add("single_command_group")
+        i += 1
+    return out
+
+
+def _font_switches(toks: list[Tok], tags: set[str]) -> list[Tok]:
+    """`{\\rm cas}(x)` -> `\\mathrm{cas}(x)`: a TeX font switch applies to the rest of its group."""
+    out = list(toks)
+    i = 0
+    while i < len(out):
+        t = out[i]
+        if t.kind == "CMD" and t.value in FONT_SWITCH and not (i + 1 < len(out) and out[i + 1].is_("CHAR", "{")):
+            # find the end of the enclosing group (or of the token list)
+            depth = 0
+            j = i + 1
+            while j < len(out):
+                if out[j].is_("CHAR", "{"):
+                    depth += 1
+                elif out[j].is_("CHAR", "}"):
+                    if depth == 0:
+                        break
+                    depth -= 1
+                j += 1
+            body = out[i + 1:j]
+            new = [Tok("CMD", FONT_SWITCH[t.value], t.start, t.end), Tok("CHAR", "{", t.start, t.end)] + body + [
+                Tok("CHAR", "}", t.end, t.end)]
+            script_arg = i > 1 and out[i - 2].kind == "CHAR" and out[i - 2].value in "^_"
+            if i > 0 and out[i - 1].is_("CHAR", "{") and j < len(out) and not script_arg:
+                out[i - 1:j + 1] = new  # `{\rm sinc}` -> `\mathrm{sinc}` (the group was only the switch)
+                i += 1
+            else:
+                out[i:j] = new
+                i += 2
+            tags.add("font_switch")
+            continue
+        i += 1
+    return out
 
 
 def _unwrap_braced_parens(toks: list[Tok], tags: set[str]) -> list[Tok]:
@@ -397,6 +452,7 @@ def split_rows(toks: list[Tok], notes: list[str], unsupported: list[str]) -> lis
         raw_rows[-1].append(t)
     rows: list[list[Tok]] = []
     for r in raw_rows:
+        r = _strip_equation_number(r, notes)
         content = [t for t in r if t.kind != "SPACE"]
         if not content:
             continue
@@ -424,6 +480,25 @@ def split_rows(toks: list[Tok], notes: list[str], unsupported: list[str]) -> lis
             unsupported.append("matrix")
             break
     return rows
+
+
+def _strip_equation_number(row: list[Tok], notes: list[str]) -> list[Tok]:
+    """`(16)\\quad B_{21} = …`: a leading equation number followed by spacing is a tag, not a factor."""
+    core = [k for k, t in enumerate(row) if t.kind != "SPACE"]
+    if len(core) < 4:
+        return row
+    k0 = core[0]
+    if not row[k0].is_("CHAR", "("):
+        return row
+    k = k0 + 1
+    while k < len(row) and (row[k].kind == "DIGIT" or row[k].is_("CHAR", ".")):
+        k += 1
+    if k == k0 + 1 or k >= len(row) or not row[k].is_("CHAR", ")"):
+        return row
+    if k + 1 < len(row) and row[k + 1].kind == "SPACE" and row[k + 1].value in ("quad", "qquad", "enspace", " ", ";"):
+        notes.append("pre:equation_number")
+        return row[k + 1:]
+    return row
 
 
 def _row_has_relation(row: list[Tok]) -> bool:
@@ -501,6 +576,11 @@ def _find_separator(toks: list[Tok]) -> tuple[int, int] | None:
                     j += 1
                 return i, j
             if t.kind == "CHAR" and t.value in (",", ";"):
+                # `i = 1, 2, \dots, n`: an enumeration (the parser reports it as a list). But in
+                # `… = Q_j, \quad j = 1, \ldots, m` the tail starts with its own relation: a condition.
+                tail_rel = next((k for k in range(i + 1, len(toks)) if is_relation(toks[k])), len(toks))
+                if any(x.kind == "CMD" and x.value in ("dots", "ldots", "cdots", "dotsc", "dotsb") for x in toks[i + 1:tail_rel]):
+                    return None
                 j = i + 1
                 while j < len(toks) and toks[j].kind == "SPACE":
                     j += 1
@@ -532,6 +612,8 @@ def _tail_is_condition(sep: list[Tok], tail: list[Tok]) -> bool:
         return True
     if tail[0].is_("CMD", "forall"):
         return True
+    if any(t.kind == "CMD" and t.value in ("dots", "ldots", "cdots", "dotsc", "dotsb") for t in tail):
+        return True  # `\quad j = 1, \ldots, m`: an index range
     depth = 0
     rels = []
     for t in tail:

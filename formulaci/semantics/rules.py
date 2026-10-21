@@ -17,6 +17,7 @@ import sympy
 from sympy.core.function import AppliedUndef
 
 from formulaci.schemas import Domain, Formula, Parsed, Semantics
+from formulaci.semantics import context_rules as cr
 from formulaci.semantics import prose
 from formulaci.semantics.prose import base_letter
 
@@ -230,7 +231,7 @@ I_INDEX = re.compile(r"\bi\s*=\s*[01]\b|\bi-?th\b|\bfor (?:each|every|all) i\b|\
 J_CONTEXT = re.compile(r"imaginary unit j|j is the imaginary|\bj\s*\^\s*2\s*=\s*-\s*1|electrical engineering|phasor|impedance", re.I)
 GAMMA_CONTEXT = re.compile(r"euler\s*[-–—−]?\s*mascheroni|mascheroni", re.I)
 GAMMA_TITLE = re.compile(r"mascheroni|^euler's constant$", re.I)
-GOLDEN_CONTEXT = re.compile(r"golden ratio|golden mean|golden section|golden number", re.I)
+GOLDEN_CONTEXT = re.compile(r"golden ratio|golden mean|golden section|golden number|golden field|golden rectangle", re.I)
 PRIME_CONTEXT = re.compile(r"\bprimes?\b|prime numbers?", re.I)
 EXISTENTIAL = re.compile(r"there (?:exists?|is|are) (?:a|an|some|infinitely|at least)|infinitely many|at least one\b|has (?:a|no) solution|"
                          r"\bsolutions? (?:of|to)\b|\bsuch that,?\s*$", re.I)
@@ -355,7 +356,10 @@ def infer(formula: Formula | None, pieces: list[Parsed]) -> tuple[Semantics, Tra
         elif squared:
             constants[i_sym.name] = "I"
             tr.add("C.i_squared", f"[{i_sym.name}] `i^2` appears, read as the imaginary unit")
-        elif ctx_cue and not index_cue:
+        elif not index_cue and not cr.index_range(latex) and _multiplies(all_e, i_sym):
+            constants[i_sym.name] = "I"
+            tr.add("C.i_factor", f"[{i_sym.name}] `i` multiplies other quantities (a+bi, Si(ix), i sin x): read as the imaginary unit")
+        elif ctx_cue and not index_cue and not cr.index_range(latex):
             constants[i_sym.name] = "I"
             tr.add("C.i_context", f"[{i_sym.name}] context/page mentions {ctx_cue.group(0)!r}")
         else:
@@ -529,14 +533,29 @@ def infer(formula: Formula | None, pieces: list[Parsed]) -> tuple[Semantics, Tra
                 doms[a.name] = Dom.of("positive", origin="expr")
                 tr.add("C.log_domain", f"[{a.name}] bare argument of a real logarithm -> positive")
 
+    for e in all_s:
+        for it in e.atoms(sympy.Integral):
+            if not any(len(lim) == 3 and (lim[1].has(sympy.oo, -sympy.oo) or lim[2].has(sympy.oo, -sympy.oo)) for lim in it.limits):
+                continue
+            for s_ in it.function.free_symbols - {lim[0] for lim in it.limits}:
+                d = doms.get(s_.name)
+                if d is not None and d.origin == "default" and d.nfield == "real" and d.lo is None:
+                    doms[s_.name] = Dom.of("positive_integer" if d.integer else "positive", origin="expr")
+                    tr.add("D.improper_integral_parameter", f"[{s_.name}] parameter of an improper integral: convergence usually needs it positive")
+                elif d is not None and d.origin == "default" and d.integer and d.lo == 0:
+                    doms[s_.name] = Dom.of("positive_integer", origin="expr")
+                    tr.add("D.improper_integral_parameter", f"[{s_.name}] parameter of an improper integral: convergence usually needs it positive")
     sem.domains = {n: d.to_schema() for n, d in sorted(doms.items())}
 
     # ---------------------------------------------------------------- constraints from the expression
     assumed = {sympy.Symbol(n): sympy.Symbol(n, **d.assumptions()) for n, d in doms.items()}
     real_names = {n for n, d in doms.items() if d.nfield == "real"}
 
+    formula_complex = any(e.has(sympy.I) for e in all_s)
+
     def is_real_regime(a):
-        return all(s.name in real_names for s in a.free_symbols) and not a.has(sympy.I)
+        # a formula that itself contains i is read with complex principal branches (arccos x = -i ln(x + sqrt(x^2-1)))
+        return all(s.name in real_names for s in a.free_symbols) and not a.has(sympy.I) and not formula_complex
 
     def holds(rel):
         try:
@@ -665,13 +684,31 @@ def infer(formula: Formula | None, pieces: list[Parsed]) -> tuple[Semantics, Tra
     sem.constraints = out
 
     # ---------------------------------------------------------------- checkability
-    reason = _checkability(pieces, subst, main_latex, latex, remaining_undef, constants, before, after, nb, na, var_syms, tr)
+    reason = _checkability(pieces, subst, main_latex, latex, remaining_undef, constants, before, after, nb, na, var_syms, tr,
+                           title=title, section=section, forms=forms)
     if reason:
         sem.checkable, sem.skip_reason = False, reason
     else:
         sem.checkable = True
     sem.assumptions_source = tr.ids()
     return sem, tr
+
+
+def _sides_latex(p) -> tuple[str, str]:
+    """The translator records `sides: <lhs latex>  ||  <rhs latex>` in its notes."""
+    m = re.search(r"^sides:\s*(.*?)\s*\|\|\s*(.*)$", p.notes or "", re.M)
+    return (m.group(1), m.group(2)) if m else ("", "")
+
+
+def _multiplies(exprs, sym) -> bool:
+    """`sym` is a factor of a product with something other than index letters (a+bi, Si(ix), i sin x)."""
+    for e in exprs:
+        for m in sympy.preorder_traversal(e):
+            if isinstance(m, sympy.Mul) and sym in m.args:
+                others = [a for a in m.args if a != sym]
+                if others and not all(isinstance(a, sympy.Symbol) and base_letter(a.name) in INTEGER_LETTERS for a in others):
+                    return True
+    return False
 
 
 def _single_symbol_offset(a):
@@ -743,10 +780,12 @@ def _fold(cur: Dom, nd: Dom, has_prose_type: bool) -> Dom:
     return cur.meet(nd)
 
 
-def _checkability(pieces, subst, main_latex, latex, remaining_undef, constants, before, after, nb, na, var_syms, tr) -> str | None:
+def _checkability(pieces, subst, main_latex, latex, remaining_undef, constants, before, after, nb, na, var_syms, tr,
+                  title="", section="", forms=None) -> str | None:
     # units
     um = re.search(r"\d\s*(?:\\[,;:! ]|~|\s|\\cdot|\)|\})*\s*\\(?:mathrm|text|rm|mbox|textrm|operatorname)\s*\{\s*~?\s*(?:" + UNITS + r")\s*[}^/\s]", latex) \
-        or re.search(r"\d\s*(?:\\,|~|\s)*(?:°|\\circ|\^\{?\\circ\}?)(?:\s*\\?mathrm\{?C)?", latex)
+        or re.search(r"\d\s*(?:\\,|~|\s)*(?:°|\\circ|\^\{?\\circ\}?)(?:\s*\\?mathrm\{?C)?", latex) \
+        or re.search(r"\d\s*(?:\\,|~|\s)*(?:kg|km|cm|mm|kJ|kW|MW|keV|MeV|GeV|kHz|MHz|GHz|mol|mL|(?:kg|g|m|km|L|J|W|mol)/(?:L|s|h|m|kg|mol|K))(?![A-Za-z])", latex)
     if um:
         tr.add("K.units", f"number followed by a unit: {um.group(0)!r}")
         return "units"
@@ -772,6 +811,58 @@ def _checkability(pieces, subst, main_latex, latex, remaining_undef, constants, 
     if any(p.has_unsupported for p in pieces):
         tr.add("K.translator_unsupported", f"translator flagged {sorted({u for p in pieces for u in p.has_unsupported})}")
         return "operator_notation"
+    # ---- second pass: context the reviewers found behind real false FAILs
+    names = [s_.name for s_ in var_syms]
+    if cr.index_range(latex):
+        tr.add("K.index_range", "an index range such as `i = 1, ..., n`, not an equation")
+        return "statement_not_identity"
+    m = cr.special_algebra(title, section, before, after, latex)
+    if m:
+        tr.add("K.special_algebra", f"arithmetic is not ordinary here ({m})")
+        return "special_algebra"
+    m = cr.stated_false(before, after)
+    if m:
+        tr.add("K.stated_false", f"the prose presents the formula as false / a fallacy / a counterfactual ({m})")
+        return "stated_false"
+    m = cr.noncommuting(names, title, section, before, after)
+    if m:
+        tr.add("K.noncommuting", f"matrices or operators, not scalars ({m})")
+        return "matrix_or_vector"
+    for n in names:
+        if prose.sym_key(n) in cr.NAMED_SYMBOLS:
+            tr.add("K.named_constant", f"[{n}] {cr.NAMED_SYMBOLS[prose.sym_key(n)]}")
+            return "named_constant"
+    if forms is not None:
+        m = cr.named_parameter(names, lambda n: sorted({f for f, v in forms.by_form.items() if v == n}, key=len, reverse=True), before, after)
+        if m:
+            tr.add("K.named_parameter", f"[{m.split(':')[0]}] the adjacent prose fixes this symbol to a specific value ({m})")
+            return "named_constant"
+    for (l, r), p in subst:
+        if l is None or r is None:
+            continue
+        for a, b in ((l, r), (r, l)):
+            if a == sympy.pi and b.is_Integer:
+                tr.add("K.pi_named_object", f"`pi = {b}`: pi names an object here (a bivector, a permutation), not 3.14159")
+                return "named_constant"
+        for a, b in ((l, r), (r, l)):
+            if a in (sympy.pi, sympy.E, sympy.GoldenRatio, sympy.EulerGamma) and b.is_number and sympy.nsimplify(b).is_Rational:
+                tr.add("K.irrational_equals_rational", f"{a} equated to the rational {sympy.sstr(b)}: a historical or working approximation")
+                return "approximation"
+        if l.has(sympy.acot) or r.has(sympy.acot):
+            tr.add("K.acot_convention", "arccot: sympy's range (-pi/2, pi/2] differs from the common (0, pi) convention")
+            return "notation_or_convention"
+        for e in (l, r):
+            for pw in e.atoms(sympy.Pow):
+                if pw.base != sympy.E and pw.exp.has(sympy.I) and not (pw.base.is_number and pw.base.is_positive):
+                    tr.add("K.multivalued_power", f"{sympy.sstr(pw)}: a complex power of a non-positive base is multivalued")
+                    return "notation_or_convention"
+    letter = cr.function_name_misread(latex)
+    if letter:
+        for (l, r), p in subst[:1]:
+            target = {"e": sympy.E, "i": sympy.I}.get(letter) if letter in constants else sympy.Symbol(letter)
+            if isinstance(l, sympy.Mul) and (sympy.Symbol(letter) in l.args or target in l.args):
+                tr.add("K.function_name_misread", f"[{letter}] `{letter}(...)` on the left is a function being defined, read as a product")
+                return "definition"
     # relation present?
     for (l, r), p in subst:
         if l is None or r is None:
@@ -818,6 +909,25 @@ def _checkability(pieces, subst, main_latex, latex, remaining_undef, constants, 
                 if any(len(lim) == 1 for lim in it.limits):
                     tr.add("K.indefinite_integral", "indefinite integral: equal only up to a constant")
                     return "indefinite_integral"
+    # equations that define a constant or are to be solved, and conditions written as inequalities
+    sides_latex = [_sides_latex(p) for (_, _), p in subst]
+    for ((l, r), p), (ll, rl) in zip(subst, sides_latex):
+        is_eq_ = p.kind != "inequality" and p.relation in (None, "=", "==")
+        fl_, fr_ = _free(l), _free(r)
+        if is_eq_:
+            for dl, other in ((cr.decimal_places(ll), fr_), (cr.decimal_places(rl), fl_)):
+                if dl is not None and other:
+                    tr.add("K.decimal_literal_side", "a decimal literal equated to an expression in free symbols: it defines a value (z_{.975}, a root)")
+                    return "defining_equation"
+        elif (not fl_ or not fr_) and (fl_ or fr_) and not cr.universal_cue(before, after):
+            tr.add("K.condition_inequality", "an expression compared with a constant, with no 'for all' nearby: a condition such as `4p^3+27q^2 < 0`")
+            return "condition"
+    if var_syms:
+        fforms = sorted({f for f in (forms.by_form if forms is not None else {})}, key=len, reverse=True)
+        m = cr.defining_cue(before, after, fforms)
+        if m:
+            tr.add("K.defining_cue", f"the prose introduces an equation to solve / a defining condition ({m})")
+            return "defining_equation"
     # existential / approximation statements in the adjacent prose
     near = nb[-200:] + " \u00b6 " + na[:60]
     m = EXISTENTIAL.search(near)
@@ -861,6 +971,17 @@ def _checkability(pieces, subst, main_latex, latex, remaining_undef, constants, 
                 tr.add("K.nonconstant_equals_constant", "one side is a constant and the other varies with its variables: an equation to solve")
                 return "statement_not_identity"
         if is_eq and fl and fr and not (l.atoms(sympy.Function) | r.atoms(sympy.Function)) \
+                and not l.has(sympy.Sum, sympy.Product, sympy.Integral, sympy.Limit, sympy.Abs) and not r.has(sympy.Sum, sympy.Product, sympy.Integral, sympy.Limit, sympy.Abs) \
+                and all(pw.exp.is_Integer for e_ in (l, r) for pw in e_.atoms(sympy.Pow)):
+            try:
+                num, _ = sympy.fraction(sympy.cancel(sympy.together(sympy.expand(l - r))))
+                if num.free_symbols and not sympy.expand(num).is_zero and not _numerically_zero(num):
+                    tr.add("K.rational_relation", "two rational expressions that are not identically equal: a relation that holds only under "
+                                                  "extra conditions (the golden-ratio hypothesis, 4p^3+27q^2=0). Wrong rational identities also land here.")
+                    return "statement_not_identity"
+            except Exception:
+                pass
+        if is_eq and fl and fr and not (l.atoms(sympy.Function) | r.atoms(sympy.Function)) \
                 and not l.has(sympy.Sum, sympy.Product, sympy.Integral, sympy.Limit) and not r.has(sympy.Sum, sympy.Product, sympy.Integral, sympy.Limit):
             try:
                 d = sympy.expand(l - r)
@@ -880,11 +1001,48 @@ def _checkability(pieces, subst, main_latex, latex, remaining_undef, constants, 
         if p.kind == "inequality" or (p.relation and p.relation not in ("=", "==")):
             tr.add("K.inequality", f"inequality kept checkable with relation {p.relation!r}")
             break
+    for ((l, r), p), (ll, rl) in zip(subst, sides_latex):
+        if _free(l) or _free(r):
+            continue
+        dp = cr.decimal_places(rl) if cr.decimal_places(rl) is not None else cr.decimal_places(ll)
+        if dp is not None:
+            tr.add("tol", f"[{dp}] a side is a decimal literal with {dp} places: compare to half a unit in the last place")
+            break
+        ap = cr.approx_cue(before, after)
+        if ap:
+            for side in (r, l):
+                q = sympy.nsimplify(side) if side.is_number else None
+                if q is not None and q.is_Rational and not q.is_Integer:
+                    den = int(q.q)
+                    while den % 2 == 0:
+                        den //= 2
+                    while den % 5 == 0:
+                        den //= 5
+                    if den == 1:
+                        places = len(str(sympy.Float(q, 30)).rstrip("0").split(".")[1])
+                        tr.add("tol", f"[{places}] prose says approximate ({ap}); {sympy.sstr(q)} has {places} decimal places")
+                        break
+                    tr.add("K.approximation", f"prose says approximate ({ap}) and {sympy.sstr(q)} is a non-terminating rational approximation")
+                    return "approximation"
     if len(pieces) > 1:
         tr.add("K.chain", f"chain of {len(pieces)} pairwise relations; all pieces checkable")
     if not var_syms:
         tr.add("K.numeric_only", "no free symbols: a numeric identity, checkable")
     return None
+
+
+def _numerically_zero(e) -> bool:
+    """True if `e` vanishes at a few deterministic sample points (catches identities that need
+    constant relations such as phi^2 = phi + 1, which symbolic expansion misses)."""
+    syms = sorted(e.free_symbols, key=lambda x: x.name)
+    try:
+        for k in range(3):
+            pt = {x: sympy.Float(0.37 + 0.61 * (j + 1) * (k + 1) / 7, 30) for j, x in enumerate(syms)}
+            if abs(complex(sympy.N(e.subs(pt), 30))) > 1e-12:
+                return False
+        return True
+    except Exception:
+        return False
 
 
 def _is_simple(e) -> bool:

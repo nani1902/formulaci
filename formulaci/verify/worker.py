@@ -10,9 +10,11 @@ from __future__ import annotations
 import random
 import time
 
+import mpmath as mp
 import sympy as sp
 
 from formulaci.schemas import Parsed, Semantics
+from formulaci.verify import guards
 from formulaci.verify import numeric as num
 from formulaci.verify.reconstruct import (NotCheckable, Problem, bare_symbol_side, build_problem,
                                           has_branch_cut)
@@ -50,6 +52,7 @@ def _indefinite_to_derivative(p: Problem) -> Problem:
 
 
 def task_prepare(payload: dict) -> dict:
+    notes = payload["parsed"].get("notes")
     try:
         p = _problem(payload)
     except NotCheckable as e:
@@ -63,6 +66,10 @@ def task_prepare(payload: dict) -> dict:
         "zero_side": bool(p.syms) and p.relation == "=" and (p.lhs == 0 or p.rhs == 0),
         "unmapped_constants": sorted(s.name for s in p.syms if s.name in CONSTANT_LIKE
                                      and s.name not in payload["semantics"].get("domains", {})),
+        "decimal_sides": guards.decimal_sides(p, notes),
+        "rational_approx": guards.rational_approximation(p),
+        "label": guards.label_superscript(p, notes),
+        "tol": guards.tolerance_hints(payload["semantics"].get("assumptions_source", [])),
         "symbols": {s.name: s.type for s in p.syms},
         "notes": p.notes,
         "constraint_errors": p.constraint_errors,
@@ -132,6 +139,11 @@ def task_numeric(payload: dict) -> dict:
     p = _problem(payload)
     fid = payload["parsed"]["formula_id"] + f"#{payload['parsed'].get('index_in_chain') or 0}"
     ev = num.Evaluator.build(p)
+    tol = guards.tolerance_hints(payload["semantics"].get("assumptions_source", []))
+    if tol.get("rel"):
+        ev.rel_tol = max(ev.rel_tol, mp.mpf(tol["rel"]))
+    if tol.get("abs"):
+        ev.abs_tol = mp.mpf(tol["abs"])
     # the supervisor kills us at `budget`; finish (and reply) comfortably before that
     ev.hard_deadline = start + max(budget - 0.7, 0.3)
     deadline = ev.hard_deadline - 0.1

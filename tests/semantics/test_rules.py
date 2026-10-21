@@ -267,9 +267,78 @@ def test_real_data_false_checkables():
                                                      lhs=srepr(h2 + Symbol("h")), rhs=srepr(1 / Symbol("h")))])
     assert sem.skip_reason == "differential_equation"
     assert run("2143", "12*34", latex=r"2143 = (12)(34)").skip_reason == "operator_notation"
-    assert run("Abs(x)", "1", kind="inequality", relation="<").skip_reason == "statement_not_identity"
+    assert run("Abs(x)", "1", kind="inequality", relation="<").skip_reason in ("condition", "statement_not_identity")
     assert run("Abs(X)", "-X").skip_reason == "statement_not_identity"
     assert run("2*beta*e**(1 - beta)", "1").skip_reason == "statement_not_identity"
     assert run("(k_1 + k_2)**2", "2*(k_1**2 + k_2**2)").skip_reason == "statement_not_identity"
     assert "e" not in run("e**2/a**2", "m*a*(2*pi*nu)**2").constants   # e^2: squared charge, not Euler
     assert run("1 + 1", "2").checkable and run("sin(x)**2 + cos(x)**2", "1").checkable
+
+
+# ------------------------------------------------------------------ second pass: reviewed real FAILs
+
+def test_special_algebra_context():
+    s = run("1 + 1", "0", before="In algebra, structures of characteristic 2 have special behavior because")
+    assert s.skip_reason == "special_algebra"
+    assert run("x**q", "x", title="Finite field").skip_reason == "special_algebra"
+    assert run("3*3*3", "3", before=r"since in the ring $\mathbb{Z}/12\mathbb{Z}$ :").skip_reason == "special_algebra"
+    assert run("aleph_0 + 1", "aleph_0", title="Cardinal number").skip_reason == "special_algebra"
+    # "z/2" is not Z/2Z
+    assert run("Beta(x, 1 - x)", "pi/sin(pi*x)", before="taking z/2 in the formula").checkable
+
+
+def test_stated_false_context():
+    assert run("1", "2", after=", a false statement. The fallacy here arises").skip_reason == "stated_false"
+    assert run("pi", "25/8", before="James Smith, a merchant, who claimed that").skip_reason == "stated_false"
+    # a cue about the *next* formula does not count
+    assert run("1/e**x", "e**(-x)", after=". Positiveness: e^x>0 for every real number x. This results from the "
+                                          "intermediate value theorem, since e^0=1 and, if one would have e^x<0").checkable
+
+
+def test_defining_equations():
+    assert run("x", "sqrt(2 + x)", before="which gives the equation").skip_reason == "defining_equation"
+    assert run("cos(x)", "x", before="Dottie number D 0.739 Real root of").skip_reason == "defining_equation"
+    assert run("2*x + 2", "3**x", after=" (where x is an unknown real number) can be solved").skip_reason == "defining_equation"
+    s = run("Integral(e**(-x**2/2), (x, -z, z))/sqrt(2*pi)", "0.95", latex=r"\int_{-z}^{z} ... = 0.95",
+            notes="sides: \\int_{-z}^{z} e^{-x^2/2}  ||  0.95")
+    assert s.skip_reason == "defining_equation"
+    # identities introduced as "obeys the equation" / "satisfying the recurrence relation" stay checkable
+    assert run("Gamma(z + 1)", "z*Gamma(z)", before="The gamma function obeys the equation").checkable
+    assert run("binomial(n, k)", "binomial(n - 1, k - 1) + binomial(n - 1, k)",
+               before="Pascal's triangle, satisfying the recurrence relation").checkable
+    assert run("Gamma(z)", "Gamma(z)", after="If the real part is an integer, this can be expressed in closed form").checkable
+
+
+def test_condition_inequalities_and_index_ranges():
+    s = run("4*p**3 + 27*q**2", "0", kind="inequality", relation="<", after="that is, if the polynomial has three real roots")
+    assert s.skip_reason == "condition"
+    assert run("i", "1", latex=r"i = 1, \ldots, n").skip_reason == "statement_not_identity"
+    assert run("i", "1", latex=r"i = 1, \ldots, n").constants == {}
+
+
+def test_noncommuting_and_named_constants():
+    assert run("exp(X)*exp(Y)", "exp(X + Y)", before="for elements X, Y of a Lie algebra").skip_reason == "matrix_or_vector"
+    assert run("Li(rho)", "pi**2/10", before=r"Define $\rho = \tfrac{1}{2} (\sqrt{5}-1)$ as the reciprocal",
+               functions=["Li"]).skip_reason in ("named_constant", "has_undefined_function")
+    sem, _ = infer(F(r"\frac{\varpi}{2}"), [Parsed(formula_id="t", status="ok", kind="equation",
+                                                    lhs=srepr(Symbol("varpi") / 2), rhs=srepr(sympy.Rational(13, 10)))])
+    assert sem.skip_reason in ("named_constant", "statement_not_identity") and "varpi" not in sem.constants
+    assert run("pi", "0").skip_reason == "named_constant"
+    assert run("pi", "355/113").skip_reason == "approximation"
+
+
+def test_imaginary_unit_as_factor_and_golden_field():
+    assert run("Abs(Gamma(a + b*i))**2", "Abs(Gamma(a))**2").constants == {"i": "I"}
+    assert run("varphi**2", "varphi + 1", title="Golden field").constants == {"varphi": "GoldenRatio"}
+
+
+def test_improper_integral_parameters_positive():
+    s = run("Integral(x*sin(m*x)/(x**2 + a**2), (x, 0, oo))", "pi/2*e**(-m*a)")
+    assert dom(s, "a") == "positive" and dom(s, "m") == "positive_integer"
+
+
+def test_rational_relation_and_tolerance_hint():
+    assert run("(c + a)/b", "b/(c - a)").skip_reason == "statement_not_identity"
+    assert run("(a + b)**2", "a**2 + 2*a*b + b**2").checkable          # a true polynomial identity stays
+    s = run("10 + 1.372*sqrt(2)/sqrt(11)", "10.585", notes="sides: 10 + 1.372\\, \\frac{\\sqrt{2}}{ \\sqrt{11} }  ||  10.585")
+    assert s.checkable and "tol:3" in s.assumptions_source

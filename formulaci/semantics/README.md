@@ -198,6 +198,52 @@ that made one formula take 150 s here before the numeric test switched to floats
 per-formula `--timeout` (default 10 s) and records `semantics_timeout` / `semantics_error` instead
 of crashing.
 
+## Second pass: rules from the review of real FAILs
+
+The coordinator's review of 266 real FAILs (`data/findings/reviews.jsonl`) tagged 135 false positives
+as semantics problems. `uv run formulaci semantics review-check` recomputes semantics for exactly those
+ids (plus the 13 confirmed real errors), runs the verify stage on them through its CLI, and reports:
+
+| review class | n | skipped now | still checkable → verify |
+|---|---|---|---|
+| special_algebra | 39 | 39 | – |
+| wrong_domain_or_constant | 42 | 31 | 8 PASS, 3 FAIL |
+| defining_equation_or_solve | 31 | 29 | 2 FAIL |
+| intentionally_false_in_context | 12 | 12 | – |
+| approximation_or_rounding | 6 | 3 | 3 PASS |
+| notation_or_convention | 5 | 4 | 1 INCONCLUSIVE |
+| **confirmed real errors** | 13 | 1 (semigroup, by `special_algebra`) | 11 FAIL, 1 INCONCLUSIVE (verify's decimal-truncation leniency) |
+
+**130 of 135 semantics-caused false FAILs no longer FAIL.** The 5 left are relations true only under
+a condition stated in prose that the rules cannot extract (law of cosines with c fixed by a, b, γ;
+`ad − bc = ±1`; `e^{iδ} = ±i`; a Born–von Karman boundary condition; the Soddy radius).
+
+All 148 reviewed items are a fixture (`tests/semantics/fixtures/review_cases.jsonl`, built by
+`build_review_cases.py`, labeled from the reviewer's note), scored by `test_review_cases_floors`:
+of the formulas the rules call checkable 82.8% are genuinely checkable, recall of checkable 96%.
+The dev and held-out fixtures did not regress (checkability 99.2% / 100%, precision 100% / 100%).
+
+| id | skip_reason | rule |
+|---|---|---|
+| K.special_algebra | special_algebra | page title, section, ±400 chars of context or the LaTeX mention modulo/mod n, characteristic 2/p, finite/Galois field, GF(, 𝔽_q, ℤ/nℤ, ordinal, cardinal, ℵ, transfinite, (bi)quaternion, split-complex, dual/hypercomplex numbers, versor, semigroup, monoid, idempotent, Boolean, tropical, duodecimal/binary/base 12, floating point, Dirac matrices, non-Diophantine, trivial ring, Coxeter group, "square roots of minus one" (Hamilton). Costs one confirmed error (a semigroup identity) and every ordinary identity on such pages |
+| K.stated_false | stated_false | within 200 chars before / 150 after: "is false", "a false statement", incorrect, not true, contradiction, no solution, cannot be justified, counterexample, fallacy, crank, purported, erroneous, invalid proof, faulty, redefinition of; before only: "claimed that", "if one would have", "instead of simply", "there is no x such that" |
+| K.defining_cue | defining_equation | the last 80 chars before the formula: "the/this equation", "gives the equation", solve, solution, root of, unknown, determined by, "satisfying:" / "such that" at the very end, condition, boundary, implicit, "holds only when", writing, fixed point; cancelled by then / we have / can be written / is given by / follows / proof / obeys / satisfies. The first 150 chars after: solve, the solution, unknown, nonlinear equation, implicit, must lie, by definition, and "if/when ..." only when the clause names one of the formula's own symbols ("if σ is odd") |
+| K.decimal_literal_side | defining_equation | a decimal literal equated to an expression in free symbols (`∫ ... = 0.95` defines z_{.975}) |
+| K.condition_inequality | condition | an expression compared with a constant, with no "for all/every/any" nearby (`4p^3+27q^2 < 0`, `μ^2 < 0`, `\|1+hλ\| ≤ 1`). Also skips true `\|z\| ≥ 0` (the one dev recall loss) |
+| K.rational_relation | statement_not_identity | two rational expressions not identically equal (checked symbolically *and* numerically, so φ² = φ+1 identities survive): the golden-ratio hypothesis, `(c+a)/b = b/(c−a)`, the cubic factorization under 4p³+27q²=0 |
+| K.index_range | statement_not_identity | `i = 1, \ldots, n`, `i = 1,2,3` (and `i` is then never mapped to I) |
+| K.noncommuting | matrix_or_vector | capital-letter or σ_k symbols with matrix/operator/Lie algebra/Pauli/Hermitian/commutator/symplectic/bivector/spinor in title, section or context, or a free `I` next to other capitals |
+| K.named_constant / K.named_parameter / K.pi_named_object | named_constant | `\varpi` (lemniscate constant, no longer mapped to π); a symbol the prose fixes ("Define ρ = ½(√5−1)", "where q is eπ", "a, b, c are certain rational numbers"); `π = 0` (π names a bivector) |
+| K.irrational_equals_rational | approximation | π, e, φ or γ equated to a rational (`π = 355/113`, `π = 3927/1250`) |
+| K.acot_convention / K.multivalued_power | notation_or_convention | arccot (sympy's range differs from (0, π)); a complex power of a non-positive base |
+| K.function_name_misread | definition | `e(t) = exp(2πit)`: a function being defined, read by the translator as e·t |
+| C.i_factor | (constant) | `i` multiplying other quantities (`a+bi`, `Si(ix)`, `(cos x + i sin x)^3`) is the imaginary unit unless index usage is seen |
+| C.phi_golden_ratio | (constant) | now also on "golden field" / "golden rectangle" pages |
+| D.improper_integral_parameter | (domain) | free parameters inside an integral with an infinite limit default to positive (positive_integer for integer letters) |
+| C.sqrt_arg / C.log_arg | (constraint) | no longer emitted when the formula itself contains `i` (complex principal branches: `arccos x = -i ln(x + √(x²−1))` holds on [−1, 1]) |
+| tol:<d> | (hint, stays checkable) | a numeric equation with a decimal literal side (`10.585`, `0.74048`, `0.67`), or a terminating rational next to "approximately/about/rounded/taking": recorded as `tol:<decimal places>` in `assumptions_source` so verify can compare to half a unit in the last place. The rounding error 9.414 (should be 9.415) still fails under that tolerance |
+| K.units (extended) | units | plain-text units after a number: `0.75 kg/L`, `3 km`, `5 MeV` |
+
 ## Known blind spots (and the safe choice we made)
 
 Precision matters more than coverage: a wrong domain creates false FAILs downstream. When unsure
@@ -243,5 +289,8 @@ and about this formula.
 - `prose.py` — LaTeX/Unicode normalization, trailing-condition split, prose fact extraction.
 - `stage.py` — `run`, `explain`, joining of formulas and parsed pieces.
 - `accuracy.py` — fixture scoring (semantic comparison by sampling).
-- `cli.py` — typer app: `run`, `explain`, `score`.
-- `tests/semantics/fixtures/build_cases.py` — fixture source of truth (labels live there).
+- `context_rules.py` — second-pass context rules (special algebra, stated false, defining equations, ...).
+- `review_check.py` — `review-check`: re-run semantics + verify on the human-reviewed FAILs.
+- `cli.py` — typer app: `run`, `explain`, `score`, `review-check`.
+- `tests/semantics/fixtures/build_cases.py` — dev + held-out fixture source of truth (labels live there).
+- `tests/semantics/fixtures/build_review_cases.py` — 148 reviewed real FAILs with labels from the review.

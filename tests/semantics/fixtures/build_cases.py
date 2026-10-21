@@ -118,7 +118,7 @@ CASES = [
                                                ("csc(theta) - cot(theta)", "sqrt((1 - cos(theta))/(1 + cos(theta)))", {"index_in_chain": 1})], [],
      dict(checkable=False, skip_reason="plus_minus")),
     ("List of trigonometric identities", 421, [("asin(x)", "-i*log(i*x + sqrt(1 - x**2))")], [],
-     dict(checkable=True, constants={"i": "I"}, domains={"x": "real"}, constraints=["x >= -1", "x <= 1"])),
+     dict(checkable=True, constants={"i": "I"}, domains={"x": "real"})),   # holds for all real x (principal branches; checked at x = +-3)
     # ------------------------------------------------------------------ binomial coefficient
     ("Binomial coefficient", 2, [("binomial(n, k)", "factorial(n)/(factorial(k)*factorial(n - k))")], [],
      dict(checkable=True, domains={"n": "nonneg_integer", "k": "nonneg_integer"}, constraints=["k <= n"])),

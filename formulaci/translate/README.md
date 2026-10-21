@@ -13,7 +13,8 @@ uv run formulaci translate run --in data/raw/formulas.jsonl --out data/parsed/pa
 #   --lark         enable the sympy-lark fallback (off by default, see "Fallback")
 uv run formulaci translate one '\Gamma(z+1) = z\Gamma(z)'    # debug one formula
 uv run formulaci translate stats data/parsed/parsed.jsonl    # coverage summary of an output file
-uv run pytest tests/translate                                # 67 tests, ~15-40 s
+uv run pytest tests/translate                                # 79 tests, ~10-40 s
+uv run python -m formulaci.translate.check_reviews     # re-check the 110 reviewed false FAILs
 ```
 
 Python API: `formulaci.translate.run(in_path, out_path, limit=, force=, workers=, timeout=, use_lark=)`
@@ -27,28 +28,44 @@ A summary is also written next to the output (`parsed.jsonl.summary.json`).
 
 | Input | formulas | equation-kind | ok | all eq. records ok | records ok / eq. records | time |
 |---|---|---|---|---|---|---|
-| Fixtures (12 pages, `tests/translate/fixtures`) | 1,174 | 674 | **575 (85.3%)** | 542 (80.4%) | 782 / 971 (80.5%) | 4 s, 1 process |
-| Real extract output (`data/raw/formulas.jsonl`, 2026-10-21, ~4,800 pages) | 180,016 | 53,726 | **30,662 (57.1%)** | 28,142 (52.4%) | 39,083 / 72,511 (53.9%) | 98 s, 6 workers |
+| Fixtures (12 pages, `tests/translate/fixtures`) | 1,174 | 674 | **576 (85.5%)** | 544 (80.7%) | 778 / 970 (80.2%) | 4 s, 1 process |
+| Real extract output, full (`data/raw/formulas.jsonl`, 952,136 formulas) | 952,136 | 272,013 | **140,226 (51.6%)** | 129,093 (47.5%) | 173,336 / 352,683 (49.1%) | 247 s, 6 workers |
+| Real, the first 180,016 formulas (same ids as the first pass) | 180,016 | 53,712 | **29,073 (54.1%)** (first pass: 30,662, 57.1%) | | | |
 
-**The 60% target is not met on the real data (57.1%).** The gap is almost entirely notation that is
-deliberately refused rather than misread: of the 23,064 equation-kind formulas without an ok record,
-21,435 carry a recognized `has_unsupported` reason and only **1,629 (3.0% of equation-kind formulas)
-are genuine parse errors**. Among formulas written in supported notation, 95.0% translate. The real
-corpus is broad physics/engineering/statistics, not just identity lists: sets, matrices, tuples/points,
-inner products, vector calculus, probability operators and ellipses dominate. Precision guards added
-after reviewing real data (ambiguous `a/2b` division, transposes, tensor indices, operator
-application, differential forms, ambiguous `f(…)` calls, …) cost about 1.5 points of coverage
-(58.7% → 57.1%) and remove readings that would have produced false FAILs.
+**The 60% target is not met on the real data (51.6% on the full corpus).** The gap is almost entirely
+notation that is deliberately refused rather than misread. Of the 131,787 equation-kind formulas
+without an ok record, 123,249 carry a recognized `has_unsupported` reason; only **8,538 (3.1% of
+equation-kind formulas) are genuine parse errors**. Among formulas in supported notation, 94.3%
+translate. The full corpus is broad physics/engineering/statistics/abstract algebra: sets, tuples,
+matrices, index/label superscripts, ellipses, inner products and vector calculus dominate.
 
-Top reasons on the real data (equation-kind records): `set_notation` 2,495, `matrix` 2,134,
-`ellipsis` 2,113, `tuple` 1,864, `inner_product` 1,201, `subscript_on_expression` 1,057
-(`(x)_n`, thermodynamic `(\partial S/\partial T)_P`, `[…]_{x=a}`), `differential_form` 1,001,
-`vector_calculus` 986, `probability` 978, `sum_index_set` 952, `vector_product` 916,
-`conjugate_star` 891, parse error "unexpected token" 852, `uppercase_juxtaposition` 843,
-`partial_operator` 772, `integral_domain` 655.
+**Second pass (2026-10-21, driven by human review of 266 real FAILs).** Reviewers attributed about 110
+false FAILs to the translator (`[translator_misread_other]` 69, `[superscript_is_label]` 32,
+`[mixed_number_or_juxtaposition]` 9). All 110 are in `tests/translate/fixtures/review_false_positives.jsonl`
+and re-checked by `uv run python -m formulaci.translate.check_reviews`:
+**71 are now refused (`not_checkable` with a reason), 38 are now read correctly** (`\bar z` →
+`conjugate(z)`, `e^{iax}` a power, `\sin\tfrac12(\theta+\varphi)` → sin((θ+φ)/2), `\theta_4[q]`,
+`M_2[f]`, `\text{ri}(x)`, `{\rm sinc}(x)`, `\mathrm{N}(\cdot)` as function applications, …),
+**1 is unresolved** (`|cd| = |cs| + |sd|`, segment lengths that cannot be told from `|c·d|`).
+The new refusals cost 3.0 points on the same 180k formulas (57.1% → 54.1%). The formerly-ok
+formulas lost there were sampled by category: mostly index/label superscripts (650), unit and word
+symbols like `\text{kg}` and `\mathrm{constant}` (353), and enumerations `i = 1, 2, \dots, k` that the
+first pass wrongly read as `i = 1` (254). The rest are named operators, Legendre symbols, matrix
+inverses, bars that could be means or conjugates, and limits of symbols that don't mention the limit
+variable. Collateral found while sampling was fixed and pinned by tests: subscripted coefficients
+`k_3(c-1)`, `a_n(x-c)^n`, `V_{w2}`, roman subscripts `U_\mathrm{el}(x)`, `n\,2^{n-1}`, `i2\pi`,
+`\cos(ax)\,dx`, `\operatorname{sech}(\tau)\,e^{…}`, `\lim_n f_n(x)`, `{\exp}\bigl(…\bigr)`,
+`\quad j=1,\ldots,m`.
 
-Status of all 205,508 real records: ok 45,960; not_checkable 150,091 (123,478 are kind `other`:
-expressions without a relation, `\approx`, `\in`, …); unparsed 9,457. No formula hit the timeout.
+Top reasons on the full real data (equation-kind records): `set_notation` 13,035, `tuple` 9,784,
+`matrix` 9,335, `superscript_label` 9,220, `ellipsis` 8,534, `sum_index_set` 5,913, `inner_product`
+5,798, `uppercase_juxtaposition` 4,682, `conjugate_star` 4,580, `differential_form` 4,465,
+`vector_calculus` 4,404, `subscript_on_expression` 4,333, `probability` 3,977, `partial_operator`
+3,977, `integral_domain` 3,688, parse error "unexpected token" 3,627, `vector_product` 3,336,
+`word_symbol` 3,244, `transpose` 2,761.
+
+Status of all 1,070,126 real records: ok 210,782; not_checkable 811,878 (663,041 are kind `other`:
+expressions without a relation, `\approx`, `\in`, …); unparsed 47,466. No formula hit the timeout.
 
 **Silent-mis-translation audit.** Every `ok` equation on the fixtures without undefined functions or
 integrals was evaluated numerically (3 random points, `e`→E and `i`→I): all 57 that fail are
@@ -158,7 +175,7 @@ the decision in `notes`.
 | `\sin^{-1} x` | arcsin vs `1/sin x` | arcsin, note `ambig:sin^-1_as_inverse`. |
 | `\sin 2x \cos y`, `\sin x^2` | argument scope | argument = first factor plus following plain letters/greek symbols; stops at `\cdot`, operators, brackets, other functions and `d<var>` inside integrals. |
 | `e`, `i` | constant vs variable | left as symbols, with `hint:e_only_as_exp_base` / `hint:e_not_only_exp_base` / `hint:i_squared`. |
-| `\bar z`, `\dot x` | conjugate / time derivative | symbol `z_bar`, note `ambig:bar:z_bar` / `ambig:time_derivative:x_dot`. |
+| `\dot x` | time derivative | symbol `x_dot`, note `ambig:time_derivative:x_dot` (bars: see the second-pass rows below). |
 | `\vec a \times \vec b`, `\mathbf{AB}` | non-commutative products as scalars | `vector_product` unsupported. |
 | `AB = BA`, `OA + OB = OC` | matrices / segments | `uppercase_juxtaposition` unsupported. |
 | `\sin(a\pm b) = … \pm …` vs `= \pm\sqrt{…}` | dual identity vs quadrant sign | split only when `\pm` is on ≥ 2 sides or `\mp` is present. |
@@ -176,8 +193,29 @@ the decision in `notes`.
 | `\arccos(z) & z & & \sqrt{1-z^2}` | table cells glued into one product | `table_row` unsupported. |
 | `A = B \\ -C = D` in `align` | new row merged into previous equation | a row starting with `-` continues the previous one only if it has no relation of its own. |
 | lark fallback | `3.\overline{142857}` → `365082.0` | fallback off by default. |
+| `\operatorname{vers}\theta`, `\operatorname{cis}x`, `{\rm sinc}x` | unknown named operator read as `vers·θ`, or `{\rm sinc}` as c·i·n·s | `named_operator`; with `(…)` an undefined function `sinc(x)`; `{\rm …}` font switches are rewritten to `\mathrm{…}`. |
+| `\text{median}`, `\mathrm{Re}`, `\text{kg}` alone | words as free variables | `word_symbol`. |
+| `\bar z`, `\overline{z}` next to a plain `z` | conjugate read as an independent variable | `conjugate(z)` when the letter is z/w/ζ or the prose mentions complex numbers/conjugates; otherwise `ambiguous_bar`. A bar alone (`\bar x = …`) stays `x_bar`. |
+| `\left(\frac{a}{p}\right)`, `\Bigg[\frac{\alpha}{\pi}\Bigg]` | Legendre/Jacobi/residue symbols read as fractions | `residue_symbol` (square brackets always; parentheses when the prose mentions Legendre/Jacobi/residues/reciprocity). |
+| `\left(\!\binom{n}{k}\!\right)` | multiset coefficient read as a binomial | `multiset_coefficient`. |
+| `X^{(0)}`, `f^{(n)}`, `F^H`, `M^X`, `A^\mathrm{g}`, `G^\circ`, `E^\infty`, `a^\omega`, `h^i_k`, `C_3^0`, `Y_l^m(\theta,\varphi)` | labels/indices/derivative orders read as powers | `superscript_label`; `U^{-1}`, `H^{-1}` on a capital → `inverse_or_reciprocal`. `x^n`, `x^0`, `2^n`, `30^\circ`, `\hat x^n`, `L^i` stay powers. |
+| `3\frac12`, `314\frac{64}{625}` | mixed number read as a product | `mixed_number`. |
+| `\mathrm{p}K`, `h2`, Church numerals `f\ x\ y` | operator/label juxtaposition | `p_function`, `letter_digit` (letter glued to a digit, except `i2\pi`), `juxtaposition_application` (≥ 3 control-spaced letters). |
+| `e_s(T)`, `\theta_4[q]`, `\tau[A]`, `M_2[f]` | function application read as a product | subscripted `e`/`i` may be functions; a subscripted or greek name before `[` is applied. |
+| `p(2n+1) = \sum p(n-k)q(2k+1)`, `E = E(R/\mathfrak p)` | partition functions / injective hull read as products | `ambiguous_application`: a letter applied twice with compound arguments and never used plainly, or a name that is both a whole side and applied. One `s(1-t)` is still a product. |
+| `\gcd(a,b,c)` | SymPy's polynomial gcd of symbols = 1 | undefined function `gcd` unless all arguments are integers. |
+| `\gamma(a,q)` | Euler–Lehmer constants read as the lower incomplete gamma | lowergamma only when the prose says "incomplete gamma"; else undefined. |
+| `\lim_{\beta\to0}\mu` | limit of a symbol that depends on β only through prose | `limit_of_unrelated_symbol` (a name like `f_n` with the variable in its subscript counts as dependent). |
+| `\cos(2k-1)\alpha`, `\sin(k+1)x` | argument scope after a bracket | `ambiguous_function_argument` when a bare letter follows the bracket (not `e`, not a differential). `\sin\tfrac12(\theta+\varphi)` takes the bracket into the argument. |
+| `\frac{dc}{c}`, `\frac{dM^2}{M^2}`, `d\theta` | differentials read as `d·c` | counted toward `differential_form`. |
+| `\Delta f`, `\Delta\epsilon`, `\delta y` | `\Delta f / f` cancelled to `\Delta` | one symbol `Delta_f`; `\frac{\delta u}{\delta\theta}` → `variational_derivative`. |
+| `i = 1, 2, \dots, k` | read as the equation `i = 1` | `list`; after an equation (`…, \quad j = 1,\ldots,m`) it is a condition. |
+| `(16)\quad B_{21} = …` | equation number read as a factor 16 | stripped (note `pre:equation_number`). |
 
-Known remaining risks (not guarded): `\sin \frac{\pi}{2} x` is read as `sin(πx/2)`;
+Known remaining risks (not guarded): segment lengths `|cd| = |cs| + |sd|` read as `|c·d|`;
+a lowercase letter applied once to a compound argument is a product (`a(n+1)` in a geometric series
+is fine, a function `q(uv)` written once is not); `x_0^{n-1}`, `\mu_1^b`, `z_m^k` (letter
+superscript on a subscripted symbol) are refused as labels even when they are powers; `\sin \frac{\pi}{2} x` is read as `sin(πx/2)`;
 `\sin x y` as `sin(xy)`; single-letter function names applied to a single atom are always calls
 (`x(t)`), so a product written `a(b)` becomes `a(b)`; `\Gamma`, `\zeta`, `\Beta` followed by `(` are
 always the special functions; `\psi(z)` is left undefined (digamma is not assumed);
@@ -199,7 +237,8 @@ indices even when it is a power.
 `text_symbol:W`, `roman_word:W`, `primed_symbol:N`, `power_of_function:N`, `bare_function_name:W`,
 `fallback:lark`, `op:times`, `index_range_from_inequality`, `brace_annotation`, `superscript_label:N`,
 `bracket_index:N`, `ambiguous_application:N`, `styled_symbol:N` (`\mathcal{L}` → `cal_L`),
-`function_name_as_symbol:W` (`\mathrm{Re}` alone → Reynolds number `Re`).
+`conjugate:z`, `increment:DeltaX`, `numeric_coefficient_function_arg`, `ambiguous_application:N`,
+`pre:font_switch`, `pre:single_command_group`, `pre:equation_number`, `pre:script_relation_symbol`.
 
 ## Fixtures
 

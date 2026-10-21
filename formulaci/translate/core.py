@@ -9,7 +9,7 @@ from sympy.core.function import AppliedUndef
 from formulaci.schemas import Formula, Parsed
 
 from .lexer import Tok
-from .parser import (Ctx, ParseError, Unsupported, _rel_name, _sym_cmd_name, _top_level_idx, indexed_bases, main_letters, prescan_brackets,
+from .parser import (Ctx, ParseError, group_end, Unsupported, _rel_name, _sym_cmd_name, _top_level_idx, indexed_bases, main_letters, plain_letters, prescan_brackets,
                      parse_side, prescan_functions)
 from .preprocess import is_relation, preprocess
 
@@ -21,6 +21,8 @@ INEQ_RELS = {"<", "<=", ">", ">=", "!="}
 DEF_PROSE = re.compile(
     r"\b(is|are|be) (defined|denoted|given|written)\b|\bdefin(e|es|ed|ing|ition)\b|\bdenot(e|es|ed|ing)\b|"
     r"\bwe (write|set|put|let)\b|\blet\b|\bwhere\b\s*$", re.I)
+COMPLEX_PROSE = re.compile(r"complex|conjugat|argand|imaginary", re.I)
+RESIDUE_PROSE = re.compile(r"legendre|jacobi symbol|kronecker symbol|residue|reciprocity|quadratic character", re.I)
 E = sp.Symbol("e")
 I_ = sp.Symbol("i")
 
@@ -70,6 +72,18 @@ def _is_differential_form(segments) -> bool:
                 continue
             prev = seg[k - 1] if k > 0 else None
             prev2 = seg[k - 2] if k > 1 else None
+            if prev is not None and prev.kind == "CHAR" and prev.value == "{" and prev2 is not None and \
+                    prev2.kind == "CMD" and prev2.value in ("frac", "dfrac", "tfrac"):
+                # `\frac{dc}{c}`, `\frac{dM^2}{M^2}`: a differential over something that is not `d<var>`
+                try:
+                    e_num = group_end(seg, k - 1)
+                except ParseError:
+                    continue
+                den_first = seg[e_num + 2] if e_num + 2 < len(seg) and seg[e_num + 1].kind == "CHAR" and seg[e_num + 1].value == "{" else None
+                if den_first is not None and not (den_first.kind == "LETTER" and den_first.value == "d") and not (
+                        den_first.kind == "CMD" and den_first.value in ("partial", "mathrm")):
+                    n += 1
+                continue
             if _sym_cmd_name(nxt) is not None and not (prev is not None and prev.kind == "CHAR" and prev.value == "{"):
                 n += 1  # `d\theta`, `k\,d\phi`: nobody writes d times theta
             elif prev is not None and prev.kind == "DIGIT" and prev2 is not None and prev2.kind == "CHAR" and prev2.value == "^":
@@ -78,6 +92,19 @@ def _is_differential_form(segments) -> bool:
                     prev.kind == "CHAR" and prev.value in "+-(}") or (prev.kind == "CMD" and prev.value in ("cdot", "wedge")):
                 n += 1
     return n >= 2
+
+
+def _is_juxtaposition_application(segments) -> bool:
+    """`\\operatorname{exp}\\ b\\ n\\ f\\ x = n\\ b\\ f\\ x` (Church numerals, lambda calculus): letters
+    separated by explicit control spaces are function application, not multiplication."""
+    for seg, _ in segments:
+        n = 0
+        for a, sp_, b in zip(seg, seg[1:], seg[2:]):
+            if sp_.kind == "SPACE" and sp_.value in (" ", "~") and a.kind in ("LETTER", "OPNAME") and b.kind == "LETTER":
+                n += 1
+        if n >= 3:
+            return True
+    return False
 
 
 def _pm_variants(seg: list[Tok]) -> list[tuple[str, list[Tok]]] | None:
@@ -215,8 +242,14 @@ def translate(f: Formula, use_lark: bool = False) -> list[Parsed]:
     all_toks = [t for seg, _ in segments for t in seg]
     nospace = [t for t in all_toks if t.kind != "SPACE"]
     funcs, fnotes, ambiguous = prescan_functions(nospace)
+    prose_all = " ".join([f.context_before, f.context_after, f.page_title, " ".join(f.page_categories)])
     ctx = Ctx(notes=notes, funcs=funcs, main_letters=main_letters(nospace), indexed_bases=indexed_bases(nospace),
-              ambiguous_funcs=ambiguous, bracket_funcs=prescan_brackets(nospace))
+              ambiguous_funcs=ambiguous, bracket_funcs=prescan_brackets(nospace), plain_letters=plain_letters(nospace),
+              complex_context=bool(COMPLEX_PROSE.search(prose_all)),
+              residue_context=bool(RESIDUE_PROSE.search(prose_all)),
+              incomplete_gamma_context=bool(re.search(r"incomplete gamma", prose_all, re.I)))
+    if _is_juxtaposition_application(segments):
+        unsupported.append("juxtaposition_application")
     if _is_differential_form(segments):
         unsupported.append("differential_form")
     notes.extend(fnotes)

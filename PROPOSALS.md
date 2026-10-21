@@ -58,7 +58,9 @@
   all-or-nothing: `z z̄ = (x+iy)(x-iy) = x^2+y^2` is skipped because piece 0 is a relation, though
   piece 1 is a valid identity. Proposal: `Semantics.skip_pieces: list[int] = []` (indices of
   `index_in_chain` pieces to skip) so `checkable` can be True for the rest.
-- **skip_reason vocabulary** used (SPEC lists examples only): `definition`, `has_undefined_function`,
+- **skip_reason vocabulary** used (SPEC lists examples only): `special_algebra`, `stated_false`,
+  `defining_equation`, `condition`, `named_constant`, `approximation`, `notation_or_convention`,
+  `differential_equation`, `definition`, `has_undefined_function`,
   `functional_identity`, `operator_notation`, `congruence`, `matrix_or_vector`, `set_notation`,
   `statement_not_identity`, `plus_minus`, `indefinite_integral`, `units`, `no_relation`, `unparsed`,
   `translator_not_checkable`, `semantics_error`, `semantics_timeout`. Worth fixing in SPEC so report
@@ -93,3 +95,17 @@
   including chained `0 < x < 1`, `and`/`or`/`not`, `Ne Eq Lt Le Gt Ge And Or Not Abs re im sqrt exp log
   sin cos tan Mod floor ceiling gamma factorial`, `^` = power. Unparseable constraints are ignored and
   listed by `verify one`. A formula with no Semantics record is SKIPped.
+- **Tolerance hint for verify (second pass).** Numeric equations with a decimal literal side get
+  `tol:<decimal places>` in `assumptions_source`. Proposal: verify compares to half a unit in that place
+  (0.5·10^-d) instead of exact equality. Optional schema: `Semantics.tolerance_decimals: int | None`.
+- **For semantics: tolerance hints (verify reads these from `assumptions_source`).**
+  - `tol:rel=1e-3` and `tol:abs=0.005` widen the numeric comparison and are reported in `Verdict.tolerance`.
+  - `tol:digits=3` means half a unit in the 3rd decimal.
+  - `tol:approx` means the context says ≈, "approximately" or "about", so the formula is never FAILed.
+
+  Without hints, verify already accepts a decimal-literal side of a constant formula when it is
+  correctly rounded (`π/(3√2) = 0.74048`), or truncated when the digits end in `\ldots`. It treats
+  `<irrational constant> = <fraction>` (`π = 355/113`) as an approximation.
+- **For translate:** verify relies on the `sides: L || R` note line for decimal literals and LaTeX label
+  checks, and on `superscript_label:<name>` lines. Please keep both formats stable. The optional
+  `Parsed.hints` list proposed under translate would serve the same purpose.

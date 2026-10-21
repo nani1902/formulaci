@@ -94,8 +94,11 @@ def verify_formula(worker: Worker, links: list[Parsed], sem: Semantics | None,
         for d in details])
     verdict, reason, ce, regimes = combined
     sym = next((d["symbolic"] for d in details if d.get("verdict") == verdict and "symbolic" in d), "unknown")
+    hint = next((d["meta"]["tol"] for d in details if (d.get("meta") or {}).get("tol")), {})
+    tolerance = Tolerance(abs=hint.get("abs", TOLERANCE.abs), rel=max(hint.get("rel", 0.0), TOLERANCE.rel),
+                          dps=TOLERANCE.dps)
     return Verdict(formula_id=fid, verdict=verdict, symbolic=sym, regimes=regimes, counterexample=ce,
-                   tolerance=TOLERANCE, reason=reason), details
+                   tolerance=tolerance, reason=reason), details
 
 
 def load_inputs(parsed_path, semantics_path):
