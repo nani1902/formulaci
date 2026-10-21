@@ -1,0 +1,182 @@
+{{Short description|none}}
+{{Dynamic list}}{{calculus|expanded=Integral calculus}}In mathematics, the definite [[integral]]
+:<math>\int_a^b f(x)\, dx</math>
+is the [[area]] of the region in the ''xy''-plane bounded by the graph of ''f'', the ''x''-axis, and the lines ''x'' = ''a'' and ''x'' = ''b'', such that area above the ''x''-axis adds to the total, and that below the ''x''-axis subtracts from the total.
+
+The [[fundamental theorem of calculus]] establishes the relationship between indefinite and definite integrals and introduces a technique for evaluating definite integrals.
+
+If the interval is infinite the definite integral is called an ''improper integral'' and defined by using appropriate limiting procedures. for example:
+
+:<math>\int_a^\infty f(x)\, dx=\lim_{b\to\infty}\left[\int_a^b f(x)\, dx\right]</math>
+
+A constant, such pi, that may be defined by the integral of an algebraic function over an algebraic domain is known as a [[Ring of periods|period]].
+
+The following is a list of some of the most common or interesting definite integrals. For a list of [[indefinite integral]]s see ''[[List of integrals|List of indefinite integrals]]''.
+
+==Definite integrals involving rational or irrational expressions==
+:<math>\int_0^\infty \frac{dx}{1+x^p}=\frac{\pi/p}{\sin(\pi/p)}\quad \text{for } \Re(p)>1</math>
+:<math>\int_0^\infty \frac{dx}{a^p + x^p}=\frac{\pi}{p a^{p-1}\sin{(\frac{\pi}{p}})} \quad \text{for } \Re(p)>1 \text{, } \Re(a)>0</math>
+:<math>\int_0^\infty \frac{x^{p-1}dx}{1+x}=\frac{\pi}{\sin(p\pi)}\quad \text{for } 0<p<1</math>
+:<math>\int_0^\infty \frac{x^{m}dx}{x^{n}+a^{n}}=\frac{\pi a^{m-n+1}}{n\sin\left(\dfrac{m+1}{n}\pi\right)}\quad \text{for } 0<m+1<n</math>
+:<math>\int_0^\infty \frac{x^m dx}{1+2x\cos\beta+x^{2}}=\frac{\pi}{\sin(m\pi)}\cdot\frac{\sin(m\beta)}{\sin(\beta)}</math>
+:<math>\int_0^a \frac{dx}{\sqrt{a^2-x^2}}=\frac{\pi}{2} </math>
+:<math>\int_0^a \sqrt{a^2-x^2}dx=\frac{\pi a^2}{4}</math>
+:<math>\int_0^a x^m (a^n-x^n)^p\,dx=\frac{a^{m+1+np}\Gamma\left(\dfrac{m+1}{n}\right)\Gamma(p+1)}{n\Gamma \left(\dfrac{m+1}{n}+p+1\right)}</math>
+:<math>\int_0^\infty \frac{x^m dx}{({x^n+a^n)}^r}=\frac{(-1)^{r-1}\pi a^{m+1-nr}\Gamma\left(\dfrac{m+1}{n}\right)}{n\sin\left(\dfrac{m+1}{n}\pi\right)(r-1)!\,\Gamma \left(\dfrac{m+1}{n}-r+1\right)}\quad \text{for } n(r-2)<m+1<nr</math>
+
+==Definite integrals involving trigonometric functions==
+
+:<math>\int_0^\pi \sin(mx)\sin(nx)dx=\begin{cases}
+0 & \text{if } m\ne n \\ \\
+\dfrac{\pi}{2} & \text{if } m=n 
+\end{cases}
+\quad\text{for } m,n \text{ positive integers}</math>
+:<math>\int_0^\pi \cos(mx)\cos(nx)dx=\begin{cases}
+0 & \text{if } m\ne n \\ \\
+\dfrac{\pi}{2} & \text{if } m=n 
+\end{cases}
+\quad\text{for } m,n \text{ positive integers}</math>
+:<math>\int_0^\pi \sin(mx)\cos(nx)dx=\begin{cases}
+0 & \text{if } m+n \text{ even} \\ \\
+\dfrac{2m}{m^{2}-n^{2}} & \text{if } m+n \text{ odd} 
+\end{cases}
+\quad\text{for } m,n \text{ integers}.</math>
+:<math>\int_0^{\frac{\pi}{2}}\sin^2(x)dx=\int_0^{\frac{\pi}{2}}\cos^2(x)dx=\frac{\pi}{4}</math>
+:<math>\int_0^{\frac{\pi}{2}}\sin^{2m}(x)dx=\int_0^{\frac{\pi}{2}}\cos^{2m}(x)dx = \frac{1\times3\times5\times\cdots\times(2m-1)}{2\times4\times6\times\cdots\times2m}\cdot\frac{\pi}{2}\quad\text{for }m=1,2,3\ldots</math>
+:<math>\int_0^{x}\sin^{2m}(t)dt=\frac{(2m-1)!!}{(2m)!!}\Biggl(x-\sin(x)\cos(x)\Biggl(1+\sum_{k=1}^\infty\frac{\sin^{2k}(x)(2k)!!}{(2k+1)!!}\Biggr)\Biggr)\quad\text{for }m=1,2,3\ldots</math>
+:<math>\int_0^{x}\cos^{2m}(t)dt=\frac{(2m-1)!!}{(2m)!!}\Biggl(x-\sin(x)\cos(x)\Biggl(1+\sum_{k=1}^\infty\frac{\cos^{2k}(x)(2k)!!}{(2k+1)!!}\Biggr)\Biggr)\quad\text{for }m=1,2,3\ldots</math>
+:<math>\int_0^{\frac{\pi}{2}}\sin^{2m+1}(x)dx=\int_0^{\frac{\pi}{2}}\cos^{2m+1}(x)dx = \frac{2\times4\times6\times\cdots\times2m}{1\times3\times5\times\cdots\times(2m+1)}\quad\text{for }m=1,2,3\ldots</math>
+:<math>\int_0^{\frac{\pi}{2}}\sin^{2p-1}(x)\cos^{2q-1}(x)dx = \frac{\Gamma(p)\Gamma(q)}{2\Gamma(p+q)}=\frac{1}{2} \text{B}(p,q)</math>
+:<math>\int_0^\infty \frac{\sin(px)}{x}dx=\begin{cases}
+\dfrac{\pi}{2} & \text{if } p>0 \\
+\\
+0 & \text{if } p=0 \\
+\\
+ -\dfrac{\pi}{2} & \text {if } p<0
+\end{cases}</math>     (see [[Dirichlet integral]])
+: <math>\int_{0}^{\infty }\frac{\sin px\cos qx}{x}\ dx=\begin{cases}
+0 & \text{ if } q>p>0 \\
+\\
+\dfrac{\pi}{2}& \text{ if } 0<q<p \\ 
+\\
+\dfrac{\pi}{4} & \text{ if } p=q>0 
+\end{cases}</math>
+: <math>\int_{0}^{\infty }\frac{\sin px \sin qx}{x^{2}}\ dx=\begin{cases}
+\dfrac{\pi p}{2}& \text{ if } 0<p\leq q \\ 
+\\
+\dfrac{\pi q}{2} & \text{ if } 0<q\leq p 
+\end{cases}</math>
+: <math>\int_{0}^{\infty} \frac{\sin ^{2}px}{x^{2}}\ dx=\frac{\pi p}{2}</math>
+: <math>\int_{0}^{\infty} \frac{1-\cos px}{x^{2}}\ dx=\frac{\pi p}{2}</math>
+: <math>\int_{0}^{\infty} \frac{\cos px - \cos qx}{x}\ dx= \ln \frac {q}{p}</math>
+: <math>\int_{0}^{\infty} \frac{\cos px - \cos qx}{x^{2}}\ dx=\frac{\pi (q-p)}{2}</math>
+: <math>\int_{0}^{\infty} \frac{\cos mx}{x^{2}+a^{2}}\ dx=\frac{\pi}{2a}e^{-ma}</math>
+: <math>\int_0^\infty \frac{x \sin mx}{x^2+a^2}\ dx=\frac{\pi}{2}e^{-ma}</math>
+: <math>\int_0^\infty \frac{ \sin mx}{x(x^2+a^2)}\ dx=\frac{\pi}{2a^2}\left(1-e^{-ma}\right)</math>
+: <math>\int_0^{2\pi} \frac{dx}{a+b\sin x}=\frac{2\pi}{\sqrt{a^2-b^2}}</math>
+: <math>\int_0^{2\pi} \frac{dx}{a+b\cos x}=\frac{2\pi}{\sqrt{a^2-b^2}}</math>
+: <math>\int_0^{\frac{\pi}{2}} \frac{dx}{a+b\cos x}=\frac{\cos^{-1} \left(\dfrac{b}{a}\right) }{\sqrt{a^2-b^2}}</math>
+: <math>\int_0^{2\pi} \frac{dx}{(a+b\sin x)^2}=\int_0^{2\pi} \frac{dx}{(a+b\cos x)^2}=\frac{2\pi a}{(a^2-b^2)^{3/2}}</math>
+: <math>\int_0^{2\pi} \frac{dx}{1-2a\cos x +a^2}=\frac{2\pi}{1-a^2} \quad \text{for } 0<a<1</math>
+: <math>\int_0^{\pi} \frac{x \sin x\ dx}{1-2a\cos x +a^2}=\begin{cases}
+\dfrac{\pi}{a}\ln\left|1+a\right| & \text{if } |a|<1 \\ \\
+\dfrac{\pi}{a} \ln\left|1+\dfrac{1}{a}\right| & \text{if } |a|>1 
+\end{cases}</math>
+: <math>\int_0^{\pi} \frac{\cos mx\ dx}{1-2a\cos x +a^2}=\frac{\pi a^m}{1-a^2} \quad \text{for } a^2<1\ , \ m=0,1,2,\dots</math>
+: <math>\int_0^\infty \sin ax^2\ dx=\int_0^\infty \cos ax^2= \frac{1}{2}\sqrt \frac{\pi}{2a}</math>
+: <math>\int_0^\infty \sin ax^n\ dx=\frac{1}{na^{1/n}}\Gamma\left(\frac{1}{n}\right)\sin\frac{\pi}{2n} \quad \text{for } n>1</math>
+: <math>\int_0^\infty \cos ax^n\ dx=\frac{1}{na^{1/n}}\Gamma\left(\frac{1}{n}\right)\cos\frac{\pi}{2n} \quad \text{for } n>1</math>
+: <math>\int_0^\infty \frac{\sin x}{\sqrt x}\ dx=\int_0^\infty \frac{\cos x}{\sqrt x}\ dx=\sqrt{\frac{\pi}{2}}</math>
+: <math>\int_0^\infty \frac{\sin x}{x^p}\ dx= \frac{\pi}{2\Gamma(p)\sin \left(\dfrac{p\pi}{2}\right)} \quad \text{for } 0 < p < 1</math>
+: <math>\int_0^\infty \frac{\cos x}{x^p}\ dx= \frac{\pi}{2\Gamma(p)\cos \left(\dfrac{p\pi}{2}\right)} \quad \text{for } 0 < p < 1</math>
+: <math>\int_0^\infty \sin ax^2\cos 2bx\ dx=\frac{1}{2}\sqrt{\frac{\pi}{2a}}\left(\cos \frac{b^2}{a}-\sin\frac{b^2}{a}\right)</math>
+: <math>\int_0^\infty \cos ax^2\cos 2bx\ dx=\frac{1}{2}\sqrt{\frac{\pi}{2a}}\left(\cos \frac{b^2}{a}+\sin\frac{b^2}{a}\right)</math>
+
+==Definite integrals involving exponential functions==
+
+: <math>\int_0^\infty \sqrt{x}\,e^{-x}\,dx = \frac{1}{2}\sqrt \pi</math>  (see also [[Gamma function]])
+: <math>\int_0^\infty e^{-ax}\cos bx \, dx=\frac{a}{a^2+b^2}</math>
+: <math>\int_0^\infty e^{-ax}\sin bx \, dx=\frac{b}{a^{2}+b^{2}}</math>
+: <math>\int_0^\infty \frac {{}e^{-ax}\sin bx}{x} \, dx=\tan^{-1}\frac{b}{a}</math>
+: <math>\int_0^\infty \frac {e^{-ax}-e^{-bx}}{x} \, dx=\ln \frac{b}{a}</math>
+: <math>\int_0^\infty \frac {e^{-ax}-\cos(bx)}{x} \, dx=\ln \frac{b}{a}</math>
+: <math>\int_0^\infty e^{-a x^2}\,dx = \frac{1}{2} \sqrt \frac {\pi} {a} \quad \text{for } a>0</math> (the [[Gaussian integral]])
+: <math>\int_0^\infty {e^{-ax^{2}}}\cos bx\, dx=\frac {1}{2} \sqrt{\frac{\pi}{a}}e^\left(\frac{-b^2}{4a}\right)</math>
+: <math>\int_0^\infty e^{-(ax^{2}+bx+c)}\, dx=\frac{1}{2}\sqrt{\frac{\pi}{a}}e^\left(\frac{b^2-4ac}{4a}\right)\cdot \operatorname{erfc} \frac{b}{2\sqrt{a}},\text{ where }\operatorname{erfc}(p)=\frac{2}{\sqrt{\pi}}\int_p^\infty  e^{-x^{2}}\, dx </math>
+: <math>\int_{-\infty}^{\infty} e^{-(ax^{2}+bx+c)}\ dx=\sqrt {\frac{\pi}{a}}e^\left(\frac{b^2-4ac}{4a}\right)</math>
+: <math>\int_0^\infty x^{n}e^{-ax}\ dx=\frac{\Gamma (n+1)}{a^{n+1}}</math>
+: <math>\int_0^\infty{x^2 e^{-a x^2}\,dx} = \frac{1}{4} \sqrt \frac {\pi} {a^3} \quad \text{for } a>0</math>
+: <math>\int_0^\infty x^{2n} e^{-a x^2}\,dx
+= \frac{2n-1}{2a} \int_0^\infty x^{2(n-1)} e^{-a x^2}\,dx
+= \frac{(2n-1)!!}{2^{n+1}} \sqrt{\frac{\pi}{a^{2n+1}}}
+= \frac{(2n)!}{n! 2^{2n+1}} \sqrt{\frac{\pi}{a^{2n+1}}} \quad \text{for } a>0\ ,\ n=1,2,3\ldots </math> (where !! is the [[double factorial]])
+: <math>\int_0^\infty{x^3 e^{-a x^2}\,dx} = \frac{1}{2 a^2} \quad \text{for } a>0</math>
+: <math>\int_0^\infty x^{2n+1} e^{-a x^2}\,dx
+= \frac {n} {a} \int_0^\infty x^{2n-1} e^{-a x^2}\,dx
+= \frac{n!}{2 a^{n+1}} \quad \text{for } a>0\ ,\ n=0,1,2\ldots </math>
+: <math>\int_0^\infty x^m e^{-ax^2}\ dx=\frac{\Gamma\left(\dfrac{m+1}{2}\right)}{2a^\left(\frac{m+1}{2}\right)}</math>
+: <math>\int_0^\infty x^n e^{-ax^b} dx = \frac{1}{b}\ a^{-\frac{n+1}{b}}\Gamma\left(\frac{n+1}{b}\right)</math>
+: <math>\int_0^\infty e^{\left(-ax^2-\frac{b}{x^2}\right)}\ dx=\frac{1}{2} \sqrt \frac{\pi}{a}e^{-2 \sqrt{ab}}</math>
+: <math>\int_0^\infty \frac {x}{e^x-1}\ dx=\zeta (2)= \frac {\pi^2}{6}</math>
+: <math>\int_0^\infty \frac {x^{n-1}}{e^x-1}\ dx=\Gamma (n)\zeta (n)</math>
+: <math>\int_0^\infty \frac {x}{e^x+1}\ dx=\frac{1}{1^2}-\frac{1}{2^2}+\frac{1}{3^2}-\frac{1}{4^2}+\dots=\frac{\pi^2}{12}</math>
+: <math>\int_0^\infty \frac {x^n}{e^x+1}\ dx= n! \cdot \left( \frac{2^n-1}{2^n} \right) \zeta(n+1) </math>
+: <math>\int_0^\infty \frac {\sin mx}{e^{2\pi x}-1}\ dx=\frac{1}{4} \coth\frac{m}{2}- \frac{1}{2m}</math>
+: <math>\int_0^\infty \left(\frac {1}{1+x}- e^{-x}\right)\ \frac{dx}{x}=\gamma</math> (where <math>\gamma</math> is [[Euler–Mascheroni constant]])
+: <math>\int_0^\infty \frac {e^{-x^2}-e^{-x}}{x}\ dx=\frac{\gamma}{2}</math>
+: <math>\int_0^\infty \left(\frac {1}{e^x-1}-\frac{e^{-x}}{x}\right)\ dx=\gamma</math>
+: <math>\int_0^\infty \frac {e^{-ax}-e^{-bx}}{x \sec px}\ dx=\frac{1}{2} \ln\frac{b^2+p^2}{a^2+p^2}</math>
+: <math>\int_0^\infty \frac {e^{-ax}-e^{-bx}}{x \csc px}\ dx=\tan^{-1}\frac{b}{p}-\tan^{-1}\frac{a}{p}</math>
+: <math>\int_0^\infty \frac {e^{-ax}(1-\cos x)}{x^2}\ dx=\cot^{-1} a-\frac{a}{2}\ln\left|\frac{a^2+1}{a^2}\right|</math>
+: <math>\int_{-\infty}^\infty e^{-x^2}\,dx=\sqrt{\pi}</math>
+: <math>\int_{-\infty}^\infty x^{2(n+1)}e^{-\frac12 x^2}\,dx=\frac{(2n+1)!}{2^n n!}\sqrt{2 \pi} \quad\text{for } n=0,1,2,\ldots </math>
+
+==Definite integrals involving logarithmic functions==
+
+: <math>\int_0^1 x^m (\ln x)^n \, dx=\frac{(-1)^n n!}{(m+1)^{n+1}} \quad\text{for } m>-1, n=0,1,2,\ldots</math>
+: <math>\int_1^\infty x^m (\ln x)^n \, dx=\frac{(-1)^{n + 1} n!}{(m+1)^{n+1}} \quad\text{for } m<-1, n=0,1,2,\ldots</math>
+: <math>\int_0^1 \frac{\ln x}{1+x}\, dx= -\frac{\pi^2}{12}</math>
+: <math>\int_0^1 \frac{\ln x}{1-x}\, dx= -\frac{\pi^2}{6}</math>
+: <math>\int_0^1 \frac{\ln (1+x)}{x}\, dx= \frac{\pi^2}{12}</math>
+: <math>\int_0^1 \frac{\ln (1-x)}{x}\, dx= -\frac{\pi^2}{6}</math>
+: <math>\int_0^\infty \frac{\ln(a^{2}+x^{2})}{b^{2}+x^{2}}\ dx = \frac{\pi}{b} \ln (a+b)\quad\text{for } a,b>0</math>
+: <math>\int_0^\infty\frac{\ln x}{x^2+a^2}\ dx = \frac{\pi \ln a}{2a}\quad\text{for } a>0</math>
+
+==Definite integrals involving hyperbolic functions==
+
+<math display="block">\int_0^\infty \frac{\sin ax}{\sinh bx}\ dx=\frac {\pi}{2b}\tanh \frac{a \pi}{2b}</math>
+
+<math display="block">\int_0^\infty \frac{\cos ax}{\cosh bx}\ dx=\frac {\pi}{2b}\cdot\frac{1}{\cosh \frac{a \pi}{2b}}</math>
+
+<math display="block">\int_0^\infty \frac{x}{\sinh ax}\ dx=\frac{\pi^2}{4a^2}</math>
+
+<math display="block">\int_0^\infty \frac{x^{2n+1}}{\sinh ax}\ dx= c_{2n+1} \left( \frac{\pi}{a} \right)^{2(n+1)}, \quad c_{2n+1} = \frac{(-1)^n}{2} \left(\frac{1}{2}- \sum_{k=0}^{n-1} (-1)^k {2n+1 \choose 2k+1} c_{2k+1} \right), \quad c_1 = \frac{1}{4} </math>
+
+<math display="block">\int_{0}^\infty \frac{1}{\cosh ax}\ dx = \frac{\pi}{2a}</math>
+
+<math display="block">\int_0^\infty \frac{x^{2n}}{\cosh ax}\ dx= d_{2n} \left( \frac{\pi}{a} \right)^{2n+1}, \quad d_{2n} = \frac{(-1)^n}{2} \left(\frac{1}{4^n}- \sum_{k=0}^{n-1} (-1)^k {2n \choose 2k} d_{2k} \right), \quad d_0 = \frac{1}{2} </math>
+
+==[[Frullani integral|Frullani integrals]]==
+
+<math display="block">\int_{0}^{\infty }\frac{f(ax)-f(bx)}{x}\ dx=\left(\lim_{x \to 0}f(x)-\lim_{x \to \infty}f(x)\right) \ln \left(\frac{b}{a} \right)</math> holds if the integral exists and <math>f'(x)</math> is continuous.
+
+== See also ==
+{{Portal|Mathematics}}
+* [[List of integrals]]
+* [[Indefinite sum]]
+* [[Gamma function]]
+* [[List of limits]]
+
+==References==
+* {{cite journal |author-first1=Robert |author-last1=Reynolds |author-first2=Allan |author-last2=Stauffer  |title = Derivation of Logarithmic and Logarithmic Hyperbolic Tangent Integrals Expressed in Terms of Special Functions |journal = Mathematics |year = 2020 |volume=8 |number = 687 |page=687 |doi = 10.3390/math8050687 |doi-access = free }}
+* {{cite journal |author-first1=Robert |author-last1=Reynolds |author-first2=Allan |author-last2=Stauffer  |title = A Definite Integral Involving the Logarithmic Function in Terms of the Lerch Function |journal = Mathematics |year = 2019 |volume=7 |number = 1148 |page=1148 |doi = 10.3390/math7121148 |doi-access = free }}
+* {{cite journal |author-first1=Robert |author-last1=Reynolds |author-first2=Allan |author-last2=Stauffer  |title = Definite Integral of Arctangent and Polylogarithmic Functions Expressed as a Series |journal = Mathematics |year = 2019 |volume=7 |number = 1099 |page=1099 |doi = 10.3390/math7111099 |doi-access = free }}
+* {{cite journal |author-first1=Anton |author-last1=Winckler  |title = Eigenschaften Einiger Bestimmten Integrale |journal = Hof, K.K., Ed. |year = 1861 }}
+*{{cite book |author-first1=Murray R. |author-last1=Spiegel |author-first2=Seymour |author-last2=Lipschutz |author-first3=John |author-last3=Liu |title=Mathematical handbook of formulas and tables |year=2009 |publisher=[[McGraw-Hill]] |isbn=978-0071548557 |edition=3rd}}
+*{{cite book |author-last=Zwillinger |author-first=Daniel |title=CRC standard mathematical tables and formulae |year=2003 |publisher=[[CRC Press]] |isbn=978-143983548-7 |edition=32nd}}
+*{{AS ref}}
+
+{{Lists of integrals}}
+
+{{DEFAULTSORT:Definite integrals}}
+[[Category:Lists of integrals|definite integrals]]

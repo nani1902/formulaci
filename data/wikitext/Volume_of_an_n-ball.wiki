@@ -1,0 +1,326 @@
+{{DISPLAYTITLE:Volume of an ''n''-ball}}
+{{Short description|Size of a mathematical ball}}
+[[File:Volumes of unit balls.svg|thumb|upright=1.5|Volumes of balls in dimensions 0 through 25; unit ball in red.]]
+
+In [[geometry]], a [[ball (mathematics)|ball]] is a region comprising all points within a fixed [[Metric space|distance]], called the [[radius]], from a given point; that is, it is the region enclosed by a [[sphere]] or [[hypersphere]]. An {{math|''n''}}-ball is a ball in an {{math|''n''}}-dimensional [[Euclidean space]]. The '''volume of a {{math|''n''}}-ball''' is the [[Lebesgue measure]] of this ball, which generalizes to any dimension the usual volume of a ball in [[3-dimensional space]]. The volume of a {{mvar|n}}-ball of radius {{mvar|R}} is <math>R^nV_n,</math> where <math>V_n</math> is the volume of the [[unit ball|unit {{mvar|n}}-ball]], the {{mvar|n}}-ball of radius {{math|1}}.
+
+The [[real number]] <math>V_n</math> can be expressed via a two-dimension [[recurrence relation]].
+Closed-form expressions involve the [[gamma function|gamma]], [[factorial]], or [[double factorial]] function. 
+The volume can also be expressed in terms of <math>A_n</math>, the [[area]] of the [[unit n-sphere|unit {{mvar|n}}-sphere]].
+
+== Formulas ==
+{{See also|N-sphere#Volume and area|Unit sphere#Volume and area}}
+
+The first volumes are as follows:
+
+{| class="wikitable"
+! Dimension !! Volume of a ball of radius {{math|''R''}} !! Radius of a ball of volume {{math|''V''}}
+|-
+| 0
+| <math>1</math>
+| (all 0-balls have volume 1)
+|-
+| 1
+| <math>2R</math>
+| <math>\frac{V}{2}=0.5\times V</math>
+|-
+| 2
+| <math>\pi R^2 \approx 3.142\times R^2</math>
+| <math>\frac{V^{1/2}}{\sqrt{\pi}}\approx 0.564\times V^{\frac{1}{2}}</math>
+|-
+| 3
+| <math>\frac{4\pi}{3} R^3 \approx 4.189\times R^3</math> 	
+| <math>\left(\frac{3V}{4\pi}\right)^{1/3}\approx 0.620\times V^{1/3}</math>
+|-
+| 4
+| <math>\frac{\pi^2}{2} R^4 \approx 4.935\times R^4</math>
+| <math>\frac{(2V)^{1/4}}{\sqrt{\pi}}\approx 0.671\times V^{1/4}</math>
+|-
+| 5
+| <math>\frac{8\pi^2}{15} R^5\approx 5.264\times R^5</math>
+| <math>\left(\frac{15V}{8\pi^2}\right)^{1/5}\approx 0.717\times V^{1/5}</math>
+|-
+| 6
+| <math>\frac{\pi^3}{6} R^6 \approx 5.168 \times R^6</math>
+| <math>\frac{(6V)^{1/6}}{\sqrt{\pi}}\approx 0.761\times V^{1/6}</math>
+|-
+| 7
+| <math>\frac{16\pi^3}{105} R^7 \approx 4.725\times R^7</math>
+| <math>\left(\frac{105V}{16\pi^3}\right)^{1/7}\approx 0.801\times V^{1/7}</math>
+|-
+| 8
+| <math>\frac{\pi^4}{24} R^8 \approx 4.059\times R^8</math>
+| <math>\frac{(24V)^{1/8}}{\sqrt{\pi}}\approx 0.839\times V^{1/8}</math>
+|-
+| 9
+| <math>\frac{32\pi^4}{945} R^9 \approx 3.299\times R^9</math>
+| <math>\left(\frac{945V}{32\pi^4}\right)^{1/9}\approx 0.876\times V^{1/9}</math>
+|-
+| 10
+| <math>\frac{\pi^5}{120} R^{10} \approx 2.550\times R^{10}</math>
+| <math>\frac{(120V)^{1/10}}{\sqrt{\pi}}\approx 0.911\times V^{1/10}</math>
+|-
+| 11
+| <math>\frac{64\pi^5}{10395} R^{11} \approx 1.884\times R^{11}</math>
+| <math>\left(\frac{10395V}{64\pi^5}\right)^{1/11}\approx 0.944\times V^{1/11}</math>
+|-
+| 12
+| <math>\frac{\pi^6}{720} R^{12} \approx 1.335\times R^{12}</math>
+| <math>\frac{(720V)^{1/12}}{\sqrt{\pi}}\approx 0.976\times V^{1/12}</math>
+|-
+| 13
+| <math>\frac{128\pi^6}{135135} R^{13} \approx 0.911\times R^{13}</math>
+| <math>\left(\frac{135135V}{128\pi^6}\right)^{1/13}\approx 1.007\times V^{1/13}</math>
+|-
+| 14
+| <math>\frac{\pi^7}{5040} R^{14} \approx 0.599\times R^{14}</math>
+| <math>\frac{(5040V)^{1/14}}{\sqrt{\pi}}\approx 1.037\times V^{1/14}</math>
+|-
+| 15
+| <math>\frac{256\pi^7}{2027025} R^{15} \approx 0.381\times R^{15}</math>
+| <math>\left(\frac{2027025V}{256\pi^7}\right)^{1/15}\approx 1.066\times V^{1/15}</math>
+|-
+! ''n'' !! ''V<sub>n</sub>''(''R'') !! ''R<sub>n</sub>''(''V'')
+|}
+
+=== Closed form ===
+The {{math|''n''}}-dimensional volume of a Euclidean ball of [[radius]] {{math|''R''}} in {{math|''n''}}-dimensional Euclidean space is:<ref>Equation 5.19.4, ''NIST Digital Library of Mathematical Functions.'' http://dlmf.nist.gov/5.19#E4, Release 1.0.6 of 2013-05-06.</ref>
+<math display="block">V_n(R) = \frac{\pi^{n/2}}{\Gamma\bigl(\tfrac n2 + 1\bigr)}R^n,</math>
+where {{math|Γ}} is [[Euler]]'s [[gamma function]].  The gamma function is offset from but  otherwise extends the [[factorial]] function to non-[[integer]] [[argument of a function|arguments]].  It satisfies {{tmath|1= \Gamma(n) = (n-1)!}} if {{math|''n''}} is a positive integer and {{tmath|1= \Gamma\bigl(n + \tfrac12\bigr) = \sqrt{\pi} \cdot \bigl(n - \tfrac12\bigr) \cdot \bigl(n - \tfrac32\bigr) \cdots \tfrac12 }} if {{math|''n''}} is a non-negative integer.
+
+=== Two-dimension recurrence relation ===
+The volume can be computed without use of the Gamma function.  As is proved [[Volume of an n-ball#The two-dimension recursion formula|below]] using a vector-calculus [[double integral]] in [[polar coordinates]], the volume {{math|''V''}} of an {{math|''n''}}-ball of radius {{math|''R''}} can be expressed recursively in terms of the volume of an {{math|(''n'' − 2)}}-ball, via the interleaved [[recurrence relation]]:
+<math display="block">
+V_n(R) = \begin{cases}
+1 &\text{if } n=0,\\[0.5ex]
+2R &\text{if } n=1,\\[0.5ex]
+\dfrac{2\pi}{n}R^2 \times V_{n-2}(R) &\text{otherwise}.
+\end{cases}
+</math>
+This allows computation of {{math|''V''{{sub|''n''}}(''R'')}} in approximately {{math|''n'' / 2}} steps.
+
+=== Alternative forms ===
+The volume can also be expressed in terms of an {{math|(''n'' − 1)}}-ball using the one-dimension recurrence relation:
+<math display="block">\begin{align}
+V_0(R) &= 1, \\
+V_n(R) &= \frac{\Gamma\bigl(\tfrac n2 + \tfrac12 \bigr)\sqrt\pi}{\Gamma\bigl(\tfrac n2 + 1\bigr)}R\, V_{n-1}(R).
+\end{align}</math>
+
+Inverting the above, the radius of an {{math|''n''}}-ball of volume {{math|''V''}} can be expressed recursively in terms of the radius of an {{math|(''n'' − 2)}}- or {{math|(''n'' − 1)}}-ball:
+<math display="block">\begin{align}
+R_n(V) &= \bigl(\tfrac12n\bigr)^{1/n}\left(\Gamma\bigl(\tfrac n2\bigr) V\right)^{-2/(n(n-2))}R_{n-2}(V), \\
+R_n(V) &= \frac{\Gamma\bigl(\tfrac n2 + 1\bigr)^{1/n}}{\Gamma\bigl(\tfrac n2 + \tfrac12 \bigr)^{1/(n-1)}}V^{-1/(n(n-1))}R_{n-1}(V).
+\end{align}</math>
+
+Using explicit formulas for [[particular values of the gamma function]] at the integers and [[half-integer]]s gives formulas for the volume of a Euclidean ball in terms of [[factorial]]s.  For non-negative integer {{mvar|k}}, these are:
+<math display="block">\begin{align}
+V_{2k}(R) &= \frac{\pi^k}{k!}R^{2k}, \\
+V_{2k+1}(R) &= \frac{2(k!)(4\pi)^k}{(2k + 1)!}R^{2k+1}.
+\end{align}</math>
+
+The volume can also be expressed in terms of [[double factorial]]s.  For a positive odd integer {{math|2''k'' + 1}}, the double factorial is defined by
+<math display="block">(2k + 1)!! = (2k + 1) \cdot (2k - 1) \dotsm 5 \cdot 3 \cdot 1.</math>
+The volume of an odd-dimensional ball is
+<math display="block">V_{2k+1}(R) = \frac{2(2\pi)^k}{(2k + 1)!!}R^{2k+1}.</math>
+There are multiple conventions for double factorials of even integers.  Under the [[Double factorial#Complex arguments|convention]] in which the double factorial satisfies
+<math display="block">(2k)!! = (2k) \cdot (2k - 2) \dotsm 4 \cdot 2 \cdot \sqrt{2/\pi} = 2^k \cdot k! \cdot \sqrt{2/\pi},</math>
+the volume of an {{math|''n''}}-dimensional ball is, regardless of whether {{math|''n''}} is even or odd,
+<math display="block">V_n(R) = \frac{2(2\pi)^{(n-1)/2}}{n!!}R^n.</math>
+
+If the convention <math>(2k)!! = (2k) \cdot (2k - 2) \dotsm 4 \cdot 2</math> for double factorials is used, without the factor of {{tmath|\sqrt{2/\pi} }}, then the volume of an {{math|''n''}}-dimensional ball is, regardless of whether {{math|''n''}} is even or odd,
+<math display="block">V_n(R) = \frac{(\pi/2)^{\lfloor \frac{n}{2} \rfloor}(2R)^n}{n!!}.</math>
+
+Instead of expressing the volume {{math|''V''}} of the ball in terms of its radius {{math|''R''}}, the formulas can be [[inverse function|inverted]] to express the radius as a function of the volume:
+<math display="block">\begin{align}
+R_n(V) &= \frac{\Gamma\bigl(\tfrac n2 + 1\bigr)^{1/n}}{\sqrt{\pi}}V^{1/n} \\
+&= \left(\frac{n!! V}{2(2\pi)^{(n-1)/2}}\right)^{1/n} \\
+R_{2k}(V) &= \frac{(k!V)^{1/(2k)}}{\sqrt{\pi}}, \\
+R_{2k+1}(V) &= \left(\frac{(2k+1)!V}{2(k!)(4\pi)^k}\right)^{1/(2k+1)}.\end{align}</math>
+
+=== Approximation for high dimensions===
+[[Stirling's approximation]] for the gamma function can be used to approximate the volume when the number of dimensions is high.
+<math display="block">V_n(R) \sim \frac{1}{\sqrt{n\pi}}\left(\frac{2\pi e}{n}\right)^{n/2}R^n.</math>
+<math display="block">R_n(V) \sim (\pi n)^{1/(2n)}\sqrt{\frac{n}{2\pi e}} V^{1/n}.</math>
+In particular, for any fixed value of {{math|''R''}} the volume tends to a limiting value of 0 as {{math|''n''}} goes to infinity. Which value of {{mvar|n}} maximizes {{math|''V''{{sub|''n''}}(''R'')}} depends upon the value of {{mvar|R}}; for example, the volume {{math|''V''<sub>''n''</sub>(1)}} is increasing for {{math|0 ≤ ''n'' ≤ 5}}, achieves its maximum when {{math|''n'' {{=}} 5}}, and is decreasing for {{math|''n'' ≥ 5}}.<ref>Smith, David J. and Vamanamurthy, Mavina K., "How Small Is a Unit Ball?", Mathematics Magazine, Volume 62, Issue 2, 1989, pp. 101–107, https://doi.org/10.1080/0025570X.1989.11977419.</ref>
+
+Also, there is an asymptotic formula for the surface area<ref>{{Cite web | url=https://www.stat.berkeley.edu/~songmei/Teaching/STAT260_Spring2021/Lecture_notes/scribe_lecture7.pdf | title=Lecture 7: Concentration Inequalities and Field theoretic calculations | date=2021-02-10 | author=Song Mei | website=www.stat.berkeley.edu}}</ref><math display="block">\lim_n \frac 1n \ln A_{n-1}(\sqrt n) = \frac 12 (\ln(2\pi) + 1)</math>
+
+=== Relation with surface area ===
+[[File:Surface areas of unit hyperspheres.svg|thumb|upright=1.5|Surface areas of hyperspheres in dimensions 0 through 25]]
+
+Let {{math|''A''{{sub|''n'' − 1}}(''R'')}} denote the hypervolume of the [[n-sphere|{{math|(''n'' − 1)}}-sphere]] of radius {{math|''R''}}. The {{math|(''n'' − 1)}}-sphere is the {{math|(''n'' − 1)}}-dimensional boundary (surface) of the {{math|''n''}}-dimensional ball of radius {{math|''R''}}, and the sphere's hypervolume and the ball's hypervolume are related by:
+<math display="block">A_{n-1}(R) = \frac{d}{dR} V_{n}(R) = \frac{n}{R}V_{n}(R).</math>
+
+Thus, {{math|''A''{{sub|''n'' − 1}}(''R'')}} inherits formulas and recursion relationships from {{math|''V''{{sub|''n''}}(''R'')}}, such as
+<math display="block">A_{n-1}(R) = \frac{2\pi^{n/2}}{\Gamma\bigl(\tfrac n2\bigr)}R^{n-1}.</math>
+There are also formulas in terms of factorials and double factorials.
+
+== Proofs ==
+There are many proofs of the above formulas.
+
+=== The volume is proportional to the {{math|''n''}}th power of the radius ===
+An important step in several proofs about volumes of {{math|''n''}}-balls, and a generally useful fact besides, is that the volume of the {{math|''n''}}-ball of radius {{math|''R''}} is proportional to {{math|''R''<sup>''n''</sup>}}:
+<math display="block">V_n(R) \propto R^n.</math>
+The proportionality constant is the volume of the unit ball.
+
+This is a special case of a general fact about volumes in {{math|''n''}}-dimensional space: If {{math|''K''}}
+is a body ([[measurable set]]) in that space and {{math|''RK''}} is the body obtained by stretching in all directions by the factor {{math|''R''}} then the volume of {{math|''RK''}} equals {{math|''R''<sup>''n''</sup>}} times the volume of {{math|''K''}}. This is a direct consequence of the change of variables formula:
+<math display="block"> V(RK) = \int_{RK} dx = \int_K R^n\, dy = R^n V(K) </math>
+where {{math|1=''dx'' = ''dx''<sub>1</sub>…''dx<sub>n</sub>''}} and the substitution {{math|1=''x'' = ''Ry''}} was made.
+
+Another proof of the above relation, which avoids multi-dimensional [[integral|integration]], uses [[mathematical induction|induction]]: The base case is {{math|''n'' {{=}} 0}}, where the proportionality is obvious. For the inductive step, assume that proportionality is true in dimension {{math|''n'' − 1}}. Note that the intersection of an ''n''-ball with a [[hyperplane]] is an {{math|(''n'' − 1)}}-ball. When the volume of the {{math|''n''}}-ball is written as the integral of volumes of {{math|(''n'' − 1)}}-balls:
+<math display="block">V_n(R) = \int_{-R}^R V_{n-1}\!\left(\sqrt{R^2 - x^2}\right) dx,</math>
+it is possible by the inductive hypothesis to remove a factor of {{math|''R''}} from the radius of the {{math|(''n'' − 1)}}-ball to get:
+<math display="block">V_n(R) = R^{n-1}\! \int_{-R}^R V_{n-1}\!\left(\sqrt{1 - \left(\frac{x}{R}\right)^2}\right) dx.</math>
+Making the change of variables {{math|''t'' {{=}} ''{{sfrac|x|R}}''}} leads to:
+<math display="block">V_n(R) = R^n\! \int_{-1}^1 V_{n-1}\!\left(\sqrt{1 - t^2}\right) dt = R^n V_n(1),</math>
+which demonstrates the proportionality relation in dimension {{math|''n''}}. By induction, the proportionality relation is true in all dimensions.
+
+=== The two-dimension recursion formula ===
+A proof of the recursion formula relating the volume of the {{math|''n''}}-ball and an {{math|(''n'' − 2)}}-ball can be given using the proportionality formula above and integration in [[Cylindrical coordinate system|cylindrical coordinates]]. Fix a plane through the center of the ball. Let {{math|''r''}} denote the distance between a point in the plane and the center of the sphere, and let {{math|''θ''}} denote the azimuth. Intersecting the {{math|''n''}}-ball with the {{math|(''n'' − 2)}}-dimensional plane defined by fixing a radius and an azimuth gives an {{math|(''n'' − 2)}}-ball of radius {{tmath|\textstyle \sqrt{R^2 - r^2} }}. The volume of the ball can therefore be written as an iterated integral of the volumes of the {{math|(''n'' − 2)}}-balls over the possible radii and azimuths:
+<math display="block">V_n(R) = \int_0^{2\pi} \int_0^R V_{n-2}\!\left(\sqrt{R^2 - r^2}\right) r\,dr\,d\theta,</math>
+The azimuthal coordinate can be immediately integrated out. Applying the proportionality relation shows that the volume equals
+<math display="block">V_n(R) = 2\pi V_{n-2}(R) \int_0^R \left(1 - \left(\frac{r}{R}\right)^2\right)^{(n-2)/2}\,r\,dr.</math>
+The integral can be evaluated by making the substitution {{math|''u'' {{=}} 1 − (''{{sfrac|r|R}}''){{su|p=2}}}} to get
+<math display="block">\begin{align}
+V_n(R) &= 2\pi V_{n-2}(R) \cdot \left[-\frac{R^2}{n}\left(1 - \left(\frac{r}{R}\right)^2\right)^{n/2}\right]_{r=0}^{r=R} \\
+&= \frac{2\pi R^2}{n} V_{n-2}(R),
+\end{align}</math>
+which is the two-dimension recursion formula.
+
+The same technique can be used to give an inductive proof of the volume formula. The base cases of the induction are the 0-ball and the 1-ball, which can be checked directly using the facts {{tmath|1= \Gamma(1) = 1}} and {{tmath|1= \Gamma\bigl(\tfrac32\bigr) = \tfrac12 \cdot \Gamma\bigl(\tfrac12\bigr) = \tfrac\pi2}}. The inductive step is similar to the above, but instead of applying proportionality to the volumes of the {{math|(''n'' − 2)}}-balls, the inductive hypothesis is applied instead.
+
+=== The one-dimension recursion formula ===
+The proportionality relation can also be used to prove the recursion formula relating the volumes of an {{math|''n''}}-ball and an {{math|(''n'' − 1)}}-ball. As in the proof of the proportionality formula, the volume of an {{math|''n''}}-ball can be written as an integral over the volumes of {{math|(''n'' − 1)}}-balls. Instead of making a substitution, however, the proportionality relation can be applied to the volumes of the {{math|(''n'' − 1)}}-balls in the [[integrand]]:
+<math display="block">V_n(R) = V_{n-1}(R) \int_{-R}^R \left(1 - \left(\frac{x}{R}\right)^2\right)^{(n-1)/2} \,dx.</math>
+The integrand is an [[even function]], so by symmetry the interval of integration can be restricted to {{math|[0, ''R'']}}. On the interval {{math|[0, ''R'']}}, it is possible to apply the substitution {{math|''u'' {{=}} (''{{sfrac|x|R}}''){{su|p=2}}}}. This transforms the expression into
+<math display="block">V_{n-1}(R) \cdot R \cdot \int_0^1 (1-u)^{(n-1)/2}u^{-\frac12}\,du</math>
+The integral is a value of a well-known [[special function]] called the [[beta function]] {{math|Β(''x'', ''y'')}}, and the volume in terms of the beta function is
+<math display="block">V_n(R) = V_{n-1}(R) \cdot R \cdot \Beta\left(\tfrac{n + 1}2, \tfrac12\right).</math>
+The beta function can be expressed in terms of the gamma function in much the same way that factorials are related to [[binomial coefficient]]s. Applying this relationship gives
+<math display="block">V_n(R) = V_{n-1}(R) \cdot R \cdot \frac{\Gamma\bigl(\tfrac n2 + \tfrac12 \bigr)\Gamma\bigl(\tfrac12\bigr)}{\Gamma\bigl(\tfrac n2 + 1\bigr)}.</math>
+Using the value {{tmath|1= \Gamma\bigl(\tfrac12\bigr) = \sqrt{\pi} }} gives the one-dimension recursion formula:
+<math display="block">V_n(R) = R\sqrt{\pi}\frac{\Gamma\bigl(\tfrac n2 + \tfrac12\bigr)}{\Gamma\bigl(\tfrac n2 + 1\bigr)} V_{n-1}(R).</math>
+
+As with the two-dimension recursive formula, the same technique can be used to give an inductive proof of the volume formula.
+
+=== Direct integration in spherical coordinates ===
+The volume of the ''n''-ball <math>V_n(R)</math> can be computed by integrating the [[volume element]] in [[N-sphere#Spherical coordinates|spherical coordinates]]. The [[spherical coordinate system]] has a radial coordinate {{math|''r''}} and angular coordinates {{math|''φ''<sub>1</sub>, …, ''φ''<sub>''n'' − 1</sub>}}, where the domain of each {{math|''φ''}} except {{math|''φ''<sub>''n'' − 1</sub>}} is {{math|[0, {{pi}})}}, and the domain of {{math|''φ''<sub>''n'' − 1</sub>}} is {{math|[0, 2{{pi}})}}. The spherical volume element is:
+<math display="block">dV = r^{n-1}\sin^{n-2}(\varphi_1)\sin^{n-3}(\varphi_2) \cdots \sin(\varphi_{n-2})\,dr\,d\varphi_1\,d\varphi_2 \cdots d\varphi_{n-1},</math>
+and the volume is the integral of this quantity over {{math|''r''}} between 0 and {{math|''R''}} and all possible angles:
+<math display="block">V_n(R) = \int_0^R \int_0^\pi \cdots \int_0^{2\pi} r^{n-1}\sin^{n-2}(\varphi_1) \cdots \sin(\varphi_{n-2})\,d\varphi_{n-1} \cdots d\varphi_1\,dr.</math>
+Each of the factors in the integrand depends on only a single variable, and therefore the iterated integral can be written as a product of integrals:
+<math display="block">V_n(R) = \left(\int_0^R r^{n-1}\,dr\right)\!\left(\int_0^\pi \sin^{n-2}(\varphi_1)\,d\varphi_1\right)\cdots\left(\int_0^{2\pi} d\varphi_{n-1}\right).</math>
+The integral over the radius is {{math|''{{sfrac|R<sup>n</sup>|n}}''}}. The intervals of integration on the angular coordinates can, by the symmetry of the sine about {{sfrac|{{pi}}|2}}, be changed to {{math|[0, {{sfrac|{{pi}}|2}}]}}:
+<math display="block">V_n(R) = \frac{R^n}{n} \left(2\int_0^{\pi/2} \sin^{n-2}(\varphi_1)\,d\varphi_1\right) \cdots \left(4\int_0^{\pi/2} d\varphi_{n-1}\right).</math>
+Each of the remaining integrals is now a particular value of the beta function:
+<math display="block">V_n(R) = \frac{R^n}{n} \Beta\bigl(\tfrac{n-1}2, \tfrac12\bigr) \Beta\bigl(\tfrac{n-2}2, \tfrac12\bigr) \cdots \Beta\bigl(1, \tfrac12\bigr) \cdot 2\,\Beta\bigl(\tfrac12, \tfrac12\bigr).</math>
+
+The beta functions can be rewritten in terms of gamma functions:
+
+<math display="block">V_n(R) = \frac{R^n}{n} \cdot \frac{\Gamma\bigl(\tfrac n2 - \tfrac12\bigr)\Gamma\bigl(\tfrac12\bigr)}{\Gamma\bigl(\tfrac n2\bigr)} \cdot \frac{\Gamma\bigl(\tfrac n2 - 1\bigr)\Gamma\bigl(\tfrac12\bigr)}{\Gamma\bigl(\tfrac n2 - \tfrac12\bigr)} \cdots \frac{\Gamma(1)\Gamma\bigl(\tfrac12\bigr)}{\Gamma\bigl(\tfrac32\bigr)} \cdot 2 \frac{\Gamma\bigl(\tfrac12\bigr)\Gamma\bigl(\tfrac12\bigr)}{\Gamma(1)}.</math>
+
+This product telescopes. Combining this with the values {{tmath|1= \Gamma\bigl(\tfrac12\bigr) = \sqrt{\pi} }} and {{tmath|1= \Gamma(1) = 1}} and the functional equation {{tmath|1= z\Gamma(z) = \Gamma(z+1)}} leads to
+
+<math display="block">V_n(R) = \frac{2\pi^{n/2}R^n}{n\,\Gamma\bigl(\tfrac n2\bigr)} = \frac{\pi^{n/2}R^n}{\Gamma\bigl(\tfrac n2 + 1\bigr)}.</math>
+
+=== Gaussian integrals ===
+The volume formula can be proven directly using [[Gaussian integral]]s. Consider the function:
+<math display="block">f(x_1, \ldots, x_n) = {\exp}\biggl({-\tfrac12 \sum_{i=1}^n x_i^2}\biggr).</math>
+This function is both rotationally invariant and a product of functions of one variable each. Using the fact that it is a product and the formula for the Gaussian integral gives:
+<math display="block">\int_{\mathbf{R}^n} f \,dV = \prod_{i=1}^n \left(\int_{-\infty}^\infty \exp\left(-\tfrac12 x_i^2\right)\,dx_i\right) = (2\pi)^{n/2},</math>
+where {{math|''dV''}} is the {{math|''n''}}-dimensional volume element. Using [[rotational invariance]], the same integral can be computed in spherical coordinates:
+<math display="block">\int_{\mathbf{R}^n} f \,dV = \int_0^\infty \int_{S^{n-1}(r)} \exp\left(-\tfrac12 r^2\right) \,dA\,dr,</math>
+where {{math|''S''<sup>''n'' − 1</sup>(''r'')}} is an {{math|(''n'' − 1)}}-sphere of radius {{math|''r''}} (being the surface of an {{math|''n''}}-ball of radius {{math|''r''}}) and {{math|''dA''}} is the area element (equivalently, the {{math|(''n'' − 1)}}-dimensional volume element). The surface area of the sphere satisfies a proportionality equation similar to the one for the volume of a ball: If {{math|''A''<sub>''n'' − 1</sub>(''r'')}} is the surface area of an {{math|(''n'' − 1)}}-sphere of radius {{math|''r''}}, then:
+<math display="block">A_{n-1}(r) = r^{n-1} A_{n-1}(1).</math>
+Applying this to the above integral gives the expression
+<math display="block">(2\pi)^{n/2} = \int_0^\infty \int_{S^{n-1}(r)} \exp\left(-\tfrac12 r^2\right) \,dA\,dr  =  A_{n-1}(1) \int_0^\infty \exp\left(-\tfrac12 r^2\right)\,r^{n-1}\,dr.</math>
+Substituting {{math|''t'' {{=}} {{sfrac|''r''<sup>2</sup>|2}}}}:
+<math display="block">\int_0^\infty \exp\left(-\tfrac12 r^2\right)\,r^{n-1}\,dr  =  2^{(n-2)/2} \int_0^\infty e^{-t} t^{(n-2)/2}\,dt.</math>
+The integral on the right is the gamma function evaluated at {{math|{{sfrac|''n''|2}}}}.
+
+Combining the two results shows that
+<math display="block">A_{n-1}(1) = \frac{2\pi^{n/2}}{\Gamma\bigl(\tfrac n2\bigr)}.</math>
+To derive the volume of an {{math|''n''}}-ball of radius {{math|''R''}} from this formula, integrate the surface area of a sphere of radius {{math|''r''}} for {{math|0 ≤ ''r'' ≤ ''R''}} and apply the functional equation {{math|''z''Γ(''z'') {{=}} Γ(''z'' + 1)}}:
+<math display="block">V_n(R) = \int_0^R \frac{2\pi^{n/2}}{\Gamma\bigl(\tfrac n2\bigr)} \,r^{n-1}\,dr = \frac{2\pi^{n/2}}{n\,\Gamma\bigl(\tfrac n2\bigr)}R^n = \frac{\pi^{n/2}}{\Gamma\bigl(\tfrac n2 + 1\bigr)}R^n.</math>
+
+=== Geometric proof ===
+
+The relations {{tmath|1= V_{n+1}(R) = \tfrac{R}{n+1}A_n(R)}} and {{tmath|1= A_{n+1}(R) = (2\pi R)V_n(R)}} and thus the volumes of {{mvar|n}}-balls and areas of {{mvar|n}}-spheres can also be derived geometrically.  As noted above, because a ball of radius {{tmath|R}} is obtained from a unit ball {{tmath|B_n}} by rescaling all directions in {{tmath|R}} times, {{tmath|V_n(R)}} is proportional to {{tmath|\textstyle R^n}}, which implies that {{tmath|1= \tfrac{d}{dR}V_n(R) = \tfrac{n}{R} V_n(R)}}.  Also, {{tmath|1= A_{n-1}(R) = \tfrac{d}{dR}V_n(R)}}, since a ball is a union of [[concentric spheres]] and increasing the radius by {{mvar|ε}} sweeps out a shell of thickness {{mvar|ε}}.  Thus, {{tmath|1= V_{n}(R) = \tfrac{R}{n}A_{n-1}(R)}}.
+
+Furthermore, {{tmath|1= A_{n+1}(R) = (2\pi R)V_n(R)}}, since a volume-preserving [[bijection]] between the unit sphere ({{tmath|S_{n+1} }}) and {{tmath|S_1 \times B_n}} exists:
+<math display="block">(x,y,\vec{z}) \mapsto \left(\frac{x}{\sqrt{x^2+y^2}},\frac{y}{\sqrt{x^2+y^2}},\vec{z}\right)</math>
+({{tmath|\vec{z} }} is an {{mvar|n}}-[[tuple]]; {{tmath|1=\vert (x,y,\vec{z})\vert =1}}; we are ignoring sets of measure 0).  Volume is preserved because at each point; the difference from [[isometry]] is a stretching in the ''xy'' plane (by <math display="inline">1/\!\sqrt{x^2+y^2}</math> times in the direction of constant {{tmath|\textstyle x^2+y^2}}) that exactly matches the compression in the direction of the [[gradient]] of <math>|\vec{z}|</math> on {{tmath|S_n}} (with the relevant angles being equal).  For {{tmath|S_2}}, a similar argument was originally made by [[Archimedes]] in ''[[On the Sphere and Cylinder]]''.
+
+== Balls in {{math|''L''{{isup|''p''}}}} norms ==
+There are also explicit expressions for the volumes of balls in [[Lp space|{{math|''L''{{isup|''p''}}}} norm]]s. The {{math|''L''{{isup|''p''}}}} norm of the vector {{math|''x'' {{=}} (''x''<sub>1</sub>, …, ''x''<sub>''n''</sub>)}} in {{math|'''R'''<sup>''n''</sup>}} is
+<math display="block">\|x\|_p = \biggl(\sum_{i=1}^n | x_i |^p \biggr)^{\! 1/p},</math>
+and an {{math|''L''{{isup|''p''}}}} ball is the set of all vectors whose {{math|''L''{{isup|''p''}}}} norm is less than or equal to a fixed number called the radius of the ball. The case {{math|''p'' {{=}} 2}} is the standard [[Euclidean distance]] function, but other values of {{math|''p''}} occur in diverse contexts such as [[information theory]], [[coding theory]], and [[dimensional regularization]].
+
+The volume of an {{math|''L''{{isup|''p''}}}} ball of radius {{math|''R''}} is
+
+<math display="block">V^p_n(R) = \frac{\Bigl(2\,\Gamma\bigl(\tfrac1p + 1\bigr)\Bigr)^n}{\Gamma\bigl(\tfrac np + 1\bigr)}R^n.</math>
+
+These volumes satisfy recurrence relations similar to those for {{math|''p'' {{=}} 2}}:
+
+<math display="block">V^p_n(R) = \frac{\Bigl(2\,\Gamma\bigl(\tfrac1p + 1\bigr)\Bigr)^p p}{n} R^p \, V^p_{n-p}(R)</math>
+
+and 
+
+<math display="block">V^p_n(R) = 2 \frac{\Gamma\bigl(\tfrac1p + 1\bigr)\Gamma\bigl(\tfrac{n-1}p + 1\bigr)}{\Gamma\bigl(\tfrac np + 1\bigr)} R \, V^p_{n-1}(R),</math>
+
+which can be written more concisely using a [[Binomial coefficient#Two_real_or_complex_valued_arguments|generalized binomial coefficient]],
+
+<math display="block">V^p_n(R) =  \frac{2}{\dbinom{n/p}{1/p}} R \, V^p_{n-1}(R).</math>
+
+For {{math|''p'' {{=}} 2}}, one recovers the recurrence for the volume of a Euclidean ball because {{math|2Γ({{sfrac|3|2}}) {{=}} {{radic|{{pi}}}}}}.
+
+For example, in the cases {{math|''p'' {{=}} 1}} ([[taxicab norm]]) and {{math|''p'' {{=}} ∞}} ([[max norm]]), the volumes are:
+<math display="block">\begin{align} V^1_n(R) &= \frac{2^n}{n!}R^n, \\ V^\infty_n(R) &= 2^n R^n. \end{align}</math>
+These agree with elementary calculations of the volumes of [[cross-polytope]]s and [[hypercube]]s.
+
+=== Relation with surface area ===
+For most values of {{math|''p''}}, the surface area <math>A_{n-1}^p(R)</math> of an {{math|''L''{{isup|''p''}}}} sphere of radius {{math|''R''}} (the boundary of an {{math|''L''{{isup|''p''}}}} {{math|''n''}}-ball of radius {{math|''R''}}) cannot be calculated by [[derivative|differentiating]] the volume of an {{math|''L''{{isup|''p''}}}} ball with respect to its radius. While the volume can be expressed as an integral over the surface areas using the [[coarea formula]], the coarea formula contains a correction factor that accounts for how the {{math|''p''}}-norm varies from point to point. For {{math|''p'' {{=}} 2}} and {{math|''p'' {{=}} ∞}}, this factor is one. However, if {{math|''p'' {{=}} 1}} then the correction factor is {{tmath|\sqrt{n} }}}: the surface area of an {{math|''L''<sup>1</sup>}} sphere of radius {{math|''R''}} in {{math|'''R'''<sup>''n''</sup>}} is {{tmath|\sqrt{n} }} times the derivative of the volume of an {{math|''L''<sup>1</sup>}} ball.  This can be seen most simply by applying the [[divergence theorem]] to the [[vector field]] {{math|'''F'''(x) {{=}} x}} to get
+
+{{bi|left=1.6|1= {{nobr|1= <math>nV^1_n(R) = </math>{{oiint
+| preintegral = <math>\iiint_V\left(\mathbf{\nabla}\cdot\mathbf{F}\right)\,dV=</math>
+| intsubscpt = <math>\scriptstyle S</math>
+| integrand = <math>(\mathbf{F}\cdot\mathbf{n})\,dS </math>
+}} {{br}} <math>\phantom{nV^1_n(R)}\vphantom{\Biggl(} = </math> {{oiint
+| intsubscpt = <math>\scriptstyle S</math>
+| integrand = <math>\frac{1}{\sqrt{n}}(\vert x_1\vert +\cdots+\vert x_n\vert )\,dS </math>
+}}  <math> = \frac{R}{\sqrt{n}} </math>{{oiint
+| intsubscpt = <math>\scriptstyle S</math>
+| integrand = <math>\,dS </math>
+}} {{br}} <math>\phantom{nV^1_n(R)}\vphantom{\Biggl(} = \frac{R}{\sqrt{n}} A^1_{n-1}(R).</math>}} }}
+For other values of {{math|''p''}}, the constant is a complicated integral.
+
+=== Generalizations ===
+The volume formula can be generalized even further. For [[positive real numbers]] {{math|''p''<sub>1</sub>, …, ''p''<sub>''n''</sub>}}, define the {{math|(''p''<sub>1</sub>, …, ''p''<sub>''n''</sub>)}} ball with limit {{math|''L'' ≥ 0}} to be
+<math display="block">B_{p_1, \ldots, p_n}(L) = \left\{ x = (x_1, \ldots, x_n) \in \mathbf{R}^n : \vert x_1 \vert^{p_1} + \cdots + \vert x_n \vert^{p_n} \le L \right\}.</math>
+The volume of this ball has been known since the time of Dirichlet:<ref>{{cite journal|last=Dirichlet|first=P. G. Lejeune|title=Sur une nouvelle méthode pour la détermination des intégrales multiples|trans-title=On a novel method for determining multiple integrals|journal=Journal de Mathématiques Pures et Appliquées|volume=4|date=1839|pages=164–168}}</ref>
+<math display="block">V\bigl(B_{p_1, \ldots, p_n}(L)\bigr) = \frac{2^n \Gamma\bigl(\tfrac1{p_1} + 1\bigr) \cdots \Gamma\bigl(\tfrac1{p_n} + 1\bigr)}{\Gamma\bigl(\tfrac1{p_1} + \cdots + \tfrac1{p_n} + 1\bigr)} L^{\tfrac1{p_1} + \cdots + \tfrac1{p_n}}.</math>
+
+==== Comparison to {{math|''L''{{isup|''p''}}}} norm ====
+Using the [[harmonic mean]] <math>p = \frac{n}{\frac{1}{p_1} + \cdots \frac{1}{p_n}}</math> and defining <math>R = \sqrt[p]{L}</math>, the similarity to the volume formula for the {{math|''L''{{isup|''p''}}}} ball becomes clear.
+<math display="block">V\left(\left\{ x \in \mathbf{R}^n : \sqrt[p]{\vert x_1 \vert^{p_1} + \cdots + \vert x_n \vert^{p_n}} \le R \right\}\right) = \frac{2^n \Gamma\bigl(\tfrac1{p_1} + 1\bigr) \cdots \Gamma\bigl(\tfrac1{p_n} + 1\bigr)}{\Gamma\bigl(\tfrac{n}{p} + 1\bigr)} R^n.</math>
+
+==See also==
+* [[n-sphere|{{math|''n''}}-sphere]]
+* [[Sphere packing]]
+* [[Hamming bound]]
+
+==References==
+{{Reflist}}
+
+=== Further reading ===
+* {{Cite journal |last=Hayes |first=Brian| author-link=Brian Hayes (scientist) |title=An Adventure in the ''N''th Dimension |url=https://www.americanscientist.org/article/an-adventure-in-the-nth-dimension |access-date=October 24, 2024 |journal=[[American Scientist]] |volume=99 |issue=9| date=November–December 2011| page=442 |doi=10.1511/2011.93.442|url-access=subscription }}, bibliography, accessible to layman.
+** Updated version: {{Cite book |last=Hayes |first=Brian |author-link=Brian Hayes (scientist) |chapter=Playing Ball in the ''n''th Dimension |title=Foolproof, and Other Mathematical Meditations |publisher=[[MIT Press|The MIT Press]] |publication-date=September 22, 2017 |isbn=9780262036863}}, bibliography, accessible to layman.
+
+==External links==
+*[http://www.brouty.fr/Maths/sphere.html Derivation in hyperspherical coordinates] {{in lang|fr}}
+* [http://mathworld.wolfram.com/Hypersphere.html Hypersphere] on Wolfram MathWorld
+* [http://www.mathreference.com/ca-int,hsp.html Volume of the Hypersphere] at Math Reference
+
+[[Category:Multi-dimensional geometry]]
+[[Category:Size]]

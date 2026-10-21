@@ -1,0 +1,1272 @@
+{{Short description|Families of certain algebraic structures}}
+{{Cleanup|reason=various, see talk|date=October 2012}}
+In [[mathematics]], a [[semigroup]] is a [[nonempty set]] together with an [[associative]] [[binary operation]]. A '''special class of semigroups'''  is a [[Class (set theory)|class]] of [[semigroup]]s satisfying additional [[property (philosophy)|properties]] or conditions. Thus the class of [[commutative]] semigroups consists of all those semigroups in which the binary operation satisfies the commutativity property that ''ab'' = ''ba'' for all elements ''a'' and ''b'' in the semigroup.
+The class of [[Finite set|finite]] semigroups consists of those semigroups for which the [[underlying set]] has finite [[cardinality]]. Members of the class of [[Brandt semigroup]]s are required to satisfy not just one condition but a set of additional properties. A large collection of special classes of semigroups have been defined though not all of them have been studied equally intensively.
+
+In the [[algebra]]ic [[theory]] of semigroups, in constructing special classes, attention is focused only on those properties, restrictions and conditions which can be expressed in terms of the binary operations in the semigroups and occasionally on the cardinality and similar properties of [[subset]]s of the [[underlying set]].  The underlying [[set (mathematics)|sets]] are not assumed to carry any other mathematical [[structure]]s like [[Partially ordered set|order]] or [[topology]].
+
+As in any algebraic theory,  one of the main problems of the theory of semigroups is the [[Classification theorem|classification]] of all semigroups and a complete description of their structure. In the case of semigroups, since the binary operation is required to satisfy only the associativity property the problem of classification is considered extremely difficult. Descriptions of structures have been obtained for certain special classes of semigroups. For example, the structure of the sets of idempotents of regular semigroups is completely known. Structure descriptions are presented in terms of better known types of semigroups. The best known type of semigroup is the [[Group (mathematics)|group]].
+
+A (necessarily incomplete) list of various special classes of semigroups is presented below. To the extent possible the defining properties are formulated in terms of the binary operations in the semigroups. The references point to the locations from where the defining properties are sourced.
+
+== Notations ==
+
+In describing the defining properties of the various special classes of semigroups, the following notational conventions are adopted.
+
+{| class="wikitable"
+|+Notations
+|-
+! Notation
+! Meaning
+|-
+| ''S''
+| Arbitrary semigroup
+|-
+| ''E''
+| Set of idempotents in ''S''
+|-
+| ''G''
+| Group of units in ''S''
+|-
+| ''I''
+| Minimal ideal of ''S'' 
+|-
+| ''V''
+| [[regular semigroup|Regular]] elements of ''S''
+|-
+|''X''
+| Arbitrary set
+|-
+| ''a'', ''b'', ''c''
+| Arbitrary elements of ''S''
+|-
+| ''x'', ''y'', ''z''
+| Specific elements of ''S''
+|-
+| ''e'', ''f'', ''g''
+| Arbitrary elements of ''E''
+|-
+| ''h''
+| Specific element of ''E''
+|-
+|''l'', ''m'', ''n''
+| Arbitrary positive integers
+|-
+|''j'', ''k''
+| Specific positive integers
+|-
+| ''v'', ''w''
+| Arbitrary elements of ''V''
+|-
+| 0
+| Zero element of ''S''
+|-
+| 1
+| Identity element of ''S''
+|-
+|''S''<sup>1</sup>
+| ''S'' if 1 ∈ ''S''; ''S'' ∪ { 1 } if 1 ∉ ''S''
+|-
+| ''a'' ≤<sub>''L''</sub> ''b''<br>''a'' ≤<sub>''R''</sub> ''b''<br>''a'' ≤<sub>''H''</sub> ''b''<br>''a'' ≤<sub>''J''</sub> ''b''
+| ''S''<sup>1</sup>''a'' ⊆ ''S''<sup>1</sup>''b'' <br>''aS''<sup>1</sup> ⊆ ''bS''<sup>1</sup> <br>''S''<sup>1</sup>''a'' ⊆ ''S''<sup>1</sup>''b''  and ''aS''<sup>1</sup> ⊆ ''bS''<sup>1</sup> <br>''S''<sup>1</sup>''aS''<sup>1</sup> ⊆ ''S''<sup>1</sup>''bS''<sup>1</sup> 
+|-
+| ''L'', ''R'', ''H'', ''D'', ''J''
+| [[Green's relations]]
+|-
+| ''L''<sub>''a''</sub>, ''R''<sub>''a''</sub>, ''H''<sub>''a''</sub>, ''D''<sub>''a''</sub>, ''J''<sub>''a''</sub>
+| Green classes containing ''a''
+|-
+| <math>x^\omega</math>
+| The only power of ''x'' which is idempotent. This element  exists, assuming the semigroup is (locally) finite.  See [[variety of finite semigroups]] for more information about this notation.
+|-
+| <math>|X|</math>
+| The cardinality of ''X'', assuming ''X'' is finite.
+|-
+|}
+For example, the definition ''xab'' = ''xba'' should be read as:
+*There exists ''x'' an element of the semigroup such that, for each ''a'' and ''b'' in the semigroup, ''xab'' and ''xba'' are equal.
+
+== List of special classes of semigroups ==
+The third column states whether this set of semigroups forms a [[variety (universal algebra)|variety]]. And whether the set of finite semigroups of this special class forms a [[variety of finite semigroups]]. Note that if this set is a variety, its set of finite elements is automatically a variety of finite semigroups.
+
+{| class="wikitable sortable"
+|+List of special classes of semigroups
+|-
+! Terminology
+! class="unsortable" |Defining property
+! Variety of finite semigroup
+! Reference(s)
+|-
+|[[Finite set|Finite]] semigroup
+|
+*''S'' is a [[finite set]].
+|
+*Not infinite
+*Finite
+|
+|-
+|[[Empty semigroup]]
+|
+*''S'' = <math>\emptyset</math>
+|No
+|
+|-
+|[[Trivial semigroup]]
+|
+*Cardinality of ''S'' is 1.
+|
+*Infinite
+*Finite
+|
+|-
+|[[Monoid]]
+|
+*1 ∈ ''S''
+|No
+|[[#Gril|Gril]] p.&nbsp;3
+|-
+| [[Band (algebra)|Band]]<br>(Idempotent semigroup)
+| 
+*''a''<sup>2</sup> = ''a''
+|
+*Infinite
+*Finite
+|[[#C&P|C&P]]  p.&nbsp;4
+|-
+|[[Band (algebra)#Rectangular bands|Rectangular band]]
+|
+*A band such that ''aba'' = ''a''
+|
+*Infinite
+*Finite
+|[[#Fennemore|Fennemore]]
+|-
+|[[Band (algebra)#Normal bands|Normal band]]
+|
+*A band such that ''abca'' = ''acba''
+|
+*Infinite
+*Finite
+|[[#Fennemore|Fennemore]]
+|-
+| [[Semilattice]]
+| A commutative band, that is:
+*''a''<sup>2</sup> = ''a''
+*''ab '' =  ''ba ''
+|
+*Infinite
+*Finite
+|
+*[[#C&P|C&P]] p.&nbsp;24
+*[[#Fennemore|Fennemore]]
+|-
+| [[Commutative]] semigroup
+|
+*''ab'' = '' ba ''
+|
+*Infinite
+*Finite
+| [[#C&P|C&P]] p.&nbsp;3
+|-
+|[[Archimedean property|Archimedean]] commutative semigroup
+|
+*''ab'' = ''ba''
+*There exists ''x'' and ''k'' such that ''a''<sup>''k''</sup> =  ''xb''.
+| 
+|[[#C&P|C&P]] p.&nbsp;131
+|-
+|[[Nowhere commutative semigroup]]
+|
+*''ab'' = ''ba'' &nbsp; ⇒ &nbsp; ''a'' = ''b''
+|
+|[[#C&P|C&P]] p.&nbsp;26
+|-
+|Left weakly commutative
+|
+*There exist ''x'' and ''k'' such that (''ab'')<sup>''k''</sup> = ''bx''.
+|
+|[[#Nagy|Nagy]] p.&nbsp;59
+|-
+|Right weakly commutative
+|
+*There exist ''x'' and ''k'' such that (''ab'')<sup>''k''</sup> = ''xa''.
+|
+|[[#Nagy|Nagy]] p.&nbsp;59
+|-
+|Weakly commutative
+| Left and right weakly commutative. That is:
+* There exist ''x'' and ''j'' such that (''ab'')<sup>''j''</sup> = ''bx''.
+* There exist ''y'' and ''k'' such that (''ab'')<sup>''k''</sup> = ''ya''.
+|
+|[[#Nagy|Nagy]] p.&nbsp;59
+|-
+|Conditionally commutative semigroup
+|
+*If ''ab'' = ''ba'' then ''axb'' = ''bxa'' for all ''x''.
+|
+|[[#Nagy|Nagy]] p.&nbsp;77
+|-
+|''R''-commutative semigroup
+|
+*''ab'' ''R'' ''ba''
+|
+|[[#Nagy|Nagy]] p.&nbsp;69–71
+|-
+|''RC''-commutative semigroup
+|
+*''R''-commutative and conditionally commutative
+|
+|[[#Nagy|Nagy]] p.&nbsp;93–107
+|-
+|''L''-commutative semigroup
+|
+*''ab'' ''L'' ''ba''
+|
+|[[#Nagy|Nagy]] p.&nbsp;69–71
+|-
+|''LC''-commutative semigroup
+|
+*''L''-commutative and conditionally commutative
+|
+|[[#Nagy|Nagy]] p.&nbsp;93–107
+|-
+|''H''-commutative semigroup
+|
+*''ab'' ''H'' ''ba''
+|
+|[[#Nagy|Nagy]] p.&nbsp;69–71
+|-
+|Quasi-commutative semigroup
+|
+*''ab'' = (''ba'')<sup>''k''</sup> for some ''k''.
+|
+|[[#Nagy|Nagy]] p.&nbsp;109
+|-
+|Right commutative semigroup
+|
+*''xab'' = ''xba''
+|
+|[[#Nagy|Nagy]] p.&nbsp;137
+|-
+|Left commutative semigroup
+|
+*''abx'' = ''bax''
+|
+|[[#Nagy|Nagy]] p.&nbsp;137
+|-
+|Externally commutative semigroup
+|
+*''axb'' = ''bxa''
+|
+|[[#Nagy|Nagy]] p.&nbsp;175
+|-
+|Medial semigroup
+|
+*''xaby'' = ''xbay''
+|
+|[[#Nagy|Nagy]] p.&nbsp;119
+|-
+|E-''k'' semigroup (''k'' fixed)
+|
+*(''ab'')<sup>''k''</sup> = ''a''<sup>''k''</sup>''b''<sup>''k''</sup>
+|
+*Infinite
+*Finite
+|[[#Nagy|Nagy]] p.&nbsp;183
+|-
+|[[Exponential function|Exponential]] semigroup
+|
+*(''ab'')<sup>''m''</sup> = ''a''<sup>''m''</sup>''b''<sup>''m''</sup> for all ''m''
+|
+*Infinite
+*Finite
+|[[#Nagy|Nagy]] p.&nbsp;183
+|-
+|WE-''k'' semigroup (''k'' fixed)
+|
+*There is a positive integer ''j'' depending on the couple (a,b) such that (''ab'')<sup>''k''+''j''</sup> = ''a''<sup>''k''</sup>''b''<sup>''k''</sup> (''ab'')<sup>''j''</sup> = (''ab'')<sup>''j''</sup>''a''<sup>''k''</sup>''b''<sup>''k''</sup>
+|
+|[[#Nagy|Nagy]] p.&nbsp;199
+|-
+|Weakly [[exponential function|exponential]] semigroup
+|
+*WE-''m'' for all ''m''
+|
+|[[#Nagy|Nagy]] p.&nbsp;215
+|-
+|[[Cancellative semigroup|Right cancellative semigroup]]
+|
+*''ba = ca ''  &nbsp;  ⇒  &nbsp;  ''b = c''
+|
+|[[#C&P|C&P]] p.&nbsp;3
+|-
+|[[Cancellative semigroup|Left cancellative semigroup]]
+|
+*''ab = ac ''  &nbsp;  ⇒  &nbsp;  ''b = c''
+|
+|[[#C&P|C&P]] p.&nbsp;3
+|-
+|[[Cancellative semigroup]]
+| Left and right cancellative semigroup, that is
+*''ab = ac ''  &nbsp; ⇒ &nbsp;  ''b = c''
+*''ba = ca ''  &nbsp; ⇒ &nbsp;  ''b = c''
+|
+|[[#C&P|C&P]] p.&nbsp;3
+|-
+|[[E-inversive semigroup|''E''-inversive semigroup]] (''E''-dense semigroup)
+|
+*There exists ''x'' such that ''ax'' ∈ ''E''.
+|
+|[[#C&P|C&P]] p.&nbsp;98
+|-
+|[[Regular semigroup]]
+|
+*There exists ''x'' such that ''axa'' =''a''.
+|
+|[[#C&P|C&P]] p.&nbsp;26
+|-
+|Regular band
+|
+*A band such that ''abaca'' = ''abca''
+|
+*Infinite
+*Finite
+|[[#Fennemore|Fennemore]]
+|-
+|Intra-regular semigroup
+|
+*There exist ''x'' and ''y'' such that ''xa''<sup>2</sup>''y'' = ''a''.
+|
+|[[#C&P|C&P]] p.&nbsp;121
+|-
+|Left regular semigroup
+|
+*There exists ''x''  such that ''xa''<sup>2</sup> = ''a''.
+|
+|[[#C&P|C&P]] p.&nbsp;121
+|-
+|[[Band (algebra)#Left-regular bands|Left-regular band]]
+|
+*A band such that ''aba'' = ''ab''
+|
+*Infinite
+*Finite
+|[[#Fennemore|Fennemore]]
+|-
+|Right regular semigroup
+|
+*There exists ''x''  such that ''a''<sup>2</sup>''x'' = ''a''.
+|
+|[[#C&P|C&P]] p.&nbsp;121
+|-
+|[[Band (algebra)#Right-regular bands|Right-regular band]]
+|
+*A band such that ''aba'' = ''ba''
+|
+*Infinite
+*Finite
+|[[#Fennemore|Fennemore]]
+|-
+|[[Completely regular semigroup]]
+|
+*''H''<sub>''a''</sub> is  a group.
+|
+|[[#Gril|Gril]] p.&nbsp;75
+|-
+|(inverse) [[Clifford semigroup]]
+|
+*A regular semigroup in which all idempotents are central.
+*Equivalently, for finite semigroup: <math>a^\omega b=ba^\omega</math>
+|
+*Finite
+|[[#Pet|Petrich]] p.&nbsp;65
+|-
+|''k''-regular semigroup (''k'' fixed)
+|
+*There exists ''x'' such that  ''a''<sup>''k''</sup>''xa''<sup>''k''</sup> = ''a''<sup>''k''</sup>.
+|
+|[[#Hari|Hari]]
+|-
+|Eventually regular semigroup<br>(π-regular semigroup, <br>Quasi regular semigroup)
+|
+*There exists ''k'' and ''x'' (depending on ''a'') such that ''a''<sup>''k''</sup>''xa''<sup>''k''</sup> = ''a''<sup>''k''</sup>.
+|
+|[[#Edwa|Edwa]]<br/>[[#Shum|Shum]]<br/>[[#Higg|Higg]] p.&nbsp;49
+|-
+|Quasi-periodic semigroup, [[epigroup]], group-bound semigroup, completely (or strongly) π-regular semigroup, and many other; see [[#Kela|Kela]] for a list)
+|
+*There exists ''k'' (depending on ''a'') such that ''a''<sup>''k''</sup> belongs to a [[subgroup]] of ''S''
+|
+|[[#Kela|Kela]]<br/>[[#Gril|Gril]] p.&nbsp;110<br>[[#Higg|Higg]] p.&nbsp;4
+|-
+|Primitive semigroup
+|
+*If ''0'' ≠ ''e'' and ''f'' = ''ef'' = ''fe'' then ''e'' = ''f''.
+|
+|[[#C&P|C&P]] p.&nbsp;26
+|-
+|Unit regular semigroup
+|
+*There exists ''u'' in ''G'' such that ''aua'' = ''a''.
+|
+|[[#Tvm|Tvm]]
+|-
+|Strongly unit regular semigroup
+|
+*There exists ''u'' in ''G'' such that ''aua'' = ''a''.
+*''e D f'' ⇒ ''f'' = ''v''<sup>−1</sup>''ev'' for some ''v'' in ''G''.
+|
+|[[#Tvm|Tvm]]
+|-
+|[[Orthodox semigroup]]
+|
+*There exists ''x'' such that ''axa'' = ''a''.
+*''E'' is a subsemigroup of ''S''.
+|
+|[[#Gril|Gril]] p.&nbsp;57<br/>[[#Howi|Howi]] p.&nbsp;226
+|-
+|[[Inverse semigroup]]
+|
+*There exists unique ''x''  such that ''axa'' = ''a'' and ''xax'' = ''x''.
+|
+|[[#C&P|C&P]] p.&nbsp;28
+|-
+|Left inverse semigroup <br>(''R''-unipotent)
+|
+*''R''<sub>''a''</sub> contains a unique ''h''.
+|
+|[[#Gril|Gril]] p.&nbsp;382
+|-
+|Right inverse semigroup<br>(''L''-unipotent)
+|
+*''L''<sub>''a''</sub> contains a unique ''h''.
+|
+|[[#Gril|Gril]] p.&nbsp;382
+|-
+|Locally inverse semigroup <br>(Pseudoinverse semigroup)
+|
+*There exists ''x'' such that ''axa'' = ''a''.
+*''E'' is a pseudosemilattice.
+|
+|[[#Gril|Gril]] p.&nbsp;352
+|-
+|''M''-inversive semigroup
+|
+*There exist ''x'' and ''y'' such that ''baxc'' = ''bc'' and ''byac'' = ''bc''.
+|
+|[[#C&P|C&P]] p.&nbsp;98
+|-
+|Abundant semigroup
+|
+*The classes ''L''*<sub>''a''</sub>  and ''R''*<sub>''a''</sub>, where ''a'' ''L''* ''b'' if ''ac'' =  ''ad'' ⇔ ''bc'' = ''bd'' and  ''a'' ''R''* ''b'' if ''ca'' =  ''da'' ⇔ ''cb'' = ''db'', contain idempotents.
+|
+|[[#Chen|Chen]]
+|-
+|Rpp-semigroup<br>(Right principal projective semigroup)
+|
+*The class ''L''*<sub>''a''</sub>, where ''a'' ''L''* ''b'' if ''ac'' =  ''ad'' ⇔ ''bc'' = ''bd'', contains at least one idempotent.
+|
+|[[#Shum|Shum]]
+|-
+|Lpp-semigroup<br>(Left principal projective semigroup)
+|
+*The class ''R''*<sub>''a''</sub>, where ''a'' ''R''* ''b'' if ''ca'' =  ''da'' ⇔ ''cb'' = ''db'', contains at least one idempotent.
+|
+|[[#Shum|Shum]]
+|-
+|[[Null semigroup]] <br>([[Zero semigroup]])
+|
+*0 ∈ ''S''
+*''ab'' = 0
+*Equivalently ''ab'' = ''cd''
+|
+*Infinite
+*Finite
+|[[#C&P|C&P]] p.&nbsp;4
+|-
+|[[Left zero semigroup]]
+|
+*''ab'' = ''a''
+|
+*Infinite
+*Finite
+|[[#C&P|C&P]] p.&nbsp;4
+|-
+|[[Band (algebra)#Zero bands|Left zero band]]
+|A left zero semigroup which is a band. That is:
+*''ab'' = ''a''
+*''aa'' = ''a''
+|
+*Infinite
+*Finite
+|
+*[[#Fennemore|Fennemore]]
+|-
+|[[Right group|Left group]]
+|
+* A semigroup which is left simple and right cancellative.
+* The direct product of a left zero semigroup and an abelian group.
+|
+|[[#C&P|C&P]] p.&nbsp;37, 38
+|-
+|[[Right zero semigroup]]
+|
+*''ab'' = ''b''
+|
+*Infinite
+*Finite
+|[[#C&P|C&P]] p.&nbsp;4
+|-
+|Right zero band
+|A right zero semigroup which is a band. That is:
+*''ab'' = ''b''
+*''aa'' = ''a''
+|
+*Infinite
+*Finite
+|[[#Fennemore|Fennemore]]
+|-
+|[[Right group]]
+|
+* A semigroup which is right simple and left cancellative.
+* The direct product of a right zero semigroup and a group.
+|
+|[[#C&P|C&P]] p.&nbsp;37, 38
+|-
+|[[Right group|Right abelian group]]
+|
+* A right simple and conditionally commutative semigroup.
+
+* The direct product of a right zero semigroup and an abelian group.
+|
+|[[#Nagy|Nagy]] p. 87
+|-
+|Unipotent semigroup
+|
+*''E'' is singleton.
+|
+*Infinite
+*Finite
+|[[#C&P|C&P]] p.&nbsp;21
+|-
+|Left reductive semigroup
+|
+*If ''xa'' = ''xb'' for all ''x'' then ''a'' = ''b''.
+|
+|[[#C&P|C&P]] p.&nbsp;9
+|-
+|Right reductive semigroup
+|
+*If ''ax'' = ''bx'' for all ''x'' then ''a'' = ''b''.
+|
+|[[#C&P|C&P]] p.&nbsp;4
+|-
+|Reductive semigroup
+|
+*If ''xa'' = ''xb'' for all ''x'' then ''a'' = ''b''.
+*If ''ax'' = ''bx'' for all ''x'' then ''a'' = ''b''.
+|
+|[[#C&P|C&P]] p.&nbsp;4
+|-
+|Separative semigroup
+|
+*''ab'' = ''a''<sup>2</sup> = ''b''<sup>2</sup>  &nbsp;  ⇒  &nbsp;  ''a'' = ''b''
+|
+|[[#C&P|C&P]] p.&nbsp;130–131
+|-
+|Reversible semigroup
+|
+*''Sa'' ∩ ''Sb'' ≠ Ø
+*''aS'' ∩ ''bS'' ≠ Ø
+|
+|[[#C&P|C&P]] p.&nbsp;34
+|-
+|Right reversible semigroup
+|
+*''Sa'' ∩ ''Sb'' ≠ Ø
+|
+|[[#C&P|C&P]] p.&nbsp;34
+|-
+|Left reversible semigroup
+|
+*''aS'' ∩ ''bS'' ≠ Ø
+|
+|[[#C&P|C&P]] p.&nbsp;34
+|-
+|[[Aperiodic semigroup]]<br>
+|
+* There exists ''k'' (depending on ''a'') such that a<sup>k</sup> = a<sup>k+1</sup>
+* Equivalently, for finite semigroup: for each ''a'', <math>a^\omega a=a^\omega</math>.
+|
+|
+*[[#KKM|KKM]] p.&nbsp;29
+*[[#Pin|Pin]] p. 158
+|-
+|ω-semigroup
+|
+*E is countable descending chain under the order ''a'' ≤<sub>''H''</sub> ''b''
+|
+|[[#Gril|Gril]] p.&nbsp;233–238
+|-
+|Left Clifford semigroup<br>(LC-semigroup)
+|
+*''aS'' ⊆ ''Sa''
+|
+|[[#Shum|Shum]]
+|-
+|Right Clifford semigroup<br>(RC-semigroup)
+|
+*''Sa'' ⊆ ''aS''
+|
+|[[#Shum|Shum]]
+|-
+|Orthogroup
+|
+*''H''<sub>''a''</sub> is a group.
+*''E'' is a subsemigroup of ''S''
+|
+|[[#Shum|Shum]]
+|-
+|Complete commutative semigroup
+|
+*''ab'' = ''ba''
+* ''a''<sup>''k''</sup> is in a subgroup of ''S'' for some ''k''.
+*Every nonempty subset of ''E'' has an infimum.
+|
+|[[#Gril|Gril]] p.&nbsp;110
+|-
+|[[Nilsemigroup]] (Nilpotent semigroup)
+|
+*0 ∈ ''S''
+*''a''<sup>''k''</sup> = 0 for some integer ''k'' which depends on ''a''.
+*Equivalently, for finite semigroup: for each element ''x'' and ''y'',  <math>yx^\omega =x^\omega=x^\omega y</math>.
+|
+*Finite
+|
+*[[#Gril|Gril]] p.&nbsp;99
+*[[#Pin|Pin]] p. 148
+|-
+|Elementary semigroup
+|
+*''ab'' =  ''ba''
+*''S'' is of the form ''G'' ∪ ''N'' where
+*''G'' is a group, and 1 ∈ ''G''
+*''N'' is an ideal, a nilsemigroup, and 0 ∈ ''N''
+|
+|[[#Gril|Gril]] p.&nbsp;111
+|-
+|''E''-unitary semigroup
+|
+*There exists unique ''x'' such that ''axa'' = ''a'' and ''xax'' = ''x''.
+*''ea'' = ''e'' &nbsp; ⇒ &nbsp; ''a'' ∈ ''E''
+|
+|[[#Gril|Gril]] p.&nbsp;245
+|-
+|Finitely presented semigroup
+|
+*''S'' has a [[Presentation of a monoid|presentation]] ( ''X''; ''R'' ) in which ''X'' and ''R'' are finite.
+|
+|[[#Gril|Gril]] p.&nbsp;134
+|-
+|Fundamental semigroup
+|
+*Equality on ''S'' is the only congruence contained in ''H''.
+|
+|[[#Gril|Gril]] p.&nbsp;88
+|-
+|Idempotent generated semigroup
+|
+*''S'' is equal to the semigroup generated by ''E''.
+|
+|[[#Gril|Gril]] p.&nbsp;328
+|-
+|Locally finite semigroup
+|
+*Every finitely generated subsemigroup of ''S'' is finite.
+|
+*Not infinite
+*Finite
+|[[#Gril|Gril]] p.&nbsp;161
+|-
+|''N''-semigroup
+|
+*''ab'' = ''ba''
+*There exists ''x'' and a positive integer ''n'' such that ''a'' =  ''xb''<sup>n</sup>.
+*''ax = ay ''  &nbsp; ⇒ &nbsp;  ''x = y''
+*''xa = ya  ''  &nbsp;  ⇒  &nbsp;  ''x = y''
+*''E'' = Ø
+|
+|[[#Gril|Gril]] p.&nbsp;100
+|-
+|''L''-unipotent semigroup <br>(Right inverse semigroup)
+|
+*''L''<sub>''a''</sub> contains a unique ''e''.
+|
+|[[#Gril|Gril]] p.&nbsp;362
+|-
+|''R''-unipotent semigroup <br> (Left inverse semigroup)
+|
+*''R''<sub>''a''</sub> contains a unique ''e''.
+|
+|[[#Gril|Gril]] p.&nbsp;362
+|-
+|Left simple semigroup
+|
+*''L''<sub>''a''</sub> = ''S''
+|
+|[[#Gril|Gril]] p.&nbsp;57
+|-
+|Right simple semigroup
+|
+*''R''<sub>''a''</sub> = ''S''
+|
+|[[#Gril|Gril]] p.&nbsp;57
+|-
+|Subelementary semigroup
+|
+*''ab'' =  ''ba''
+* ''S'' = ''C'' ∪ ''N'' where ''C'' is a cancellative semigroup, ''N'' is a nilsemigroup or a one-element semigroup.
+*''N'' is ideal of ''S''.
+*Zero of ''N'' is 0 of ''S''.
+*For ''x'', ''y'' in ''S'' and ''c'' in ''C'', ''cx'' = ''cy'' implies that ''x'' = ''y''.
+|
+|[[#Gril|Gril]] p.&nbsp;134
+|-
+|Symmetric semigroup<br>([[Transformation semigroup|Full transformation semigroup]])
+|
+*Set of all mappings of ''X'' into itself with composition of mappings as binary operation.
+|
+|[[#C&P|C&P]] p.&nbsp;2
+|-
+|Weakly reductive semigroup
+|
+*If ''xz'' = ''yz'' and ''zx'' = ''zy'' for all ''z'' in ''S'' then ''x'' = ''y''.
+|
+|[[#C&P|C&P]] p.&nbsp;11
+|-
+|Right unambiguous semigroup
+|
+*If ''x'', ''y'' ≥<sub>''R''</sub> ''z'' then ''x''  ≥<sub>''R''</sub> ''y'' or ''y'' ≥<sub>''R''</sub> ''x''.
+|
+|[[#Gril|Gril]] p.&nbsp;170
+|-
+|Left unambiguous semigroup
+|
+*If ''x'', ''y'' ≥<sub>''L''</sub> ''z'' then ''x''  ≥<sub>''L''</sub> ''y'' or ''y'' ≥<sub>''L''</sub> ''x''.
+|
+|[[#Gril|Gril]] p.&nbsp;170
+|-
+|Unambiguous semigroup
+|
+*If ''x'', ''y'' ≥<sub>''R''</sub> ''z'' then ''x''  ≥<sub>''R''</sub> ''y'' or ''y'' ≥<sub>''R''</sub> ''x''.
+*If ''x'', ''y'' ≥<sub>''L''</sub> ''z'' then ''x''  ≥<sub>''L''</sub> ''y'' or ''y'' ≥<sub>''L''</sub> ''x''.
+|
+|[[#Gril|Gril]] p.&nbsp;170
+|-
+|Left 0-unambiguous
+|
+*0∈ ''S''
+*0 ≠ ''x'' ≤<sub>''L''</sub> ''y'', ''z'' &nbsp; ⇒ &nbsp; ''y'' ≤<sub>''L''</sub> ''z'' or ''z'' ≤<sub>''L''</sub> ''y''
+|
+|[[#Gril|Gril]] p.&nbsp;178
+|-
+|Right 0-unambiguous
+|
+*0∈ ''S''
+*0 ≠ ''x'' ≤<sub>''R''</sub> ''y'', ''z'' &nbsp; ⇒ &nbsp; ''y'' ≤<sub>''L''</sub> ''z'' or ''z'' ≤<sub>''R''</sub> ''y''
+|
+|[[#Gril|Gril]] p.&nbsp;178
+|-
+|0-unambiguous semigroup
+|
+*0∈ ''S''
+*0 ≠ ''x'' ≤<sub>''L''</sub> ''y'', ''z'' &nbsp; ⇒ &nbsp; ''y'' ≤<sub>''L''</sub> ''z'' or ''z'' ≤<sub>''L''</sub> ''y''
+*0 ≠ ''x'' ≤<sub>''R''</sub> ''y'', ''z'' &nbsp; ⇒ &nbsp; ''y'' ≤<sub>''L''</sub> ''z'' or ''z'' ≤<sub>''R''</sub> ''y''
+|
+|[[#Gril|Gril]] p.&nbsp;178
+|-
+|Left Putcha semigroup
+|
+*''a'' ∈ ''bS''<sup>1</sup> &nbsp; ⇒ &nbsp; ''a''<sup>''n''</sup> ∈ ''b''<sup>2</sup>''S''<sup>1</sup> for some ''n''.
+|
+|[[#Nagy|Nagy]] p.&nbsp;35
+|-
+|Right Putcha semigroup
+|
+*''a'' ∈ ''S''<sup>1</sup>''b'' &nbsp; ⇒ &nbsp; ''a''<sup>''n''</sup> ∈ ''S''<sup>1</sup>''b''<sup>2</sup> for some ''n''.
+|
+|[[#Nagy|Nagy]]  p.&nbsp;35
+|-
+|Putcha semigroup
+|
+*''a'' ∈ ''S''<sup>1</sup>''b'' ''S''<sup>1</sup> &nbsp; ⇒ &nbsp; ''a''<sup>''n''</sup> ∈ ''S''<sup>1</sup>''b''<sup>2</sup>''S''<sup>1</sup> for some positive integer ''n''
+|
+|[[#Nagy|Nagy]]  p.&nbsp;35
+|-
+|Bisimple semigroup<br>(''D''-simple semigroup)
+|
+*''D''<sub>''a''</sub> = ''S''
+|
+|[[#C&P|C&P]] p.&nbsp;49
+|-
+|0-bisimple semigroup
+|
+*0 ∈ ''S''
+* ''S'' - {0} is a ''D''-class of ''S''.
+|
+|[[#C&P|C&P]] p.&nbsp;76
+|-
+|Completely simple semigroup
+|
+*There exists no ''A'' ⊆ ''S'', ''A'' ≠ ''S'' such that  ''SA'' ⊆ ''A'' and  ''AS'' ⊆ ''A''.
+*There exists ''h'' in ''E'' such that whenever ''hf'' = ''f''  and  ''fh'' = '' f ''  we have ''h'' = ''f''.
+|
+|[[#C&P|C&P]] p.&nbsp;76
+|-
+|Completely 0-simple semigroup
+|
+*0 ∈ ''S''
+* ''S''<sup>2</sup> ≠ 0
+* If ''A'' ⊆ ''S'' is such that ''AS'' ⊆ ''A'' and ''SA'' ⊆ ''A'' then ''A'' = 0 or ''A'' = ''S''.
+* There exists non-zero ''h'' in ''E'' such that whenever ''hf'' = ''f'',  ''fh'' = ''f'' and ''f'' ≠ 0  we have ''h'' = ''f''.
+|
+|[[#C&P|C&P]] p.&nbsp;76
+|-
+|''D''-simple semigroup<br>(Bisimple semigroup)
+|
+*''D''<sub>''a''</sub> = ''S''
+|
+|[[#C&P|C&P]] p.&nbsp;49
+|-
+|Semisimple semigroup
+|
+*Let ''J''(''a'') = ''S''<sup>1</sup>''aS''<sup>1</sup>, ''I''(''a'') = ''J''(''a'') − ''J''<sub>''a''</sub>. Each Rees factor semigroup ''J''(''a'')/''I''(''a'') is 0-simple or simple.
+|
+|[[#C&P|C&P]] p.&nbsp;71–75
+|-
+|<math>\mathbf{CS}</math>: Simple semigroup
+|
+* ''J<sub>a</sub>'' = ''S''. (There exists no ''A'' ⊆ ''S'', ''A'' ≠ ''S'' such that  ''SA'' ⊆ ''A'' and  ''AS'' ⊆ ''A''.),
+* equivalently, for finite semigroup: <math>a^{\omega}a=a</math> and <math>(aba)^\omega=a^\omega</math>.
+|
+*Finite
+|
+*[[#C&P|C&P]] p.&nbsp;5
+*[[#Higg|Higg]] p.&nbsp;16
+*[[#Pin|Pin]] pp. 151, 158
+|-
+|0-simple semigroup
+|
+*0 ∈ ''S''
+* ''S''<sup>2</sup> ≠ 0
+* If ''A'' ⊆ ''S'' is such that ''AS'' ⊆ ''A'' and ''SA'' ⊆ ''A'' then ''A'' = 0.
+|
+|[[#C&P|C&P]] p.&nbsp;67
+|-
+|Left 0-simple semigroup
+|
+*0 ∈ ''S''
+*''S''<sup>2</sup> ≠ 0
+* If ''A'' ⊆ ''S'' is such that  ''SA'' ⊆ ''A'' then ''A'' = 0.
+|
+|[[#C&P|C&P]] p.&nbsp;67
+|-
+|Right 0-simple semigroup
+|
+*0 ∈ ''S''
+* ''S''<sup>2</sup> ≠ 0
+* If ''A'' ⊆ ''S'' is such that ''AS'' ⊆ ''A''  then ''A'' = 0.
+|
+|[[#C&P|C&P]] p.&nbsp;67
+|-
+|[[Cyclic semigroup]] <br>([[Monogenic semigroup]])
+|
+*''S'' = { ''w'', ''w''<sup>2</sup>,  ''w''<sup>3</sup>, ... } for some ''w'' in ''S''
+|
+*Not infinite
+*Not finite
+|[[#C&P|C&P]] p.&nbsp;19
+|-
+|Periodic semigroup
+|
+*{ ''a'', ''a''<sup>2</sup>, ''a''<sup>3</sup>, ... } is a finite set.
+|
+*Not infinite
+*Finite
+|[[#C&P|C&P]] p.&nbsp;20
+|-
+|[[Bicyclic semigroup]]
+|
+*1 ∈ S
+* ''S'' admits the presentation <math>\langle x,y\mid xy=1\rangle</math>.
+|
+|[[#C&P|C&P]] p.&nbsp;43–46
+|-
+|[[Full transformation semigroup]] ''T''<sub>''X''</sub><br>(Symmetric semigroup)
+|
+*[[Set (mathematics)|Set]] of all [[Map (mathematics)|mappings]] of ''X'' into itself with [[Function composition|composition of mappings]] as [[binary operation]].
+|
+|[[#C&P|C&P]] p.&nbsp;2
+|-
+|Rectangular band
+|
+*A band such that ''aba'' = ''a''
+*Equivalently ''abc'' = ''ac''
+|
+*Infinite
+*Finite
+|[[#Fennemore|Fennemore]]
+|-
+|Rectangular semigroup
+|
+*Whenever three of ''ax'', ''ay'', ''bx'', ''by'' are equal, all four are equal.
+|
+|[[#C&P|C&P]] p.&nbsp;97
+|-
+|[[Symmetric inverse semigroup]] ''I''<sub>''X''</sub>
+|
+*The semigroup of [[bijection|one-to-one]] [[partial function|partial transformations]] of ''X''.
+|
+|[[#C&P|C&P]] p.&nbsp;29
+|-
+|[[Brandt semigroup]]
+|
+*0 ∈ ''S''
+* ( ''ac'' = ''bc'' ≠ 0 or ''ca'' = ''cb'' ≠ 0 )  &nbsp;  ⇒  &nbsp; ''a'' = ''b''
+* ( ''ab'' ≠ 0 and ''bc'' ≠ 0 )  &nbsp;  ⇒  &nbsp; ''abc'' ≠ 0
+* If ''a'' ≠ 0 there exist unique ''x'', ''y'', ''z'', such that ''xa'' = ''a'', ''ay'' = ''a'', ''za'' = ''y''.
+* ( ''e'' ≠ 0 and  ''f'' ≠ 0 )  &nbsp;  ⇒  &nbsp; ''eSf '' ≠ 0.
+|
+|[[#C&P|C&P]] p.&nbsp;101
+|-
+|[[Free semigroup]] ''F''<sub>''X''</sub>
+|
+*Set of finite sequences of elements of ''X'' with the operation<br>( ''x''<sub>1</sub>, ..., ''x''<sub>m</sub> ) ( ''y''<sub>1</sub>, ..., ''y''<sub>n</sub> ) = ( ''x''<sub>1</sub>, ..., ''x''<sub>m</sub>, ''y''<sub>1</sub>, ..., ''y''<sub>n</sub> )
+|
+|[[#Gril|Gril]] p.&nbsp;18
+|-
+|Rees [[Matrix (mathematics)|matrix]] semigroup
+|
+*''G''<sup>0</sup> a group ''G'' with 0 adjoined.
+*''P'' :  Λ × ''I'' → ''G''<sup>0</sup> a map.
+* Define an operation in ''I'' × ''G''<sup>0</sup> × Λ  by ( ''i'', ''g'', λ ) ( ''j'', ''h'', μ ) = ( ''i'', ''g'' P( λ, ''j'' ) ''h'', μ ).
+* ( ''I'', ''G''<sup>0</sup>, Λ )/( ''I'' × { 0 } × Λ )  is the Rees matrix semigroup ''M''<sup>0</sup> ( ''G''<sup>0</sup>; ''I'', Λ ; ''P'' ).
+|
+|[[#C&P|C&P]] p.88
+|-
+|Semigroup of [[linear transformation]]s
+|
+*Semigroup of [[linear transformation]]s of a [[vector space]] ''V'' over a [[field (mathematics)|field]] ''F'' under [[composition of functions]].
+|
+|[[#C&P|C&P]] p.57
+|-
+|Semigroup of [[binary relation]]s ''B''<sub>''X''</sub>
+|
+*Set of all [[binary relation]]s on ''X'' under [[composition of relations|composition]]
+|
+|[[#C&P|C&P]] p.13
+|-
+|[[Numerical semigroup]]
+|
+*0 ∈ ''S'' ⊆ ''N'' = { 0,1,2, ... } under + .
+*''N'' - ''S'' is finite
+|
+|[[#Delg|Delg]]
+|-
+|[[Semigroup with involution]]<br>(*-semigroup)
+|
+*There exists a unary operation ''a'' → ''a''* in ''S'' such that ''a''** = ''a'' and (''ab'')* = ''b''*''a''*.
+|
+|[[#Howi|Howi]]
+|-
+|Baer–Levi semigroup
+|
+*Semigroup of one-to-one transformations ''f'' of  ''X'' such that ''X'' − ''f'' ( ''X'' ) is infinite.
+|
+|[[#C&P II|C&P II]] Ch.8
+|-
+|[[U-semigroup|''U''-semigroup]]
+|
+*There exists a unary operation ''a'' → ''a''’ in ''S'' such that ( ''a''’)’ = ''a''.
+|
+|[[#Howi|Howi]] p.102
+|-
+|[[I-semigroup|''I''-semigroup]]
+|
+*There exists a unary operation ''a'' → ''a''’ in ''S'' such that ( ''a''’)’ = ''a'' and ''aa''’''a'' = ''a''.
+|
+|[[#Howi|Howi]] p.102
+|-
+|[[Semiband]]
+|
+*A regular semigroup generated by its idempotents.
+|
+|[[#Howi|Howi]] p.230
+|-
+|[[Group (mathematics)|Group]]
+|
+*There exists ''h'' such that for all a, ''ah'' = ''ha'' = ''a''.
+*There exists ''x'' (depending on ''a'') such that ''ax'' = ''xa'' = ''h''.
+|
+*Not infinite
+*Finite
+|
+|-
+|[[Topological semigroup]]
+|
+*A semigroup which is also a topological space. Such that the semigroup product is continuous.
+|
+*Not applicable
+|[[#Pin|Pin]] p. 130
+|-
+|[[Syntactic semigroup]]
+|
+*The smallest finite monoid which can [[Recognizable set|recognize]] a subset of another semigroup.
+|
+|[[#Pin|Pin]] p. 14
+|-
+|<math>\mathbf R</math>: the ''R''-trivial monoids
+|
+*''R''-trivial. That is, each ''R''-equivalence class is trivial.
+*Equivalently, for finite semigroup: <math>(ab)^\omega a=(ab)^\omega</math>.
+|
+*Finite
+|[[#Pin|Pin]] p. 158
+|-
+|<math>\mathbf L</math>: the ''L''-trivial monoids
+|
+*''L''-trivial. That is, each ''L''-equivalence class is trivial.
+*Equivalently, for finite monoids, <math>b(ab)^\omega=(ab)^\omega</math>.
+|
+*Finite
+|[[#Pin|Pin]] p. 158
+|-
+|<math>\mathbf J</math>: the ''J''-trivial monoids
+|
+*Monoids which are ''J''-trivial. That is, each ''J''-equivalence class is trivial.
+*Equivalently, the monoids which are ''L''-trivial and ''R''-trivial.
+|
+*Finite
+|[[#Pin|Pin]] p. 158
+|-
+|<math>\mathbf{R_1}</math>: idempotent and ''R''-trivial monoids
+|
+*''R''-trivial. That is, each ''R''-equivalence class is trivial.
+*Equivalently, for finite monoids: ''aba'' = ''ab''.
+|
+*Finite
+|[[#Pin|Pin]] p. 158
+|-
+|<math>\mathbf {L_1}</math>: idempotent and ''L''-trivial monoids
+|
+*''L''-trivial. That is, each ''L''-equivalence class is trivial.
+*Equivalently, for finite monoids: ''aba'' = ''ba''.
+|
+*Finite
+|[[#Pin|Pin]] p. 158
+|-
+|<math>\mathbb D\mathbf{S}</math>: Semigroup whose regular ''D'' are semigroup
+|
+*Equivalently, for finite monoids: <math>(a^\omega a^\omega a^\omega)^\omega=a^\omega</math>.
+*Equivalently, regular H-classes are groups,
+*Equivalently, ''v''≤<sub>''J''</sub>''a'' implies ''v R va'' and ''v L av''
+*Equivalently, for each idempotent ''e'', the set of ''a'' such that ''e''≤<sub>''J''</sub>''a'' is closed under product (i.e. this set is a subsemigroup)
+*Equivalently, there exists no idempotent ''e'' and ''f'' such that ''e J f'' but not ''ef  J e''
+*Equivalently, the monoid <math>B^1_2</math> does not divide <math>S\times S</math>
+|
+*Finite
+|[[#Pin|Pin]] pp. 154, 155, 158
+|-
+|<math>\mathbb D\mathbf{A}</math>: Semigroup whose regular ''D'' are aperiodic semigroup
+|
+*Each regular D-class is an aperiodic semigroup
+*Equivalently, every regular D-class is a rectangular band
+*Equivalently, regular D-class are semigroup, and furthermore ''S'' is aperiodic
+*Equivalently, for finite monoid: regular D-class are semigroup, and furthermore <math>aa^\omega=a^\omega</math>
+*Equivalently, ''e''≤<sub>''J''</sub>''a'' implies ''eae'' = ''e''
+*Equivalently, ''e''≤<sub>''J''</sub>''f'' implies ''efe'' = ''e''.
+|
+*Finite
+|[[#Pin|Pin]] p. 156, 158
+|-
+|<math>\ell\mathbf{1}</math>/<math>\mathbf K</math>: Lefty trivial semigroup
+|
+*''e'': ''eS'' = ''e'',
+*Equivalently, ''I'' is a left zero semigroup equal to ''E'',
+*Equivalently, for finite semigroup: ''I'' is a left zero semigroup equals <math>S^{|S|}</math>,
+*Equivalently, for finite semigroup: <math>a_1\dots a_ny=a_1\dots a_n</math>,
+*Equivalently, for finite semigroup: <math>a^\omega b=a^\omega</math>.
+|
+*Finite
+|[[#Pin|Pin]] pp. 149, 158
+|-
+|<math>\mathbf{r1}</math>/<math>\mathbf D</math>: Right trivial semigroup
+|
+*''e'': ''Se'' = ''e'',
+*Equivalently, ''I'' is a right zero semigroup equal to ''E'',
+*Equivalently, for finite semigroup: ''I'' is a right zero semigroup equals <math>S^{|S|}</math>,
+*Equivalently, for finite semigroup: <math>b a_1\dots a_n=a_1\dots a_n</math>,
+*Equivalently, for finite semigroup: <math>b a^\omega=a^\omega</math>.
+|
+*Finite
+|[[#Pin|Pin]] pp. 149, 158
+|-
+|<math>\mathbb L\mathbf{1}</math>: Locally trivial semigroup
+|
+*''eSe'' = ''e'',
+*Equivalently, ''I'' is equal to ''E'',
+*Equivalently, ''eaf'' = ''ef'',
+*Equivalently, for finite semigroup: <math>y a_1\dots a_n=a_1\dots a_n</math>,
+*Equivalently, for finite semigroup: <math>a_1\dots a_n y a_1\dots a_n=a_1\dots a_n</math>,
+*Equivalently, for finite semigroup: <math>a^\omega b a^\omega=a^\omega</math>.
+|
+*Finite
+|[[#Pin|Pin]] pp. 150, 158
+|-
+|<math>\mathbb L\mathbf{G}</math>: Locally groups
+|
+*''eSe'' is a group,
+*Equivalently, ''E''⊆''I'',
+*Equivalently, for finite semigroup: <math>(a^\omega b a^\omega)^\omega=a^\omega</math>.
+|
+*Finite
+|[[#Pin|Pin]] pp. 151, 158
+|-
+|}
+
+{| class="wikitable sortable"
+|+List of special classes of ordered semigroups
+|-
+! Terminology
+! class="unsortable" |Defining property
+! Variety
+! Reference(s)
+|-
+|[[Ordered semigroup]]
+|
+*A semigroup with a partial order relation ≤, such that ''a'' ≤ ''b'' implies c•a ≤ c•b and a•c ≤ b•c
+|
+*Finite
+|[[#Pin|Pin]] p. 14
+|-
+|<math>\mathbf{N}^+</math>
+|
+*Nilpotent finite semigroups, with <math>a\le b^\omega</math>
+|
+*Finite
+|[[#Pin|Pin]] pp. 157, 158
+|-
+|<math>\mathbf{N}^-</math>
+|
+*Nilpotent finite semigroups, with <math>b^\omega\le a</math>
+|
+*Finite
+|[[#Pin|Pin]] pp. 157, 158
+|-
+|<math>\mathbf{J}_1^+</math>
+|
+*Semilattices with <math>1\le a</math>
+|
+*Finite
+|[[#Pin|Pin]] pp. 157, 158
+|-
+|<math>\mathbf{J}_1^-</math>
+|
+*Semilattices with <math>a\le 1</math>
+|
+*Finite
+|[[#Pin|Pin]] pp. 157, 158
+|-
+|<math>\mathbb L\mathbf{J}_1^+</math> locally positive J-trivial semigroup
+|
+*Finite semigroups satisfying <math>a^\omega\le a^\omega ba^\omega</math>
+|
+*Finite
+|[[#Pin|Pin]] pp. 157, 158
+|-
+|}
+
+==References==
+
+{| 
+|-valign="top"
+| [C&P]
+|
+| {{Anchor|C&P}}[[A. H. Clifford]], [[G. B. Preston]] (1964). ''The Algebraic Theory of Semigroups Vol. I'' (Second Edition). [[American Mathematical Society]].  {{isbn|978-0-8218-0272-4}}
+|-valign="top"
+|[C&P II] &nbsp;
+|
+|{{Anchor|C&P II}}A. H. Clifford, G. B. Preston (1967). ''The Algebraic Theory of Semigroups Vol. II'' (Second Edition). [[American Mathematical Society]].  {{isbn|0-8218-0272-0}}
+|-valign="top"
+| [Chen]&nbsp;
+|
+| {{Anchor|Chen}}Hui Chen (2006), "Construction of a kind of abundant semigroups", ''Mathematical Communications'' ('''11'''), 165–171 (Accessed on 25 April 2009)
+|-valign="top"
+|[Delg]
+|
+|{{Anchor|Delg}}M. Delgado, ''et al.'', ''Numerical semigroups'', [http://www.gap-system.org/Manuals/pkg/numericalsgps/doc/manual.pdf] (Accessed on 27 April 2009)
+|-valign="top"
+|[Edwa]
+|
+|{{Anchor|Edwa}}P. M. Edwards (1983), "Eventually regular semigroups", ''Bulletin of Australian Mathematical Society'' '''28''', 23–38
+|-valign="top"
+|[Gril]
+|
+|{{Anchor|Gril}}P. A. Grillet (1995). ''Semigroups''. [[CRC Press]].  {{isbn|978-0-8247-9662-4}}
+|-valign="top"
+|[Hari]
+|
+|{{Anchor|Hari}}K. S. Harinath (1979), "Some results on ''k''-regular semigroups", ''Indian Journal of Pure and Applied Mathematics'' '''10'''(11), 1422–1431
+|-valign="top"
+|[Howi]
+|
+|{{Anchor|Howi}}[[John Mackintosh Howie|J. M. Howie]] (1995), ''Fundamentals of Semigroup Theory'', [[Oxford University Press]]
+|-valign="top"
+|[Nagy]
+|
+|{{Anchor|Nagy}}Attila Nagy (2001). ''Special Classes of Semigroups''. [[Springer Science+Business Media|Springer]]. {{isbn|978-0-7923-6890-8}}
+|-valign="top"
+|[Pet]
+|
+|{{Anchor|Pet}} M. Petrich, N. R. Reilly (1999). ''Completely regular semigroups''. [[John Wiley & Sons]].  {{isbn|978-0-471-19571-9}}
+|-valign="top"
+|[Shum] &nbsp; &nbsp;
+|
+|{{Anchor|Shum}}K. P. Shum "Rpp semigroups, its generalizations and special subclasses" in ''Advances in Algebra and Combinatorics'' edited by K P Shum et al. (2008), [[World Scientific]],  {{isbn|981-279-000-4}} (pp.&nbsp;303–334)
+|-valign="top"
+|[Tvm]
+|
+|{{Anchor|Tvm}}''Proceedings of the International Symposium on Theory of Regular Semigroups and Applications'', [[University of Kerala]], [[Thiruvananthapuram]], [[India]], 1986
+|-valign="top"
+|[Kela]
+|
+|{{Anchor|Kela}}A. V. Kelarev, ''Applications of epigroups to graded ring theory'', [[Semigroup Forum]], Volume 50, Number 1 (1995), 327-350 {{doi|10.1007/BF02573530}} <!-- we could use almost any other paper by the Russian group here, but this one has most synonyms given in its introduction.-->
+|-valign="top"
+|[KKM]
+|
+|{{Anchor|KKM}}Mati Kilp, Ulrich Knauer, Alexander V. Mikhalev (2000), ''Monoids, Acts and Categories: with Applications to Wreath Products and Graphs'', Expositions in Mathematics '''29''', Walter de Gruyter, Berlin, {{isbn|978-3-11-015248-7}}.
+|-valign="top"
+|[Higg]
+|
+|{{Anchor|Higg}} {{cite book|author=Peter M. Higgins|title=Techniques of semigroup theory|year=1992|publisher=Oxford University Press|isbn=978-0-19-853577-5}}
+|-valign="top"
+|[Pin]
+|
+|{{Anchor|Pin}}{{cite book|last1=Pin|first1=Jean-Éric|authorlink = Jean-Éric Pin|title=Mathematical Foundations of Automata Theory|date=2016-11-30|url=http://www.liafa.jussieu.fr/~jep/PDF/MPRI/MPRI.pdf}}
+|-valign="top"
+|[Fennemore]
+|
+|{{Anchor|Fennemore}}{{citation
+ | last = Fennemore | first = Charles
+ | doi = 10.1007/BF02573031
+ | issue = 1
+ | journal = [[Semigroup Forum]]
+ | pages = 172–179
+ | title = All varieties of bands
+ | volume = 1
+ | year = 1970}}
+|-valign="top"
+|}
+
+[[Category:Algebraic structures]]
+[[Category:Semigroup theory]]\

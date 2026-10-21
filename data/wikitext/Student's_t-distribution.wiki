@@ -1,0 +1,1000 @@
+{{short description|Probability distribution}}
+{{DISPLAYTITLE:Student's {{mvar|t}}-distribution}}
+{{About|the mathematics of Student's {{mvar|t}}-distribution|its uses in statistics|Student's t-test}}
+{{Infobox probability distribution
+| name       = Student's {{mvar|t}}
+| type       = density
+| pdf_image  = [[File:student t pdf.svg|325px]]
+| cdf_image  = [[File:student t cdf.svg|325px]]
+| parameters = <math>\nu > 0</math> [[Degrees of freedom (statistics)|degrees of freedom]] ([[Real number|real]], nearly always a positive [[integer]])
+| support    = <math>x \in (-\infty, \infty)</math>
+| pdf        = <math>\frac{\Gamma{\left(\frac{\nu + 1}{2}\right)}}{\sqrt{\pi\nu}\, \Gamma{\left(\frac{\nu}{2}\right)}} \left(1 + \frac{x^2}{\nu}\right)^{-\frac{\nu+1}{2}}</math>
+| cdf        = <math>\begin{align}
+  & \frac{1}{2} + x \frac{\Gamma{\left(\frac{\nu + 1}{2}\right)}}{\sqrt{\pi\nu}\, \Gamma{\left(\frac{\nu}{2}\right)}} \times \\
+  &\qquad  {}_{2}F_1\!\left(\frac{1}{2}, \frac{\nu + 1}{2}; \frac{3}{2}; -\frac{x^2}{\nu}\right),
+ \end{align}</math>
+ where <math>{}_{2}F_1</math> is the [[hypergeometric function]]
+| mean       = <math>0</math> for <math>\nu > 1,</math> otherwise [[indeterminate form|undefined]]
+| median     = <math>0</math>
+| mode       = <math>0</math>
+| variance   = <math>\frac{\nu}{\nu  -2}</math> for <math>\nu > 2,</math> <math>\infty</math> for <math>1 < \nu \le 2,</math> otherwise [[indeterminate form|undefined]]
+| skewness   = <math>0</math> for <math>\ \nu > 3\ ,</math> otherwise [[indeterminate form|undefined]]
+| kurtosis   = <math>\frac{6}{\nu - 4}</math> for <math>\nu > 4,</math> <math>\infty</math> for <math>2 < \nu \le 4,</math> otherwise [[indeterminate form|undefined]]
+| entropy    = <math>\begin{align}
+  & \frac{\nu + 1}{2} \left[\psi{\left(\frac{\nu + 1}{2}\right)} -
+                            \psi{\left(\frac{\nu}{2}\right)}\right] \\
+  &\quad + \ln\left[\sqrt{\nu}\, \mathrm{B}{\left(\frac{\nu}{2}, \frac{1}{2}\right)}\right]~\text{(nats)},
+\end{align}</math><br/>
+where <math>\psi</math> is the [[digamma function]] and <math>\mathrm{B}</math> is the [[beta function]]
+| mgf        = undefined
+| char       = <math>\frac{\big(\sqrt{\nu}\, |t|\big)^{\nu/2}\, K_{\nu/2}\big(\sqrt{\nu}\, |t|\big)}{\Gamma(\nu/2)\, 2^{\nu/2-1}}</math> for <math>\nu > 0</math>,<br/>
+where <math>K_\nu</math> is the [[Bessel function|modified Bessel function of the second kind]]<ref>{{cite web |last=Hurst |first=Simon |title=The characteristic function of the Student {{mvar|t}} distribution |series=Financial Mathematics Research Report |volume=FMRR006-95 |id=Statistics Research Report No.&nbsp;SRR044-95 |url=http://wwwmaths.anu.edu.au/research.reports/srr/95/044/ |url-status=dead |archive-url=https://web.archive.org/web/20100218072259/http://wwwmaths.anu.edu.au/research.reports/srr/95/044/ |archive-date=February 18, 2010 }}</ref>
+| ES         = <math>\mu + s\left(\frac{\big(\nu + [T^{-1}(1 - p)]^2\big) \times \tau\big(T^{-1}(1 - p)\big)}{(\nu - 1)(1 - p)}\right),</math>
+where <math>T^{-1}</math> is the inverse standardized Student&nbsp;{{mvar|t}} [[cumulative distribution function|CDF]], and <math>\tau</math> is the standardized Student&nbsp;t [[probability density function|PDF]].<ref name=norton>{{cite journal |last1=Norton |first1=Matthew |last2=Khokhlov |first2=Valentyn |last3=Uryasev |first3=Stan |year=2019 |title=Calculating CVaR and bPOE for common probability distributions with application to portfolio optimization and density estimation |journal=[[Annals of Operations Research]] |volume=299 |issue=1–2 |pages=1281–1315 |publisher=Springer|doi=10.1007/s10479-019-03373-1 |arxiv=1811.11301 |s2cid=254231768 |url=http://uryasev.ams.stonybrook.edu/wp-content/uploads/2019/10/Norton2019_CVaR_bPOE.pdf |access-date=2023-02-27}}</ref>
+}}
+
+In [[probability]] theory and [[statistics]], '''Student's {{mvar|t}}&nbsp;distribution''' (or simply the '''{{mvar|t}}&nbsp;distribution''') <math>t_\nu </math> is a continuous [[probability distribution]] that generalizes the [[Normal distribution#Standard normal distribution|standard normal distribution]]. Like the latter, it is symmetric around zero and bell-shaped.
+
+However, <math>t_\nu</math> has [[Heavy-tailed distribution|heavier tails]], and the amount of probability mass in the tails is controlled by the parameter <math>\nu</math>. For <math>\nu = 1</math> the Student's {{mvar|t}} distribution <math>t_\nu</math> becomes the standard [[Cauchy distribution]], which has very [[fat-tailed distribution|"fat" tails]]; whereas for <math>\nu \to \infty</math> it becomes the standard normal distribution <math>\mathcal{N}(0, 1),</math> which has very "thin" tails.
+
+The name "Student" is a pseudonym used by [[William Sealy Gosset]] in his scientific paper publications during his work at the [[Guinness Brewery]] in [[Dublin, Ireland]].
+
+The Student's {{mvar|t}}&nbsp;distribution plays a role in a number of widely used statistical analyses, including [[Student's t-test|Student's {{mvar|t}}-test]] for assessing the [[statistical significance]] of the difference between two sample means, the construction of [[confidence interval]]s for the difference between two population means, and in linear [[regression analysis]].
+
+In the form of the ''location-scale {{mvar|t}}&nbsp;distribution'' <math>\operatorname{\ell st}(\mu, \tau^2, \nu)</math> it generalizes the [[normal distribution]] and also arises in the [[Bayesian analysis]] of data from a normal family as a [[Compound probability distribution|compound distribution]] when marginalizing over the variance parameter.
+
+== Definitions ==
+
+===Probability density function===
+'''Student's {{mvar|t}}&nbsp;distribution''' has the [[probability density function]] (PDF) given by
+<math display="block">f(t) = \frac{\Gamma{\left(\frac{\nu+1}{2}\right)}}{\sqrt{\pi\nu} \, \Gamma{\left(\frac{\nu}{2}\right)}} \left(1 + \frac{t^2}{\nu}\right)^{-(\nu + 1)/2},</math>
+where <math>\nu</math> is the number of ''[[degrees of freedom (statistics)|degrees of freedom]]'', and <math>\Gamma</math> is the [[gamma function]]. This may also be written as
+<math display="block">f(t) = \frac{1}{\sqrt{\nu}\,\mathrm{B}{\left(\frac{1}{2}, \frac{\nu}{2}\right)}} \left(1 + \frac{t^2}{\nu}\right)^{-(\nu+1)/2},</math>
+where <math>\mathrm{B}</math> is the [[beta function]]. In particular, for positive integer-valued degrees of freedom {{math|{{mvar|&nu;}} > 1}} we have:
+
+<math display="block">\begin{align}
+\nu & \in \N \geq 2\\
+k &= \begin{cases}
+2, &\nu\text{ even}\\
+\pi, &\nu\text{ odd}\\
+\end{cases}\\
+\frac{\Gamma{\left(\frac{\nu + 1}{2}\right)}}{\sqrt{\pi\nu}\, \Gamma{\left(\frac{\nu}{2}\right)}} &= \frac{(\nu-1)!!}{k\sqrt{\nu}(\nu-2)!!}\\
+\end{align}</math>
+
+The probability density function is [[Symmetric distribution|symmetric]], and its overall shape resembles the bell shape of a normally distributed variable with mean 0 and variance 1, except that it is a bit lower and wider. As the number of degrees of freedom grows, the {{mvar|t}}&nbsp;distribution approaches the normal distribution with mean 0 and variance 1. For this reason <math>{\nu}</math> is also known as the normality parameter.<ref>{{cite book |last=Kruschke |first=J. K. |author-link=John K. Kruschke |year=2015 |title=Doing Bayesian Data Analysis |edition=2nd |publisher=Academic Press |isbn=9780124058880 |oclc=959632184}}</ref>
+
+The following images show the density of the {{mvar|t}}&nbsp;distribution for increasing values of <math>\nu .</math> The normal distribution is shown as a blue line for comparison. Note that the {{mvar|t}}&nbsp;distribution (red line) becomes closer to the normal distribution as <math>\nu</math> increases.
+
+{{Multiple image
+| align = center
+| caption_align = center
+| header = Density of the {{mvar|t}}&nbsp;distribution (red) for 1, 2, 3, 5, 10, and 30 degrees of freedom compared to the standard normal distribution (blue).<br>Previous plots shown in green.
+| perrow = 3
+| image1 = T distribution 1df enhanced.svg
+| image2 = T distribution 2df enhanced.svg
+| image3 = T distribution 3df enhanced.svg
+| image4 = T distribution 5df enhanced.svg
+| image5 = T distribution 10df enhanced.svg
+| image6 = T distribution 30df enhanced.svg
+| caption1 = 1 degree of freedom
+| caption2 = 2 degrees of freedom
+| caption3 = 3 degrees of freedom
+| caption4 = 5 degrees of freedom
+| caption5 = 10 degrees of freedom
+| caption6 = 30 degrees of freedom
+}}
+
+===Cumulative distribution function===
+The [[cumulative distribution function]] (CDF) can be written in terms of {{mvar|I}}, the regularized
+[[incomplete beta function]]. For {{nobr|{{math| ''t'' > 0}} ,}}
+
+<math display="block">F(t) = \int_{-\infty}^t f(u) \, du ~=~ 1 - \frac{1}{2} I_{x(t)}{\left( \frac{\nu}{2},\, \frac{1}{2} \right)} ,</math>
+
+where
+
+<math display="block">x(t) = \frac{ \nu }{ t^2+\nu } \,.</math>
+
+Other values would be obtained by symmetry. An alternative formula, valid for <math> t^2 < \nu\, ,</math> is
+
+<math display="block">\int_{-\infty}^t f(u) \, du = \frac{1}{2} + t\, \frac{\Gamma\!\left( \frac{\nu+1}{2} \right) }{ \sqrt{\pi \nu }\, \Gamma\!\left( \frac{ \nu }{\ 2\ }\right) } \; {}_{2}F_1\!\left( \frac{1}{2}, \frac{ \nu+1 }{2} ;\, \frac{3}{2} ;\, - \frac{t^2}{\nu} \right) ,</math>
+
+where <math>{}_{2}F_1(\ ,\ ;\ ;\ ) </math> is a particular instance of the [[hypergeometric function]].
+
+For information on its inverse cumulative distribution function, see {{slink|quantile function|Student's t-distribution}}.
+
+===Special cases===
+Certain values of <math>\ \nu\ </math> give a simple form for Student's t-distribution.
+{| class="wikitable"
+|-
+! <math>\ \nu\ </math>
+! PDF
+! CDF
+! notes
+|-
+! 1
+| <math>\frac{1}{ \pi (1 + t^2) } </math>
+| <math>\frac{1}{2} + \frac{1}{\pi} \arctan(t) </math>
+| See [[Cauchy distribution]]
+|-
+! 2
+| <math>\frac{1}{2\, \sqrt{2}\, \left(1+\frac{t^2}{2}\right)^{3/2}} </math>
+| <math>\frac{1}{2} + \frac{t}{ 2\sqrt{2} \, \sqrt{ 1 + \frac{t^2}{2} } } </math>
+|
+|-
+! 3
+| <math>\frac{2}{ \pi \sqrt{3} \, \left( 1 + \frac{t^2}{3} \right)^2 } </math>
+| <math>\frac{1}{2} + \frac{1}{\pi} \left[ \frac{\frac{t}{\sqrt{3}}}{ 1 + \frac{t^2}{3} } + \arctan\frac{t}{\sqrt{3}} \right] </math>
+|
+|-
+! 4
+| <math>\frac{3}{ 8 \left( 1 + \frac{t^2}{4} \right)^{5/2}} </math>
+| <math>\frac{1}{2} + \frac{3}{8} \left[ \frac{ t }{ \sqrt{ 1 + \frac{t^2}{4} }} \right] \left[ 1 - \frac{t^2}{12 \left(1 + \frac{t^2}{4} \right) } \right] </math>
+|
+|-
+! 5
+| <math>\frac{8}{ 3\pi \sqrt{5} \, \left( 1 + \frac{t^2}{5} \right)^3 } </math>
+| <math>\frac{1}{2} + \frac{1}{\pi} \left[ \frac{t}{ \sqrt{5 } \left(1 + \frac{t^2}{5}\right) } \left(1 + \frac{2}{ 3 \left(1 + \frac{t^2}{5}\right) }\right) + \arctan \frac{t}{\sqrt{5}} \right] </math>
+|
+|-
+! <math>\ \infty\ </math>
+| <math>\frac{1}{ \sqrt{2 \pi } }\, e^{-t^2/2}</math>
+| <math>\frac{1}{2} \left[ 1 + \operatorname{erf}\left( \frac{t}{\sqrt{2}} \right) \right] </math>
+| See ''[[Normal distribution]]'', ''[[Error function]]''
+|}
+
+==Properties==
+===Moments===
+For {{nowrap|<math>\nu > 1</math>,}} the [[raw moment]]s of the {{mvar|t}}&nbsp;distribution are
+
+<math display="block">\operatorname{\mathbb E}\left\{ T^k \right\} = \begin{cases}
+\quad 0 & k \text{ odd }, \quad 0 < k < \nu\, , \\[2ex]
+\frac{1}{\sqrt{\pi }\, \Gamma{\left(\frac{\nu}{2}\right)}} \left[ \Gamma\!\left(\frac{k + 1}{2}\right) \, \Gamma\!\left(\frac{\nu - k}{2}\right)\, \nu^{\frac{k}{ 2 }} \right] & k \text{ even }, \quad 0 < k < \nu \,.
+\end{cases}</math>
+
+Moments of order <math>\ \nu\ </math> or higher do not exist.<ref>{{cite book |vauthors=Casella G, Berger RL |year=1990 |title=Statistical Inference |publisher=Duxbury Resource Center |isbn=9780534119584 |page =56}}</ref>
+
+The term for {{nowrap|<math> 0 < k < \nu </math>,}} {{mvar|k}} even, may be simplified using the properties of the [[gamma function]] to
+
+<math display="block">\operatorname{\mathbb E}\left\{ T^k \right\} = \nu^{ \frac{k}{2} } \, \prod_{j=1}^{k/2} \frac{2j - 1}{\nu - 2j} \qquad k \text{ even}, \quad 0 < k < \nu ~.</math>
+
+For a {{mvar|t}}&nbsp;distribution with <math>\nu </math> degrees of freedom, the [[expected value]] is <math> 0 </math> if <math>\nu > 1\, ,</math> and its [[variance]] is <math>\frac{\nu}{\nu-2} </math> if <math>\nu > 2 \,.</math> The [[skewness]] is 0 if <math>\nu > 3 </math> and the [[excess kurtosis]] is <math>\frac{6}{\nu - 4} </math> if <math>\nu > 4 \,.</math>
+===How the {{mvar|t}}&nbsp;distribution arises (characterization) {{anchor|Characterization}}===
+
+====As the distribution of a test statistic====
+Student's ''t''-distribution with <math>\nu</math> degrees of freedom can be defined as the distribution of the [[random variable]] ''T'' with<ref name="JKB">{{Cite book|title=Continuous Univariate Distributions|vauthors=Johnson NL, Kotz S, Balakrishnan N|publisher=Wiley|year=1995|isbn=9780471584940|edition=2nd|volume=2|chapter=Chapter 28}}</ref><ref name="Hogg">{{cite book|title=Introduction to Mathematical Statistics|vauthors=Hogg RV, Craig AT|publisher=Macmillan|year=1978|edition=4th|location=New York|asin=B010WFO0SA|postscript=. Sections 4.4 and 4.8|author-link=Robert V. Hogg}}</ref>
+
+<math display="block"> T = \frac{Z}{\sqrt{V/\nu}} = Z \sqrt{\frac{\nu}{V}},</math>
+
+where
+* ''Z'' is a standard normal with [[expected value]] 0 and variance 1;
+* ''V'' has a [[chi-squared distribution]] ({{nowrap|1=<span style="font-family:serif">''χ''</span><sup>2</sup>-distribution}}) with <math>\nu</math> [[Degrees of freedom (statistics)|degrees of freedom]];
+* ''Z'' and ''V'' are [[statistical independence|independent]];
+
+A different distribution is defined as that of the random variable defined, for a given constant&nbsp;''μ'', by
+<math display="block">(Z+\mu) \sqrt{\frac{\nu}{V}}.</math>
+This random variable has a [[noncentral t-distribution|noncentral ''t''-distribution]] with [[noncentrality parameter]] ''μ''. This distribution is important in studies of the [[statistical power|power]] of Student's ''t''-test.
+
+=====Derivation=====
+Suppose ''X''<sub>1</sub>, ..., ''X''<sub>''n''</sub> are [[statistical independence|independent]] realizations of the normally-distributed, random variable ''X'', which has an expected value ''μ'' and [[variance]] ''σ''<sup>2</sup>. Let
+
+<math display="block">\overline{X}_n = \frac{1}{n}(X_1+\cdots+X_n)</math>
+
+be the sample mean, and
+
+<math display="block">s^2 = \frac{1}{n-1} \sum_{i=1}^n \left(X_i - \overline{X}_n\right)^2</math>
+
+be an unbiased estimate of the variance from the sample.  It can be shown that the random variable
+
+<math display="block">V = (n-1)\frac{s^2}{\sigma^2} </math>
+
+has a chi-squared distribution with <math>\nu = n - 1</math> degrees of freedom (by [[Cochran's theorem]]).<ref>{{cite journal|authorlink1=William Gemmell Cochran | last1=Cochran |first1=W. G.|date=1934|title=The distribution of quadratic forms in a normal system, with applications to the analysis of covariance|journal=[[Mathematical Proceedings of the Cambridge Philosophical Society]]|volume=30|issue=2|pages=178–191|bibcode=1934PCPS...30..178C|doi=10.1017/S0305004100016595|s2cid=122547084 }}</ref>  It is readily shown that the quantity
+
+<math display="block">Z = \left(\overline{X}_n - \mu\right) \frac{\sqrt{n}}{\sigma}</math>
+
+is normally distributed with mean 0 and variance 1, since the sample mean <math>\overline{X}_n</math> is normally distributed with mean ''μ'' and variance ''σ''<sup>2</sup>/''n''.  Moreover, it is possible to show that these two random variables (the normally distributed one ''Z'' and the chi-squared-distributed one ''V'') are independent. Consequently{{clarify|date=November 2012}} the [[pivotal quantity]]
+
+<math display="block">T \equiv \frac{Z}{\sqrt{V/\nu}} = \left(\overline{X}_n - \mu\right) \frac{\sqrt{n}}{s},</math>
+
+which differs from ''Z'' in that the exact standard deviation ''σ'' is replaced by the sample standard error ''s'', has a Student's ''t''-distribution as defined above. Notice that the unknown population variance ''σ''<sup>2</sup> does not appear in ''T'', since it was in both the numerator and the denominator, so it canceled. Gosset intuitively obtained the probability density function stated above, with <math>\nu</math> equal to ''n''&nbsp;−&nbsp;1, and Fisher proved it in 1925.<ref name="Fisher 1925 90–104"/>
+
+The distribution of the test statistic ''T'' depends on <math>\nu</math>, but not ''μ'' or ''σ''; the lack of dependence on ''μ'' and ''σ'' is what makes the ''t''-distribution important in both theory and practice.
+
+====Sampling distribution of t-statistic====
+The {{mvar|t}}&nbsp;distribution arises as the [[sampling distribution]]
+of the {{mvar|t}}&nbsp;statistic. Below the one-sample {{mvar|t}}&nbsp;statistic is discussed, for the corresponding two-sample {{mvar|t}}&nbsp;statistic see [[Student's t-test]].
+
+=====Unbiased variance estimate=====
+Let <math>\ x_1, \ldots, x_n \sim {\mathcal N}(\mu, \sigma^2)\ </math> be independent and identically distributed samples from a normal distribution with mean <math>\mu</math> and variance <math>\ \sigma^2 ~.</math> The sample mean and unbiased [[sample variance]] are given by:
+
+<math display="block">
+\begin{align}
+ \bar{x} &= \frac{\ x_1+\cdots+x_n\ }{ n }\ , \\[5pt]
+ s^2     &= \frac{ 1 }{\ n-1\ }\ \sum_{i=1}^n (x_i - \bar{x})^2 ~.
+\end{align}
+</math>
+
+The resulting (one sample) {{mvar|t}}&nbsp;statistic is given by
+
+<math display="block"> t = \frac{\bar{x} - \mu}{\ s / \sqrt{n \ }\ } \sim t_{n - 1} ~.</math>
+
+and is distributed according to a Student's {{mvar|t}}&nbsp;distribution with <math>\ n - 1\ </math> degrees of freedom.
+
+Thus for inference purposes the {{mvar|t}}&nbsp;statistic is a useful "[[pivotal quantity]]" in the case when the mean and variance <math>(\mu, \sigma^2)</math> are unknown population parameters, in the sense that the {{mvar|t}}&nbsp;statistic has then a probability distribution that depends on neither <math>\mu</math> nor <math>\ \sigma^2 ~.</math>
+
+=====ML variance estimate=====
+Instead of the unbiased estimate <math>\ s^2\ </math> we may also use the maximum likelihood estimate
+<math display="block">\ s^2_\mathsf{ML} = \frac{\ 1\ }{ n }\ \sum_{i=1}^n (x_i - \bar{x})^2\ </math>
+yielding the statistic
+<math display="block">\ t_\mathsf{ML} = \frac{\bar{x} - \mu}{\sqrt{s^2_\mathsf{ML}/n\ }} = \sqrt{\frac{n}{n-1}\ }\ t ~.</math>
+This is distributed according to the location-scale {{mvar|t}}&nbsp;distribution:
+<math display="block"> t_\mathsf{ML} \sim \operatorname{\ell st}(0,\ \tau^2=n/(n-1),\ n-1) ~.</math>
+
+====Compound distribution of normal with inverse gamma distribution====
+The location-scale {{mvar|t}}&nbsp;distribution results from [[compound distribution|compounding]] a [[Normal distribution|Gaussian distribution]] (normal distribution) with [[mean]] <math>\ \mu\ </math> and unknown [[variance]], with an [[inverse gamma distribution]] placed over the variance with parameters <math display="inline">a = \frac{\nu}{2} </math> and <math display="inline">b = \frac{\nu \tau^2}{2} \,.</math> In other words, the [[random variable]] ''X'' is assumed to have a Gaussian distribution with an unknown variance distributed as inverse gamma, and then the variance is [[marginalized out]] (integrated out).
+
+Equivalently, this distribution results from compounding a Gaussian distribution with a [[scaled-inverse-chi-squared distribution]] with parameters <math>\nu</math> and <math>\ \tau^2 ~.</math> The scaled-inverse-chi-squared distribution is exactly the same distribution as the inverse gamma distribution, but with a different parameterization, i.e. <math>\nu = 2 a, \; \tau^2 = \frac{b}{a} \,.</math>
+
+The reason for the usefulness of this characterization is that in [[Bayesian statistics]] the inverse gamma distribution is the [[conjugate prior]] distribution of the variance of a Gaussian distribution. As a result, the location-scale {{mvar|t}}&nbsp;distribution arises naturally in many Bayesian inference problems.<ref>{{Cite book |title=Bayesian Data Analysis |vauthors=Gelman AB, Carlin JS, Rubin DB, Stern HS |publisher=Chapman & Hal l|year=1997 |isbn=9780412039911 |edition=2nd |location=Boca Raton, FL |pages=68 }}</ref>
+
+====Maximum entropy distribution====
+Student's {{mvar|t}}&nbsp;distribution is the [[maximum entropy probability distribution]] for a random variate ''X'' having a certain value of <math display="inline">\operatorname{\mathbb E}\left\{ \ln(\nu+X^2) \right\} </math><ref>{{cite journal|vauthors=Park SY, Bera AK|date=2009|title=Maximum entropy autoregressive conditional heteroskedasticity model|journal=[[Journal of Econometrics]]|volume=150|issue=2|pages=219–230|doi=10.1016/j.jeconom.2008.12.014 |bibcode=2009JEcon.150..219P }}</ref>
+{{Clarify|reason=It is not clear what is meant by "fixed" in this context. An older and more to-the-point source (https://link.springer.com/content/pdf/10.1007/BF02481032.pdf) demonstrates that the Student's t distribution with  {{mvar|ν}} d.o.f. is the maximum entropy solution to a specific problem, for which, in addition to one more constraint, ℰ{ ln( 1 + X²/ν)} equals some constant which is predetermined for every {{mvar|ν}}.|date=December 2020}}{{Better source needed|date=December 2020|reason=The source does not obviously state this, although it touches upon something related.}}.
+That is, for fixed {{mvar|ν}}>0, the Student's {{mvar|t}}-distribution with {{mvar|ν}} degrees of freedom, <math display="inline">P_\nu</math>, is the unique distribution that maximizes differential entropy subject to a fixed value of <math display="inline">\mathbb E[\ln(\nu+X^2)].</math> More precisely,
+
+:<math>
+P_\nu = \underset{P\in\mathcal P}{\operatorname{arg\,max}}\ H(P), \quad\text{subject to}\quad \mathbb E_P[\ln(\nu+X^2)]=C,
+</math>
+
+for some constant {{mvar|C}} (the value of {{mvar|C}} will depend on {{mvar|ν}}), where <math display="inline">\mathcal{P}</math> denotes the set of all distributions on <math display="inline">\mathbb{R}</math> with finite [[differential entropy]], and {{mvar|H}}({{mvar|P}}) is the differential entropy of {{mvar|P}}.
+This follows immediately from the observation that the pdf can be written in [[exponential family]] form with <math>\nu + X^2</math> as sufficient statistic.
+
+===Integral of Student's probability density function and {{mvar|p}}-value===
+The function {{nobr|{{math|''A''(''t'' {{!}} ''ν'')}} }} is the integral of Student's probability density function, {{math|''f''(''t'')}} between &nbsp;{{mvar|-t}} and {{mvar|t}}, for {{nobr|{{math| ''t'' ≥ 0 }} .}} It thus gives the probability that a value of ''t'' less than that calculated from observed data would occur by chance. Therefore, the function {{nobr|{{math|''A''(''t'' {{!}} ''ν'')}} }} can be used when testing whether the difference between the means of two sets of data is statistically significant, by calculating the corresponding value of {{mvar|t}} and the probability of its occurrence if the two sets of data were drawn from the same population. This is used in a variety of situations, particularly in [[t test|{{mvar|t}}&nbsp;tests]]. For the statistic {{mvar|t}}, with {{mvar|ν}} degrees of freedom, {{nobr|{{math|''A''(''t'' {{!}} ''ν'')}} }} is the probability that {{mvar|t}} would be less than the observed value if the two means were the same (provided that the smaller mean is subtracted from the larger, so that {{nobr|{{math| ''t'' ≥ 0}} ).}} It can be easily calculated from the [[cumulative distribution function]] {{math|''F''{{sub|''ν''}}(''t'')}} of the {{mvar|t}}&nbsp;distribution:
+
+<math display="block"> A( t \mid \nu) = F_\nu(t) - F_\nu(-t) = 1 - I_{ \frac{\nu}{\nu +t^2} }\!\left(\frac{\nu}{2}, \frac{1}{2}\right),</math>
+
+where {{nobr| {{math| ''I{{sub|x}}''(''a'', ''b'') }}  }} is the regularized [[Beta function#Incomplete beta function|incomplete beta function]].
+
+For statistical hypothesis testing this function is used to construct the [[p-value|''p''-value]].
+
+==Related distributions==
+===In general===
+
+* The [[noncentral t-distribution|noncentral {{mvar|t}}&nbsp;distribution]] generalizes the {{mvar|t}}&nbsp;distribution to include a noncentrality parameter. Unlike the nonstandardized {{mvar|t}}&nbsp;distributions, the noncentral distributions are not symmetric (the median is not the same as the mode).
+* The ''discrete Student's {{mvar|t}}&nbsp;distribution'' is defined by its [[probability mass function]] at ''r'' being proportional to:<ref>{{cite book |title=Families of Frequency Distributions |vauthors=Ord JK |publisher=Griffin |year=1972 |isbn=9780852641378 | location=London, UK |at=Table&nbsp;5.1 }}</ref> <math display="block"> \prod_{j=1}^k \frac{1}{(r+j+a)^2+b^2}  \quad \quad r=\ldots, -1, 0, 1, \ldots ~.</math> Here ''a'', ''b'', and ''k'' are parameters. This distribution arises from the construction of a system of discrete distributions similar to that of the [[Pearson distribution]]s for continuous distributions.<ref>{{Cite book |title=Families of frequency distributions |vauthors=Ord JK |publisher=Griffin |year=1972 |isbn=9780852641378 |location=London, UK |at=Chapter&nbsp;5}}</ref>
+* One can generate Student {{nobr| {{math|''A''(''t'' {{!}} ''ν'')}} }} samples by taking the ratio of variables from the normal distribution and the square-root of the {{nobr|{{math|''χ''²}} ''distribution''}}. If we use instead of the normal distribution, e.g., the [[Irwin–Hall distribution]], we obtain over-all a symmetric 4&nbsp;parameter distribution, which includes the normal, the [[uniform distribution (continuous)|uniform]], the [[triangular distribution|triangular]], the Student&nbsp;{{mvar|t}} and the [[Cauchy distribution]]. This is also more flexible than some other symmetric generalizations of the normal distribution.
+* {{mvar|t}}&nbsp;distribution is an instance of [[ratio distributions]].
+* The square of a random variable distributed  {{math|''t''{{sub|''n''}}}} is distributed as [[Snedecor's F distribution]] {{math|''F''{{sub|1,''n''}}}}.
+
+===<span class="anchor" id="Three-parameter version"></span><span class="anchor" id="location-scale"></span>Location-scale {{mvar|t}}-distribution===
+====Location-scale transformation====
+Student's {{mvar|t}}&nbsp;distribution generalizes to the three parameter ''location-scale {{mvar|t}}&nbsp;distribution'' <math>\operatorname{\ell st}(\mu,\ \tau^2,\ \nu)\ </math> by introducing a [[location parameter]] <math>\ \mu\ </math> and a [[scale parameter]] <math>\ \tau ~.</math> With
+<math display="block">\ T \sim t_\nu\ </math>
+and [[location-scale family]] transformation
+<math display="block">\ X = \mu + \tau\ T\ </math>
+we get
+<math display="block"> X \sim \operatorname{\ell st}(\mu,\ \tau^2,\ \nu) ~.</math>
+
+The resulting distribution is also called the ''non-standardized Student's {{mvar|t}}&nbsp;distribution''.
+
+====Density and first two moments====
+The location-scale {{mvar|t}} distribution has a density defined by:<ref name="Jackman">{{cite book |title=Bayesian Analysis for the Social Sciences |url=https://archive.org/details/bayesianmodeling00jack |url-access=limited |author=Jackman, S. |series=Wiley Series in Probability and Statistics |publisher=Wiley |year=2009 |isbn=9780470011546 |page=[https://archive.org/details/bayesianmodeling00jack/page/n542 507] |doi=10.1002/9780470686621}}</ref>
+
+<math display="block">p(x\mid \nu,\mu,\tau) = \frac{\Gamma{\left(\frac{\nu + 1}{2} \right)}}{\Gamma{\left( \frac{\nu}{2}\right)} \tau \sqrt{\pi \nu}} \left(1 + \frac{1}{\nu} \left(\frac{x-\mu}{\tau} \right)^2 \right)^{-(\nu+1)/2}</math>
+
+Equivalently, the density can be written in terms of <math>\tau^2</math>:
+
+<math display="block">p(x \mid \nu, \mu, \tau^2) = \frac{\Gamma{\left(\frac{\nu + 1}{2}\right)}}{\Gamma{\left(\frac{\nu}{2}\right)} \sqrt{\pi \nu \tau^2}} \left(1 + \frac{1}{\nu} \frac{(x - \mu)^2}{\tau^2} \right)^{-(\nu+1)/2}</math>
+
+Other properties of this version of the distribution are:<ref name=Jackman/>
+
+<math display="block">\begin{align}
+\operatorname{\mathbb E}\{\ X\ \} &= \mu & \text{ for } \nu > 1\ ,\\
+\operatorname{var}\{\ X\ \} &= \tau^2\frac{\nu}{\nu-2} & \text{ for } \nu > 2\ ,\\
+\operatorname{mode}\{\ X\ \} &= \mu ~.
+\end{align} </math>
+
+====Special cases====
+* If <math>X </math> follows a location-scale {{mvar|t}}&nbsp;distribution <math>X \sim \operatorname{\ell st}\left(\mu,\, \tau^2,\, \nu\right) </math> then for <math>\nu \to \infty </math>, <math>X </math> is normally distributed <math>X \sim \mathrm{N}{\left(\mu, \tau^2\right)}</math> with mean <math>\mu</math> and variance <math>\tau^2 \,.</math>
+* The location-scale {{mvar|t}}&nbsp;distribution <math>\ \operatorname{\ell st}\left(\mu,\ \tau^2,\ \nu=1 \right)\ </math> with degree of freedom <math>\nu=1</math> is equivalent to the [[Cauchy distribution]] <math>\mathrm{Cau}\left(\mu, \tau\right) ~.</math>
+* The location-scale {{mvar|t}}&nbsp;distribution <math>\operatorname{\ell st}\left(\mu=0,\ \tau^2=1,\ \nu\right)\ </math> with <math>\mu=0</math> and <math>\ \tau^2=1\ </math> reduces to the Student's {{mvar|t}}&nbsp;distribution <math>\ t_\nu ~.</math>
+
+==Occurrence and applications==
+===In frequentist statistical inference===
+Student's {{mvar|t}}&nbsp;distribution arises in a variety of statistical estimation problems where the goal is to estimate an unknown parameter, such as a mean value, in a setting where the data are observed with additive [[errors and residuals in statistics|errors]]. If (as in nearly all practical statistical work) the population [[standard deviation]] of these errors is unknown and has to be estimated from the data, the {{mvar|t}}&nbsp;distribution is often used to account for the extra uncertainty that results from this estimation. In most such problems, if the standard deviation of the errors were known, a normal distribution would be used instead of the {{mvar|t}}&nbsp;distribution.
+
+[[Confidence interval]]s and [[hypothesis test]]s are two statistical procedures in which the [[quantile]]s of the sampling distribution of a particular statistic (e.g. the [[standard score]]) are required. In any situation where this statistic is a [[linear function]] of the [[data]], divided by the usual estimate of the standard deviation, the resulting quantity can be rescaled and centered to follow Student's {{mvar|t}}&nbsp;distribution. Statistical analyses involving means, weighted means, and regression coefficients all lead to statistics having this form.
+
+Quite often, textbook problems will treat the population standard deviation as if it were known and thereby avoid the need to use the Student's {{mvar|t}}&nbsp;distribution. These problems are generally of two kinds: (1) those in which the sample size is so large that one may treat a data-based estimate of the [[variance]] as if it were certain, and (2) those that illustrate mathematical reasoning, in which the problem of estimating the standard deviation is temporarily ignored because that is not the point that the author or instructor is then explaining.
+
+====Hypothesis testing====
+A number of statistics can be shown to have {{mvar|t}}&nbsp;distributions for samples of moderate size under [[null hypothesis|null hypotheses]] that are of interest, so that the {{mvar|t}}&nbsp;distribution forms the basis for significance tests. For example, the distribution of [[Spearman's rank correlation coefficient]] {{mvar|ρ}}, in the null case (zero correlation) is well approximated by the {{mvar|t}} distribution for sample sizes above about 20.{{citation needed|date=November 2010}}
+
+====Confidence intervals====
+Suppose the number ''A'' is so chosen that
+
+<math display="block">\ \operatorname{\mathbb P}\left\{\ {-A} < T < A\ \right\} = 0.9\ ,</math>
+
+when {{mvar|T}} has a {{mvar|t}}&nbsp;distribution with {{nobr|{{math|''n'' − 1}} &thinsp;}} degrees of freedom. By symmetry, this is the same as saying that {{mvar|A}} satisfies
+
+<math display="block">\ \operatorname{\mathbb P}\left\{\ T < A\ \right\} = 0.95\ ,</math>
+
+so ''A'' is the "95th percentile" of this probability distribution, or <math>\ A = t_{(0.05,n-1)} ~.</math> Then
+
+<math display="block">\ \operatorname{\mathbb P}\left\{\ {-A} < \frac{\ \overline{X}_n - \mu\ }{ S_n/\sqrt{n\ } } < A\ \right\} = 0.9\ ,</math>
+
+where {{nobr|''S''{{sub|''n''}} }} is the sample standard deviation of the observed values. This is equivalent to
+
+<math display="block">\ \operatorname{\mathbb P}\left\{\ \overline{X}_n - A \frac{ S_n }{\ \sqrt{n\ }\ } < \mu < \overline{X}_n + A\ \frac{ S_n }{\ \sqrt{n\ }\ }\ \right\} = 0.9.</math>
+
+Therefore, the interval whose endpoints are
+
+<math display="block">\ \overline{X}_n\ \pm A\ \frac{ S_n }{\ \sqrt{n\ }\ }\ </math>
+
+is a 90% [[confidence interval]] for μ. Therefore, if we find the mean of a set of observations that we can reasonably expect to have a normal distribution, we can use the {{mvar|t}}&nbsp;distribution to examine whether the confidence limits on that mean include some theoretically predicted value – such as the value predicted on a [[null hypothesis]].
+
+It is this result that is used in the [[Student's t-test|Student's {{mvar|t}}&nbsp;test]]s: since the difference between the means of samples from two normal distributions is itself distributed normally, the {{mvar|t}}&nbsp;distribution can be used to examine whether that difference can reasonably be supposed to be zero.
+
+If the data are normally distributed, the one-sided {{nobr|{{math|(1 − ''α'')}} upper}} confidence limit (UCL) of the mean, can be calculated using the following equation:
+
+<math display="block">\mathsf{UCL}_{1-\alpha} = \overline{X}_n + t_{\alpha,n-1}\ \frac{ S_n }{\ \sqrt{n\ }\ } ~.</math>
+ 
+The resulting UCL will be the greatest average value that will occur for a given confidence interval and population size. In other words, <math>\overline{X}_n</math> being the mean of the set of observations, the probability that the mean of the distribution is inferior to {{nobr|UCL{{sub|{{math|1 − ''α''}} }} }} is equal to the confidence {{nobr|level {{math|1 − ''α''}} .}}
+
+====Prediction intervals====
+The {{mvar|t}}&nbsp;distribution can be used to construct a [[prediction interval]] for an unobserved sample from a normal distribution with unknown mean and variance.
+
+===In Bayesian statistics===
+The Student's {{mvar|t}}&nbsp;distribution, especially in its three-parameter (location-scale) version, arises frequently in [[Bayesian statistics]] as a result of its connection with the normal distribution. Whenever the [[variance]] of a normally distributed [[random variable]] is unknown and a [[conjugate prior]] placed over it that follows an [[inverse gamma distribution]], the resulting [[marginal distribution]] of the variable will follow a Student's {{mvar|t}}&nbsp;distribution. Equivalent constructions with the same results involve a conjugate [[scaled-inverse-chi-squared distribution]] over the variance, or a conjugate gamma distribution over the [[Precision (statistics)|precision]]. If an [[improper prior]] proportional to {{sfrac| 1 | {{mvar|σ}}² }} is placed over the variance, the {{mvar|t}}&nbsp;distribution also arises. This is the case regardless of whether the mean of the normally distributed variable is known, is unknown distributed according to a [[conjugate prior|conjugate]] normally distributed prior, or is unknown distributed according to an improper constant prior.
+
+Related situations that also produce a {{mvar|t}}&nbsp;distribution are:
+* The [[marginal distribution|marginal]] [[posterior distribution]] of the unknown mean of a normally distributed variable, with unknown prior mean and variance following the above model.
+* The [[prior predictive distribution]] and [[posterior predictive distribution]] of a new normally distributed data point when a series of [[independent identically distributed]] normally distributed data points have been observed, with prior mean and variance as in the above model.
+
+===Robust parametric modeling===
+The {{mvar|t}}&nbsp;distribution is often used as an alternative to the normal distribution as a model for data, which often has heavier tails than the normal distribution allows for; see e.g. Lange et al.<ref>{{cite journal|vauthors=Lange KL, Little RJ, Taylor JM|date=1989|title=Robust Statistical Modeling Using the {{mvar|t}} Distribution|url=https://cloudfront.escholarship.org/dist/prd/content/qt27s1d3h7/qt27s1d3h7.pdf|journal=[[Journal of the American Statistical Association]]|volume=84|issue=408|pages=881–896|doi=10.1080/01621459.1989.10478852|jstor=2290063}}</ref> The classical approach was to identify [[outlier (statistics)|outliers]] (e.g., using [[Grubbs's test]]) and exclude or downweight them in some way. However, it is not always easy to identify outliers (especially in [[curse of dimensionality|high dimensions]]), and the {{mvar|t}}&nbsp;distribution is a natural choice of model for such data and provides a parametric approach to [[robust statistics]].
+
+A Bayesian account can be found in Gelman et al.<ref>{{cite book|title=Bayesian Data Analysis|vauthors=Gelman AB, Carlin JB, Stern HS, Dunson DB, Vehtari A, Rubin DB|publisher=CRC Press|year=2014|isbn=9781439898208|location=Boca Raton, Florida|pages=293|chapter=Computationally efficient Markov chain simulation|display-authors=3}}</ref> The degrees of freedom parameter controls the kurtosis of the distribution and is correlated with the scale parameter. The likelihood can have multiple local maxima and, as such, it is often necessary to fix the degrees of freedom at a fairly low value and estimate the other parameters taking this as given. Some authors{{Citation needed|date=June 2015}} report that values between 3 and 9 are often good choices. Venables and Ripley{{Citation needed|date=June 2015}} suggest that a value of 5 is often a good choice.
+
+===Student's {{mvar|t}}&nbsp;process===
+For practical [[Regression analysis|regression]] and [[prediction]] needs, Student's {{mvar|t}}&nbsp;processes were introduced, that are generalisations of the Student {{mvar|t}}&nbsp;distributions for functions. A Student's {{mvar|t}}&nbsp;process is constructed from the Student {{mvar|t}}&nbsp;distributions like a [[Gaussian process]] is constructed from the [[Multivariate normal distribution|Gaussian distributions]]. For a [[Gaussian process]], all sets of values have a multidimensional Gaussian distribution. Analogously, <math>X(t)</math> is a Student {{mvar|t}}&nbsp;process on an interval <math>I=[a,b]</math> if the correspondent values of the process <math>\ X(t_1),\ \ldots\ , X(t_n)\ </math> (<math>t_i \in I</math>) have a joint [[Multivariate t-distribution|multivariate Student {{mvar|t}}&nbsp;distribution]].<ref name="Shah2014">{{cite journal |last1= Shah| first1= Amar |last2= Wilson| first2= Andrew Gordon|last3= Ghahramani|first3= Zoubin|year= 2014 |title= Student&nbsp;{{mvar|t}} processes as alternatives to Gaussian processes|journal= JMLR|volume= 33|issue= Proceedings of the 17th International Conference on Artificial Intelligence and Statistics (AISTATS) 2014, Reykjavik, Iceland|pages= 877–885| arxiv= 1402.4306 | url= https://proceedings.mlr.press/v33/shah14.pdf}}</ref> These processes are used for regression, prediction, Bayesian optimization and related problems. For multivariate regression and multi-output prediction, the multivariate Student {{mvar|t}}&nbsp;processes are introduced and used.<ref name="Zexun2020">{{cite journal |last1= Chen| first1= Zexun |last2= Wang| first2= Bo|last3= Gorban|first3=Alexander N.|year= 2019 |title= Multivariate Gaussian and Student&nbsp;{{mvar|t}} process regression for multi-output prediction|journal= Neural Computing and Applications| volume= 32 | issue= 8 | pages= 3005–3028 |doi=10.1007/s00521-019-04687-8|doi-access= free| arxiv= 1703.04455 }}</ref>
+
+===Table of selected values===
+The following table lists values for {{mvar|t}}&nbsp;distributions with {{mvar|ν}} degrees of freedom for a range of one-sided or two-sided critical regions. The first column is {{mvar|ν}}, the percentages along the top are confidence levels <math>\ \alpha\ ,</math> and the numbers in the body of the table are the <math>t_{\alpha,n-1}</math> factors described in the section on [[#Confidence intervals|confidence intervals]].
+
+The last row with infinite {{mvar|ν}} gives critical points for a normal distribution since a {{mvar|t}}&nbsp;distribution with infinitely many degrees of freedom is a normal distribution. (See [[#Related distributions|Related distributions]] above).
+
+{| class="wikitable"
+|-
+! ''One-sided''
+! 75%
+! 80%
+! 85%
+! 90%
+! 95%
+! 97.5%
+! 99%
+! 99.5%
+! 99.75%
+! 99.9%
+! 99.95%
+|-
+! ''Two-sided''
+! 50%
+! 60%
+! 70%
+! 80%
+! 90%
+! 95%
+! 98%
+! 99%
+! 99.5%
+! 99.8%
+! 99.9%
+|-
+!1
+|1.000
+|1.376
+|1.963
+|3.078
+|6.314
+|12.706
+|31.821
+|63.657
+|127.321
+|318.309
+|636.619
+|-
+!2
+|0.816
+|1.061
+|1.386
+|1.886
+|2.920
+|4.303
+|6.965
+|9.925
+|14.089
+|22.327
+|31.599
+|-
+!3
+|0.765
+|0.978
+|1.250
+|1.638
+|2.353
+|3.182
+|4.541
+|5.841
+|7.453
+|10.215
+|12.924
+|-
+!4
+|0.741
+|0.941
+|1.190
+|1.533
+|2.132
+|2.776
+|3.747
+|4.604
+|5.598
+|7.173
+|8.610
+|-
+!5
+|0.727
+|0.920
+|1.156
+|1.476
+|2.015
+|2.571
+|3.365
+|4.032
+|4.773
+|5.893
+|6.869
+|-
+!6
+|0.718
+|0.906
+|1.134
+|1.440
+|1.943
+|2.447
+|3.143
+|3.707
+|4.317
+|5.208
+|5.959
+|-
+!7
+|0.711
+|0.896
+|1.119
+|1.415
+|1.895
+|2.365
+|2.998
+|3.499
+|4.029
+|4.785
+|5.408
+|-
+!8
+|0.706
+|0.889
+|1.108
+|1.397
+|1.860
+|2.306
+|2.896
+|3.355
+|3.833
+|4.501
+|5.041
+|-
+!9
+|0.703
+|0.883
+|1.100
+|1.383
+|1.833
+|2.262
+|2.821
+|3.250
+|3.690
+|4.297
+|4.781
+|-
+!10
+|0.700
+|0.879
+|1.093
+|1.372
+|1.812
+|2.228
+|2.764
+|3.169
+|3.581
+|4.144
+|4.587
+|-
+!11
+|0.697
+|0.876
+|1.088
+|1.363
+|1.796
+|2.201
+|2.718
+|3.106
+|3.497
+|4.025
+|4.437
+|-
+!12
+|0.695
+|0.873
+|1.083
+|1.356
+|1.782
+|2.179
+|2.681
+|3.055
+|3.428
+|3.930
+|4.318
+|-
+!13
+|0.694
+|0.870
+|1.079
+|1.350
+|1.771
+|2.160
+|2.650
+|3.012
+|3.372
+|3.852
+|4.221
+|-
+!14
+|0.692
+|0.868
+|1.076
+|1.345
+|1.761
+|2.145
+|2.624
+|2.977
+|3.326
+|3.787
+|4.140
+|-
+!15
+|0.691
+|0.866
+|1.074
+|1.341
+|1.753
+|2.131
+|2.602
+|2.947
+|3.286
+|3.733
+|4.073
+|-
+!16
+|0.690
+|0.865
+|1.071
+|1.337
+|1.746
+|2.120
+|2.583
+|2.921
+|3.252
+|3.686
+|4.015
+|-
+!17
+|0.689
+|0.863
+|1.069
+|1.333
+|1.740
+|2.110
+|2.567
+|2.898
+|3.222
+|3.646
+|3.965
+|-
+!18
+|0.688
+|0.862
+|1.067
+|1.330
+|1.734
+|2.101
+|2.552
+|2.878
+|3.197
+|3.610
+|3.922
+|-
+!19
+|0.688
+|0.861
+|1.066
+|1.328
+|1.729
+|2.093
+|2.539
+|2.861
+|3.174
+|3.579
+|3.883
+|-
+!20
+|0.687
+|0.860
+|1.064
+|1.325
+|1.725
+|2.086
+|2.528
+|2.845
+|3.153
+|3.552
+|3.850
+|-
+!21
+|0.686
+|0.859
+|1.063
+|1.323
+|1.721
+|2.080
+|2.518
+|2.831
+|3.135
+|3.527
+|3.819
+|-
+!22
+|0.686
+|0.858
+|1.061
+|1.321
+|1.717
+|2.074
+|2.508
+|2.819
+|3.119
+|3.505
+|3.792
+|-
+!23
+|0.685
+|0.858
+|1.060
+|1.319
+|1.714
+|2.069
+|2.500
+|2.807
+|3.104
+|3.485
+|3.767
+|-
+!24
+|0.685
+|0.857
+|1.059
+|1.318
+|1.711
+|2.064
+|2.492
+|2.797
+|3.091
+|3.467
+|3.745
+|-
+!25
+|0.684
+|0.856
+|1.058
+|1.316
+|1.708
+|2.060
+|2.485
+|2.787
+|3.078
+|3.450
+|3.725
+|-
+!26
+|0.684
+|0.856
+|1.058
+|1.315
+|1.706
+|2.056
+|2.479
+|2.779
+|3.067
+|3.435
+|3.707
+|-
+!27
+|0.684
+|0.855
+|1.057
+|1.314
+|1.703
+|2.052
+|2.473
+|2.771
+|3.057
+|3.421
+|3.690
+|-
+!28
+|0.683
+|0.855
+|1.056
+|1.313
+|1.701
+|2.048
+|2.467
+|2.763
+|3.047
+|3.408
+|3.674
+|-
+!29
+|0.683
+|0.854
+|1.055
+|1.311
+|1.699
+|2.045
+|2.462
+|2.756
+|3.038
+|3.396
+|3.659
+|-
+!30
+|0.683
+|0.854
+|1.055
+|1.310
+|1.697
+|2.042
+|2.457
+|2.750
+|3.030
+|3.385
+|3.646
+|-
+!40
+|0.681
+|0.851
+|1.050
+|1.303
+|1.684
+|2.021
+|2.423
+|2.704
+|2.971
+|3.307
+|3.551
+|-
+!50
+|0.679
+|0.849
+|1.047
+|1.299
+|1.676
+|2.009
+|2.403
+|2.678
+|2.937
+|3.261
+|3.496
+|-
+!60
+|0.679
+|0.848
+|1.045
+|1.296
+|1.671
+|2.000
+|2.390
+|2.660
+|2.915
+|3.232
+|3.460
+|-
+!80
+|0.678
+|0.846
+|1.043
+|1.292
+|1.664
+|1.990
+|2.374
+|2.639
+|2.887
+|3.195
+|3.416
+|-
+!100
+|0.677
+|0.845
+|1.042
+|1.290
+|1.660
+|1.984
+|2.364
+|2.626
+|2.871
+|3.174
+|3.390
+|-
+!120
+|0.677
+|0.845
+|1.041
+|1.289
+|1.658
+|1.980
+|2.358
+|2.617
+|2.860
+|3.160
+|3.373
+|-
+!∞
+|0.674
+|0.842
+|1.036
+|1.282
+|1.645
+|1.960
+|2.326
+|2.576
+|2.807
+|3.090
+|3.291
+|-
+! ''One-sided''
+! 75%
+! 80%
+! 85%
+! 90%
+! 95%
+! 97.5%
+! 99%
+! 99.5%
+! 99.75%
+! 99.9%
+! 99.95%
+|-
+! ''Two-sided''
+! 50%
+! 60%
+! 70%
+! 80%
+! 90%
+! 95%
+! 98%
+! 99%
+! 99.5%
+! 99.8%
+! 99.9%
+|}
+
+; Calculating the confidence interval :
+
+Let's say we have a sample with size&nbsp;11, sample mean&nbsp;10, and sample variance&nbsp;2. For 90% confidence with 10&nbsp;degrees of freedom, the one-sided {{mvar|t}}&nbsp;value from the table is 1.372&nbsp;. Then with confidence interval calculated from
+
+<math display="block">\overline{X}_n \pm t_{\alpha,\nu} \, \frac{S_n}{\sqrt{n}}\, ,</math>
+
+we determine that with 90% confidence we have a true mean lying below
+
+<math display="block">10 + 1.372\, \frac{\sqrt{2}}{ \sqrt{11} } = 10.585 \,.</math>
+
+In other words, 90% of the times that an upper threshold is calculated by this method from particular samples, this upper threshold exceeds the true mean.
+
+And with 90% confidence we have a true mean lying above
+
+<math display="block">\ 10 - 1.372\ \frac{ \sqrt{2\ } }{\ \sqrt{11\ }\ } = 9.414 ~.</math>
+
+In other words, 90% of the times that a lower threshold is calculated by this method from particular samples, this lower threshold lies below the true mean.
+
+So that at 80% confidence (calculated from 100%&nbsp;−&nbsp;2&nbsp;×&nbsp;(1&nbsp;−&nbsp;90%) = 80%), we have a true mean lying within the interval
+
+<math display="block">\left(10 - 1.372 \, \frac{\sqrt{2}}{\sqrt{11}}, \, 10 + 1.372 \, \frac{\sqrt{2}}{\sqrt{11}} \right) = ( 9.414,\, 10.585) \,.</math>
+
+Saying that 80% of the times that upper and lower thresholds are calculated by this method from a given sample, the true mean is both below the upper threshold and above the lower threshold is not the same as saying that there is an 80% probability that the true mean lies between a particular pair of upper and lower thresholds that have been calculated by this method; see [[confidence interval]] and [[prosecutor's fallacy]].
+
+Nowadays, statistical software, such as the [[R (programming language)|R programming language]], and functions available in many [[Spreadsheet|spreadsheet programs]] compute values of the {{mvar|t}}&nbsp;distribution and its inverse without tables.
+
+==Computational methods==
+===Monte Carlo sampling===
+There are various approaches to constructing random samples from the Student's {{mvar|t}}&nbsp;distribution. The matter depends on whether the samples are required on a stand-alone basis, or are to be constructed by application of a [[quantile function]] to [[uniform]] samples; e.g., in the multi-dimensional applications basis of [[Copula (statistics)|copula-dependency]].{{citation needed|date=July 2011}} In the case of stand-alone sampling, an extension of the [[Box–Muller method]] and its [[Box–Muller transform#Polar form|polar form]] is easily deployed.<ref name=Bailey>{{Cite journal |vauthors=Bailey RW |date=1994 |title=Polar generation of random variates with the {{mvar|t}}&nbsp;distribution |journal=[[Mathematics of Computation]] |volume=62 |issue=206 |pages=779–781 |doi=10.2307/2153537 |jstor=2153537 |bibcode=1994MaCom..62..779B |s2cid=120459654 }}</ref> It has the merit that it applies equally well to all real positive [[degrees of freedom (statistics)|degrees of freedom]], {{mvar|ν}}, while many other candidate methods fail if {{mvar|ν}} is close to zero.<ref name=Bailey/>
+==History==
+[[File:William_Sealy_Gosset.jpg|thumb|upright|Statistician [[William Sealy Gosset]], known as "Student"]]
+
+In statistics, the {{mvar|t}}&nbsp;distribution was first derived as a [[posterior distribution]] in 1876 by [[Friedrich Robert Helmert|Helmert]]<ref name=HFR1>{{cite journal |vauthors=Helmert FR |year=1875 |title=Über die Berechnung des wahrscheinlichen Fehlers aus einer endlichen Anzahl wahrer Beobachtungsfehler |language=de |journal=[[Zeitschrift für Angewandte Mathematik und Physik]] |volume=20 |pages=300–303}}</ref><ref name=HFR2>{{cite journal |vauthors=Helmert FR |year=1876 |title=Über die Wahrscheinlichkeit der Potenzsummen der Beobachtungsfehler und uber einige damit in Zusammenhang stehende Fragen |language=de |journal=[[Zeitschrift für Angewandte Mathematik und Physik]] |volume=21 |pages=192–218 }}</ref><ref name=HFR3>{{cite journal |vauthors=Helmert FR |year=1876 |title=Die Genauigkeit der Formel von Peters zur Berechnung des wahrscheinlichen Beobachtungsfehlers directer Beobachtungen gleicher Genauigkeit |language=de |trans-title=The accuracy of Peters' formula for calculating the probable observation error of direct observations of the same accuracy |journal=[[Astronomische Nachrichten]] |volume=88 |issue=8–9 |pages=113–132 |bibcode=1876AN.....88..113H |doi=10.1002/asna.18760880802 |url=https://zenodo.org/record/1424695}}</ref> and [[Jacob Lüroth|Lüroth]].<ref name=L1876>{{cite journal |vauthors=Lüroth J |date=1876 |title=Vergleichung von zwei Werten des wahrscheinlichen Fehlers |language=de |journal=[[Astronomische Nachrichten]] |volume=87 |issue=14 |pages=209–220 |bibcode=1876AN.....87..209L |doi=10.1002/asna.18760871402 |url=https://zenodo.org/record/1424693}}</ref><ref>{{Cite journal |vauthors=Pfanzagl J, Sheynin O |year=1996 |title=Studies in the history of probability and statistics. XLIV. A forerunner of the {{mvar|t}}&nbsp;distribution |journal=[[Biometrika]] |volume=83 |issue=4 |pages=891–898 |doi=10.1093/biomet/83.4.891 |mr=1766040 }} <!-- abstract = "The t-distribution first occurred in a paper by Lüroth (1876) on the classical theory of errors in connection with a Bayesian result." --></ref><ref>{{Cite journal |vauthors=Sheynin O |year=1995 |title=Helmert's work in the theory of errors |journal=[[Archive for History of Exact Sciences]] |volume=49 |issue=1 |pages=73–104 |doi=10.1007/BF00374700 |s2cid=121241599}}</ref> As such, Student's t-distribution is an example of [[Stigler's law of eponymy|Stigler's Law of Eponymy]]. The {{mvar|t}}&nbsp;distribution also appeared in a more general form as [[Pearson distribution|Pearson type&nbsp;IV]] distribution in [[Karl Pearson]]'s 1895 paper.<ref>{{cite journal |last=Pearson |first=K. |year=1895 |title=Contributions to the Mathematical Theory of Evolution. II. Skew Variation in Homogeneous Material |journal=Philosophical Transactions of the Royal Society A: Mathematical, Physical and Engineering Sciences |volume=186 |issue=374 |pages=343–414 |doi=10.1098/rsta.1895.0010 |doi-access=free |bibcode=1895RSPTA.186..343P |issn=1364-503X|url=https://zenodo.org/record/1432104 }}</ref>
+
+In the English-language literature, the distribution takes its name from [[William Sealy Gosset]]'s 1908 paper in ''[[Biometrika]]'' under the pseudonym "Student" during his work at the [[Guinness Brewery]] in [[Dublin, Ireland]].<ref>{{cite journal |author="Student" <nowiki>[</nowiki>[[pen name|pseu.]] [[William Sealy Gosset]]<nowiki>]</nowiki> |year=1908 |title=The probable error of a mean |journal=[[Biometrika]] |volume=6 |issue=1 |pages=1–25 |doi=10.1093/biomet/6.1.1 |jstor=2331554 |hdl=10338.dmlcz/143545  |url=http://www.york.ac.uk/depts/maths/histstat/student.pdf}}</ref> One version of the origin of the pseudonym is that Gosset's employer preferred staff to use pen names when publishing scientific papers instead of their real name, so he used the name "Student" to hide his identity. Another version is that Guinness did not want their competitors to know that they were using the {{mvar|t}}&nbsp;test to determine the quality of raw material.<ref>{{cite journal |vauthors=Wendl MC |author-link=Michael Christopher Wendl |date=2016 |title=Pseudonymous fame |journal=[[Science (journal)|Science]] |volume=351 |issue=6280 |page =1406 |doi=10.1126/science.351.6280.1406 |pmid=27013722 |bibcode=2016Sci...351.1406W}}</ref><ref>{{cite book |vauthors=Mortimer RG |year=2005 |title=Mathematics for Physical Chemistry |edition=3rd |publisher=Elsevier |isbn=9780080492889 |location=Burlington, MA |pages=[https://archive.org/details/mathematicsforph00mort_321/page/n339 326] |oclc=156200058 |url=https://archive.org/details/mathematicsforph00mort_321 |url-access=registration}}</ref>
+
+Gosset worked at Guinness and was interested in the problems of small samples – for example, the chemical properties of barley where sample sizes might be as few as 3. Gosset's paper refers to the distribution as the "frequency distribution of standard deviations of samples drawn from a normal population". It became well known through the work of [[Ronald Fisher]], who called the distribution "Student's distribution" and represented the test value with the letter {{mvar|t}}.<ref name="Fisher 1925 90–104">{{cite journal |vauthors=Fisher RA |author-link=Ronald Fisher |year=1925 |title=Applications of 'Student's' distribution |journal=Metron |volume=5 |pages=90–104 |url=http://www.sothis.ro/user/content/4ef6e90670749a86-student_distribution_1925.pdf |url-status=dead |archive-url=https://web.archive.org/web/20160305130235/http://www.sothis.ro/user/content/4ef6e90670749a86-student_distribution_1925.pdf |archive-date=5 March 2016}}</ref><ref>{{cite book |vauthors=Walpole RE, Myers R, Myers S, Ye K |year=2006 |title=Probability & Statistics for Engineers & Scientists |edition=7th |publisher=Pearson |isbn=9788177584042 |location=New Delhi, IN |page=237 |oclc=818811849 }}</ref>
+
+==See also==
+{{Portal|Mathematics}}
+{{Colbegin}}
+* [[F-distribution|''F''-distribution]]
+* [[Folded-t and half-t distributions|Folded&nbsp;{{mvar|t}} and half&nbsp;{{mvar|t}} distributions]]
+* [[Hotelling's T-squared distribution|Hotelling's {{mvar|T}}² distribution]]
+* [[Multivariate Student distribution]]
+* [[Standard normal table]] (''Z''-distribution table)
+* [[t-statistic|{{mvar|t}}&nbsp;statistic]]
+* [[Tau distribution]], for [[internally studentized residual]]s
+* [[Wilks' lambda distribution]]
+* [[Wishart distribution]]
+
+{{Colend}}
+
+==Notes==
+{{Reflist}}
+
+==References==
+*{{Cite journal
+| last1 = Senn | first1 = S.
+| last2 = Richardson | first2 = W.
+| title = The first {{mvar|t}}&nbsp;test
+| journal = [[Statistics in Medicine (journal)|Statistics in Medicine]]
+| volume = 13
+| issue = 8
+| pages = 785–803
+| year = 1994
+| pmid = 8047737 |doi=10.1002/sim.4780130802
+}}
+*{{cite book|title=Introduction to Mathematical Statistics|vauthors=Hogg RV, Craig AT|publisher=Macmillan|year=1978|edition=4th|location=New York|asin=B010WFO0SA|author-link=Robert V. Hogg}}
+*{{cite book |last1=Venables |first1=W. N. |first2=B. D. |last2=Ripley |year=2002 |title=Modern Applied Statistics with S |edition=Fourth |publisher=Springer }}
+*{{Cite book
+  | last = Gelman
+  | first = Andrew
+  |author2=John B. Carlin |author3=Hal S. Stern |author4=Donald B. Rubin
+   | title = Bayesian Data Analysis
+  | publisher = CRC/Chapman & Hall
+  | year = 2003
+  | isbn = 1-58488-388-X
+  | url = http://www.stat.columbia.edu/~gelman/book/
+| edition = Second
+ }}
+
+==External links==
+*{{springer|title=Student distribution|id=p/s090710}}
+*[https://jeff560.tripod.com/s.html Earliest Known Uses of Some of the Words of Mathematics (S)] ''(Remarks on the history of the term "Student's distribution")''
+*{{Citation |last=Rouaud |first=M. |date=2013 |url=https://www.incertitudes.fr/book.pdf |title=Probability, Statistics and Estimation |edition=short |ref=none}} First Students on page 112.
+*[https://flexbooks.ck12.org/cbook/ck-12-interactive-algebra-2-for-ccss/section/6.6/related/lesson/students-t-distribution-adv-pst/ Student's t-Distribution], {{Webarchive|url=https://web.archive.org/web/20210410192326/https://flexbooks.ck12.org/cbook/ck-12-interactive-algebra-2-for-ccss/section/6.6/related/lesson/students-t-distribution-adv-pst/ |date=2021-04-10 }}
+
+{{ProbDistributions|continuous-infinite}}
+{{Statistics|state=collapsed}}
+
+[[Category:Continuous distributions]]
+[[Category:Special functions]]
+[[Category:Normal distribution]]
+[[Category:Compound probability distributions]]
+[[Category:Probability distributions with non-finite variance]]
+[[Category:Infinitely divisible probability distributions]]
+[[Category:Location-scale family probability distributions]]

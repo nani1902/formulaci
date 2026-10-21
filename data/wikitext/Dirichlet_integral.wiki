@@ -1,0 +1,210 @@
+{{Use American English|date = January 2019}}
+{{Short description|Integral of sin(x)/x from 0 to infinity}}
+{{Distinguish|Dirichlet energy}} 
+[[File:Dirichlet 3.jpeg|thumb|[[Peter Gustav Lejeune Dirichlet]]]]
+{{calculus}}
+In [[mathematics]], there are several [[integral]]s known as the '''Dirichlet integral''', after the German mathematician [[Peter Gustav Lejeune Dirichlet]], one of which is the [[improper integral]] of the [[sinc function]] over the positive real number line.
+
+<math display="block">\int_0^\infty \frac{\sin x}{x} \,dx = \frac{\pi}{2}.</math>
+
+This integral is not [[absolutely convergent]], meaning <math display="inline">\left| \frac{\sin x}{x} \right|</math> has an infinite Lebesgue or Riemann improper integral over the positive real line, so the sinc function is not [[Lebesgue integrable]] over the positive real line. The sinc function is, however, integrable in the sense of the improper [[Riemann integral]] or the generalized Riemann or [[Henstock–Kurzweil integral]].<ref>{{cite journal |last=Bartle |first=Robert G. |author-link=Robert G. Bartle |date=10 June 1996 |title=Return to the Riemann Integral |url=http://math.tut.fi/courses/73129/Bartle.pdf |journal=The American Mathematical Monthly |volume=103 |issue=8 |pages=625–632 |doi=10.2307/2974874 |jstor=2974874 |access-date=10 June 2017 |archive-date=18 November 2017 |archive-url=https://web.archive.org/web/20171118184849/http://math.tut.fi/courses/73129/Bartle.pdf |url-status=dead }}</ref><ref>{{Cite book|last=Bartle|first=Robert G.|title=Introduction to Real Analysis|url=https://archive.org/details/introductiontore00bart_903|url-access=limited|last2=Sherbert|first2=Donald R.|publisher=John Wiley & Sons|year=2011|isbn=978-0-471-43331-6|pages=[https://archive.org/details/introductiontore00bart_903/page/n325 311]|chapter=Chapter 10: The Generalized Riemann Integral}}</ref> This can be seen by using [[Dirichlet%27s_test#Improper_integrals |Dirichlet's test for improper integrals]].  
+
+It is a good illustration of special techniques for evaluating definite integrals, particularly when it is not useful to directly apply the [[fundamental theorem of calculus]] due to the lack of an elementary [[antiderivative]] for the integrand, as the [[sine integral]], an antiderivative of the sinc function, is not an [[elementary function]]. In this case, the improper definite integral can be determined in several ways: the Laplace transform, double integration, differentiating under the integral sign, contour integration, and the Dirichlet kernel. But since the integrand is an even function, the domain of integration can be extended to the negative real number line as well.
+
+== Evaluation ==
+
+=== Laplace transform ===
+Let <math>f(t)</math> be a function defined whenever {{tmath|t \geq 0}}. Then its [[Laplace transform]] is given by
+<math display="block">\mathcal{L} \{f(t)\} = F(s) = \int_{0}^{\infty} e^{-st} f(t) \,dt,</math>
+if the integral exists.<ref>{{Cite book |last=Zill|first=Dennis G. |title=Differential Equations with Boundary-Value Problems |url=https://archive.org/details/differentialequa00zill_769|url-access=limited|last2=Wright|first2=Warren S. |publisher=Cengage Learning |year=2013 |isbn=978-1-111-82706-9|pages=[https://archive.org/details/differentialequa00zill_769/page/n323 274]-5 |chapter=Chapter 7: The Laplace Transform}}</ref> 
+
+A property of the [[Laplace transform#Evaluating improper integrals|Laplace transform useful for evaluating improper integrals]] is
+<math display="block"> \mathcal{L} \left [  \frac{f(t)}{t} \right] = \int_{s}^{\infty} F(u) \, du,
+</math>
+provided <math display="inline">\lim_{t \to 0} \frac{f(t)}{t}</math> exists.
+
+In what follows, one needs the result {{tmath|1= \textstyle \mathcal{L}\{\sin t\} = \frac{1}{s^2 + 1} }}, which is the Laplace transform of the function <math>\sin t</math> {{see below|{{slink||Differentiating under the integral sign}} for a derivation}} as well as a version of [[Abel's theorem]] (a consequence of the [[Final value theorem#Final Value Theorem for improperly integrable functions (Abel's theorem for integrals)|final value theorem for the Laplace transform]]).
+
+Therefore,
+<math display="block"> 
+\begin{align}
+\int_{0}^{\infty} \frac{\sin t}{t} \, dt
+&= \lim_{s \to 0} \int_{0}^{\infty} e^{-st} \frac{\sin t}{t} \, dt
+= \lim_{s \to 0} \mathcal{L} \left [  \frac{\sin t}{t} \right] \\[6pt]
+&= \lim_{s \to 0} \int_{s}^{\infty} \frac{du}{u^2 + 1}
+= \lim_{s \to 0} \arctan u \Biggr|_{s}^{\infty} \\[6pt]
+&= \lim_{s \to 0} \left[ \frac{\pi}{2} - \arctan (s)\right]
+= \frac{\pi}{2}.
+\end{align} </math>
+
+=== Double integration ===
+
+Evaluating the Dirichlet integral using the Laplace transform is equivalent to calculating the same double definite integral by changing the [[Order of integration (calculus)|order of integration]], namely,
+<math display="block">
+\left( I_1 = \int_0^\infty \int _0^\infty e^{-st} \sin t \,dt \,ds \right) = \left( I_2 = \int_0^\infty \int _0^\infty e^{-st} \sin t \,ds \,dt \right),</math>
+<math display="block">\left( I_1 = \int_0^\infty \frac{1}{s^2 + 1} \,ds = \frac{\pi}{2} \right) = \left( I_2 = \int_0^\infty \frac{\sin t}{t} \,dt \right), \text{ provided } s > 0.
+</math>
+The change of order is justified by the fact that for all {{tmath|s > 0}}, the integral is absolutely convergent.
+
+=== Differentiation under the integral sign (Feynman's trick)===
+First rewrite the integral as a function of the additional variable {{tmath|s}}, namely, the Laplace transform of {{tmath|\textstyle \frac{\sin t} t}}. So let
+<math display="block">f(s)=\int_0^\infty e^{-st} \frac{\sin t} t \, dt.</math>
+
+In order to evaluate the Dirichlet integral, we need to determine {{tmath|f(0)}}. The continuity of <math>f</math> can be justified by applying the [[dominated convergence theorem]] after integration by parts. Differentiate with respect to <math>s>0</math> and apply the [[Leibniz integral rule|Leibniz rule for differentiating under the integral sign]] to obtain
+<math display="block">
+\begin{align}
+\frac{df}{ds} & = \frac{d}{ds}\int_0^\infty e^{-st} \frac{\sin t}{t} \, dt = \int_0^\infty \frac{\partial}{\partial s}e^{-st}\frac{\sin t} t \, dt \\[6pt]
+& = -\int_0^\infty e^{-st} \sin t \, dt.
+\end{align}
+</math>
+
+Now, using [[Euler's formula]] {{tmath|1= e^{it} = \cos t + i\sin t}}, one can express the sine function in terms of complex exponentials:
+<math display="block">
+\sin t = \frac{1}{2i} \left( e^{i t} - e^{-it}\right).
+</math>
+
+Therefore,
+<math display="block">
+\begin{align}
+\frac{df}{ds} & = -\int_0^\infty e^{-st} \sin t \, dt = -\int_{0}^{\infty} e^{-st} \frac{e^{it} - e^{-it}}{2i} dt \\[6pt]
+&= -\frac{1}{2i} \int_{0}^{\infty} \left[ e^{-t(s-i)} - e^{-t(s + i)} \right] dt \\[6pt]
+&= -\frac{1}{2i} \left [ \frac{-1}{s - i} e^{-t (s - i)} - \frac{-1}{s + i} e^{-t (s + i)}\right]_0^{\infty} \\[6pt]
+&= -\frac{1}{2i} \left[ 0 - \left( \frac{-1}{s - i} + \frac{1}{s + i} \right) \right] = -\frac{1}{2i} \left( \frac{1}{s - i} - \frac{1}{s + i} \right) \\[6pt]
+&= -\frac{1}{2i} \left( \frac{s + i - (s -i)}{s^2 + 1} \right) = -\frac{1}{s^2 + 1}.
+\end{align}
+</math>
+
+Integrating with respect to <math>s</math> gives
+<math display="block">f(s) = \int \frac{-ds}{s^2 + 1} = A - \arctan s,</math>
+
+where <math>A</math> is a constant of integration to be determined. Since {{tmath|1= \lim_{s \to \infty} f(s) = 0 }}, {{tmath|1= \textstyle A = \lim_{s \to \infty} \arctan s = \frac{\pi}{2} }}, using the principal value. This means that for <math>s > 0</math> 
+<math display="block">f(s) = \frac{\pi}{2} - \arctan s.</math>
+
+Finally, by continuity at {{tmath|1= s = 0}}, we have {{tmath|1= \textstyle f(0) = \frac{\pi}{2} - \arctan(0) = \frac{\pi}{2} }}, as before.
+
+=== Complex contour integration ===
+Consider <math display="block">f(z) = \frac{e^{iz}} z.</math>
+
+As a function of the complex variable {{tmath|z}}, it has a simple pole at the origin, which prevents the application of [[Jordan's lemma]], whose other hypotheses are satisfied.
+
+Define then a new function<ref>{{cite book |last= Appel |first=  Walter |date= 2007 |title= Mathematics for Physics and Physicists |publisher= Princeton University Press |page= 226 |isbn= 978-0-691-13102-3 }}</ref>
+<math display="block">g(z) = \frac{e^{iz}}{z + i\varepsilon}.</math>
+
+The pole has been moved to the negative imaginary axis, so <math>g(z)</math> can be integrated along the semicircle <math>\gamma</math> of radius <math>R</math> centered at <math>z = 0</math> extending in the positive imaginary direction, and closed along the real axis. One then takes the limit {{tmath|\varepsilon \to 0}}.
+
+The complex integral is zero by the [[residue theorem]], as there are no poles inside the integration path {{tmath|\gamma}}:
+<math display="block">0 = \int_\gamma g(z) \,dz = \int_{-R}^R \frac{e^{ix}}{x + i\varepsilon} \, dx + \int_0^\pi \frac{e^{i(Re^{i\theta} + \theta)}}{Re^{i\theta} + i\varepsilon} iR \, d\theta.</math>
+
+The second term vanishes as <math>R</math> goes to infinity. As for the first integral, one can use one version of the [[Sokhotski–Plemelj theorem]] for integrals over the real line: for a [[complex number|complex]]-valued function {{mvar|f}} defined and continuously differentiable on the real line and real constants <math>a</math> and <math>b</math> with <math>a < 0 < b</math> one finds
+<math display="block">\lim_{\varepsilon \to 0^+} \int_a^b \frac{f(x)}{x \pm i \varepsilon} \,dx = \mp i \pi f(0) + \mathcal{P} \int_a^b \frac{f(x)}{x} \,dx,</math>
+
+where <math>\mathcal{P}</math> denotes the [[Cauchy principal value]]. Back to the above original calculation, one can write
+<math display="block">0 = \mathcal{P} \int \frac{e^{ix}}{x} \, dx - \pi i.</math>
+
+By taking the imaginary part on both sides and noting that the function <math display="inline">\frac{\sin x}{x}</math> is even, we get
+<math display="block">\int_{-\infty}^{+\infty} \frac{\sin(x)}{x} \,dx = 2 \int_0^{+\infty} \frac{\sin(x)}{x} \,dx.</math>
+
+Finally,
+<math display="block">\lim_{\varepsilon \to 0} \int_\varepsilon^\infty \frac{\sin(x)}{x} \, dx = \int_0^\infty \frac{\sin(x)}{x} \, dx = \frac \pi 2.</math>
+
+Alternatively, choose as the integration contour for <math>f</math> the union of upper half-plane semicircles of radii <math>\varepsilon</math> and <math>R</math> together with two segments of the real line that connect them. On one hand the contour integral is zero, independently of <math>\varepsilon</math> and {{tmath|R}}; on the other hand, as <math>\varepsilon \to 0</math> and <math>R \to \infty</math> the integral's imaginary part converges to <math display="inline">2 I + \Im\big(\ln 0 - \ln(\pi i)\big) = 2I - \pi</math> (here <math>\ln z</math> is any branch of logarithm on upper half-plane), leading to {{tmath|1= \textstyle I = \frac{\pi}{2} }}.
+
+=== Dirichlet kernel ===
+Consider the well-known formula for the [[Dirichlet kernel]]:<ref>{{cite report |last= Chen |first= Guo |date= 26 June 2009 |url=https://www.math.uchicago.edu/~may/VIGRE/VIGRE2009/REUPapers/ChenGuo.pdf |title= A Treatment of the Dirichlet Integral Via the Methods of Real Analysis }}</ref>
+<math display="block">
+D_n(x) = 1 + 2\sum_{k=1}^n \cos(2kx) = \frac{\sin[(2n+1)x]}{\sin(x)}.
+</math>
+
+It immediately follows that:
+<math display="block">
+\int_0^{\frac{\pi}{2}} D_n(x)\, dx = \frac{\pi}{2}.
+</math>
+
+Define
+<math display="block">f(x) =
+\begin{cases}
+\frac{1}{x} - \frac{1}{\sin(x)} & x \neq 0 \\[6pt]
+0 & x = 0
+\end{cases}
+</math>
+
+Clearly, <math>f</math> is continuous when {{tmath| x \in (0,\pi/2] }}; to see its continuity at {{tmath|0}} apply [[L'Hopital's Rule]]:
+<math display="block">
+\lim_{x\to 0} \frac{\sin(x) - x}{x\sin(x)} = 
+\lim_{x\to 0} \frac{\cos(x) - 1}{\sin(x) + x\cos(x)} = 
+\lim_{x\to 0} \frac{-\sin(x)}{2\cos(x) - x\sin(x)} = 0.
+</math>
+
+Hence, <math>f</math> fulfills the requirements of the [[Riemann-Lebesgue Lemma]]. This means:<ref>The form of the Riemann-Lebesgue Lemma used here is proven in {{harvp|Chen|2009}}.</ref>
+<math display="block">
+\lim_{\lambda \to \infty} \int_0^{\pi/2} f(x)\sin(\lambda x)dx = 0 
+\quad\Longrightarrow\quad
+\lim_{\lambda \to \infty} \int_0^{\pi/2} \frac{\sin(\lambda x)}{x}dx = 
+    \lim_{\lambda \to \infty} \int_0^{\pi/2} \frac{\sin(\lambda x)}{\sin(x)}dx.
+</math>
+
+We would like to compute:
+<math display="block">
+\begin{align}
+\int_0^\infty \frac{\sin(t)}{t}dt
+= & \lim_{\lambda \to \infty} \int_0^{\lambda\frac{\pi}{2}} \frac{\sin(t)}{t}dt \\[6pt]
+= & \lim_{\lambda \to \infty} \int_0^{\frac{\pi}{2}} \frac{\sin(\lambda x)}{x}dx \\[6pt]
+= & \lim_{\lambda \to \infty} \int_0^{\frac{\pi}{2}} \frac{\sin(\lambda x)}{\sin(x)}dx \\[6pt]
+= & \lim_{n\to \infty} \int_0^{\frac{\pi}{2}} \frac{\sin((2n+1)x)}{\sin(x)}dx \\[6pt]
+= & \lim_{n\to \infty} \int_0^{\frac{\pi}{2}} D_n(x) dx = \frac{\pi}{2}
+\end{align} </math>
+
+However, we must justify switching the real limit in <math>\lambda</math> to the integral limit in {{tmath|n}}, which will follow from showing that the limit does exist.
+
+Using [[integration by parts]], we have:
+<math display="block">
+\int_a^b \frac{\sin(x)}{x}dx = 
+\int_a^b \frac{d(1-\cos(x))}{x}dx = 
+\left. \frac{1-\cos(x)}{x}\right|_a^b + \int_a^b \frac{1-\cos(x)}{x^2}dx
+</math>
+
+Now, as <math>a \to 0</math> and <math> b \to \infty</math> the term on the left converges with no problem. See the [[List of limits#Trigonometric functions|list of limits of trigonometric functions]].  We now show that <math display="inline"> \int_{-\infty}^{\infty} \frac{1-\cos(x)}{x^2}dx </math> is absolutely integrable, which implies that the limit exists.<ref>{{cite report |last= Daileda |first= R. C. |title= Improper Integrals |url= http://ramanujan.math.trinity.edu/rdaileda/teach/m4342f10/improper_integrals.pdf }}</ref>
+
+First, we seek to bound the integral near the origin. Using the Taylor-series expansion of the cosine about zero,
+<math display="block">
+1 - \cos(x) = 1 - \sum_{k\geq 0}\frac{{(-1)^{(k+1)}}x^{2k}}{(2k)!} = \sum_{k\geq 1}\frac{{(-1)^{(k+1)}}x^{2k}}{(2k)!}.
+</math>
+
+Therefore,
+<math display="block">
+\left|\frac{1 - \cos(x)}{x^2}\right| 
+  =  \left|-\sum_{k\geq 0}\frac{x^{2k}}{2(k+1)!}\right|
+\leq \sum_{k\geq 0} \frac{|x|^k}{k!}
+  =  e^{|x|}.
+</math>
+
+Splitting the integral into pieces, we have
+<math display="block">
+     \int_{-\infty}^{\infty}\left|\frac{1-\cos(x)}{x^2}\right|dx
+\leq \int_{-\infty}^{-\varepsilon} \frac{2}{x^2}dx + 
+     \int_{-\varepsilon}^{\varepsilon} e^{|x|}dx + 
+     \int_{\varepsilon}^{\infty} \frac{2}{x^2}dx
+\leq K,
+</math>
+
+for some constant {{tmath| K > 0 }}. This shows that the integral is absolutely integrable, which implies the original integral exists, and switching from <math>\lambda</math> to <math>n</math> was in fact justified, and the proof is complete.
+
+== See also ==
+{{Portal|Mathematics}}
+* [[Dirichlet distribution]]
+* [[Dirichlet principle]]
+* [[Sinc function]]
+*[[Fresnel integral]]
+
+== References==
+{{Reflist}}
+
+== External links ==
+
+* {{MathWorld | urlname=DirichletIntegrals | title=Dirichlet Integrals}}
+{{Integrals}}
+{{Peter Gustav Lejeune Dirichlet}}
+
+[[Category:Special functions]]
+[[Category:Integral calculus]]
+[[Category:Mathematical physics]]
