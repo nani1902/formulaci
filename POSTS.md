@@ -25,10 +25,10 @@ Each recomputed to 30 digits, all still live today.
 **3/**
 More:
 • Dirichlet integral: two wrong series in the page's own proof
-• List of trigonometric identities: two "sine" identities that sum cosines
+• Trig identities list: two "sine" identities that sum cosines
 • Gautschi's inequality: bounds swapped
 • Ginzburg–Landau: e^{ix} = e^{ix+2πn}, missing an i
-• Extreme learning machine: arccos defined by the arcsin integral
+• Extreme learning machine: arccos via the arcsin integral
 
 **4/**
 How it works: extract 952k formulas from 64,617 articles → translate Wikipedia LaTeX to SymPy → infer domains and constraints from the prose → check symbolically and numerically at 50 digits across several sampling regimes → review every flag by hand before calling it an error.
